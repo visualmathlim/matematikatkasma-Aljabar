@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VisualMath.Lim - TKA Matematika Wajib SMA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        /* Pola background agar tidak terlalu polos */
+        .bg-pattern {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#00d6d8 0.75px, transparent 0.75px), radial-gradient(#00d6d8 0.75px, #f8fafc 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            opacity: 0.8;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: '#022050',   /* Biru Tua dari background logo */
+                            cyan: '#00d6d8',   /* Biru Muda/Cyan dari teks Lim & Robot */
+                            yellow: '#ffd300', /* Kuning dari banner dan pensil */
+                            light: '#e6fbfc',  /* Background transparan untuk icon */
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col relative">
+    
+    <!-- Latar Belakang Pola -->
+    <div class="absolute inset-0 bg-pattern -z-10"></div>
+
+    <!-- Header / Hero Section -->
+    <header class="bg-brand-navy text-white pt-12 pb-20 px-6 rounded-b-[3rem] shadow-xl relative overflow-hidden text-center">
+        <!-- Efek Cahaya di Background Header -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-brand-cyan/20 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto flex flex-col items-center">
+            <!-- Logo VisualMath.Lim -->
+            <img src="logo.png" alt="Logo VisualMath.Lim" class="h-48 md:h-56 object-contain mb-6 drop-shadow-2xl hover:scale-105 transition-transform duration-300">
+            
+            <div class="inline-block bg-brand-yellow text-brand-navy font-bold px-6 py-2 rounded-full mb-4 shadow-lg text-sm md:text-base tracking-wide uppercase">
+                See • Think • Solve
+            </div>
+            
+            <h1 class="text-3xl md:text-4xl font-extrabold mb-2 text-white drop-shadow-md">
+                TKA MATEMATIKA WAJIB SMA
+            </h1>
+            <h2 class="text-xl md:text-2xl font-semibold text-brand-cyan mb-4">
+                Elemen 2: Aljabar
+            </h2>
+            <p class="text-slate-200 max-w-2xl mx-auto md:text-lg">
+                Matematika Lebih Mudah, Lebih Seru, Lebih Bermakna! Pilih sub-materi di bawah ini untuk memulai belajar dan berlatih soal.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content / Dashboard Navigasi -->
+    <main class="flex-grow max-w-5xl mx-auto px-6 -mt-10 w-full mb-16">
+        <div class="grid md:grid-cols-3 gap-8">
+            
+            <!-- Kartu 1: Persamaan & Pertidaksamaan Linear -->
+            <a href="linear.html" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl border-b-4 border-slate-200 hover:border-brand-cyan transition-all duration-300 hover:-translate-y-2 flex flex-col h-full">
+                <div class="w-16 h-16 bg-brand-light text-brand-cyan rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform duration-300">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-brand-navy mb-3 group-hover:text-brand-cyan transition-colors">
+                    Persamaan & Pertidaksamaan Linear
+                </h3>
+                <p class="text-slate-500 mb-6 flex-grow text-sm">
+                    Pelajari konsep nilai mutlak, penyelesaian persamaan, dan pertidaksamaan linear satu variabel.
+                </p>
+                <div class="flex items-center text-brand-cyan font-semibold text-sm group-hover:text-brand-navy transition-colors">
+                    Mulai Belajar 
+                    <svg class="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+
+            <!-- Kartu 2: Fungsi -->
+            <a href="fungsi.html" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl border-b-4 border-slate-200 hover:border-brand-yellow transition-all duration-300 hover:-translate-y-2 flex flex-col h-full">
+                <div class="w-16 h-16 bg-[#fffbea] text-brand-yellow rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform duration-300">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-brand-navy mb-3 group-hover:text-brand-yellow transition-colors">
+                    Fungsi
+                </h3>
+                <p class="text-slate-500 mb-6 flex-grow text-sm">
+                    Pahami relasi, fungsi komposisi, fungsi invers, serta grafiknya dengan pendekatan visual yang mudah.
+                </p>
+                <div class="flex items-center text-brand-yellow font-semibold text-sm group-hover:text-brand-navy transition-colors">
+                    Mulai Belajar 
+                    <svg class="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+
+            <!-- Kartu 3: Barisan dan Deret -->
+            <a href="deret.html" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl border-b-4 border-slate-200 hover:border-brand-cyan transition-all duration-300 hover:-translate-y-2 flex flex-col h-full">
+                <div class="w-16 h-16 bg-brand-light text-brand-cyan rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform duration-300">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-brand-navy mb-3 group-hover:text-brand-cyan transition-colors">
+                    Barisan dan Deret
+                </h3>
+                <p class="text-slate-500 mb-6 flex-grow text-sm">
+                    Eksplorasi pola bilangan, barisan aritmetika, geometri, dan aplikasinya dalam kehidupan sehari-hari.
+                </p>
+                <div class="flex items-center text-brand-cyan font-semibold text-sm group-hover:text-brand-navy transition-colors">
+                    Mulai Belajar 
+                    <svg class="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-auto py-8">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <p class="text-slate-500 font-medium">
+                © 2026 VisualMath.Lim. Matematika Lebih Mudah, Lebih Seru, Lebih Bermakna!
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>

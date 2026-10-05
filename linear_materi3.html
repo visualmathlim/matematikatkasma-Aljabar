@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Program Linear | VisualMath.Lim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<style>
+:root{--navy:#022050;--cyan:#00d6d8;--yellow:#ffd300;--ink:#10213f;--bg:#f2f8fb;--card:#fff;--line:#d5e3ec;--soft:#e6fbfb}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;font-family:'Lexend',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:16px}
+header{position:sticky;top:0;z-index:50;background:var(--navy);border-bottom:4px solid var(--yellow);box-shadow:0 4px 18px #02205055}
+.bar{max-width:1120px;margin:auto;display:flex;align-items:center;gap:14px;padding:8px 16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;min-width:0}
+.brand img{width:52px;height:52px;border-radius:50%;background:#fff2}
+.brand b{font-weight:800;font-size:1.08rem;line-height:1.2}
+.brand b span{color:var(--cyan)}
+.brand small{display:block;color:var(--yellow);font-weight:500;font-size:.78rem}
+nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+nav a{color:#fff;text-decoration:none;font-weight:500;font-size:.9rem;padding:8px 14px;border-radius:999px;transition:.2s}
+nav a:hover{background:var(--cyan);color:var(--navy)}
+nav a.dash{background:var(--yellow);color:var(--navy);font-weight:700}
+nav a.dash:hover{background:var(--cyan)}
+.toc{background:#033070;overflow-x:auto;white-space:nowrap;scrollbar-width:thin}
+.toc div{max-width:1120px;margin:auto;padding:6px 16px}
+.toc a{color:#bfeff0;font-size:.8rem;text-decoration:none;margin-right:16px}
+.toc a:hover{color:var(--yellow)}
+main{max-width:1120px;margin:auto;padding:24px 16px 60px}
+.hero{background:linear-gradient(135deg,var(--navy),#06377f);color:#fff;border-radius:24px;padding:34px 28px;position:relative;overflow:hidden}
+.hero:after{content:"x + y = z";position:absolute;right:-10px;bottom:-24px;font-size:6rem;font-weight:800;color:#ffffff10;white-space:nowrap}
+.tag{display:inline-block;background:var(--yellow);color:var(--navy);font-weight:700;font-size:.75rem;padding:3px 12px;border-radius:999px;letter-spacing:.04em}
+.hero h1{margin:12px 0 6px;font-size:clamp(1.7rem,4.5vw,2.8rem);line-height:1.15}
+.hero h1 em{font-style:normal;color:var(--cyan)}
+.hero p{margin:0;color:#d6e6ff;max-width:640px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chips span{background:#ffffff1c;border:1px solid #ffffff40;padding:4px 12px;border-radius:999px;font-size:.82rem}
+section{margin-top:28px}
+h2{font-size:1.5rem;margin:0 0 12px;color:var(--navy);display:flex;align-items:center;gap:10px}
+h2 i{font-style:normal;background:var(--navy);color:var(--yellow);border-radius:12px;padding:2px 12px;font-size:1rem}
+h3{color:#05408f;margin:22px 0 6px;font-size:1.12rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px;box-shadow:0 2px 10px #02205010}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.mini{border-top:5px solid var(--cyan);background:#fff;border-radius:14px;padding:14px 16px;border:1px solid var(--line);border-top:5px solid var(--cyan)}
+.mini b{color:var(--navy)}
+.box,.tip,.warn{border-radius:14px;padding:12px 16px;margin:14px 0}
+.box{background:var(--soft);border-left:6px solid var(--cyan)}
+.tip{background:#fff8cc;border-left:6px solid var(--yellow)}
+.warn{background:#ffecec;border-left:6px solid #e5484d}
+.box b:first-child,.tip b:first-child,.warn b:first-child{color:var(--navy)}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+.tw{overflow-x:auto}
+th{background:var(--navy);color:#fff;text-align:left;padding:8px 12px}
+td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:#f6fbfd}
+figure{margin:14px auto;text-align:center}
+figure svg{max-width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:14px}
+figcaption{font-size:.84rem;color:#4a5f7d;margin-top:4px}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}
+.flow div{background:var(--navy);color:#fff;padding:8px 14px;border-radius:12px;font-size:.88rem}
+.flow div:nth-child(even){background:var(--cyan);color:var(--navy);font-weight:700}
+.ex{border:2px dashed var(--cyan);border-radius:14px;padding:6px 16px 10px;margin:12px 0;background:#fff}
+.q{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 20px;margin:16px 0;box-shadow:0 2px 10px #02205010}
+.q .hd{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
+.no{background:var(--navy);color:var(--yellow);font-weight:800;border-radius:10px;padding:1px 12px}
+.lv{font-size:.74rem;font-weight:700;padding:2px 10px;border-radius:999px;background:var(--soft);color:#047c7e}
+.lv.l2{background:#fff3b0;color:#7a5b00}.lv.l3{background:#ffdede;color:#a02a2a}
+.opt{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;font:inherit;background:#f6fbfd;border:2px solid var(--line);border-radius:12px;padding:8px 12px;margin:6px 0;cursor:pointer;transition:.15s;color:inherit}
+.opt:hover{border-color:var(--cyan);background:var(--soft)}
+.opt b{background:var(--navy);color:#fff;min-width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:.8rem;flex:none}
+.opt.sel{border-color:var(--cyan);background:var(--soft)}
+.opt.ok{border-color:#1a9d5a;background:#e3f8ec}.opt.ok b{background:#1a9d5a}
+.opt.no2{border-color:#e5484d;background:#ffecec}.opt.no2 b{background:#e5484d}
+.btn{font:inherit;font-weight:700;border:0;border-radius:999px;padding:8px 18px;cursor:pointer;background:var(--cyan);color:var(--navy);margin:6px 6px 0 0}
+.btn:hover{background:var(--yellow)}
+.btn.alt{background:var(--navy);color:#fff}
+.btn.alt:hover{background:#06377f}
+.res{margin-top:8px;font-weight:700}
+.sol{display:none;margin-top:10px}
+.sol.on{display:block}
+.pane{border-radius:14px;padding:10px 16px;margin:8px 0}
+.pane.fast{background:#fff8cc;border-left:6px solid var(--yellow)}
+.pane.full{background:var(--soft);border-left:6px solid var(--cyan)}
+.pane h4{margin:0 0 4px;color:var(--navy)}
+.bs td select{font:inherit;padding:4px 8px;border-radius:8px;border:2px solid var(--line)}
+.bs td.ok{background:#e3f8ec!important}.bs td.bad{background:#ffecec!important}
+footer{background:var(--navy);color:#bcd;text-align:center;padding:22px;border-top:4px solid var(--yellow);font-size:.88rem}
+footer b{color:var(--cyan)}
+.top{position:fixed;right:16px;bottom:16px;background:var(--yellow);color:var(--navy);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;text-decoration:none;font-weight:800;box-shadow:0 4px 14px #0004}
+@media(max-width:640px){nav{margin-left:0;width:100%}.brand img{width:44px;height:44px}.hero{padding:26px 18px}}
+.katex{font-size:1.05em}
+.steps{counter-reset:s;list-style:none;padding:0;margin:8px 0}
+.steps>li{counter-increment:s;position:relative;padding:2px 0 10px 40px}
+.steps>li:before{content:counter(s);position:absolute;left:0;top:3px;width:27px;height:27px;border-radius:50%;background:var(--navy);color:var(--yellow);font-weight:700;font-size:.82rem;display:grid;place-items:center}
+.steps>li:not(:last-child):after{content:"";position:absolute;left:13px;top:32px;bottom:2px;width:2px;background:var(--line)}
+.steps .katex-display{margin:.45em 0}
+.ex .steps{margin:4px 0}
+.ex>b:first-child{display:block;color:var(--navy)}
+#mc label{display:flex;gap:8px;align-items:flex-start;margin:6px 0;cursor:pointer}#mc input{margin-top:6px;accent-color:#00d6d8;width:18px;height:18px}.bar2{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:.82rem}.bar2 .n{width:76px;text-align:right;font-weight:700}.trk{position:relative;flex:1;background:#e6eef5;border-radius:6px;height:20px}.trk i{position:absolute;left:0;top:0;bottom:0;border-radius:6px;background:var(--cyan)}.trk i.bad{background:#e5484d}.trk u{position:absolute;top:-3px;bottom:-3px;width:3px;background:var(--yellow);border:1px solid var(--navy)}.trk span{position:absolute;right:6px;top:0;font-size:.74rem;line-height:20px;font-weight:700;color:var(--navy)}</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <a class="brand" href="index.html"><img src="logo.png" alt="Logo VisualMath.Lim"><b><span>VisualMath.Lim</span> - TKA Matematika Wajib SMA<small>Bimbingan Belajar</small></b></a>
+    <nav><a href="index.html">🏠 Home</a><a class="dash" href="linear.html">📊 Dashboard</a></nav>
+  </div>
+  <div class="toc"><div><a href="#peta">Peta Belajar</a><a href="#A">A. Bekal Dasar</a><a href="#B">B. Dua Variabel</a><a href="#C">C. Tiga Variabel</a><a href="#D">D. Bank Kesalahan</a><a href="#latihan">E. Latihan</a><a href="#prediksi">F. Prediksi TKA</a></div></div>
+</header>
+
+<main>
+<div class="hero">
+  <span class="tag">ALJABAR • KELAS 12 • TKA</span>
+  <h1>Program <em>Linear</em></h1>
+  <p>Model matematika, daerah penyelesaian, titik pojok, nilai maksimum &amp; minimum, dan tiga variabel. Lengkap dengan <b>Cara Cepat</b> dan <b>Cara Lengkap</b> di setiap soal.</p>
+  <div class="chips"><span>👀 LIHAT</span><span>🧠 PIKIR</span><span>✅ SELESAIKAN</span><span>PG • PGK • Benar/Salah</span><span>Maksimum 3 variabel</span></div>
+</div>
+
+<section id="peta">
+  <h2><i>🗺️</i> Peta Belajar</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Tujuan belajar</h3>
+    <ul>
+      <li>Mengubah soal cerita menjadi <b>variabel, kendala, dan fungsi objektif</b>.</li>
+      <li>Menggambar garis, menentukan <b>daerah penyelesaian</b> dengan titik uji, dan menentukan <b>titik pojok</b>.</li>
+      <li>Menentukan nilai maksimum/minimum dengan uji titik pojok (Cara Lengkap) dan garis selidik (Cara Cepat).</li>
+      <li>Membaca soal bergambar dan menyusun sistem pertidaksamaan dari grafik.</li>
+      <li>Menilai pernyataan (Level 3), termasuk kasus <b>banyak titik optimum</b>.</li>
+      <li>Menyusun model dan mengecek rencana pada <b>tiga variabel</b>.</li>
+    </ul>
+    <h3>Tiga level soal TKA</h3>
+    <div class="grid">
+      <div class="mini"><b>Level 1 · Pengetahuan &amp; Pemahaman</b><br>Membaca titik pojok dari grafik lalu menghitung $f(x,y)$; memilih titik yang memenuhi sistem; mengenali sistem dari grafik.</div>
+      <div class="mini"><b>Level 2 · Aplikasi</b><br>Soal cerita → model → titik pojok → maksimum/minimum; model tiga variabel; membandingkan rencana.</div>
+      <div class="mini"><b>Level 3 · Penalaran</b><br>Menilai pernyataan benar/salah; kendala campuran ($\le$ dan $\ge$); banyak titik optimum; memilih rencana layak terbaik.</div>
+    </div>
+    <h3>Alur belajar</h3>
+    <div class="flow"><div>A. Bekal dasar</div><div>B. Dua variabel</div><div>C. Tiga variabel</div><div>D. Bank kesalahan</div><div>E–F. Latihan &amp; prediksi</div></div>
+    <div class="box"><b>Cara belajar: LIHAT – PIKIR – SELESAIKAN.</b> <b>Lihat</b>: apa yang diketahui, apa yang ditanya, ada grafik atau tabel? <b>Pikir</b>: pilih strategi tercepat (tabel model, titik uji, garis selidik, atau uji pilihan jawaban). <b>Selesaikan</b> lalu <b>cek</b>: masukkan jawaban ke semua kendala.</div>
+  </div>
+</section>
+
+<section id="A">
+  <h2><i>A</i> Bekal Dasar</h2>
+  <div class="card">
+    <p>Banyak kesalahan di TKA terjadi bukan karena program linearnya sulit, tetapi karena <b>tanda minus</b>, <b>kata kunci soal</b>, atau <b>cara menggambar garis</b>.</p>
+    <h3>A.1 Tanda minus dan tanda kurung</h3>
+    <div class="tw"><table>
+      <tr><th>Keterampilan</th><th>Contoh benar</th><th>Kesalahan umum</th></tr>
+      <tr><td>Bilangan negatif</td><td>$5-8=-3$; $(-2)(-3)=6$; $-2(4)=-8$</td><td>$(-2)(-3)=-6$</td></tr>
+      <tr><td>Kurung dengan minus di depan</td><td>$-(x-2)=-x+2$; $3-(y+1)=2-y$</td><td>$-(x-2)=-x-2$</td></tr>
+      <tr><td>Mengalikan ke dalam kurung</td><td>$3(x+2)=3x+6$</td><td>$3(x+2)=3x+2$</td></tr>
+      <tr><td>Substitusi nilai</td><td>$x=4$: $2x+3=2(4)+3=11$</td><td>Menulis $2x=24$</td></tr>
+    </table></div>
+
+    <h3>A.2 Kata kunci soal cerita → tanda pertidaksamaan</h3>
+    <p>Tanda ditentukan oleh <b>kata</b> pada soal, bukan oleh angkanya.</p>
+    <div class="tw"><table>
+      <tr><th>Kata di soal</th><th>Tanda</th><th>Contoh model</th></tr>
+      <tr><td>paling banyak, maksimal, tidak lebih dari, tersedia, kapasitas, daya muat</td><td>$\le$</td><td>Bahan tersedia paling banyak 30 kg → $2x+y\le30$</td></tr>
+      <tr><td>paling sedikit, minimal, sedikitnya, setidaknya, tidak kurang dari</td><td>$\ge$</td><td>Kebutuhan minimal 10 unit → $2x+y\ge10$</td></tr>
+      <tr><td>banyak barang/orang tidak mungkin negatif</td><td>$\ge0$</td><td>$x\ge0$ dan $y\ge0$ (selalu ditulis)</td></tr>
+    </table></div>
+    <div class="tip"><b>Tips.</b> “Paling banyak” menjaga agar tidak berlebihan ($\le$); “paling sedikit” menjaga agar tidak kurang ($\ge$). Garis tetap digambar utuh karena tanda sama dengan ikut.</div>
+
+    <h3>A.3 Menggambar garis dari dua titik potong sumbu</h3>
+    <p>Untuk garis $ax+by=c$:</p>
+    <ol class="steps">
+      <li>Titik potong sumbu-$x$ (isi $y=0$): $x=\dfrac ca$, titik $\left(\dfrac ca,0\right)$.</li>
+      <li>Titik potong sumbu-$y$ (isi $x=0$): $y=\dfrac cb$, titik $\left(0,\dfrac cb\right)$.</li>
+      <li>Hubungkan kedua titik dengan garis lurus.</li>
+    </ol>
+    <div class="ex"><b>Contoh:</b> gambar garis $3x+2y=12$.
+      <ol class="steps">
+        <li>Saat $y=0$:$$\begin{aligned}3x&=12\\x&=4\end{aligned}$$ Titik $(4,0)$.</li>
+        <li>Saat $x=0$:$$\begin{aligned}2y&=12\\y&=6\end{aligned}$$ Titik $(0,6)$.</li>
+        <li>Hubungkan $(4,0)$ dan $(0,6)$.</li>
+      </ol></div>
+    <figure><div id="gA1"></div><figcaption>Gambar A.1 Garis $3x+2y=12$ melalui $(4,0)$ dan $(0,6)$.</figcaption></figure>
+
+    <h3>A.4 Daerah penyelesaian dengan titik uji</h3>
+    <ol class="steps">
+      <li>Gambar garisnya, lalu pilih satu titik uji, paling mudah $(0,0)$. Jika garis melalui $(0,0)$, pilih $(1,0)$ atau $(0,1)$.</li>
+      <li>Masukkan titik uji ke pertidaksamaan.</li>
+      <li>Jika pernyataan <b>benar</b>, arsir sisi yang memuat titik itu. Jika <b>salah</b>, arsir sisi lainnya.</li>
+    </ol>
+    <div class="ex"><b>Contoh:</b> $3x+2y\le12$.
+      <ol class="steps">
+        <li>Uji $(0,0)$:$$3(0)+2(0)=0\le12\ \text{(benar)}$$</li>
+        <li>Sisi yang memuat titik asal diarsir. Bersama $x\ge0$ dan $y\ge0$, daerahnya berupa segitiga di kuadran I.</li>
+        <li>Uji $(4,4)$: $12+8=20\le12$ salah → di luar daerah.</li>
+      </ol></div>
+    <figure><div id="gA2"></div><figcaption>Gambar A.2 Titik uji $(0,0)$ benar (di dalam), titik $(4,4)$ salah (di luar).</figcaption></figure>
+
+    <h3>A.5 Titik potong dua garis (SPLDV)</h3>
+    <p>Titik pojok sering berupa perpotongan dua garis. Cara tercepat: <b>eliminasi</b>.</p>
+    <div class="ex"><b>Contoh 1:</b> titik potong $2x+y=30$ dan $x+y=20$.
+      <ol class="steps">
+        <li>Kurangkan:$$\begin{aligned}(2x+y)-(x+y)&=30-20\\x&=10\end{aligned}$$</li>
+        <li>Substitusi ke $x+y=20$:$$\begin{aligned}10+y&=20\\y&=10\end{aligned}$$ Titik potong $(10,10)$.</li>
+        <li>Cek: $2(10)+10=30$ ✓ dan $10+10=20$ ✓.</li>
+      </ol></div>
+    <div class="ex"><b>Contoh 2 (koefisien belum sama):</b> $2x+y=10$ dan $x+2y=11$.
+      <ol class="steps">
+        <li>Kalikan persamaan pertama dengan 2 (semua suku):$$4x+2y=20$$</li>
+        <li>Kurangkan dengan $x+2y=11$:$$\begin{aligned}(4x+2y)-(x+2y)&=20-11\\3x&=9\\x&=3\end{aligned}$$</li>
+        <li>Substitusi: $2(3)+y=10\Rightarrow y=4$. Titik $(3,4)$.</li>
+      </ol></div>
+    <div class="tip"><b>Cek bekal (kerjakan sebelum lanjut).</b><br>1) Hitung $-3(2-5)$. 2) “Kapasitas gudang paling banyak 40 kotak” memakai tanda apa? 3) Titik potong sumbu garis $4x+2y=16$. 4) Titik potong $x+y=10$ dan $3x+y=18$.
+      <br><button class="btn alt" onclick="this.nextElementSibling.classList.toggle('on')">Lihat jawaban</button>
+      <span class="sol">1) $9$ &nbsp; 2) $\le$ &nbsp; 3) $(4,0)$ dan $(0,8)$ &nbsp; 4) $(4,6)$</span></div>
+  </div>
+</section>
+
+<section id="B">
+  <h2><i>B</i> Program Linear Dua Variabel</h2>
+  <div class="card">
+    <h3 style="margin-top:0">B.1 Ide besar</h3>
+    <p>Program linear = cara menentukan <b>hasil terbaik</b> (terbesar/terkecil) ketika ada <b>keterbatasan</b>.</p>
+    <div class="grid">
+      <div class="mini"><b>Variabel keputusan</b><br>Yang dicari, mis. $x$ = banyak tas, $y$ = banyak dompet.</div>
+      <div class="mini"><b>Kendala</b><br>Batasan (bahan, waktu, modal, ruang) berbentuk pertidaksamaan.</div>
+      <div class="mini"><b>Fungsi objektif</b><br>Yang dimaksimumkan (laba) atau diminimumkan (biaya), mis. $Z=50.000x+30.000y$.</div>
+    </div>
+    <p>Pola membaca soal: <b>Cari → Batasi → Tujuan</b>.</p>
+    <div class="flow"><div>1 Baca soal</div><div>2 Tentukan variabel</div><div>3 Tabel &amp; model</div><div>4 Gambar daerah</div><div>5 Cari titik pojok</div><div>6 Hitung $Z$, pilih</div></div>
+    <p style="font-size:.84rem;color:#4a5f7d">Gambar B.1 Enam langkah menyelesaikan soal program linear.</p>
+
+    <h3>B.2 Menyusun model dengan tabel kebutuhan</h3>
+    <div class="ex"><b>Contoh:</b> toko membuat tas ($x$) dan dompet ($y$). Bahan tersedia 30 unit; tas butuh 2 unit, dompet 1 unit. Jumlah produk paling banyak 20. Laba tas Rp50.000 dan dompet Rp30.000.
+      <div class="tw"><table>
+        <tr><th></th><th>Tas ($x$)</th><th>Dompet ($y$)</th><th>Tersedia</th></tr>
+        <tr><td>Bahan</td><td>2</td><td>1</td><td>$\le30$</td></tr>
+        <tr><td>Jumlah produk</td><td>1</td><td>1</td><td>$\le20$</td></tr>
+        <tr><td>Laba (Rp)</td><td>50.000</td><td>30.000</td><td>dimaksimumkan</td></tr>
+      </table></div>
+      Model matematika:
+      $$\begin{aligned}\text{Maksimumkan}\quad Z&=50.000x+30.000y\\2x+y&\le30\\x+y&\le20\\x&\ge0,\ y\ge0\end{aligned}$$</div>
+
+    <h3>B.3 Titik pojok dan nilai maksimum</h3>
+    <p>Titik pojok ada dua jenis: <b>titik potong garis dengan sumbu</b> dan <b>titik potong dua garis</b> (SPLDV).</p>
+    <ol class="steps">
+      <li>Garis $2x+y=30$: $y=0\to x=15$, titik $P(15,0)$; $x=0\to y=30$, titik $(0,30)$.</li>
+      <li>Garis $x+y=20$: $y=0\to x=20$, titik $(20,0)$; $x=0\to y=20$, titik $R(0,20)$.</li>
+      <li>Titik potong dua garis: $Q(10,10)$ (lihat A.5).</li>
+      <li>Uji kelayakan ke <b>semua</b> kendala: $(0,30)$ gagal di $x+y\le20$; $(20,0)$ gagal di $2x+y\le30$. Keduanya bukan titik pojok.</li>
+    </ol>
+    <figure><div id="gB2"></div><figcaption>Gambar B.2 Daerah penyelesaian tas–dompet dengan titik pojok O, P, Q, R.</figcaption></figure>
+    <div class="warn"><b>Awas: tidak semua titik potong adalah titik pojok.</b> $(0,30)$ memang titik potong garis dengan sumbu-$y$, tetapi $0+30\le20$ salah. Selalu cek titik ke <b>semua</b> kendala.</div>
+    <p><b>Cara Lengkap:</b> hitung $Z=50.000x+30.000y$ di setiap titik pojok, lalu pilih yang terbesar.</p>
+    <div class="tw"><table>
+      <tr><th>Titik pojok</th><th>Perhitungan</th><th>$Z$ (Rp)</th></tr>
+      <tr><td>O $(0,0)$</td><td>0</td><td>0</td></tr>
+      <tr><td>P $(15,0)$</td><td>$50.000(15)+0$</td><td>750.000</td></tr>
+      <tr><td><b>Q $(10,10)$</b></td><td>$500.000+300.000$</td><td><b>800.000 ← maksimum</b></td></tr>
+      <tr><td>R $(0,20)$</td><td>$0+30.000(20)$</td><td>600.000</td></tr>
+    </table></div>
+    <p>Laba maksimum <b>Rp800.000</b>, dengan membuat 10 tas dan 10 dompet.</p>
+    <div class="box"><b>Mengapa cukup titik pojok?</b> Fungsi objektif dan kendala sama-sama linear, sehingga maksimum/minimum (bila ada) terjadi di titik pojok. Urutan: cari titik pojok → hitung $Z$ → bandingkan → pilih terbesar (maks) atau terkecil (min).</div>
+
+    <h3>Cara Cepat: garis selidik</h3>
+    <p>Gambar garis $Z=k$ untuk beberapa nilai $k$. Semuanya <b>sejajar</b>. Geser menjauhi O: titik pojok <b>terakhir</b> yang disentuh daerah = <b>maksimum</b>; titik pojok <b>pertama</b> yang disentuh = <b>minimum</b>.</p>
+    <figure><div id="gB3"></div><figcaption>Gambar B.3 Garis selidik $5x+3y=k$ digeser; titik Q terakhir disentuh, jadi $Z$ maksimum di Q.</figcaption></figure>
+    <div class="tip"><b>Cara Cepat yang aman di TKA</b>
+      <ol class="steps">
+        <li>Lewati titik O jika koefisien $Z$ positif dan soalnya maksimum (nilainya pasti 0).</li>
+        <li>Bagi dengan faktor persekutuan: $Z=10.000(5x+3y)$, cukup hitung $5x+3y$ di tiap titik: $75$, <b>80</b>, $60$.</li>
+        <li>Pada pilihan ganda, uji pilihan jawaban ke semua kendala, lalu cocokkan nilai $Z$-nya.</li>
+      </ol></div>
+
+    <h3>B.4 Contoh dengan batas bawah (Level 3)</h3>
+    <div class="ex">Paket A butuh 3 jam mesin dan 2 kg bahan; Paket B butuh 2 jam mesin dan 4 kg bahan. Tersedia 60 jam mesin dan 80 kg bahan. Laba A Rp70.000, B Rp80.000. Dibuat sedikitnya 4 Paket A dan 12 Paket B. Tentukan laba maksimum.
+      <ol class="steps">
+        <li><b>Model.</b> Kendala bahan $2x+4y\le80$ disederhanakan dengan membagi <b>semua</b> suku dengan 2:$$\begin{aligned}\text{Maksimumkan}\quad Z&=70.000x+80.000y\\3x+2y&\le60\\x+2y&\le40\\x&\ge4,\ y\ge12\end{aligned}$$</li>
+        <li><b>Titik pojok</b> (lihat gambar):<br>A: $x=4$ dan $y=12$ → $(4,12)$<br>B: $x=4$ dan $x+2y=40$ → $2y=36$, $y=18$ → $(4,18)$<br>D: $y=12$ dan $3x+2y=60$ → $3x=36$, $x=12$ → $(12,12)$</li>
+        <li>C: $3x+2y=60$ dan $x+2y=40$. Kurangkan:$$\begin{aligned}(3x+2y)-(x+2y)&=60-40\\2x&=20\\x&=10\end{aligned}$$ Maka $y=15$ → $(10,15)$.</li>
+        <li><b>Hitung $Z$ di tiap titik.</b></li>
+      </ol>
+      <div class="tw"><table>
+        <tr><th>Titik</th><th>Perhitungan</th><th>$Z$ (Rp)</th></tr>
+        <tr><td>A $(4,12)$</td><td>280.000 + 960.000</td><td>1.240.000</td></tr>
+        <tr><td>B $(4,18)$</td><td>280.000 + 1.440.000</td><td>1.720.000</td></tr>
+        <tr><td><b>C $(10,15)$</b></td><td>700.000 + 1.200.000</td><td><b>1.900.000 ← maksimum</b></td></tr>
+        <tr><td>D $(12,12)$</td><td>840.000 + 960.000</td><td>1.800.000</td></tr>
+      </table></div>
+      Laba maksimum <b>Rp1.900.000</b> dengan 10 Paket A dan 15 Paket B. Cek: mesin $3(10)+2(15)=60$ ✓; bahan $2(10)+4(15)=80$ ✓; $10\ge4$ dan $15\ge12$ ✓.</div>
+    <figure><div id="gB4"></div><figcaption>Gambar B.4 Daerah penyelesaian dengan empat titik pojok A, B, C, D.</figcaption></figure>
+    <div class="tip"><b>Cara Cepat.</b> Gambar kasar, lalu fokus pada titik yang berada di <b>dua garis kendala sekaligus</b> (titik C). Tetap hitung titik lain bila waktu cukup. Jika soal meminta bilangan bulat, periksa apakah titik optimum bulat (di sini semua bulat).</div>
+
+    <h3>B.5 Meminimumkan (biaya terkecil)</h3>
+    <p>Kendala “minimal” bertanda $\ge$, sehingga daerahnya <b>terbuka ke atas dan kanan</b>. Karena itu yang dicari biasanya nilai <b>terkecil</b>.</p>
+    <div class="ex">Pupuk A (Rp4.000/kg; 2 unit N dan 1 unit P per kg) dan pupuk B (Rp3.000/kg; 1 unit N dan 2 unit P per kg). Kebutuhan minimal 10 unit N dan 11 unit P. Biaya minimum?
+      <ol class="steps">
+        <li>Model:$$\begin{aligned}\text{Minimumkan}\quad Z&=4.000x+3.000y\\2x+y&\ge10\\x+2y&\ge11\\x&\ge0,\ y\ge0\end{aligned}$$</li>
+        <li>Titik pojok dari sumbu: $(0,10)$ dan $(11,0)$.</li>
+        <li>Titik potong dua garis: kalikan $2x+y=10$ dengan 2 → $4x+2y=20$, kurangkan $x+2y=11$:$$\begin{aligned}3x&=9\\x&=3,\ y=4\end{aligned}$$ Titik $(3,4)$.</li>
+        <li>Hitung $Z$:$$\begin{aligned}Z(0,10)&=30.000\\Z(3,4)&=12.000+12.000=24.000\\Z(11,0)&=44.000\end{aligned}$$</li>
+        <li>Biaya minimum <b>Rp24.000</b>.</li>
+      </ol></div>
+    <figure><div id="gB5"></div><figcaption>Gambar B.5 Daerah terbuka; $Z$ terkecil di $(3,4)$.</figcaption></figure>
+    <div class="tip"><b>Cara Cepat.</b> Geser garis selidik dari O ke arah daerah arsiran. <b>Titik pertama yang disentuh</b> = minimum, yaitu $(3,4)$.</div>
+
+    <h3>B.6 Membaca soal bergambar</h3>
+    <p>Lakukan: <b>(1)</b> baca koordinat titik pojok, <b>(2)</b> hitung $Z$, <b>(3)</b> bandingkan. Jika diminta sistem pertidaksamaan, cari persamaan tiap garis dari titik potong sumbunya.</p>
+    <div class="box"><b>Rumus garis dari dua titik potong sumbu.</b> Garis melalui $(a,0)$ dan $(0,b)$:$$bx+ay=ab$$</div>
+    <div class="ex"><b>Contoh:</b> garis I melalui $(7,0)$ dan $(0,14)$; garis II melalui $(9,0)$ dan $(0,9)$. Tentukan sistem pertidaksamaan dan nilai maksimum $f(x,y)=3x+2y$.
+      <ol class="steps">
+        <li>Garis I:$$\begin{aligned}14x+7y&=98\\2x+y&=14\end{aligned}$$</li>
+        <li>Garis II:$$\begin{aligned}9x+9y&=81\\x+y&=9\end{aligned}$$</li>
+        <li>Titik uji $(0,0)$ ada di daerah arsiran dan $0\le14$, $0\le9$ benar, jadi tandanya $\le$:$$2x+y\le14,\ \ x+y\le9,\ \ x\ge0,\ \ y\ge0$$</li>
+        <li>Titik pojok: $(0,0)$, $(7,0)$, $(0,9)$, dan titik potong:$$\begin{aligned}(2x+y)-(x+y)&=14-9\\x&=5,\ y=4\end{aligned}$$</li>
+        <li>Hitung $f$:$$\begin{aligned}f(0,0)&=0\\f(7,0)&=21\\f(5,4)&=15+8=23\\f(0,9)&=18\end{aligned}$$ Maksimum <b>23</b>.</li>
+      </ol>
+      Titik $(0,14)$ dan $(9,0)$ <b>bukan</b> titik pojok karena di luar daerah arsiran.</div>
+    <figure><div id="gB6"></div><figcaption>Gambar B.6 Garis I melalui $(7,0)$ dan $(0,14)$; garis II melalui $(9,0)$ dan $(0,9)$.</figcaption></figure>
+
+    <h3>B.7 Bila fungsi objektif berubah: banyak titik optimum</h3>
+    <p>Pada Gambar B.2, ganti menjadi $Z=50.000x+50.000y=50.000(x+y)$:</p>
+    $$\begin{aligned}Z(15,0)&=750.000\\Z(10,10)&=1.000.000\\Z(0,20)&=1.000.000\end{aligned}$$
+    <figure><div id="gB7"></div><figcaption>Gambar B.7 Garis selidik sejajar sisi QR, sehingga maksimum tercapai di seluruh ruas QR.</figcaption></figure>
+    <div class="box"><b>Kesimpulan.</b> Bila dua titik pojok yang <b>bersebelahan</b> memberi nilai $Z$ sama dan itu yang terbaik, maka <b>seluruh titik pada ruas</b> di antaranya juga optimum. Ini terjadi ketika garis $Z$ <b>sejajar</b> salah satu garis kendala (di sini sejajar $x+y=20$).</div>
+
+    <h3>B.8 Menilai pernyataan (Level 3)</h3>
+    <ul>
+      <li>Rencana $(x,y)$ <b>layak</b> jika memenuhi <b>semua</b> kendala, termasuk $x\ge0$ dan $y\ge0$. Satu kendala gagal → tidak layak.</li>
+      <li>Nilai maksimum <b>tidak boleh ditebak</b> dari variabel yang paling besar. Hitung $Z$ di semua titik pojok atau pakai garis selidik.</li>
+      <li>Setiap pernyataan dicek <b>sendiri-sendiri</b>.</li>
+      <li>Untuk “hanya di satu titik” atau “di banyak titik”, periksa apakah garis $Z$ <b>sejajar</b> garis kendala (B.7).</li>
+    </ul>
+  </div>
+</section>
+
+<section id="C">
+  <h2><i>C</i> Program Linear Tiga Variabel</h2>
+  <div class="card">
+    <p>Batas variabel di TKA <b>maksimum tiga</b>. Daerahnya berupa bangun ruang sehingga <b>tidak diminta digambar</b>. Yang biasa diminta: <b>menyusun model</b> (Level 2), <b>mengecek</b> kelayakan rencana, <b>membandingkan</b> rencana, atau menetapkan satu variabel lalu mengerjakannya seperti dua variabel.</p>
+    <h3>C.1 Menyusun model dengan tabel</h3>
+    <div class="ex">Produk A butuh 2 jam mesin dan 1 kg bahan; B butuh 1 jam dan 2 kg; C butuh 3 jam dan 2 kg. Tersedia 40 jam mesin dan 30 kg bahan. Laba A Rp50.000, B Rp40.000, C Rp70.000. Minimal produksi: A 2, B 3, C 1.
+      <div class="tw"><table>
+        <tr><th></th><th>A ($x$)</th><th>B ($y$)</th><th>C ($z$)</th><th>Tersedia</th></tr>
+        <tr><td>Jam mesin</td><td>2</td><td>1</td><td>3</td><td>$\le40$</td></tr>
+        <tr><td>Kg bahan</td><td>1</td><td>2</td><td>2</td><td>$\le30$</td></tr>
+        <tr><td>Minimal produksi</td><td>2</td><td>3</td><td>1</td><td>$\ge$</td></tr>
+        <tr><td>Laba (ribu Rp)</td><td>50</td><td>40</td><td>70</td><td>maksimum</td></tr>
+      </table></div>
+      $$\begin{aligned}\text{Maksimumkan}\quad f(x,y,z)&=50.000x+40.000y+70.000z\\2x+y+3z&\le40\\x+2y+2z&\le30\\x\ge2,\ y&\ge3,\ z\ge1\end{aligned}$$</div>
+    <div class="tip"><b>Tips penamaan.</b> Pakai huruf $f$ atau $L$ untuk fungsi objektif tiga variabel, supaya tidak tertukar dengan variabel $z$.</div>
+
+    <h3>C.2 Mengecek kelayakan dan membandingkan rencana</h3>
+    <p>Rencana $(x,y,z)$ <b>layak</b> bila memenuhi semua kendala. Di antara yang layak, pilih laba terbesar.</p>
+    <div class="tw"><table>
+      <tr><th>Rencana</th><th>Mesin $\le40$</th><th>Bahan $\le30$</th><th>Layak?</th><th>Laba (ribu Rp)</th></tr>
+      <tr><td>$(5,4,6)$</td><td>10+4+18 = 32</td><td>5+8+12 = 25</td><td>ya</td><td>830</td></tr>
+      <tr><td>$(4,3,7)$</td><td>8+3+21 = 32</td><td>4+6+14 = 24</td><td>ya</td><td>810</td></tr>
+      <tr><td><b>$(8,5,6)$</b></td><td>16+5+18 = 39</td><td>8+10+12 = 30</td><td><b>ya</b></td><td><b>1.020</b></td></tr>
+      <tr><td>$(9,6,6)$</td><td>18+6+18 = <b>42 ✗</b></td><td>9+12+12 = <b>33 ✗</b></td><td><b>tidak</b></td><td>1.110</td></tr>
+    </table></div>
+    <figure><div id="cbar"></div><figcaption>Gambar C.1 Pemakaian mesin dan bahan tiap rencana dibandingkan dengan batasnya (garis kuning).</figcaption></figure>
+    <p>Rencana $(9,6,6)$ berlaba tertinggi, tetapi <b>tidak layak</b> karena melampaui batas mesin dan bahan. Rencana layak terbaik adalah $(8,5,6)$ dengan laba Rp1.020.000.</p>
+    <div class="tip"><b>Cara Cepat.</b> Periksa kendala satu per satu dan <b>coret rencana begitu satu kendala gagal</b>. Urutkan dari laba terbesar; jika tidak layak, turun ke berikutnya.</div>
+
+    <h3>C.3 Menetapkan satu variabel</h3>
+    <div class="ex"><b>Contoh:</b> pada C.1, jika produksi C tepat 5 unit ($z=5$), tentukan laba maksimum.
+      <ol class="steps">
+        <li>Substitusi $z=5$:$$\begin{aligned}2x+y+15&\le40\ \Rightarrow\ 2x+y\le25\\x+2y+10&\le30\ \Rightarrow\ x+2y\le20\\x&\ge2,\ y\ge3\end{aligned}$$</li>
+        <li>Fungsi laba:$$f=50.000x+40.000y+70.000(5)=50.000x+40.000y+350.000$$</li>
+        <li>Titik pojok (lihat gambar): $(2,3)$, $(11,3)$, $(2,9)$, dan titik potong $2x+y=25$ dengan $x+2y=20$. Kalikan persamaan pertama dengan 2 dan kurangkan:$$\begin{aligned}(4x+2y)-(x+2y)&=50-20\\3x&=30\\x&=10,\ y=5\end{aligned}$$ Titik $(10,5)$.</li>
+        <li>Hitung laba:</li>
+      </ol>
+      <div class="tw"><table>
+        <tr><th>Titik</th><th>Perhitungan</th><th>Laba (Rp)</th></tr>
+        <tr><td>$(2,3)$</td><td>100.000+120.000+350.000</td><td>570.000</td></tr>
+        <tr><td>$(11,3)$</td><td>550.000+120.000+350.000</td><td>1.020.000</td></tr>
+        <tr><td><b>$(10,5)$</b></td><td>500.000+200.000+350.000</td><td><b>1.050.000 ← maksimum</b></td></tr>
+        <tr><td>$(2,9)$</td><td>100.000+360.000+350.000</td><td>810.000</td></tr>
+      </table></div>
+      Laba maksimum untuk $z=5$ adalah <b>Rp1.050.000</b> pada $(10,5,5)$. Cek: mesin $20+5+15=40$ ✓; bahan $10+10+10=30$ ✓.</div>
+    <figure><div id="gC2"></div><figcaption>Gambar C.2 Untuk $z=5$, daerah berupa segi empat dengan titik pojok $(2,3)$, $(11,3)$, $(10,5)$, $(2,9)$.</figcaption></figure>
+    <div class="box"><b>Catatan.</b> Ini laba maksimum <b>untuk $z=5$</b>. Mencari optimum untuk semua $z$ sekaligus tidak diminta di TKA. Fokus pada: menyusun model, mengecek kelayakan, membandingkan rencana.</div>
+  </div>
+</section>
+
+<section id="D">
+  <h2><i>D</i> Bank Kesalahan &amp; Master Check</h2>
+  <div class="card">
+    <div class="tw"><table>
+      <tr><th>Kesalahan umum</th><th>Contoh</th><th>Cara menghindari</th></tr>
+      <tr><td>Memilih titik hanya karena $x$ atau $y$ terbesar</td><td>Memilih $(15,0)$ karena $x=15$</td><td>Hitung $Z$ di <b>semua</b> titik pojok</td></tr>
+      <tr><td>Semua titik potong dianggap titik pojok</td><td>Memakai $(0,30)$ di Gambar B.2</td><td>Uji ke <b>semua</b> kendala</td></tr>
+      <tr><td>Lupa $x\ge0$, $y\ge0$</td><td>Daerah tidak tertutup</td><td>Tulis di setiap model</td></tr>
+      <tr><td>Koefisien tertukar</td><td>Bahan tas dan dompet terbalik</td><td>Buat tabel kebutuhan dulu</td></tr>
+      <tr><td>Tanda tertukar</td><td>“paling banyak” ditulis $\ge$</td><td>banyak/maksimal $\le$; sedikit/minimal $\ge$</td></tr>
+      <tr><td>Maksimum dan minimum tertukar</td><td>Mengambil terbesar padahal diminta minimum</td><td>Garis bawahi kata maksimum/minimum</td></tr>
+      <tr><td>Menyederhanakan tidak semua suku</td><td>$2x+4y\le80\to x+4y\le40$</td><td>Bagi <b>semua</b> suku, termasuk ruas kanan</td></tr>
+      <tr><td>Salah membaca skala grafik</td><td>Satu kotak dianggap 1, padahal 5</td><td>Cek angka pada sumbu</td></tr>
+      <tr><td>Tiga variabel: cek satu kendala saja</td><td>Rencana dianggap layak</td><td>Cek <b>semua</b> kendala dan batas bawah</td></tr>
+      <tr><td>Tidak mengecek jawaban</td><td>Hasil tidak masuk ke soal</td><td>Substitusi ke semua kendala</td></tr>
+    </table></div>
+    <div class="box" id="mc"><b>Master Check (centang sebelum menjawab)</b>
+      <label><input type="checkbox"> Kata kunci dibaca: <b>paling banyak/minimal</b>, <b>maksimum/minimum</b>?</label>
+      <label><input type="checkbox"> Variabel sudah didefinisikan ($x=\ldots$, $y=\ldots$)?</label>
+      <label><input type="checkbox"> Semua kendala ditulis, termasuk $x\ge0$ dan $y\ge0$?</label>
+      <label><input type="checkbox"> Titik pojok sudah diuji ke <b>semua</b> kendala?</label>
+      <label><input type="checkbox"> $Z$ dihitung di <b>semua</b> titik pojok (atau garis selidik dipakai)?</label>
+      <label><input type="checkbox"> Jawaban dimasukkan kembali ke soal dan satuannya benar?</label>
+      <div class="res" id="mcr"></div></div>
+  </div>
+</section>
+
+<section id="latihan">
+  <h2><i>✏️</i> Bagian E · Latihan</h2>
+  <p>6 soal bertingkat (Level 1–3). Pilih jawaban, lalu buka <b>Cara Cepat</b> dan <b>Cara Lengkap</b>.</p>
+  <div id="qL"></div>
+</section>
+
+<section id="prediksi">
+  <h2><i>🎯</i> Bagian F · Prediksi Soal TKA</h2>
+  <p>10 soal: Level 1 = 3, Level 2 = 4, Level 3 = 3 (PG, PGK, Benar/Salah).</p>
+  <div class="tw"><table>
+    <tr><th>No</th><th>Level</th><th>Proses berpikir</th><th>Bentuk</th><th>Topik</th></tr>
+    <tr><td>1</td><td>1</td><td>Menghitung, memahami informasi</td><td>PG</td><td>Membaca grafik, nilai maksimum</td></tr>
+    <tr><td>2</td><td>1</td><td>Mengidentifikasi</td><td>PG</td><td>Sistem pertidaksamaan dari grafik</td></tr>
+    <tr><td>3</td><td>1</td><td>Mengelompokkan</td><td>PGK</td><td>Titik yang memenuhi sistem</td></tr>
+    <tr><td>4</td><td>2</td><td>Memodelkan, menerapkan</td><td>PG</td><td>Soal cerita, maksimum</td></tr>
+    <tr><td>5</td><td>2</td><td>Memodelkan, menerapkan</td><td>PG</td><td>Tabel, minimum</td></tr>
+    <tr><td>6</td><td>2</td><td>Memodelkan, menginterpretasikan</td><td>PGK</td><td>Model tiga variabel</td></tr>
+    <tr><td>7</td><td>2</td><td>Menerapkan</td><td>PG</td><td>Tiga variabel, membandingkan rencana</td></tr>
+    <tr><td>8</td><td>3</td><td>Menganalisis, menjustifikasi</td><td>B/S</td><td>Banyak titik optimum</td></tr>
+    <tr><td>9</td><td>3</td><td>Memecahkan masalah, mengevaluasi</td><td>PG</td><td>Minimum, kendala campuran</td></tr>
+    <tr><td>10</td><td>3</td><td>Menganalisis, menyimpulkan</td><td>PGK</td><td>Tiga variabel, evaluasi rencana</td></tr>
+  </table></div>
+  <div id="qP"></div>
+  <div class="card" id="skor" style="text-align:center;font-weight:700"></div>
+</section>
+</main>
+
+
+<footer><b>VisualMath.Lim</b> - TKA Matematika Wajib SMA<br>© Bimbingan Belajar VisualMath.Lim · <a href="index.html" style="color:var(--yellow)">Home</a> · <a href="linear.html" style="color:var(--yellow)">Dashboard</a></footer>
+<a class="top" href="#" aria-label="Ke atas">↑</a>
+
+<script>
+/* ---------- Grafik SVG ---------- */
+function graph(o){
+  const W=o.w||340,H=o.h||270,L=34,B=26,R=14,T=14,xm=o.xmax,ym=o.ymax;
+  const sx=(W-L-R)/xm, sy=(H-T-B)/ym, X=x=>L+x*sx, Y=y=>H-B-y*sy;
+  const st=o.step||1; let s=`<svg viewBox="0 0 ${W} ${H}" width="${W}" role="img" aria-label="${o.label||'Grafik'}">`;
+  for(let i=0;i<=xm;i+=st){s+=`<line x1="${X(i)}" y1="${T}" x2="${X(i)}" y2="${H-B}" stroke="#e0ebf2"/><text x="${X(i)}" y="${H-B+14}" font-size="10" text-anchor="middle" fill="#4a5f7d">${i}</text>`}
+  for(let j=0;j<=ym;j+=st){s+=`<line x1="${L}" y1="${Y(j)}" x2="${W-R}" y2="${Y(j)}" stroke="#e0ebf2"/><text x="${L-5}" y="${Y(j)+3}" font-size="10" text-anchor="end" fill="#4a5f7d">${j}</text>`}
+  s+=`<line x1="${L}" y1="${H-B}" x2="${W-R}" y2="${H-B}" stroke="#022050" stroke-width="2"/><line x1="${L}" y1="${T}" x2="${L}" y2="${H-B}" stroke="#022050" stroke-width="2"/><text x="${W-R}" y="${H-B-5}" font-size="12" text-anchor="end" font-weight="700" fill="#022050">x</text><text x="${L+6}" y="${T+8}" font-size="12" font-weight="700" fill="#022050">y</text>`;
+  if(o.poly)s+=`<polygon points="${o.poly.map(p=>X(p[0])+','+Y(p[1])).join(' ')}" fill="#00d6d8" fill-opacity=".22"/>`;
+  (o.lines||[]).forEach(l=>{s+=`<line x1="${X(l[0])}" y1="${Y(l[1])}" x2="${X(l[2])}" y2="${Y(l[3])}" stroke="${l[4]}" stroke-width="3.5" stroke-linecap="round" ${l[6]?'stroke-dasharray="8 6"':''}/>`;
+    if(l[5])s+=`<text x="${X(l[2])-4}" y="${Y(l[3])-6}" font-size="11" text-anchor="end" font-weight="700" fill="${l[4]}">${l[5]}</text>`});
+  (o.pts||[]).forEach(p=>{s+=`<circle cx="${X(p[0])}" cy="${Y(p[1])}" r="5.5" fill="#ffd300" stroke="#022050" stroke-width="2"/>`+(p[2]?`<text x="${X(p[0])+9}" y="${Y(p[1])-8}" font-size="12" font-weight="800" fill="#022050">${p[2]}</text>`:'')});
+  return s+'</svg>';
+}
+
+const NV='#1457c4',GR='#14a06b',OR='#e0701a';
+const rg=(x1,y1,x2,y2,c,l,d)=>[x1,y1,x2,y2,c,l,d];
+const TB3='',TB13='',TB7='';
+const G={
+ A1:graph({xmax:6,ymax:8,lines:[rg(4,0,0,6,NV,'3x+2y=12')],pts:[[4,0,'(4,0)'],[0,6,'(0,6)']]}),
+ A2:graph({xmax:6,ymax:8,poly:[[0,0],[4,0],[0,6]],lines:[rg(4,0,0,6,NV,'3x+2y=12')],pts:[[0,0,'(0,0) benar'],[4,4,'(4,4) salah']]}),
+ B2:graph({w:360,h:300,xmax:22,ymax:32,step:2,poly:[[0,0],[15,0],[10,10],[0,20]],lines:[rg(0,30,15,0,NV,'2x+y=30'),rg(0,20,20,0,GR,'x+y=20')],pts:[[0,0,'O'],[15,0,'P(15,0)'],[10,10,'Q(10,10)'],[0,20,'R(0,20)']]}),
+ B3:graph({w:360,h:300,xmax:22,ymax:32,step:2,poly:[[0,0],[15,0],[10,10],[0,20]],lines:[rg(0,10,6,0,OR,'k=30',1),rg(0,20,12,0,OR,'k=60',1),rg(0,80/3,16,0,OR,'k=80',1),rg(0,30,15,0,NV),rg(0,20,20,0,GR)],pts:[[10,10,'Q']]}),
+ B4:graph({w:360,h:300,xmax:24,ymax:26,step:2,poly:[[4,12],[12,12],[10,15],[4,18]],lines:[rg(4,24,20,0,NV,'3x+2y=60'),rg(0,20,24,8,GR,'x+2y=40'),rg(4,0,4,26,'#888'),rg(0,12,24,12,'#888')],pts:[[4,12,'A'],[4,18,'B'],[10,15,'C'],[12,12,'D']]}),
+ B5:graph({w:360,h:300,xmax:12,ymax:12,poly:[[0,12],[0,10],[3,4],[11,0],[12,0],[12,12]],lines:[rg(0,10,5,0,NV,'2x+y=10'),rg(0,5.5,11,0,GR,'x+2y=11')],pts:[[0,10,'(0,10)'],[3,4,'(3,4)'],[11,0,'(11,0)']]}),
+ B6:graph({w:360,h:300,xmax:10,ymax:15,poly:[[0,0],[7,0],[5,4],[0,9]],lines:[rg(0,14,7,0,NV,'I'),rg(0,9,9,0,GR,'II')],pts:[[7,0,'(7,0)'],[5,4,'(5,4)'],[0,9,'(0,9)']]}),
+ B7:graph({w:360,h:300,xmax:22,ymax:32,step:2,poly:[[0,0],[15,0],[10,10],[0,20]],lines:[rg(0,30,15,0,NV),rg(0,20,20,0,'#e0701a','Z sejajar QR'),rg(10,10,0,20,'#ffd300')],pts:[[10,10,'Q'],[0,20,'R']]}),
+ C2:graph({w:360,h:280,xmax:14,ymax:12,poly:[[2,3],[11,3],[10,5],[2,9]],lines:[rg(12.5,0,6.5,12,NV,'2x+y=25'),rg(0,10,14,3,GR,'x+2y=20'),rg(2,0,2,12,'#888'),rg(0,3,14,3,'#888')],pts:[[2,3,'(2,3)'],[11,3,'(11,3)'],[10,5,'(10,5)'],[2,9,'(2,9)']]}),
+ p1:graph({w:360,h:280,xmax:12,ymax:7,poly:[[0,0],[8,0],[6,3],[0,5]],lines:[rg(8,0,4,6,NV),rg(0,5,12,1,GR)],pts:[[0,0,'O'],[8,0,'(8,0)'],[6,3,'(6,3)'],[0,5,'(0,5)']]}),
+ p2:graph({w:340,h:270,xmax:7,ymax:6,poly:[[0,0],[5,0],[3,2],[0,4]],lines:[rg(5,0,0,5,NV,'p'),rg(6,0,0,4,GR,'q')],pts:[[5,0,'(5,0)'],[0,5,'(0,5)'],[6,0,'(6,0)'],[0,4,'(0,4)'],[3,2]]})
+};
+for(const k of ['A1','A2','B2','B3','B4','B5','B6','B7','C2'])document.getElementById('g'+k).innerHTML=G[k];
+(function(){const rows=[['(5,4,6)',32,25],['(4,3,7)',32,24],['(8,5,6)',39,30],['(9,6,6)',42,33]];
+ const mk=(lab,v,lim,max)=>`<div class="bar2"><span class="n">${lab}</span><div class="trk"><i class="${v>lim?'bad':''}" style="width:${v/max*100}%"></i><u style="left:${lim/max*100}%"></u><span>${v} / ${lim}</span></div></div>`;
+ document.getElementById('cbar').innerHTML='<div style="text-align:left;max-width:560px;margin:auto"><b>Jam mesin (batas 40)</b>'+rows.map(r=>mk(r[0],r[1],40,48)).join('')+'<b>Kg bahan (batas 30)</b>'+rows.map(r=>mk(r[0],r[2],30,36)).join('')+'</div>';
+ const cb=[...document.querySelectorAll('#mc input')],out=document.getElementById('mcr');
+ cb.forEach(c=>c.onchange=()=>{const n=cb.filter(x=>x.checked).length;out.textContent=n===cb.length?'✅ Master Check lengkap. Siap menjawab!':n+' dari '+cb.length+' langkah dicek'})})();
+const r=String.raw;
+const LAT=[
+{lv:1,t:'PG',q:r`Daerah penyelesaian suatu program linear memiliki titik pojok $(0,0)$, $(9,0)$, $(6,4)$, dan $(0,7)$. Nilai maksimum $f(x,y)=3x+4y$ adalah ....`,o:['27','28','30','34','36'],a:'D',
+ f:[r`Lewati $(0,0)$. Hitung tiga titik lain: $27$, $34$, $28$.`,r`Terbesar $34$ → <b>D</b>.`],
+ l:[r`Hitung $f$ di setiap titik pojok:$$\begin{aligned}f(0,0)&=0\\f(9,0)&=3(9)=27\\f(6,4)&=18+16=34\\f(0,7)&=4(7)=28\end{aligned}$$`,
+    r`Pilih yang terbesar: <b>34</b> di titik $(6,4)$.`,r`Jawaban: <b>D</b>.`]},
+{lv:1,t:'PG',q:r`Titik yang memenuhi sistem $3x+2y\le18$, $x+y\le8$, $x\ge0$, $y\ge0$ adalah ....`,o:[r`$(5,3)$`,r`$(4,4)$`,r`$(2,6)$`,r`$(6,3)$`,r`$(3,6)$`],a:'C',
+ f:[r`Uji tiap pilihan ke kendala yang paling ketat, $3x+2y\le18$: $(5,3)$ → 21 ✗, $(4,4)$ → 20 ✗, $(6,3)$ → 24 ✗, $(3,6)$ → 21 ✗.`,r`Sisa $(2,6)$ → <b>C</b>.`],
+ l:[r`Uji $(2,6)$:$$\begin{aligned}3(2)+2(6)&=18\le18\ \checkmark\\2+6&=8\le8\ \checkmark\end{aligned}$$`,
+    r`Pilihan lain gagal:<br>$(5,3)$: $15+6=21>18$ ✗<br>$(4,4)$: $12+8=20>18$ ✗<br>$(6,3)$: $18+6=24>18$ ✗<br>$(3,6)$: $9+12=21>18$ ✗`,
+    r`Jawaban: <b>C</b>.`]},
+{lv:2,t:'PG',q:r`Seorang pedagang membeli sepeda motor ($x$ unit) seharga Rp20 juta per unit dan sepeda ($y$ unit) seharga Rp2 juta per unit. Modal paling banyak Rp200 juta dan tempat memuat paling banyak 25 kendaraan. Model matematika yang tepat adalah ....`,o:[r`$10x+y\le100;\ x+y\le25;\ x\ge0;\ y\ge0$`,r`$10x+y\ge100;\ x+y\ge25;\ x\ge0;\ y\ge0$`,r`$x+10y\le100;\ x+y\le25;\ x\ge0;\ y\ge0$`,r`$20x+2y\le25;\ x+y\le200;\ x\ge0;\ y\ge0$`,r`$10x+y\le100;\ x+y\ge25;\ x\ge0;\ y\ge0$`],a:'A',
+ f:[r`“Paling banyak” → semua tanda $\le$ (coret B dan E).`,r`Koefisien motor 20 → $10$ (setelah dibagi 2), bukan koefisien $y$ → A.`],
+ l:[r`Modal (juta): motor $20x$ + sepeda $2y$, paling banyak 200:$$20x+2y\le200$$`,
+    r`Bagi <b>semua</b> suku dengan 2:$$10x+y\le100$$`,
+    r`Tempat memuat paling banyak 25 kendaraan:$$x+y\le25$$`,
+    r`Tambahkan $x\ge0$ dan $y\ge0$. Jawaban: <b>A</b>.`]},
+{lv:2,t:'PG',q:r`Titik potong garis $3x+y=13$ dan $x+y=7$ adalah ....`,o:[r`$(2,5)$`,r`$(3,4)$`,r`$(4,3)$`,r`$(5,2)$`,r`$(6,1)$`],a:'B',
+ f:[r`Kurangkan: $2x=6\Rightarrow x=3$, lalu $y=7-3=4$ → <b>B</b>.`],
+ l:[r`Kurangkan kedua persamaan (koefisien $y$ sama):$$\begin{aligned}(3x+y)-(x+y)&=13-7\\2x&=6\\x&=3\end{aligned}$$`,
+    r`Substitusi ke $x+y=7$:$$\begin{aligned}3+y&=7\\y&=4\end{aligned}$$`,
+    r`Cek: $3(3)+4=13$ ✓. Jawaban: <b>B</b>.`]},
+{lv:2,t:'PG',q:r`Toko roti membuat roti manis ($x$ loyang) dan roti tawar ($y$ loyang). Roti manis memerlukan 2 kg tepung per loyang dan roti tawar 1 kg. Tepung tersedia paling banyak 16 kg dan oven memuat paling banyak 12 loyang. Laba roti manis Rp25.000 dan roti tawar Rp20.000 per loyang. Laba maksimum adalah ....`,o:['Rp200.000','Rp240.000','Rp250.000','Rp260.000','Rp300.000'],a:'D',
+ f:[r`Bagi laba dengan 5.000: hitung $5x+4y$ di titik pojok: $40$, $52$, $48$.`,r`Terbesar $52\times5.000=$ Rp260.000 → <b>D</b>.`],
+ l:[r`Model:$$\begin{aligned}\text{Maksimumkan}\ Z&=25.000x+20.000y\\2x+y&\le16\\x+y&\le12\\x&\ge0,\ y\ge0\end{aligned}$$`,
+    r`Titik potong dua garis: kurangkan$$\begin{aligned}(2x+y)-(x+y)&=16-12\\x&=4,\ y=8\end{aligned}$$`,
+    r`Titik pojok: $(0,0)$, $(8,0)$, $(4,8)$, $(0,12)$.`,
+    r`Hitung $Z$:$$\begin{aligned}Z(0,0)&=0\\Z(8,0)&=200.000\\Z(4,8)&=100.000+160.000=260.000\\Z(0,12)&=240.000\end{aligned}$$`,
+    r`Maksimum Rp260.000 → <b>D</b>.`]},
+{lv:3,t:'PG',q:r`Suatu usaha memiliki kendala jam kerja $x+2y+3z\le30$ dan bahan $2x+y+z\le25$, dengan $x,y,z$ bilangan tak negatif. Rencana produksi $(x,y,z)$ yang layak adalah ....`,o:[r`$(4,5,6)$`,r`$(6,4,5)$`,r`$(8,3,6)$`,r`$(7,6,4)$`,r`$(10,2,5)$`],a:'B',
+ f:[r`Uji kendala jam kerja dulu (paling ketat): A → 32 ✗, C → 32 ✗, D → 31 ✗, E → 29 tetapi bahan 27 ✗.`,r`Sisa $(6,4,5)$ → <b>B</b>.`],
+ l:[r`Uji $(6,4,5)$:$$\begin{aligned}6+2(4)+3(5)&=29\le30\ \checkmark\\2(6)+4+5&=21\le25\ \checkmark\end{aligned}$$`,
+    r`Pilihan lain gagal di salah satu kendala:<br>A $(4,5,6)$: jam $4+10+18=32>30$ ✗<br>C $(8,3,6)$: jam $8+6+18=32>30$ ✗<br>D $(7,6,4)$: jam $7+12+12=31>30$ ✗<br>E $(10,2,5)$: jam $10+4+15=29$ ✓ tetapi bahan $20+2+5=27>25$ ✗`,
+    r`Jawaban: <b>B</b>.`]}
+];
+
+const PRE=[
+{lv:1,t:'PG',q:r`Daerah yang diarsir pada gambar merupakan himpunan penyelesaian suatu sistem pertidaksamaan linear. Nilai maksimum $f(x,y)=4x+5y$ pada daerah tersebut adalah ....[[G:p1]]`,o:['25','32','36','39','41'],a:'D',
+ f:[r`Titik O pasti 0; hitung $A$, $B$, $C$ saja.`,r`$f(A)=32$, $f(B)=39$, $f(C)=25$. Waspadai jebakan: $A$ punya $x$ terbesar tetapi bukan maksimum → <b>D</b>.`],
+ l:[r`Baca titik pojok dari grafik: $O(0,0)$, $A(8,0)$, $B(6,3)$, $C(0,5)$.`,
+    r`Hitung $f=4x+5y$:$$\begin{aligned}f(O)&=0\\f(A)&=4(8)=32\\f(B)&=24+15=39\\f(C)&=25\end{aligned}$$`,
+    r`Maksimum <b>39</b> di titik $B$ → <b>D</b>.`]},
+{lv:1,t:'PG',q:r`Daerah yang diarsir pada gambar dibatasi garis $p$, garis $q$, sumbu-$x$, dan sumbu-$y$. Sistem pertidaksamaan yang sesuai adalah ....[[G:p2]]`,o:[r`$x+y\le5;\ 2x+3y\le12;\ x\ge0;\ y\ge0$`,r`$x+y\ge5;\ 2x+3y\ge12;\ x\ge0;\ y\ge0$`,r`$x+y\le5;\ 3x+2y\le12;\ x\ge0;\ y\ge0$`,r`$x+y\le5;\ 2x+3y\ge12;\ x\ge0;\ y\ge0$`,r`$x+y\ge5;\ 3x+2y\le12;\ x\ge0;\ y\ge0$`],a:'A',
+ f:[r`Titik uji $(0,0)$ ada di daerah arsiran → semua tanda $\le$ (coret B, D, E).`,r`Uji titik pojok $(3,2)$ di $2x+3y$: $6+6=12$ ✓ (cocok A), sedangkan $3x+2y=13\ne12$ (C salah).`],
+ l:[r`Garis $p$ melalui $(5,0)$ dan $(0,5)$:$$\begin{aligned}5x+5y&=25\\x+y&=5\end{aligned}$$`,
+    r`Garis $q$ melalui $(6,0)$ dan $(0,4)$:$$\begin{aligned}4x+6y&=24\\2x+3y&=12\end{aligned}$$`,
+    r`Titik uji $(0,0)$ di daerah arsiran: $0\le5$ dan $0\le12$ benar, sehingga tandanya $\le$.`,
+    r`Jawaban: <b>A</b>.`]},
+{lv:1,t:'PGK',q:r`Perhatikan sistem $2x+y\le10$, $x+3y\le15$, $x\ge0$, $y\ge0$. Pilih <b>semua</b> titik yang berada di daerah penyelesaian.`,o:[r`$(3,4)$`,r`$(4,3)$`,r`$(0,6)$`,r`$(2,3)$`,r`$(5,0)$`],a:['A','D','E'],
+ f:[r`Coret yang jelas melanggar: B ($2(4)+3=11>10$) dan C ($3\times6=18>15$).`,r`Sisa <b>A, D, E</b>.`],
+ l:[r`Uji tiap titik ke dua kendala:<br>A $(3,4)$: $6+4=10\le10$ ✓ dan $3+12=15\le15$ ✓ → memenuhi<br>B $(4,3)$: $8+3=11>10$ ✗ → tidak<br>C $(0,6)$: $0+18=18>15$ ✗ → tidak<br>D $(2,3)$: $7\le10$ ✓ dan $11\le15$ ✓ → memenuhi<br>E $(5,0)$: $10\le10$ ✓ dan $5\le15$ ✓ → memenuhi`,
+    r`Jawaban: <b>A, D, E</b>.`]},
+{lv:2,t:'PG',q:r`Seorang pedagang memiliki modal Rp12.000.000 untuk membeli sepatu jenis A seharga Rp200.000 per pasang dan jenis B seharga Rp150.000 per pasang. Tokonya memuat paling banyak 70 pasang. Laba sepatu A Rp35.000 dan B Rp25.000 per pasang. Laba maksimum adalah ....`,o:['Rp1.750.000','Rp2.000.000','Rp2.050.000','Rp2.100.000','Rp2.250.000'],a:'D',
+ f:[r`$Z=5.000(7x+5y)$. Hitung $7x+5y$: $(60,0)\to420$; $(30,40)\to410$; $(0,70)\to350$.`,r`Terbesar 420 → $420\times5.000=$ Rp2.100.000 → <b>D</b>. Jangan berhenti di titik potong dua garis (jebakan C).`],
+ l:[r`Misalkan sepatu A $=x$ dan B $=y$. Modal dibagi 50.000:$$\begin{aligned}200.000x+150.000y&\le12.000.000\\4x+3y&\le240\end{aligned}$$ Muat: $x+y\le70$. Laba: $Z=35.000x+25.000y$.`,
+    r`Titik pojok dari sumbu: $(0,0)$, $(60,0)$, $(0,70)$.`,
+    r`Titik potong: substitusi $y=70-x$ ke $4x+3y=240$:$$\begin{aligned}4x+210-3x&=240\\x&=30,\ y=40\end{aligned}$$`,
+    r`Hitung $Z$:$$\begin{aligned}Z(60,0)&=2.100.000\\Z(30,40)&=1.050.000+1.000.000=2.050.000\\Z(0,70)&=1.750.000\end{aligned}$$`,
+    r`Maksimum Rp2.100.000 di $(60,0)$ → <b>D</b>.`]},
+{lv:2,t:'PG',q:r`Seseorang memenuhi kebutuhan kalsium dan zat besi dengan membeli suplemen I dan II. Suplemen I (per butir): kalsium 3, zat besi 1, harga Rp5.000. Suplemen II (per butir): kalsium 1, zat besi 2, harga Rp4.000. Kebutuhan minimal: kalsium 18 unit dan zat besi 16 unit. Pengeluaran minimum adalah ....`,o:['Rp40.000','Rp44.000','Rp48.000','Rp72.000','Rp80.000'],a:'B',
+ f:[r`Hitung $5x+4y$ (ribuan) di tiga titik pojok: $72$, <b>44</b>, $80$.`,r`Diminta minimum → ambil terkecil: Rp44.000 → <b>B</b>.`],
+ l:[r`Misalkan suplemen I $=x$ dan II $=y$:$$\begin{aligned}\text{Minimumkan}\ Z&=5.000x+4.000y\\3x+y&\ge18\\x+2y&\ge16\end{aligned}$$`,
+    r`Titik pojok dari sumbu: $(0,18)$ dan $(16,0)$.`,
+    r`Titik potong: substitusi $y=18-3x$ ke $x+2y=16$:$$\begin{aligned}x+36-6x&=16\\-5x&=-20\\x&=4,\ y=6\end{aligned}$$`,
+    r`Hitung $Z$:$$\begin{aligned}Z(0,18)&=72.000\\Z(4,6)&=20.000+24.000=44.000\\Z(16,0)&=80.000\end{aligned}$$`,
+    r`Minimum Rp44.000 → <b>B</b>.`]},
+{lv:2,t:'PGK',q:r`Seorang pengrajin membuat meja ($x$), kursi ($y$), dan lemari ($z$). Meja memerlukan 4 lembar papan dan 3 jam kerja, kursi 2 lembar dan 2 jam, lemari 6 lembar dan 5 jam. Papan tersedia paling banyak 120 lembar dan jam kerja paling banyak 90 jam. Pesanan mengharuskan sedikitnya 5 meja, 10 kursi, dan 2 lemari. Pilih <b>semua</b> pernyataan yang benar.`,o:[r`Kendala papan dapat ditulis $4x+2y+6z\le120$.`,r`Kendala jam kerja dapat ditulis $3x+2y+5z\ge90$.`,r`Rencana $(6,12,3)$ memenuhi semua kendala.`,r`Rencana $(10,15,8)$ memenuhi semua kendala.`,r`$x\ge5$, $y\ge10$, $z\ge2$ berarti pengrajin membuat paling banyak 5 meja, 10 kursi, dan 2 lemari.`],a:['A','C'],
+ f:[r`Kata kunci: <b>paling banyak = $\le$</b>, <b>sedikitnya = $\ge$</b>.`,r`Uji rencana mulai dari kendala paling ketat (jam kerja); D gagal di sana ($100>90$).`],
+ l:[r`A: papan $4x+2y+6z$, “paling banyak” → $\le120$ → <b>Benar</b>.`,
+    r`B: jam kerja “paling banyak” → $\le90$, bukan $\ge$ → <b>Salah</b>.`,
+    r`C: $(6,12,3)$:$$\begin{aligned}\text{papan}&=24+24+18=66\le120\ \checkmark\\\text{jam}&=18+24+15=57\le90\ \checkmark\end{aligned}$$ dan $6\ge5$, $12\ge10$, $3\ge2$ → <b>Benar</b>.`,
+    r`D: $(10,15,8)$: papan $40+30+48=118\le120$ ✓, tetapi jam $30+30+40=100>90$ ✗ → <b>Salah</b>.`,
+    r`E: “sedikitnya” = batas <b>bawah</b> ($\ge$), bukan paling banyak → <b>Salah</b>.`,
+    r`Jawaban: <b>A, C</b>.`]},
+{lv:2,t:'PG',q:r`Usaha membuat kue A, B, C sebanyak $x$, $y$, $z$. Model: waktu kerja $3x+2y+z\le60$, bahan $2x+3y+2z\le70$, $x,y,z\ge0$, laba $f=40.000x+30.000y+50.000z$. Dari rencana $(x,y,z)$ berikut, yang <b>layak</b> dan berlaba <b>terbesar</b> adalah ....`,o:[r`$(10,8,5)$`,r`$(12,10,4)$`,r`$(15,8,6)$`,r`$(8,12,10)$`,'tidak ada yang memenuhi'],a:'B',
+ f:[r`Urutkan laba dari terbesar: D (1.180) → bahan $72>70$, <b>coret</b>. C (1.140) → waktu $67>60$, <b>coret</b>.`,r`B (980) → memenuhi semua kendala, <b>ambil</b> → <b>B</b>.`],
+ l:[r`Uji tiap rencana:$$\begin{array}{lccc}\text{Rencana}&\text{waktu}\le60&\text{bahan}\le70&\text{laba (ribu)}\\A(10,8,5)&51&54&890\\B(12,10,4)&60&62&980\\C(15,8,6)&67\ \times&66&1.140\\D(8,12,10)&58&72\ \times&1.180\end{array}$$`,
+    r`Rencana yang layak hanya A dan B.`,
+    r`Bandingkan laba: B (980.000) &gt; A (890.000). Jawaban: <b>B</b>.`]},
+{lv:3,t:'BS',q:r`Suatu usaha membuat produk P ($x$) dan Q ($y$) dengan model: bahan $3x+2y\le120$, kapasitas $x+y\le50$, $x\ge0$, $y\ge0$, dan laba $Z=30.000x+20.000y$. Tentukan Benar atau Salah tiap pernyataan.`,
+ s:[[r`Rencana $(20,30)$ layak dan menggunakan seluruh bahan serta seluruh kapasitas.`,1],[r`Titik $(0,60)$ merupakan salah satu titik pojok daerah penyelesaian.`,0],[r`Laba maksimum sebesar Rp1.200.000.`,1],[r`Laba maksimum hanya dicapai pada tepat satu rencana produksi.`,0]],
+ f:[r`Koefisien $Z$ ($30.000:20.000=3:2$) sama dengan koefisien kendala bahan ($3:2$).`,r`Itu tanda garis $Z$ <b>sejajar</b> garis kendala → banyak titik optimum. Jawaban: B, S, B, S.`],
+ l:[r`Titik pojok: $(0,0)$; $(40,0)$ dari $3x+2y=120$; $(0,50)$ dari $x+y=50$; dan titik potong: substitusi $y=50-x$:$$\begin{aligned}3x+2(50-x)&=120\\x&=20,\ y=30\end{aligned}$$`,
+    r`(1) $3(20)+2(30)=120$ dan $20+30=50$, keduanya tepat di batas → <b>Benar</b>.`,
+    r`(2) $(0,60)$: $0+60=60>50$ melanggar kapasitas, jadi bukan titik pojok → <b>Salah</b>.`,
+    r`(3) Hitung $Z$:$$\begin{aligned}Z(40,0)&=1.200.000\\Z(20,30)&=600.000+600.000=1.200.000\\Z(0,50)&=1.000.000\end{aligned}$$ Maksimum 1.200.000 → <b>Benar</b>.`,
+    r`(4) $Z=10.000(3x+2y)$, sehingga sepanjang garis $3x+2y=120$ nilai $Z$ selalu 1.200.000. Maksimum tercapai di $(40,0)$, $(20,30)$, dan <b>semua titik pada ruas di antaranya</b> → <b>Salah</b>.`]},
+{lv:3,t:'PG',q:r`Perusahaan menyewa truk kecil (4 ton) dan truk besar (10 ton). Harus mengangkut paling sedikit 80 ton barang dengan jumlah truk paling banyak 14 unit. Biaya sewa truk kecil Rp300.000 dan truk besar Rp600.000 per unit. Biaya sewa minimum adalah ....`,o:['Rp4.200.000','Rp4.800.000','Rp5.400.000','Rp6.000.000','Rp8.400.000'],a:'B',
+ f:[r`$Z=300.000(x+2y)$. Hitung $x+2y$: $(0,8)\to16$; $(0,14)\to28$; $(10,4)\to18$.`,r`Terkecil 16 → $16\times300.000=$ Rp4.800.000 → <b>B</b>. Jebakan: titik potong $(10,4)$ bukan minimum.`],
+ l:[r`Misalkan truk kecil $=x$ dan besar $=y$. Muatan dibagi 2:$$\begin{aligned}4x+10y&\ge80\\2x+5y&\ge40\end{aligned}$$ Jumlah: $x+y\le14$; $x,y\ge0$; $Z=300.000x+600.000y$.`,
+    r`Titik pojok dari sumbu: $(0,8)$ dan $(0,14)$. Titik $(20,0)$ dan $(14,0)$ bukan titik pojok (masing-masing melanggar $x+y\le14$ dan $2x+5y\ge40$).`,
+    r`Titik potong: substitusi $y=14-x$ ke $2x+5y=40$:$$\begin{aligned}2x+70-5x&=40\\-3x&=-30\\x&=10,\ y=4\end{aligned}$$`,
+    r`Hitung $Z$:$$\begin{aligned}Z(0,8)&=4.800.000\\Z(0,14)&=8.400.000\\Z(10,4)&=3.000.000+2.400.000=5.400.000\end{aligned}$$`,
+    r`Minimum Rp4.800.000 → <b>B</b>.`]},
+{lv:3,t:'PGK',q:r`Usaha membuat produk A, B, C sebanyak $x$, $y$, $z$ dengan kendala waktu $3x+2y+4z\le80$, bahan $2x+3y+z\le60$, $x\ge4$, $y\ge2$, $z\ge3$, dan laba $f=30.000x+20.000y+45.000z$. Dua rencana: P $(10,8,6)$ dan Q $(12,8,7)$. Pilih <b>semua</b> pernyataan yang benar.`,o:[r`Rencana P memenuhi semua kendala.`,r`Rencana Q menggunakan seluruh waktu kerja yang tersedia.`,r`Jika pada rencana P produksi C ditambah 3 unit (A dan B tetap), rencana baru tetap layak.`,r`Laba rencana Q lebih besar Rp105.000 daripada laba rencana P.`,r`Rencana R $(14,10,6)$ layak karena kendala bahan terpenuhi.`],a:['A','B','D'],
+ f:[r`Cek satu per satu mulai dari kendala paling ketat (waktu).`,r`Untuk D cukup hitung selisih: $(12-10)30.000+(7-6)45.000=105.000$.`],
+ l:[r`A: P $(10,8,6)$: waktu $30+16+24=70\le80$ ✓; bahan $20+24+6=50\le60$ ✓; $10\ge4$, $8\ge2$, $6\ge3$ ✓ → <b>Benar</b>.`,
+    r`B: Q $(12,8,7)$: waktu $36+16+28=80$, tepat sama dengan batas → <b>Benar</b>.`,
+    r`C: P dengan C ditambah 3 → $(10,8,9)$: waktu $30+16+36=82>80$ ✗ → <b>Salah</b>.`,
+    r`D: laba P dan Q:$$\begin{aligned}f(P)&=300.000+160.000+270.000=730.000\\f(Q)&=360.000+160.000+315.000=835.000\end{aligned}$$ Selisih $835.000-730.000=105.000$ → <b>Benar</b>.`,
+    r`E: R $(14,10,6)$: bahan $28+30+6=64>60$ dan waktu $42+20+24=86>80$ → tidak layak → <b>Salah</b>.`,
+    r`Jawaban: <b>A, B, D</b>.`]}
+];
+
+/* ---------- Render soal ---------- */
+let correctP=0,doneP=0;
+const steps=a=>'<ol class="steps">'+a.map(x=>`<li>${x}</li>`).join('')+'</ol>';
+function build(list,host,prefix){
+  const root=document.getElementById(host);
+  list.forEach((d,i)=>{
+    const L='ABCDE'; let body='';
+    const q=d.q.replace('[[TB3]]',TB3).replace('[[TB13]]',TB13).replace('[[TB7]]',TB7).replace(/\[\[G:(\w+)\]\]/,(m,k)=>`<figure>${G[k]}<figcaption>Grafik untuk soal ${i+1}</figcaption></figure>`);
+    if(d.t==='BS'){
+      body='<div class="tw bs"><table><tr><th>No</th><th>Pernyataan</th><th>Jawaban</th></tr>'+d.s.map((r,j)=>`<tr><td>${j+1}</td><td>${r[0]}</td><td><select><option value="">–</option><option value="1">Benar</option><option value="0">Salah</option></select></td></tr>`).join('')+'</table></div><button class="btn">Periksa</button>';
+    }else{
+      body=d.o.map((t,j)=>`<button class="opt" data-k="${L[j]}"><b>${L[j]}</b><span>${t}</span></button>`).join('')+(d.t==='PGK'?'<button class="btn">Periksa</button><p style="font-size:.85rem;margin:4px 0 0">Pilih semua jawaban yang benar.</p>':'');
+    }
+    const el=document.createElement('div');el.className='q';
+    el.innerHTML=`<div class="hd"><span class="no">${i+1}</span><span class="lv l${d.lv}">Level ${d.lv} · ${d.t==='BS'?'Benar/Salah':d.t}</span></div><div>${q}</div>${body}<div class="res"></div><button class="btn alt show">Lihat Cara Cepat & Cara Lengkap</button><div class="sol"><div class="pane fast"><h4>⚡ Cara Cepat</h4>${steps(d.f)}</div><div class="pane full"><h4>📝 Cara Lengkap</h4>${steps(d.l)}</div></div>`;
+    root.appendChild(el);
+    const res=el.querySelector('.res'),sol=el.querySelector('.sol');let done=false;
+    const finish=ok=>{res.textContent=ok?'✅ Benar! Bagus.':'❌ Belum tepat. Pelajari pembahasan di bawah.';res.style.color=ok?'#1a9d5a':'#e5484d';sol.classList.add('on');if(!done&&prefix==='P'){done=true;doneP++;if(ok)correctP++;document.getElementById('skor').textContent=`Skor Prediksi TKA: ${correctP} benar dari ${doneP} soal dijawab (total 10).`}done=true};
+    el.querySelector('.show').onclick=()=>sol.classList.toggle('on');
+    if(d.t==='PG'){el.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(done)return;done=true;const ok=b.dataset.k===d.a;b.classList.add(ok?'ok':'no2');if(!ok)el.querySelector(`.opt[data-k=${d.a}]`).classList.add('ok');done=false;finish(ok);done=true})}
+    else if(d.t==='PGK'){el.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(!done)b.classList.toggle('sel')});
+      el.querySelector('.btn').onclick=()=>{if(done)return;const sel=[...el.querySelectorAll('.opt.sel')].map(b=>b.dataset.k).sort().join('');el.querySelectorAll('.opt').forEach(b=>{b.classList.remove('sel');if(d.a.includes(b.dataset.k))b.classList.add('ok');else if(sel.includes(b.dataset.k))b.classList.add('no2')});finish(sel===d.a.join(''))}}
+    else{el.querySelector('.btn').onclick=()=>{if(done)return;let ok=true;el.querySelectorAll('select').forEach((s,j)=>{const c=s.value===String(d.s[j][1]);ok=ok&&c;s.parentElement.className=c?'ok':'bad'});finish(ok)}}
+  });
+}
+build(LAT,'qL','L');build(PRE,'qP','P');
+addEventListener('DOMContentLoaded',()=>renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false}));
+</script>
+</body>
+</html>

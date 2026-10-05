@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sistem Pertidaksamaan Linear - VisualMath.Lim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&family=Fira+Sans:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<style>
+:root{--navy:#022050;--cy:#00d6d8;--ye:#ffd300;--bg:#f2f8fc;--ink:#12243f;--mut:#51637f;--ok:#14935a;--bad:#d1384a}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 Nunito,system-ui,sans-serif}
+header{position:sticky;top:0;z-index:20;background:var(--navy);border-bottom:4px solid var(--ye)}
+.hd{max-width:1180px;margin:auto;padding:8px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.hd img{height:54px;width:54px;border-radius:50%;background:#fff1}
+.brand{color:#fff;font:700 clamp(15px,2.4vw,21px)/1.2 'Fira Sans',sans-serif;flex:1;min-width:200px}
+.brand b{color:var(--cy)}
+nav{display:flex;gap:8px}
+nav a{color:#fff;text-decoration:none;font-weight:800;padding:8px 16px;border-radius:999px;border:2px solid #fff3;transition:.2s}
+nav a:hover,nav a:focus-visible{background:var(--cy);color:var(--navy);border-color:var(--cy);outline:none}
+nav a.on{background:var(--ye);color:var(--navy);border-color:var(--ye)}
+.wrap{max-width:1180px;margin:auto;padding:22px 18px;display:grid;grid-template-columns:230px 1fr;gap:26px}
+aside{position:sticky;top:96px;align-self:start;background:#fff;border-radius:14px;padding:14px;border:2px solid var(--navy)}
+aside b{color:var(--navy)}aside a{display:block;color:var(--ink);text-decoration:none;padding:6px 10px;border-radius:8px;font-size:15px;font-weight:600}
+aside a:hover{background:var(--cy);color:var(--navy)}
+.hero{background:var(--navy);color:#fff;border-radius:18px;padding:30px;margin-bottom:22px;border-bottom:6px solid var(--ye)}
+.hero h1{font:700 clamp(26px,4vw,40px)/1.15 'Fira Sans',sans-serif;margin:0 0 8px;color:var(--cy)}
+.hero p{margin:0;color:#dbe7ff}
+section{background:#fff;border-radius:16px;padding:24px;margin-bottom:22px;box-shadow:0 2px 0 #022050 }
+h2{font:700 26px 'Fira Sans',sans-serif;color:var(--navy);margin:0 0 12px;padding-bottom:8px;border-bottom:4px solid var(--cy)}
+h3{font:700 19px 'Fira Sans',sans-serif;color:var(--navy);margin:20px 0 8px}
+.box{border-left:6px solid var(--ye);background:#fff9d6;padding:12px 16px;border-radius:0 12px 12px 0;margin:12px 0}
+.box.tip{border-color:var(--cy);background:#e3fbfb}.box.bad{border-color:var(--bad);background:#fdecef}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:15.5px}
+th{background:var(--navy);color:#fff;text-align:left}th,td{padding:8px 10px;border:1px solid #cfd9e8}
+.st{list-style:none;counter-reset:s;padding:0;margin:10px 0}
+.st>li{counter-increment:s;position:relative;padding:10px 12px 10px 54px;margin:8px 0;background:#f4faff;border:1px solid #cfe3f3;border-radius:12px}
+.st>li::before{content:counter(s);position:absolute;left:12px;top:10px;width:30px;height:30px;border-radius:50%;background:var(--navy);color:var(--ye);font:700 16px/30px 'Fira Sans';text-align:center}
+.st .katex-display{margin:.4em 0;text-align:left;overflow-x:auto;overflow-y:hidden}
+.fig{margin:14px auto;max-width:430px;text-align:center}.fig svg{width:100%;height:auto;background:#fff;border:2px solid #cfe3f3;border-radius:12px}
+.fig figcaption{font-size:14px;color:var(--mut);margin-top:4px}
+.q{border:2px solid var(--navy);border-radius:14px;padding:16px;margin:18px 0}
+.q h4{margin:0 0 6px;font:700 17px 'Fira Sans'}
+.lv{display:inline-block;background:var(--ye);color:var(--navy);border-radius:999px;padding:1px 12px;font:700 13px 'Fira Sans';margin-right:6px}
+.o{display:flex;gap:10px;align-items:flex-start;padding:8px 12px;margin:6px 0;border:2px solid #cfd9e8;border-radius:10px;cursor:pointer}
+.o:hover{border-color:var(--cy)}.o input{margin-top:8px;accent-color:var(--navy)}
+.o.ok{border-color:var(--ok);background:#e4f7ee}.o.no{border-color:var(--bad);background:#fdecef}
+button{font:800 15px Nunito;border:0;border-radius:999px;padding:9px 18px;cursor:pointer;background:var(--cy);color:var(--navy)}
+button:hover,button:focus-visible{background:var(--ye);outline:none}button.alt{background:var(--navy);color:#fff}button.alt.on{background:var(--ye);color:var(--navy)}
+.res{font-weight:800;margin:8px 0}.pn{display:none;margin-top:10px}.pn.show{display:block}
+.bs td:nth-child(n+2){text-align:center;width:80px}
+footer{background:var(--navy);color:#dbe7ff;text-align:center;padding:18px;border-top:4px solid var(--ye)}
+@media(max-width:860px){.wrap{grid-template-columns:1fr}aside{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div class="hd">
+<img src="logo.png" alt="Logo VisualMath.Lim">
+<div class="brand">VisualMath.<b>Lim</b> - TKA Matematika Wajib SMA</div>
+<nav><a href="index.html">Home</a><a href="linear.html">Dashboard</a><a href="linear_materi2.html" class="on">Materi</a></nav>
+</div></header>
+
+<div class="wrap">
+<aside><b>Daftar isi</b>
+<a href="#dasar">Bekal dasar</a><a href="#s21">2.1 Bahasa soal</a><a href="#s22">2.2 Satu variabel</a><a href="#s23">2.3 Dua variabel</a><a href="#s24">2.4 Sistem &amp; titik pojok</a><a href="#s25">2.5 Soal cerita</a><a href="#s26">2.6 Tiga variabel</a><a href="#s27">2.7 Parameter</a><a href="#latihan">Latihan &amp; prediksi soal</a></aside>
+<main>
+<div class="hero"><h1>Sistem Pertidaksamaan Linear Multivariabel</h1><p>Elemen Aljabar &bull; maksimum tiga variabel &bull; belajar dengan <b>Lihat, Pikir, Selesaikan</b></p></div>
+
+<section id="dasar"><h2>Bekal dasar</h2>
+<p>Kesalahan terbanyak ada pada tanda minus, tanda kurung, dan membaca titik.</p>
+<table><tr><th>Keterampilan</th><th>Benar</th><th>Sering salah</th></tr>
+<tr><td>Kali negatif</td><td>$(-2)(-3)=6$</td><td>$-6$</td></tr>
+<tr><td>Kurung dengan minus</td><td>$-(x-2)=-x+2$</td><td>$-x-2$</td></tr>
+<tr><td>Kurang negatif</td><td>$3x-(-2)=3x+2$</td><td>$3x-2$</td></tr>
+<tr><td>Pecahan</td><td>$\frac{x+1}{3}\ge2 \Rightarrow x+1\ge6$</td><td>lupa mengali 3 ke 2</td></tr></table>
+<h3>Titik potong dua garis (eliminasi)</h3>
+<p>Contoh: $x+y=5$ dan $2x+y=8$.</p>
+<ol class="st"><li>Kurangkan persamaan kedua dengan pertama.$$(2x+y)-(x+y)=8-5$$$$x=3$$</li>
+<li>Substitusi ke $x+y=5$.$$3+y=5$$$$y=2$$</li>
+<li>Titik potong:$$(3,\,2)$$</li></ol></section>
+
+<section id="s21"><h2>2.1 Bahasa soal menjadi simbol</h2>
+<table><tr><th>Bahasa soal</th><th>Simbol</th></tr>
+<tr><td>kurang dari</td><td>$<$</td></tr><tr><td>lebih dari</td><td>$>$</td></tr>
+<tr><td>paling banyak, maksimal, tidak lebih dari</td><td>$\le$</td></tr>
+<tr><td>paling sedikit, minimal, tidak kurang dari</td><td>$\ge$</td></tr></table>
+<div class="box"><b>Jebakan.</b> "Lebih dari 10" ($x>10$) tidak sama dengan "10 atau lebih" ($x\ge10$). Cek apakah angka 10 ikut.</div></section>
+
+<section id="s22"><h2>2.2 Satu variabel</h2>
+<p>Selesaikan seperti persamaan. Satu aturan khusus: bila dikali atau dibagi bilangan <b>negatif</b>, tanda <b>dibalik</b>.</p>
+<ol class="st"><li>Soal:$$-3x+6\ge15$$</li><li>Pindahkan 6:$$-3x\ge9$$</li><li>Bagi $-3$, tanda dibalik:$$x\le-3$$</li><li>Cek dengan $x=-4$:$$-3(-4)+6=18\ge15\;\checkmark$$</li></ol>
+<figure class="fig" data-g="nl1"></figure><figure class="fig" data-g="nl2"></figure>
+<p style="text-align:center;font-size:14px;color:var(--mut)">Titik kosong untuk $<$ atau $>$; titik penuh untuk $\le$ atau $\ge$.</p></section>
+
+<section id="s23"><h2>2.3 Dua variabel: daerah penyelesaian</h2>
+<p>Contoh: gambar $x+y\le6$.</p>
+<ol class="st"><li><b>Garis batas.</b> Ganti tanda dengan sama dengan.$$x+y=6$$</li>
+<li><b>Dua titik.</b>$$x=0\Rightarrow y=6\;\to\;(0,6)$$$$y=0\Rightarrow x=6\;\to\;(6,0)$$</li>
+<li><b>Jenis garis.</b> $\le,\ge$ garis penuh; $<,>$ garis putus-putus.</li>
+<li><b>Titik uji</b> $(0,0)$.$$0+0\le6\;\text{(benar)}$$</li>
+<li><b>Arsir</b> sisi yang memuat titik uji (jika benar).</li></ol>
+<figure class="fig" data-g="g1"><figcaption>Daerah $x+y\le6$</figcaption></figure>
+<div class="box bad"><b>Jangan hanya hafal "&ge; arsir ke atas".</b> Pada $x-y\ge2$, titik uji $(0,0)$ memberi $0\ge2$ (salah), sehingga daerahnya di <b>bawah</b> garis.</div>
+<figure class="fig" data-g="g2"><figcaption>Daerah $x-y\ge2$ (di bawah garis)</figcaption></figure></section>
+
+<section id="s24"><h2>2.4 Sistem pertidaksamaan dan titik pojok</h2>
+<p>Semua kendala harus benar sekaligus. Daerah penyelesaian adalah <b>irisan</b>.</p>
+<figure class="fig" data-g="g3"><figcaption>$2x+y\le8,\ x+y\le5,\ x\ge0,\ y\ge0$</figcaption></figure>
+<h3>Mencari titik pojok</h3>
+<ol class="st"><li>Titik potong dengan sumbu:$$(4,0),\ (0,5)$$</li>
+<li>Titik potong dua garis (eliminasi):$$2x+y=8,\quad x+y=5$$$$x=3,\ y=2\;\to\;(3,2)$$</li>
+<li>Uji ke semua kendala. $(0,8)$ gagal karena $0+8>5$; $(5,0)$ gagal karena $10>8$.</li>
+<li>Titik pojok:$$(0,0),\ (4,0),\ (3,2),\ (0,5)$$</li></ol></section>
+
+<section id="s25"><h2>2.5 Soal cerita</h2>
+<p>Bu Sari membuat bolu ($x$) dan donat ($y$). Bolu 200 g tepung, donat 100 g. Tepung paling banyak 1 kg, oven muat paling banyak 7 kue.</p>
+<ol class="st"><li>Tepung (samakan satuan gram):$$200x+100y\le1000$$$$2x+y\le10$$</li><li>Oven:$$x+y\le7$$</li><li>Tidak negatif:$$x\ge0,\ y\ge0$$</li></ol>
+<figure class="fig" data-g="g4"><figcaption>Titik $(3,4)$: $2(3)+4=10$ dan $3+4=7$, keduanya pas.</figcaption></figure></section>
+
+<section id="s26"><h2>2.6 Tiga variabel</h2>
+<p>Tidak digambar. Cukup substitusi dan cek <b>semua</b> kendala. Contoh: $x+y+z\le30,\ x\ge5,\ y\ge8,\ z\ge4$.</p>
+<table><tr><th>Titik</th><th>$x+y+z\le30$</th><th>$x\ge5$</th><th>$y\ge8$</th><th>$z\ge4$</th></tr>
+<tr><td>$(10,12,6)$</td><td>28 &#10003;</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td></tr>
+<tr><td>$(12,14,6)$</td><td>32 &#10007;</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td></tr></table>
+<div class="box tip"><b>Aturan emas.</b> Untuk nilai variabel terbesar, buat variabel lain sekecil mungkin sesuai batas bawahnya.</div></section>
+
+<section id="s27"><h2>2.7 Parameter</h2>
+<p>Titik $(3,p)$ memenuhi $x+y\le9$ dan $y\ge x-1$.</p>
+<ol class="st"><li>Syarat pertama:$$3+p\le9$$$$p\le6$$</li><li>Syarat kedua:$$p\ge3-1$$$$p\ge2$$</li><li>Gabungkan:$$2\le p\le6$$</li></ol></section>
+
+<section id="latihan"><h2>Latihan &amp; prediksi soal</h2>
+<p>Pilih jawaban, tekan <b>Periksa</b>, lalu buka <b>Cara cepat</b> atau <b>Cara lengkap</b>. Skor: <b id="sk">0</b> benar dari <b id="tt">0</b> soal.</p>
+<div id="qs"></div></section>
+</main></div>
+<footer>&copy; VisualMath.Lim &bull; Bimbingan Belajar</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+const NV='#022050',CY='#00d6d8',YE='#ffd300';
+/* ---------- grafik SVG ---------- */
+function plot(el,c){
+ const[x0,x1]=c.x,[y0,y1]=c.y,W=360,H=Math.round(W*(y1-y0)/(x1-x0)),sx=x=>(x-x0)/(x1-x0)*W,sy=y=>H-(y-y0)/(y1-y0)*H,st=c.s||1;
+ let poly=[[x0,y0],[x1,y0],[x1,y1],[x0,y1]];
+ (c.r||[]).forEach(([a,b,k,op])=>{const s=op=='<='?1:-1,f=p=>s*(a*p[0]+b*p[1]-k),o=[];
+  poly.forEach((p,i)=>{const q=poly[(i+1)%poly.length],fp=f(p),fq=f(q);if(fp<=0)o.push(p);if(fp*fq<0){const t=fp/(fp-fq);o.push([p[0]+t*(q[0]-p[0]),p[1]+t*(q[1]-p[1])])}});poly=o});
+ let g='';
+ for(let x=Math.ceil(x0);x<=x1;x+=st)g+=`<line x1="${sx(x)}" x2="${sx(x)}" y1="0" y2="${H}" stroke="#e1e9f2"/><text x="${sx(x)}" y="${H+14}" font-size="10" text-anchor="middle" fill="#51637f">${x}</text>`;
+ for(let y=Math.ceil(y0);y<=y1;y+=st)g+=`<line y1="${sy(y)}" y2="${sy(y)}" x1="0" x2="${W}" stroke="#e1e9f2"/><text x="-5" y="${sy(y)+3}" font-size="10" text-anchor="end" fill="#51637f">${y}</text>`;
+ if(x0<0)g+=`<line x1="${sx(0)}" x2="${sx(0)}" y1="0" y2="${H}" stroke="${NV}" stroke-width="1.6"/>`;
+ if(y0<0)g+=`<line y1="${sy(0)}" y2="${sy(0)}" x1="0" x2="${W}" stroke="${NV}" stroke-width="1.6"/>`;
+ if(poly.length)g+=`<polygon points="${poly.map(p=>sx(p[0])+','+sy(p[1])).join(' ')}" fill="${CY}" fill-opacity=".38"/>`;
+ (c.l||[]).forEach(([a,b,k,solid,col])=>{const[p,q]=b==0?[[k/a,y0],[k/a,y1]]:[[x0,(k-a*x0)/b],[x1,(k-a*x1)/b]];
+  g+=`<line x1="${sx(p[0])}" y1="${sy(p[1])}" x2="${sx(q[0])}" y2="${sy(q[1])}" stroke="${col||NV}" stroke-width="2.6" ${solid?'':'stroke-dasharray="7 5"'}/>`});
+ (c.p||[]).forEach(([x,y,t,dx,dy])=>g+=`<circle cx="${sx(x)}" cy="${sy(y)}" r="5" fill="${YE}" stroke="${NV}" stroke-width="2"/><text x="${sx(x)+(dx??8)}" y="${sy(y)+(dy??-8)}" font-size="11.5" font-weight="800" fill="${NV}">${t||''}</text>`);
+ el.insertAdjacentHTML('afterbegin',`<svg viewBox="-26 -8 ${W+40} ${H+30}" role="img" aria-label="grafik">${g}</svg>`)}
+function numline(el,[v,t,d]){let g='<line x1="10" x2="350" y1="30" y2="30" stroke="'+NV+'" stroke-width="2"/>';
+ for(let i=-6;i<=6;i++){const x=180+i*27;g+=`<line x1="${x}" x2="${x}" y1="25" y2="35" stroke="${NV}"/><text x="${x}" y="52" font-size="11" text-anchor="middle">${i}</text>`}
+ const x=180+v*27,e=d=='l'?10:350;g+=`<line x1="${x}" x2="${e}" y1="30" y2="30" stroke="${CY}" stroke-width="7"/><circle cx="${x}" cy="30" r="8" fill="${t=='f'?NV:'#fff'}" stroke="${NV}" stroke-width="3"/>`;
+ el.insertAdjacentHTML('afterbegin',`<svg viewBox="0 0 360 62">${g}</svg>`)}
+const G={nl1:{n:[-3,'f','l']},nl2:{n:[2,'o','r']},
+ g1:{x:[-1,8],y:[-1,8],r:[[1,1,6,'<=']],l:[[1,1,6,1]],p:[[0,6,'(0,6)'],[6,0,'(6,0)',6,-10],[0,0,'uji (0,0)',8,-8]]},
+ g2:{x:[-3,7],y:[-4,6],r:[[1,-1,2,'>=']],l:[[1,-1,2,1]],p:[[2,0,'(2,0)'],[0,-2,'(0,-2)'],[0,0,'uji (0,0)']]},
+ g3:{x:[-1,9],y:[-1,9],r:[[2,1,8,'<='],[1,1,5,'<='],[1,0,0,'>='],[0,1,0,'>=']],l:[[2,1,8,1],[1,1,5,1,'#b58a00']],p:[[0,0,'(0,0)',8,-6],[4,0,'(4,0)',6,-8],[3,2,'(3,2)'],[0,5,'(0,5)']]},
+ g4:{x:[-1,9],y:[-1,11],r:[[2,1,10,'<='],[1,1,7,'<='],[1,0,0,'>='],[0,1,0,'>=']],l:[[2,1,10,1],[1,1,7,1,'#b58a00']],p:[[3,4,'(3,4)']]},
+ q1:{x:[-1,7],y:[-1,6],r:[[1,2,6,'<='],[1,1,4,'<='],[1,0,0,'>='],[0,1,0,'>=']],l:[[1,2,6,1],[1,1,4,1,'#b58a00']],p:[[0,3,'(0,3)',-34,0],[4,0,'(4,0)',-8,-10],[2,2,'(2,2)'],[6,0,'(6,0)',-8,-10],[0,4,'(0,4)']]},
+ q2:{x:[-1,10],y:[-1,9],r:[[1,1,8,'<='],[1,0,1,'>='],[0,1,2,'>=']],l:[[1,1,8,1],[1,0,1,1,'#7a3fb0'],[0,1,2,1,'#b58a00']],p:[[2,3,'A'],[7,3,'B'],[3,5,'C'],[1,1,'D'],[4,2,'E']]}};
+document.querySelectorAll('[data-g]').forEach(f=>{const c=G[f.dataset.g];c.n?numline(f,c.n):plot(f,c)});
+
+/* ---------- bank soal ---------- */
+const S=(...a)=>a; // langkah: [teks, rumus1, rumus2, ...]
+const Q=[
+{lv:'Level 2 · PG',t:String.raw`Penyelesaian dari $-2x \ge 8$ adalah ....`,o:[String.raw`$x\ge4$`,String.raw`$x\le4$`,String.raw`$x\ge-4$`,String.raw`$x\le-4$`,String.raw`$x=-4$`],a:3,
+ q:[String.raw`Bagi $-2$, tanda dibalik: $x\le-4$.`,String.raw`Cek cepat: $x=-5\Rightarrow -2(-5)=10\ge8$ ✓.`],
+ f:[S('Tulis soal.',String.raw`-2x\ge8`),S('Bagi kedua ruas dengan $-2$. Bilangan negatif, jadi tanda dibalik.',String.raw`x\le\frac{8}{-2}`,String.raw`x\le-4`),S('Cek dengan $x=-5$.',String.raw`-2(-5)=10\ge8\;\checkmark`)]},
+{lv:'Level 2 · PG',t:String.raw`Tiket anak Rp10.000 dan dewasa Rp15.000. Penonton paling banyak 100 orang, hasil penjualan paling sedikit Rp900.000. Jika $x$ = anak dan $y$ = dewasa, model yang tepat adalah ....`,
+ o:[String.raw`$x+y\le100,\ 2x+3y\ge180$`,String.raw`$x+y\ge100,\ 2x+3y\le180$`,String.raw`$x+y\le100,\ 2x+3y\le180$`,String.raw`$x+y\le100,\ 3x+2y\ge180$`,String.raw`$x+y\le100,\ 10x+15y\ge90$`],a:0,
+ q:['"Paling banyak" jadi $\\le$, "paling sedikit" jadi $\\ge$.',String.raw`Bagi 5.000: $10.000x+15.000y\ge900.000$ menjadi $2x+3y\ge180$.`],
+ f:[S('Tentukan variabel: $x$ anak, $y$ dewasa.'),S('Jumlah penonton, "paling banyak" berarti $\\le$.',String.raw`x+y\le100`),S('Hasil penjualan, "paling sedikit" berarti $\\ge$.',String.raw`10.000x+15.000y\ge900.000`),S('Bagi kedua ruas dengan 5.000.',String.raw`2x+3y\ge180`),S('Tambahkan syarat tidak negatif.',String.raw`x\ge0,\ y\ge0`)]},
+{lv:'Level 1 · PG',t:'Daerah yang diarsir adalah penyelesaian sistem ....',g:'q1',
+ o:[String.raw`$x+2y\le6,\ x+y\le4,\ x\ge0,\ y\ge0$`,String.raw`$x+2y\ge6,\ x+y\ge4,\ x\ge0,\ y\ge0$`,String.raw`$2x+y\le6,\ x+y\le4,\ x\ge0,\ y\ge0$`,String.raw`$x+2y\le6,\ x+y\ge4,\ x\ge0,\ y\ge0$`,String.raw`$x+3y\le6,\ x+y\le4,\ x\ge0,\ y\ge0$`],a:0,
+ q:[String.raw`Titik potong sumbu $(6,0),(0,3)$ memberi $x+2y=6$; $(4,0),(0,4)$ memberi $x+y=4$.`,String.raw`$(0,0)$ ada di daerah arsiran dan $0\le6$, $0\le4$, jadi tanda $\le$.`],
+ f:[S('Garis pertama melalui $(6,0)$ dan $(0,3)$. Rumus $bx+ay=ab$.',String.raw`3x+6y=18`,String.raw`x+2y=6`),S('Garis kedua melalui $(4,0)$ dan $(0,4)$.',String.raw`4x+4y=16`,String.raw`x+y=4`),S('Uji titik $(0,0)$, yang berada di daerah arsiran.',String.raw`0\le6\;\checkmark`,String.raw`0\le4\;\checkmark`),S('Daerah di kuadran I.',String.raw`x\ge0,\ y\ge0`)]},
+{lv:'Level 1 · PGK',t:'Daerah biru adalah penyelesaian $x+y\\le8,\\ x\\ge1,\\ y\\ge2$ (garis penuh). Pilih <b>semua</b> titik yang termasuk penyelesaian.',g:'q2',type:'pgk',
+ o:['A (2, 3)','B (7, 3)','C (3, 5)','D (1, 1)','E (4, 2)'],a:[0,2,4],
+ q:['Titik di garis penuh ikut. Hanya B ($7+3=10>8$) dan D ($y=1<2$) keluar.','Jawaban: A, C, E.'],
+ f:[S('Uji A $(2,3)$.',String.raw`5\le8,\ 2\ge1,\ 3\ge2\;\checkmark`),S('Uji B $(7,3)$.',String.raw`7+3=10>8\;\times`),S('Uji C $(3,5)$. Tepat di garis penuh, ikut.',String.raw`3+5=8\le8\;\checkmark`),S('Uji D $(1,1)$.',String.raw`y=1<2\;\times`),S('Uji E $(4,2)$. Di garis $y=2$, ikut.',String.raw`6\le8,\ 4\ge1,\ 2\ge2\;\checkmark`)]},
+{lv:'Level 2 · PG',t:String.raw`Diketahui $2x+y+z\le20,\ x\ge2,\ y\ge3,\ z\ge1$. Pasangan $(x,y,z)$ yang memenuhi <b>semua</b> pertidaksamaan adalah ....`,
+ o:['$(4,5,8)$','$(5,4,6)$','$(3,2,5)$','$(6,3,6)$','$(1,6,8)$'],a:1,
+ q:['Hitung $2x+y+z$ lalu cek batas bawah. Hanya $(5,4,6)$ lolos semuanya.'],
+ f:[S('$(4,5,8)$:',String.raw`8+5+8=21>20\;\times`),S('$(5,4,6)$:',String.raw`10+4+6=20\le20\;\checkmark`,String.raw`5\ge2,\ 4\ge3,\ 6\ge1\;\checkmark`),S('$(3,2,5)$ jumlahnya 13, tetapi:',String.raw`y=2<3\;\times`),S('$(6,3,6)$:',String.raw`12+3+6=21>20\;\times`),S('$(1,6,8)$ jumlahnya 16, tetapi:',String.raw`x=1<2\;\times`)]},
+{lv:'Level 2 · PGK',t:String.raw`Titik $(4,p)$ penyelesaian sistem $x+y\le10$ dan $y\ge2x-3$. Pilih <b>semua</b> nilai $p$ yang mungkin.`,type:'pgk',
+ o:['$4$','$5$','$5{,}5$','$6$','$7$'],a:[1,2,3],
+ q:[String.raw`$4+p\le10\Rightarrow p\le6$; $p\ge2(4)-3=5$. Jadi $5\le p\le6$.`],
+ f:[S('Syarat pertama, substitusi $x=4$.',String.raw`4+p\le10`,String.raw`p\le6`),S('Syarat kedua.',String.raw`p\ge2(4)-3`,String.raw`p\ge5`),S('Gabungkan.',String.raw`5\le p\le6`),S('Nilai yang masuk: 5, 5,5, dan 6. Nilai 4 terlalu kecil, 7 terlalu besar.')]},
+{lv:'Level 3 · PG',t:String.raw`Sistem $x\ge3,\ y\ge2,\ x+y\le k$ hanya punya <b>tepat satu</b> pasangan penyelesaian. Nilai $k$ adalah ....`,
+ o:['3','4','5','6','7'],a:2,
+ q:[String.raw`Nilai $x+y$ terkecil adalah $3+2=5$. Agar hanya $(3,2)$ yang lolos, $k=5$.`],
+ f:[S('Cari jumlah terkecil yang mungkin.',String.raw`x+y\ge3+2=5`),S('Jika $k<5$: tidak ada penyelesaian.'),S('Jika $k=5$: hanya $(3,2)$.',String.raw`x+y\le5\Rightarrow(x,y)=(3,2)`),S('Jika $k>5$: banyak penyelesaian, misal $k=6$ ada $(3,2)$ dan $(3,3)$.'),S('Jadi',String.raw`k=5`)]},
+{lv:'Level 3 · B/S',t:'Tentukan <b>Benar</b> atau <b>Salah</b> tiap pernyataan.',type:'bs',
+ o:[String.raw`Sistem $x+y\le4$ dan $x+y\ge6$ tidak punya penyelesaian.`,String.raw`Jika $(a,b)$ memenuhi $x+y\le5$, maka $(2a,2b)$ pasti memenuhi $x+y\le5$.`,String.raw`Titik dengan $x,y\ge0$ dan $x+y\le5$ pasti memenuhi $x+y\le8$.`,String.raw`Pada $x,y\ge0,\ x+y\le10$, hanya $(5,5)$ yang memenuhi $x+y=10$.`],a:[true,false,true,false],
+ q:['Cari contoh penentang. (2): $(3,2)\\to(6,4)$ jumlah 10. (4): $(4,6)$ juga memenuhi.','Jawaban: Benar, Salah, Benar, Salah.'],
+ f:[S('Pernyataan 1. Jumlah tidak mungkin sekaligus kecil dari 4 dan besar dari 6.','\\text{Benar}'),S('Pernyataan 2. Contoh penentang: $(3,2)$ memenuhi, tetapi $(6,4)$ tidak.',String.raw`3+2=5\le5,\quad 6+4=10>5`,'\\text{Salah}'),S('Pernyataan 3. Jika jumlah $\\le5$, maka juga $\\le8$.','\\text{Benar}'),S('Pernyataan 4. Banyak titik di garis, misal $(4,6)$ dan $(10,0)$.','\\text{Salah}')]}
+];
+/* ---------- render soal ---------- */
+const L='ABCDE';let sc=0,done=0;document.getElementById('tt').textContent=Q.length;
+const html=Q.map((q,i)=>{
+ const type=q.type||'pg';let body='';
+ if(type=='bs')body=`<table class="bs"><tr><th>Pernyataan</th><th>Benar</th><th>Salah</th></tr>${q.o.map((s,j)=>`<tr><td>${s}</td><td><input type="radio" name="q${i}_${j}" value="1"></td><td><input type="radio" name="q${i}_${j}" value="0"></td></tr>`).join('')}</table>`;
+ else body=q.o.map((s,j)=>`<label class="o"><input type="${type=='pg'?'radio':'checkbox'}" name="q${i}" value="${j}"><span><b>${L[j]}.</b> ${s}</span></label>`).join('');
+ const steps=q.f.map(s=>`<li>${s[0]}${s.slice(1).map(m=>`$$${m}$$`).join('')}</li>`).join('');
+ return `<div class="q" id="q${i}"><h4><span class="lv">${q.lv}</span>Soal ${i+1}</h4><p>${q.t}</p>${q.g?`<figure class="fig" data-q="${q.g}"></figure>`:''}${body}
+ <button onclick="chk(${i})">Periksa</button> <button class="alt" onclick="tg(${i},'c')">Cara cepat</button> <button class="alt" onclick="tg(${i},'l')">Cara lengkap</button>
+ <div class="res" id="r${i}"></div>
+ <div class="pn box tip" id="c${i}"><b>Cara cepat</b><ol class="st">${q.q.map(s=>`<li>${s}</li>`).join('')}</ol></div>
+ <div class="pn box" id="l${i}"><b>Cara lengkap</b><ol class="st">${steps}</ol></div></div>`}).join('');
+document.getElementById('qs').innerHTML=html;
+Q.forEach((q,i)=>{if(q.g)plot(document.querySelector(`#q${i} [data-q]`),G[q.g])});
+const dn={};
+function chk(i){const q=Q[i],type=q.type||'pg',box=document.getElementById('q'+i);let ok;
+ if(type=='pg'){const v=box.querySelector('input:checked');ok=v&&+v.value==q.a;
+  box.querySelectorAll('.o').forEach((l,j)=>{l.classList.toggle('ok',j==q.a);l.classList.toggle('no',l.querySelector('input').checked&&j!=q.a)})}
+ else if(type=='pgk'){const v=[...box.querySelectorAll('input:checked')].map(x=>+x.value);ok=v.length==q.a.length&&q.a.every(x=>v.includes(x));
+  box.querySelectorAll('.o').forEach((l,j)=>{l.classList.toggle('ok',q.a.includes(j));l.classList.toggle('no',l.querySelector('input').checked&&!q.a.includes(j))})}
+ else{ok=q.a.every((a,j)=>{const v=box.querySelector(`input[name="q${i}_${j}"]:checked`);return v&&(v.value=='1')==a})}
+ document.getElementById('r'+i).innerHTML=ok?'<span style="color:var(--ok)">Benar. Bagus!</span>':'<span style="color:var(--bad)">Belum tepat. Buka cara cepat atau cara lengkap, lalu coba lagi.</span>';
+ if(ok&&!dn[i]){dn[i]=1;sc++;document.getElementById('sk').textContent=sc}}
+function tg(i,k){const e=document.getElementById(k+i);e.classList.toggle('show')}
+renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});
+</script>
+</body>
+</html>

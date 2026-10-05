@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fungsi - VisualMath.Lim</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .bg-pattern {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#00d6d8 0.75px, transparent 0.75px), radial-gradient(#00d6d8 0.75px, #f8fafc 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            opacity: 0.5;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: '#022050',
+                            cyan: '#00d6d8',
+                            yellow: '#ffd300',
+                            light: '#e6fbfc',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col relative">
+    
+    <!-- Latar Belakang Pola -->
+    <div class="absolute inset-0 bg-pattern -z-10"></div>
+
+    <!-- Navigasi Atas (Menu Home) -->
+    <nav class="bg-brand-navy w-full py-4 px-6 shadow-md z-10">
+        <div class="max-w-5xl mx-auto flex items-center justify-between">
+            <a href="index.html" class="flex items-center text-white hover:text-brand-yellow transition-colors text-sm font-semibold">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                Kembali ke Home
+            </a>
+            <img src="logo.png" alt="VisualMath.Lim" class="h-10 hidden sm:block">
+        </div>
+    </nav>
+
+    <!-- Header Materi -->
+    <header class="bg-white border-b-4 border-brand-yellow pt-12 pb-16 px-6 text-center shadow-sm relative overflow-hidden">
+        <div class="max-w-3xl mx-auto relative z-10">
+            <div class="inline-block bg-[#fffbea] text-brand-yellow font-bold px-4 py-1 rounded-full mb-4 text-sm tracking-wide border border-brand-yellow/30">
+                ELEMEN 2: ALJABAR
+            </div>
+            <h1 class="text-3xl md:text-4xl font-extrabold mb-4 text-brand-navy">
+                Materi Fungsi
+            </h1>
+            <p class="text-slate-500 md:text-lg">
+                Pahami bentuk grafik, gabungkan dengan fungsi komposisi, dan pelajari cara membalikkan prosesnya melalui fungsi invers.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content / Path Belajar -->
+    <main class="flex-grow max-w-5xl mx-auto px-6 -mt-8 w-full mb-16 relative z-20">
+        <div class="grid md:grid-cols-3 gap-8">
+            
+            <!-- Tahap 1: Anatomi & Grafik -->
+            <a href="fungsi_materi1.html" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl border-t-8 border-slate-200 hover:border-brand-cyan transition-all duration-300 relative flex flex-col h-full">
+                <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-brand-navy text-white font-bold px-4 py-1 rounded-full shadow-md text-sm group-hover:bg-brand-cyan group-hover:text-brand-navy transition-colors">
+                    Tahap 1
+                </div>
+                <div class="w-14 h-14 bg-brand-light text-brand-cyan rounded-xl flex items-center justify-center mb-6 mt-2 mx-auto group-hover:scale-110 transition-transform">
+                    <!-- Ikon Grafik -->
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path></svg>
+                </div>
+                <h3 class="text-lg font-bold text-brand-navy mb-3 text-center group-hover:text-brand-cyan transition-colors">
+                    Anatomi & Grafik Fungsi
+                </h3>
+                <p class="text-slate-500 mb-6 flex-grow text-sm text-center">
+                    Kuasai penentuan domain, kodomain, range, serta karakteristik grafik linear, kuadrat, dan rasional.
+                </p>
+                <div class="text-center w-full bg-slate-50 text-brand-navy font-semibold text-sm py-2 rounded-lg group-hover:bg-brand-cyan group-hover:text-white transition-colors">
+                    Buka Materi
+                </div>
+            </a>
+
+            <!-- Tahap 2: Komposisi -->
+            <a href="fungsi_materi2.html" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl border-t-8 border-slate-200 hover:border-brand-cyan transition-all duration-300 relative flex flex-col h-full">
+                <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-brand-navy text-white font-bold px-4 py-1 rounded-full shadow-md text-sm group-hover:bg-brand-cyan group-hover:text-brand-navy transition-colors">
+                    Tahap 2
+                </div>
+                <div class="w-14 h-14 bg-brand-light text-brand-cyan rounded-xl flex items-center justify-center mb-6 mt-2 mx-auto group-hover:scale-110 transition-transform">
+                    <!-- Ikon Mesin/Gear untuk Komposisi -->
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                </div>
+                <h3 class="text-lg font-bold text-brand-navy mb-3 text-center group-hover:text-brand-cyan transition-colors">
+                    Fungsi Komposisi
+                </h3>
+                <p class="text-slate-500 mb-6 flex-grow text-sm text-center">
+                    Logika proses berantai. Pahami bagaimana menggabungkan dua fungsi atau lebih menggunakan substitusi.
+                </p>
+                <div class="text-center w-full bg-slate-50 text-brand-navy font-semibold text-sm py-2 rounded-lg group-hover:bg-brand-cyan group-hover:text-white transition-colors">
+                    Buka Materi
+                </div>
+            </a>
+
+            <!-- Tahap 3: Invers -->
+            <a href="fungsi_materi3.html" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl border-t-8 border-slate-200 hover:border-brand-cyan transition-all duration-300 relative flex flex-col h-full">
+                <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-brand-navy text-white font-bold px-4 py-1 rounded-full shadow-md text-sm group-hover:bg-brand-cyan group-hover:text-brand-navy transition-colors">
+                    Tahap 3
+                </div>
+                <div class="w-14 h-14 bg-brand-light text-brand-cyan rounded-xl flex items-center justify-center mb-6 mt-2 mx-auto group-hover:scale-110 transition-transform">
+                    <!-- Ikon Putar Balik/Invers -->
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                </div>
+                <h3 class="text-lg font-bold text-brand-navy mb-3 text-center group-hover:text-brand-cyan transition-colors">
+                    Invers Fungsi
+                </h3>
+                <p class="text-slate-500 mb-6 flex-grow text-sm text-center">
+                    Membalikkan arah proses. Pelajari trik aljabar dan visualisasi grafik cerminan pada fungsi invers.
+                </p>
+                <div class="text-center w-full bg-slate-50 text-brand-navy font-semibold text-sm py-2 rounded-lg group-hover:bg-brand-cyan group-hover:text-white transition-colors">
+                    Buka Materi
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+</body>
+</html>

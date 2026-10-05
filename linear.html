@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persamaan & Pertidaksamaan Linear - VisualMath.Lim</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .bg-pattern {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#00d6d8 0.75px, transparent 0.75px), radial-gradient(#00d6d8 0.75px, #f8fafc 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            opacity: 0.5;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: '#022050',
+                            cyan: '#00d6d8',
+                            yellow: '#ffd300',
+                            light: '#e6fbfc',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col relative">
+    
+    <div class="absolute inset-0 bg-pattern -z-10"></div>
+
+    <!-- Navigasi Atas -->
+    <nav class="bg-brand-navy w-full py-4 px-6 shadow-md z-10">
+        <div class="max-w-5xl mx-auto flex items-center justify-between">
+            <a href="index.html" class="flex items-center text-white hover:text-brand-yellow transition-colors text-sm font-semibold">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                Kembali ke Dashboard Utama
+            </a>
+            <img src="logo.png" alt="VisualMath.Lim" class="h-10 hidden sm:block">
+        </div>
+    </nav>
+
+    <!-- Header Materi -->
+    <header class="bg-white border-b-4 border-brand-cyan pt-12 pb-16 px-6 text-center shadow-sm relative overflow-hidden">
+        <div class="max-w-3xl mx-auto relative z-10">
+            <div class="inline-block bg-brand-light text-brand-cyan font-bold px-4 py-1 rounded-full mb-4 text-sm tracking-wide">
+                ELEMEN 2: ALJABAR
+            </div>
+            <h1 class="text-3xl md:text-4xl font-extrabold mb-4 text-brand-navy">
+                Persamaan & Pertidaksamaan Linear
+            </h1>
+            <p class="text-slate-500 md:text-lg">
+                Materi ini dirancang berjenjang. Selesaikan Tahap 1 untuk membangun fondasi, sebelum melangkah ke pemodelan visual dan optimasi.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content / Path Belajar -->
+    <main class="flex-grow max-w-5xl mx-auto px-6 -mt-8 w-full mb-16 relative z-20">
+        <div class="grid md:grid-cols-3 gap-8">
+            
+            <!-- Tahap 1: SPL -->
+            <a href="linear_materi1.html" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl border-t-8 border-slate-200 hover:border-brand-yellow transition-all duration-300 relative flex flex-col h-full">
+                <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-brand-navy text-white font-bold px-4 py-1 rounded-full shadow-md text-sm group-hover:bg-brand-yellow group-hover:text-brand-navy transition-colors">
+                    Tahap 1
+                </div>
+                <div class="w-14 h-14 bg-brand-light text-brand-cyan rounded-xl flex items-center justify-center mb-6 mt-2 mx-auto group-hover:scale-110 transition-transform">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"></path></svg>
+                </div>
+                <h3 class="text-lg font-bold text-brand-navy mb-3 text-center group-hover:text-brand-cyan transition-colors">
+                    Sistem Persamaan Linear
+                </h3>
+                <p class="text-slate-500 mb-6 flex-grow text-sm text-center">
+                    Mencari titik temu. Kuasai metode eliminasi dan substitusi untuk menyelesaikan variabel yang belum diketahui.
+                </p>
+                <div class="text-center w-full bg-slate-50 text-brand-navy font-semibold text-sm py-2 rounded-lg group-hover:bg-brand-cyan group-hover:text-white transition-colors">
+                    Buka Materi
+                </div>
+            </a>
+
+            <!-- Tahap 2: SPtL -->
+            <a href="linear_materi2.html" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl border-t-8 border-slate-200 hover:border-brand-yellow transition-all duration-300 relative flex flex-col h-full">
+                <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-brand-navy text-white font-bold px-4 py-1 rounded-full shadow-md text-sm group-hover:bg-brand-yellow group-hover:text-brand-navy transition-colors">
+                    Tahap 2
+                </div>
+                <div class="w-14 h-14 bg-brand-light text-brand-cyan rounded-xl flex items-center justify-center mb-6 mt-2 mx-auto group-hover:scale-110 transition-transform">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path></svg>
+                </div>
+                <h3 class="text-lg font-bold text-brand-navy mb-3 text-center group-hover:text-brand-cyan transition-colors">
+                    Sistem Pertidaksamaan
+                </h3>
+                <p class="text-slate-500 mb-6 flex-grow text-sm text-center">
+                    Visualisasi area. Belajar menggambar grafik dan mengarsir daerah penyelesaian (himpunan penyelesaian).
+                </p>
+                <div class="text-center w-full bg-slate-50 text-brand-navy font-semibold text-sm py-2 rounded-lg group-hover:bg-brand-cyan group-hover:text-white transition-colors">
+                    Buka Materi
+                </div>
+            </a>
+
+            <!-- Tahap 3: Program Linear -->
+            <a href="linear_materi3.html" class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl border-t-8 border-slate-200 hover:border-brand-yellow transition-all duration-300 relative flex flex-col h-full">
+                <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-brand-navy text-white font-bold px-4 py-1 rounded-full shadow-md text-sm group-hover:bg-brand-yellow group-hover:text-brand-navy transition-colors">
+                    Tahap 3
+                </div>
+                <div class="w-14 h-14 bg-brand-light text-brand-cyan rounded-xl flex items-center justify-center mb-6 mt-2 mx-auto group-hover:scale-110 transition-transform">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                </div>
+                <h3 class="text-lg font-bold text-brand-navy mb-3 text-center group-hover:text-brand-cyan transition-colors">
+                    Program Linear
+                </h3>
+                <p class="text-slate-500 mb-6 flex-grow text-sm text-center">
+                    Penerapan nyata. Tentukan nilai maksimum atau minimum dari suatu fungsi objektif pada soal cerita.
+                </p>
+                <div class="text-center w-full bg-slate-50 text-brand-navy font-semibold text-sm py-2 rounded-lg group-hover:bg-brand-cyan group-hover:text-white transition-colors">
+                    Buka Materi
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sistem Persamaan Linear Multivariabel | VisualMath.Lim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<style>
+:root{--navy:#022050;--cyan:#00d6d8;--yellow:#ffd300;--ink:#10213f;--bg:#f2f8fb;--card:#fff;--line:#d5e3ec;--soft:#e6fbfb}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;font-family:'Lexend',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:16px}
+header{position:sticky;top:0;z-index:50;background:var(--navy);border-bottom:4px solid var(--yellow);box-shadow:0 4px 18px #02205055}
+.bar{max-width:1120px;margin:auto;display:flex;align-items:center;gap:14px;padding:8px 16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;min-width:0}
+.brand img{width:52px;height:52px;border-radius:50%;background:#fff2}
+.brand b{font-weight:800;font-size:1.08rem;line-height:1.2}
+.brand b span{color:var(--cyan)}
+.brand small{display:block;color:var(--yellow);font-weight:500;font-size:.78rem}
+nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+nav a{color:#fff;text-decoration:none;font-weight:500;font-size:.9rem;padding:8px 14px;border-radius:999px;transition:.2s}
+nav a:hover{background:var(--cyan);color:var(--navy)}
+nav a.dash{background:var(--yellow);color:var(--navy);font-weight:700}
+nav a.dash:hover{background:var(--cyan)}
+.toc{background:#033070;overflow-x:auto;white-space:nowrap;scrollbar-width:thin}
+.toc div{max-width:1120px;margin:auto;padding:6px 16px}
+.toc a{color:#bfeff0;font-size:.8rem;text-decoration:none;margin-right:16px}
+.toc a:hover{color:var(--yellow)}
+main{max-width:1120px;margin:auto;padding:24px 16px 60px}
+.hero{background:linear-gradient(135deg,var(--navy),#06377f);color:#fff;border-radius:24px;padding:34px 28px;position:relative;overflow:hidden}
+.hero:after{content:"x + y = z";position:absolute;right:-10px;bottom:-24px;font-size:6rem;font-weight:800;color:#ffffff10;white-space:nowrap}
+.tag{display:inline-block;background:var(--yellow);color:var(--navy);font-weight:700;font-size:.75rem;padding:3px 12px;border-radius:999px;letter-spacing:.04em}
+.hero h1{margin:12px 0 6px;font-size:clamp(1.7rem,4.5vw,2.8rem);line-height:1.15}
+.hero h1 em{font-style:normal;color:var(--cyan)}
+.hero p{margin:0;color:#d6e6ff;max-width:640px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chips span{background:#ffffff1c;border:1px solid #ffffff40;padding:4px 12px;border-radius:999px;font-size:.82rem}
+section{margin-top:28px}
+h2{font-size:1.5rem;margin:0 0 12px;color:var(--navy);display:flex;align-items:center;gap:10px}
+h2 i{font-style:normal;background:var(--navy);color:var(--yellow);border-radius:12px;padding:2px 12px;font-size:1rem}
+h3{color:#05408f;margin:22px 0 6px;font-size:1.12rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px;box-shadow:0 2px 10px #02205010}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.mini{border-top:5px solid var(--cyan);background:#fff;border-radius:14px;padding:14px 16px;border:1px solid var(--line);border-top:5px solid var(--cyan)}
+.mini b{color:var(--navy)}
+.box,.tip,.warn{border-radius:14px;padding:12px 16px;margin:14px 0}
+.box{background:var(--soft);border-left:6px solid var(--cyan)}
+.tip{background:#fff8cc;border-left:6px solid var(--yellow)}
+.warn{background:#ffecec;border-left:6px solid #e5484d}
+.box b:first-child,.tip b:first-child,.warn b:first-child{color:var(--navy)}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:10px 0}
+.tw{overflow-x:auto}
+th{background:var(--navy);color:#fff;text-align:left;padding:8px 12px}
+td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:#f6fbfd}
+figure{margin:14px auto;text-align:center}
+figure svg{max-width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:14px}
+figcaption{font-size:.84rem;color:#4a5f7d;margin-top:4px}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}
+.flow div{background:var(--navy);color:#fff;padding:8px 14px;border-radius:12px;font-size:.88rem}
+.flow div:nth-child(even){background:var(--cyan);color:var(--navy);font-weight:700}
+.ex{border:2px dashed var(--cyan);border-radius:14px;padding:6px 16px 10px;margin:12px 0;background:#fff}
+.q{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 20px;margin:16px 0;box-shadow:0 2px 10px #02205010}
+.q .hd{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
+.no{background:var(--navy);color:var(--yellow);font-weight:800;border-radius:10px;padding:1px 12px}
+.lv{font-size:.74rem;font-weight:700;padding:2px 10px;border-radius:999px;background:var(--soft);color:#047c7e}
+.lv.l2{background:#fff3b0;color:#7a5b00}.lv.l3{background:#ffdede;color:#a02a2a}
+.opt{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;font:inherit;background:#f6fbfd;border:2px solid var(--line);border-radius:12px;padding:8px 12px;margin:6px 0;cursor:pointer;transition:.15s;color:inherit}
+.opt:hover{border-color:var(--cyan);background:var(--soft)}
+.opt b{background:var(--navy);color:#fff;min-width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:.8rem;flex:none}
+.opt.sel{border-color:var(--cyan);background:var(--soft)}
+.opt.ok{border-color:#1a9d5a;background:#e3f8ec}.opt.ok b{background:#1a9d5a}
+.opt.no2{border-color:#e5484d;background:#ffecec}.opt.no2 b{background:#e5484d}
+.btn{font:inherit;font-weight:700;border:0;border-radius:999px;padding:8px 18px;cursor:pointer;background:var(--cyan);color:var(--navy);margin:6px 6px 0 0}
+.btn:hover{background:var(--yellow)}
+.btn.alt{background:var(--navy);color:#fff}
+.btn.alt:hover{background:#06377f}
+.res{margin-top:8px;font-weight:700}
+.sol{display:none;margin-top:10px}
+.sol.on{display:block}
+.pane{border-radius:14px;padding:10px 16px;margin:8px 0}
+.pane.fast{background:#fff8cc;border-left:6px solid var(--yellow)}
+.pane.full{background:var(--soft);border-left:6px solid var(--cyan)}
+.pane h4{margin:0 0 4px;color:var(--navy)}
+.bs td select{font:inherit;padding:4px 8px;border-radius:8px;border:2px solid var(--line)}
+.bs td.ok{background:#e3f8ec!important}.bs td.bad{background:#ffecec!important}
+footer{background:var(--navy);color:#bcd;text-align:center;padding:22px;border-top:4px solid var(--yellow);font-size:.88rem}
+footer b{color:var(--cyan)}
+.top{position:fixed;right:16px;bottom:16px;background:var(--yellow);color:var(--navy);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;text-decoration:none;font-weight:800;box-shadow:0 4px 14px #0004}
+@media(max-width:640px){nav{margin-left:0;width:100%}.brand img{width:44px;height:44px}.hero{padding:26px 18px}}
+.katex{font-size:1.05em}
+.steps{counter-reset:s;list-style:none;padding:0;margin:8px 0}
+.steps>li{counter-increment:s;position:relative;padding:2px 0 10px 40px}
+.steps>li:before{content:counter(s);position:absolute;left:0;top:3px;width:27px;height:27px;border-radius:50%;background:var(--navy);color:var(--yellow);font-weight:700;font-size:.82rem;display:grid;place-items:center}
+.steps>li:not(:last-child):after{content:"";position:absolute;left:13px;top:32px;bottom:2px;width:2px;background:var(--line)}
+.steps .katex-display{margin:.45em 0}
+.ex .steps{margin:4px 0}
+.ex>b:first-child{display:block;color:var(--navy)}
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <a class="brand" href="index.html"><img src="logo.png" alt="Logo VisualMath.Lim"><b><span>VisualMath.Lim</span> - TKA Matematika Wajib SMA<small>Bimbingan Belajar</small></b></a>
+    <nav><a href="index.html">🏠 Home</a><a class="dash" href="linear.html">📊 Dashboard</a></nav>
+  </div>
+  <div class="toc"><div>
+    <a href="#bekal">Bekal Dasar</a><a href="#s11">1.1 Ide Besar</a><a href="#s12">1.2 Persamaan Linear</a><a href="#s13">1.3 SPLDV</a><a href="#s14">1.4 SPLTV</a><a href="#s15">1.5 Soal Cerita</a><a href="#s16">1.6 Banyak Solusi</a><a href="#s17">1.7–1.9 Strategi</a><a href="#latihan">Latihan Bab 1</a><a href="#prediksi">Prediksi TKA</a>
+  </div></div>
+</header>
+
+<main>
+<div class="hero">
+  <span class="tag">ALJABAR • KELAS 12 • TKA</span>
+  <h1>Sistem Persamaan Linear <em>Multivariabel</em></h1>
+  <p>SPLDV, SPLTV, soal cerita, dan banyak solusi. Konkret → gambar → aljabar, lengkap dengan <b>cara cepat</b> dan <b>cara lengkap</b> di setiap soal.</p>
+  <div class="chips"><span>👀 LIHAT</span><span>🧠 PIKIR</span><span>✅ SELESAIKAN</span><span>PG • PGK • Benar/Salah</span></div>
+</div>
+
+<section id="bekal">
+  <h2><i>0</i> Peta Misi & Bekal Dasar</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Tujuan belajar</h3>
+    <ul>
+      <li>Mengenali persamaan linear dan menentukan variabelnya.</li>
+      <li>Menyelesaikan SPLDV dan SPLTV (substitusi, eliminasi, grafik) dan memilih cara tercepat.</li>
+      <li>Mengubah soal cerita menjadi model matematika, lalu menafsirkan hasilnya.</li>
+      <li>Menentukan banyak solusi (satu, tidak ada, tak hingga) dan mencari nilai parameter.</li>
+      <li>Mengecek, mengevaluasi, dan menjustifikasi jawaban, termasuk soal PGK dan Benar/Salah.</li>
+    </ul>
+    <h3>Tiga level soal TKA</h3>
+    <div class="grid">
+      <div class="mini"><b>Level 1 · Pengetahuan & Pemahaman</b><br>Menghitung, membaca grafik/tabel, mengidentifikasi.</div>
+      <div class="mini"><b>Level 2 · Aplikasi</b><br>Memodelkan cerita, menerapkan prosedur, menafsirkan.</div>
+      <div class="mini"><b>Level 3 · Penalaran</b><br>Menganalisis, mengevaluasi, menjustifikasi, parameter $k$.</div>
+    </div>
+    <h3>Bekal dasar</h3>
+    <p>Banyak kesalahan di TKA bukan karena konsepnya sulit, tetapi karena <b>tanda minus</b>, <b>tanda kurung</b>, dan <b>memindah ruas</b>.</p>
+    <div class="tw"><table>
+      <tr><th>Keterampilan</th><th>Contoh benar</th><th>Kesalahan umum</th></tr>
+      <tr><td>Bilangan negatif</td><td>$5-8=-3$; $(-2)(-3)=6$; $-2(4)=-8$</td><td>$(-2)(-3)=-6$</td></tr>
+      <tr><td>Kurung dengan minus</td><td>$-(x-2)=-x+2$; $3-(y+1)=2-y$</td><td>$-(x-2)=-x-2$</td></tr>
+      <tr><td>Mengalikan ke kurung</td><td>$3(x+2)=3x+6$</td><td>$3(x+2)=3x+2$</td></tr>
+      <tr><td>Memindah ruas</td><td>$x+3=7\Rightarrow x=7-3=4$</td><td>$x=7+3$</td></tr>
+      <tr><td>Substitusi nilai</td><td>$x=4$: $2x+3=2(4)+3=11$</td><td>Menulis $2x=24$</td></tr>
+      <tr><td>Membaca titik</td><td>$(3,-2)$: 3 ke kanan, 2 ke bawah</td><td>Menukar $(x,y)$ menjadi $(y,x)$</td></tr>
+    </table></div>
+    <figure>
+      <svg viewBox="0 0 520 110" width="520" role="img" aria-label="Garis bilangan">
+        <line x1="20" y1="70" x2="500" y2="70" stroke="#022050" stroke-width="3"/>
+        <g id="nl"></g>
+        <path d="M410 50 Q290 5 168 50" fill="none" stroke="#00d6d8" stroke-width="4"/>
+        <polygon points="168,50 180,40 183,54" fill="#00d6d8"/>
+        <text x="290" y="22" text-anchor="middle" font-size="14" font-weight="700" fill="#022050">5 − 8 : mundur 8 langkah</text>
+        <circle cx="410" cy="70" r="7" fill="#ffd300" stroke="#022050" stroke-width="2"/>
+        <circle cx="170" cy="70" r="7" fill="#00d6d8" stroke="#022050" stroke-width="2"/>
+      </svg>
+      <figcaption>Gambar 0.1 Garis bilangan: mengurangi = mundur, menambah = maju. Hasil bisa negatif ($5-8=-3$).</figcaption>
+    </figure>
+    <div class="tip"><b>Cek diagnostik (5 menit, tanpa kalkulator)</b><br>
+      1) $5-9$ &nbsp; 2) $(-4)(-5)$ &nbsp; 3) $-(2x-5)$ &nbsp; 4) $4(x-3)$ &nbsp; 5) $3x-5$ jika $x=-2$ &nbsp; 6) selesaikan $3x+4=19$ &nbsp; 7) $2x-y$ jika $x=3,y=-2$
+      <br><button class="btn alt" onclick="this.nextElementSibling.classList.toggle('on')">Lihat jawaban</button>
+      <span class="sol">1) −4 &nbsp; 2) 20 &nbsp; 3) $-2x+5$ &nbsp; 4) $4x-12$ &nbsp; 5) −11 &nbsp; 6) $x=5$ &nbsp; 7) 8</span>
+    </div>
+    <div class="box"><b>Cara belajar: LIHAT – PIKIR – SELESAIKAN.</b> <b>Lihat</b>: apa yang diketahui dan ditanya? <b>Pikir</b>: pilih strategi tercepat. <b>Selesaikan</b> lalu <b>cek</b>: masukkan jawaban ke soal.</div>
+  </div>
+</section>
+
+<section id="s11">
+  <h2><i>1.1</i> Ide besar</h2>
+  <div class="card">
+    <p>Sistem persamaan adalah <b>kumpulan hubungan yang harus benar secara bersamaan</b>. Kita mencari nilai yang membuat semua persamaan benar sekaligus.</p>
+    $$\begin{cases}x+y=10\\2x+y=16\end{cases}$$
+    <p>Coba $x=6,y=4$: $6+4=10$ ✓ dan $2(6)+4=16$ ✓. Jadi $(x,y)=(6,4)$ adalah <b>solusi</b>.</p>
+    <p>Anggap tanda “=” sebagai <b>timbangan seimbang</b>. Apa pun yang dilakukan di satu sisi harus dilakukan di sisi lain, sehingga saat memindah ruas tandanya berubah.</p>
+    <figure>
+      <svg viewBox="0 0 420 200" width="420" role="img" aria-label="Timbangan seimbang">
+        <polygon points="210,60 185,170 235,170" fill="#022050"/>
+        <rect x="150" y="170" width="120" height="12" rx="6" fill="#022050"/>
+        <rect x="60" y="55" width="300" height="8" rx="4" fill="#ffd300" stroke="#022050" stroke-width="2"/>
+        <path d="M80 63 L55 120 H145 L120 63" fill="none" stroke="#022050" stroke-width="2"/>
+        <path d="M340 63 L315 120 H405 L380 63" fill="none" stroke="#022050" stroke-width="2"/>
+        <rect x="45" y="120" width="110" height="14" rx="7" fill="#00d6d8"/>
+        <rect x="305" y="120" width="110" height="14" rx="7" fill="#00d6d8"/>
+        <rect x="62" y="82" width="38" height="36" rx="6" fill="#ffd300" stroke="#022050" stroke-width="2"/>
+        <text x="81" y="106" text-anchor="middle" font-weight="800" fill="#022050">x</text>
+        <rect x="104" y="92" width="40" height="26" rx="6" fill="#fff" stroke="#022050" stroke-width="2"/>
+        <text x="124" y="110" text-anchor="middle" font-weight="700" fill="#022050">+3</text>
+        <rect x="335" y="82" width="50" height="36" rx="6" fill="#fff" stroke="#022050" stroke-width="2"/>
+        <text x="360" y="106" text-anchor="middle" font-weight="800" fill="#022050">7</text>
+        <text x="210" y="40" text-anchor="middle" font-size="15" font-weight="700" fill="#022050">x + 3 = 7 → kurangi 3 di kedua sisi → x = 4</text>
+      </svg>
+      <figcaption>Gambar 1.1 Persamaan seperti timbangan seimbang.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="s12">
+  <h2><i>1.2</i> Persamaan linear dan variabel</h2>
+  <div class="card">
+    <p>Persamaan linear: setiap variabel berpangkat 1 dan tidak ada perkalian antarvariabel. Di TKA, variabel paling banyak tiga ($x,y,z$). Pada $3x-2y=7$:</p>
+    <div class="grid">
+      <div class="mini"><b>Variabel</b><br>$x$ dan $y$</div>
+      <div class="mini"><b>Koefisien</b><br>koefisien $x$ = 3, koefisien $y$ = −2 (minus ikut)</div>
+      <div class="mini"><b>Konstanta</b><br>7</div>
+      <div class="mini"><b>Solusi</b><br>$(3,1)$ karena $3(3)-2(1)=7$</div>
+    </div>
+    <div class="tw"><table>
+      <tr><th>Persamaan</th><th>Linear?</th><th>Alasan</th></tr>
+      <tr><td>$2x+5=13$</td><td>✓ Ya</td><td>$x$ berpangkat 1</td></tr>
+      <tr><td>$x+2y-z=10$</td><td>✓ Ya</td><td>tiga variabel, semua berpangkat 1</td></tr>
+      <tr><td>$x^2+y=10$</td><td>✗ Bukan</td><td>ada $x^2$</td></tr>
+      <tr><td>$xy+2=8$</td><td>✗ Bukan</td><td>ada perkalian $xy$</td></tr>
+      <tr><td>$\dfrac1x+y=3$</td><td>✗ Bukan</td><td>$x$ di penyebut</td></tr>
+    </table></div>
+  </div>
+</section>
+
+<section id="s13">
+  <h2><i>1.3</i> SPLDV: tiga cara menyelesaikan</h2>
+  <div class="card">
+    <p>SPLDV = dua persamaan linear dengan dua variabel. <b>Jangan menghafal satu cara saja; pilih yang paling cepat.</b></p>
+    <div class="grid">
+      <div class="mini"><b>Ada koefisien 1</b><br>→ Substitusi</div>
+      <div class="mini"><b>Koefisien sama / berlawanan</b><br>→ Eliminasi langsung</div>
+      <div class="mini"><b>Koefisien berbeda</b><br>→ Kalikan dulu, lalu eliminasi</div>
+      <div class="mini"><b>Ada grafik / tabel</b><br>→ Titik potong</div>
+    </div>
+    <p style="font-size:.84rem;color:#4a5f7d">Gambar 1.2 Peta memilih strategi SPLDV.</p>
+
+    <h3>Cara 1: Substitusi</h3>
+    <div class="ex"><b>Contoh:</b> selesaikan $x+y=9$ dan $2x-y=6$.
+      <ol class="steps">
+        <li>Dari persamaan pertama, nyatakan $y$:$$\begin{aligned}x+y&=9\\y&=9-x\end{aligned}$$</li>
+        <li>Substitusi ke persamaan kedua:$$\begin{aligned}2x-(9-x)&=6\\2x-9+x&=6\\3x&=15\\x&=5\end{aligned}$$</li>
+        <li>Cari $y$:$$y=9-5=4$$</li>
+        <li>Solusi: <b>$(5,4)$</b>.</li>
+      </ol></div>
+
+    <h3>Cara 2: Eliminasi</h3>
+    <div class="ex"><b>Eliminasi langsung:</b> $2x+y=11$ dan $x+y=7$ (koefisien $y$ sama).
+      <ol class="steps">
+        <li>Kurangkan kedua persamaan:$$\begin{aligned}(2x+y)-(x+y)&=11-7\\x&=4\end{aligned}$$</li>
+        <li>Substitusi ke $x+y=7$:$$\begin{aligned}4+y&=7\\y&=3\end{aligned}$$</li>
+        <li>Solusi: <b>$(4,3)$</b>.</li>
+      </ol></div>
+    <div class="ex"><b>Menyamakan koefisien:</b> $2x+3y=12$ dan $3x+2y=13$.
+      <ol class="steps">
+        <li>Ingin membuang $x$. KPK dari 2 dan 3 adalah 6. Kalikan persamaan 1 dengan 3 dan persamaan 2 dengan 2 (<b>semua suku</b>):$$\begin{aligned}6x+9y&=36\\6x+4y&=26\end{aligned}$$</li>
+        <li>Kurangkan:$$\begin{aligned}(6x+9y)-(6x+4y)&=36-26\\5y&=10\\y&=2\end{aligned}$$</li>
+        <li>Substitusi ke $2x+3y=12$:$$\begin{aligned}2x+6&=12\\2x&=6\\x&=3\end{aligned}$$</li>
+        <li>Solusi: <b>$(3,2)$</b>. Cek: $3(3)+2(2)=13$ ✓.</li>
+      </ol></div>
+
+    <h3>Cara 3: Grafik</h3>
+    <p>Titik potong kedua garis adalah solusi. Cara cepat: isi $x=0$ untuk mencari $y$, lalu $y=0$ untuk mencari $x$.</p>
+    <figure><div id="g13a"></div><figcaption>Gambar 1.3 Garis $2x+3y=12$ melalui $(0,4)$ dan $(6,0)$.</figcaption></figure>
+    <div class="tw"><table>
+      <tr><th>Garis 1: $y=11-2x$</th><th>Garis 2: $y=7-x$</th></tr>
+      <tr><td>$x=0\to(0,11)$</td><td>$x=0\to(0,7)$</td></tr>
+      <tr><td>$x=2\to(2,7)$</td><td>$x=2\to(2,5)$</td></tr>
+      <tr><td>$x=4\to(4,3)$</td><td>$x=4\to(4,3)$</td></tr>
+      <tr><td>$x=5\to(5,1)$</td><td>$x=6\to(6,1)$</td></tr>
+    </table></div>
+    <figure><div id="g13b"></div><figcaption>Gambar 1.4 Kedua garis berpotongan di $(4,3)$, jadi $(x,y)=(4,3)$.</figcaption></figure>
+    <div class="tip"><b>Tips TKA.</b> Soal sering menanyakan “nilai $2x+y$” atau “$x+y$”, bukan $x$ dan $y$ saja. Cari $x,y$ dulu, lalu hitung yang ditanya. <b>Selalu baca kalimat terakhir soal.</b></div>
+  </div>
+</section>
+
+<section id="s14">
+  <h2><i>1.4</i> SPLTV: tiga variabel, tiga persamaan</h2>
+  <div class="card">
+    <p>Jangan melawan tiga variabel sekaligus. Ubah menjadi SPLDV dulu.</p>
+    <div class="flow"><div>Pilih variabel termudah dibuang</div><div>Buang dari 2 pasang persamaan</div><div>Dapat SPLDV</div><div>Selesaikan</div><div>Substitusi balik</div><div>Cek 3 persamaan</div></div>
+    <p style="font-size:.84rem;color:#4a5f7d">Gambar 1.5 Alur menyelesaikan SPLTV.</p>
+
+    <h3>Contoh 1 (dasar)</h3>
+    <div class="ex">$$\begin{cases}x+y+z=6&(1)\\2x+y+z=9&(2)\\x+2y+z=8&(3)\end{cases}$$
+      <ol class="steps">
+        <li>(2)−(1):$$\begin{aligned}(2x+y+z)-(x+y+z)&=9-6\\x&=3\end{aligned}$$</li>
+        <li>(3)−(1):$$\begin{aligned}(x+2y+z)-(x+y+z)&=8-6\\y&=2\end{aligned}$$</li>
+        <li>Substitusi ke (1):$$\begin{aligned}3+2+z&=6\\z&=1\end{aligned}$$</li>
+        <li>Solusi: <b>$(3,2,1)$</b>.</li>
+      </ol></div>
+
+    <h3>Contoh 2 (level TKA)</h3>
+    <div class="ex">$$\begin{cases}x+y+z=6&(1)\\2x-y+z=3&(2)\\x+2y-z=2&(3)\end{cases}$$
+      <ol class="steps">
+        <li><b>Buang $z$ (pasangan 1 dan 2):</b>$$\begin{aligned}(x+y+z)-(2x-y+z)&=6-3\\-x+2y&=3\ \ldots(4)\end{aligned}$$</li>
+        <li><b>Buang $z$ (pasangan 1 dan 3):</b>$$\begin{aligned}(x+y+z)+(x+2y-z)&=6+2\\2x+3y&=8\ \ldots(5)\end{aligned}$$</li>
+        <li><b>Selesaikan SPLDV (4) dan (5).</b> Dari (4): $x=2y-3$. Substitusi ke (5):$$\begin{aligned}2(2y-3)+3y&=8\\4y-6+3y&=8\\7y&=14\\y&=2\end{aligned}$$ Maka $x=2(2)-3=1$.</li>
+        <li><b>Cari $z$</b> dari (1):$$\begin{aligned}1+2+z&=6\\z&=3\end{aligned}$$</li>
+        <li>Solusi: <b>$(1,2,3)$</b>. Cek (2): $2-2+3=3$ ✓; (3): $1+4-3=2$ ✓.</li>
+      </ol></div>
+    <div class="warn"><b>Awas tanda minus!</b> $(x+y+z)-(2x-y+z)=-x+2y$. Banyak siswa lupa bahwa $-(-y)=+y$.</div>
+
+    <h3>Contoh 3 (cerita + trik jumlahkan semua)</h3>
+    <div class="ex">2 buku + 1 pulpen + 1 pensil = Rp15.000; 1 buku + 2 pulpen + 1 pensil = Rp13.000; 1 buku + 1 pulpen + 2 pensil = Rp12.000. Berapa harga 1 buku + 1 pulpen + 1 pensil?
+      <ol class="steps">
+        <li>Misalkan buku $=b$, pulpen $=p$, pensil $=q$ (ribuan):$$\begin{aligned}2b+p+q&=15\\b+2p+q&=13\\b+p+2q&=12\end{aligned}$$</li>
+        <li>Jumlahkan ketiganya:$$\begin{aligned}4b+4p+4q&=40\\b+p+q&=10\end{aligned}$$</li>
+        <li>Jawab: <b>Rp10.000</b>. (Jika diminta tiap harga: $b=15-10=5$, $p=13-10=3$, $q=12-10=2$.)</li>
+      </ol></div>
+    <div class="tip"><b>Trik.</b> Koefisien simetris (2,1,1 / 1,2,1 / 1,1,2) → jumlahkan semua persamaan. Jika tidak simetris, pakai alur biasa (Contoh 4).</div>
+
+    <h3>Contoh 4 (koefisien berbeda)</h3>
+    <div class="ex">$$\begin{cases}x+2y+z=7&(1)\\2x-y+z=6&(2)\\3x+y-2z=1&(3)\end{cases}$$
+      <ol class="steps">
+        <li>Pilih $y$ untuk dibuang (koefisiennya 2, −1, 1).</li>
+        <li>(2)×2 lalu jumlahkan dengan (1):$$\begin{aligned}(4x-2y+2z)+(x+2y+z)&=12+7\\5x+3z&=19\ \ldots(4)\end{aligned}$$</li>
+        <li>(2)+(3):$$\begin{aligned}(2x-y+z)+(3x+y-2z)&=6+1\\5x-z&=7\ \ldots(5)\end{aligned}$$</li>
+        <li>Dari (5): $z=5x-7$. Substitusi ke (4):$$\begin{aligned}5x+3(5x-7)&=19\\20x-21&=19\\20x&=40\\x&=2\end{aligned}$$ Maka $z=5(2)-7=3$.</li>
+        <li>Cari $y$ dari (2):$$\begin{aligned}4-y+3&=6\\y&=1\end{aligned}$$</li>
+        <li>Solusi: <b>$(2,1,3)$</b>. Cek (1): $2+2+3=7$ ✓; (3): $6+1-6=1$ ✓.</li>
+      </ol></div>
+  </div>
+</section>
+
+<section id="s15">
+  <h2><i>1.5</i> Soal cerita: ubah bahasa menjadi model</h2>
+  <div class="card">
+    <div class="flow"><div>Cerita</div><div>Variabel</div><div>Hubungan</div><div>Persamaan</div><div>Penyelesaian</div><div>Interpretasi</div><div>Cek</div></div>
+    <h3>Contoh 1 (harga)</h3>
+    <div class="ex">3 buku + 2 penggaris = Rp18.000; buku lebih mahal Rp1.000 dari penggaris. Harga 2 buku + 5 penggaris?
+      <ol class="steps">
+        <li>Misalkan buku $=x$ dan penggaris $=y$. Model:$$\begin{aligned}3x+2y&=18.000\ \ldots(1)\\x&=y+1.000\ \ldots(2)\end{aligned}$$</li>
+        <li>Substitusi (2) ke (1):$$\begin{aligned}3(y+1.000)+2y&=18.000\\5y+3.000&=18.000\\5y&=15.000\\y&=3.000\end{aligned}$$</li>
+        <li>Maka $x=3.000+1.000=4.000$.</li>
+        <li>Ditanya:$$2x+5y=8.000+15.000=23.000$$ Jawab: <b>Rp23.000</b>.</li>
+        <li>Cek: $3(4.000)+2(3.000)=18.000$ ✓.</li>
+      </ol></div>
+    <figure>
+      <svg viewBox="0 0 560 150" width="560" role="img" aria-label="Jembatan visual">
+        <g font-size="13" font-weight="700" fill="#022050" text-anchor="middle">
+          <rect x="10" y="20" width="150" height="44" rx="8" fill="#ffd300"/><text x="85" y="48">3 buku</text>
+          <rect x="165" y="20" width="110" height="44" rx="8" fill="#00d6d8"/><text x="220" y="48">2 penggaris</text>
+          <text x="300" y="48">=</text>
+          <rect x="320" y="20" width="230" height="44" rx="8" fill="#e6fbfb" stroke="#022050"/><text x="435" y="48">18.000</text>
+          <text x="280" y="92" font-size="12">tukar buku = penggaris + 1.000</text>
+          <rect x="10" y="102" width="260" height="38" rx="8" fill="#ffd300"/><text x="140" y="127">3 penggaris + 3.000</text>
+          <rect x="275" y="102" width="110" height="38" rx="8" fill="#00d6d8"/><text x="330" y="127">2 penggaris</text>
+          <text x="470" y="127">5 penggaris = 15.000</text>
+        </g>
+      </svg>
+      <figcaption>Gambar 1.6 Jembatan visual: tukar “buku” menjadi “penggaris + 1.000”. Setelah itu selesaikan dengan aljabar.</figcaption>
+    </figure>
+    <h3>Contoh 2 (tiket)</h3>
+    <div class="ex">2 dewasa + 3 anak = Rp170.000; 3 dewasa + 1 anak = Rp150.000. Harga 1 dewasa + 1 anak?
+      <ol class="steps">
+        <li>Misalkan dewasa $=d$ dan anak $=a$ (ribuan):$$\begin{aligned}2d+3a&=170\\3d+a&=150\end{aligned}$$</li>
+        <li>Dari persamaan kedua: $a=150-3d$. Substitusi ke persamaan pertama:$$\begin{aligned}2d+3(150-3d)&=170\\2d+450-9d&=170\\-7d&=-280\\d&=40\end{aligned}$$</li>
+        <li>Maka $a=150-3(40)=30$.</li>
+        <li>Ditanya $d+a=40+30=70$. Jawab: <b>Rp70.000</b>.</li>
+      </ol></div>
+
+    <h3>Contoh 3 (umur, 3 variabel)</h3>
+    <div class="ex">Ayah 5 tahun lebih tua dari Ibu. Ibu 4 kali umur Anak. Jumlah umur ketiganya 95 tahun. Umur Ayah 3 tahun lagi?
+      <ol class="steps">
+        <li>Misalkan Ayah $=a$, Ibu $=b$, Anak $=c$:$$\begin{aligned}a&=b+5\\b&=4c\\a+b+c&=95\end{aligned}$$</li>
+        <li>Nyatakan semuanya dalam $c$: $b=4c$ dan $a=4c+5$.</li>
+        <li>Substitusi ke persamaan jumlah:$$\begin{aligned}(4c+5)+4c+c&=95\\9c+5&=95\\9c&=90\\c&=10\end{aligned}$$</li>
+        <li>Maka $b=40$ dan $a=45$.</li>
+        <li>Ditanya umur Ayah <b>3 tahun lagi</b>: $45+3=$ <b>48 tahun</b> (jangan berhenti di 45).</li>
+      </ol></div>
+    <h3>Kamus kata kunci</h3>
+    <div class="tw"><table>
+      <tr><th>Kata di soal</th><th>Model</th></tr>
+      <tr><td>jumlah dua bilangan 18</td><td>$x+y=18$</td></tr>
+      <tr><td>selisih 4</td><td>$x-y=4$</td></tr>
+      <tr><td>A lebih banyak 3 dari B</td><td>$A=B+3$ (bukan $3B$)</td></tr>
+      <tr><td>A lebih sedikit 3 dari B</td><td>$A=B-3$</td></tr>
+      <tr><td>A dua kali B</td><td>$A=2B$</td></tr>
+      <tr><td>5 tahun lagi / 5 tahun lalu</td><td>$(x+5)$ / $(x-5)$</td></tr>
+      <tr><td>kepala dan kaki</td><td>$a+k$ = kepala; $2a+4k$ = kaki</td></tr>
+    </table></div>
+  </div>
+</section>
+
+<section id="s16">
+  <h2><i>1.6</i> Berapa banyak solusi?</h2>
+  <div class="card">
+    <div class="grid" id="g16" style="text-align:center"></div>
+    <p style="font-size:.84rem;color:#4a5f7d">Gambar 1.7 Tiga kemungkinan solusi SPLDV.</p>
+    <div class="tw"><table>
+      <tr><th>Kondisi</th><th>Garis</th><th>Ciri hitungan</th><th>Contoh</th></tr>
+      <tr><td><b>Satu solusi</b></td><td>Berpotongan</td><td>$x,y$ pasti</td><td>$x+y=7;\,x-y=1\to(4,3)$</td></tr>
+      <tr><td><b>Tidak ada</b></td><td>Sejajar</td><td>“$0=-3$” (salah)</td><td>$x+y=5;\,x+y=8$</td></tr>
+      <tr><td><b>Tak hingga</b></td><td>Berimpit</td><td>“$0=0$” (benar)</td><td>$x+y=5;\,2x+2y=10$</td></tr>
+    </table></div>
+    <div class="box"><b>Cara cepat: bandingkan koefisien</b> untuk $a_1x+b_1y=c_1$ dan $a_2x+b_2y=c_2$:
+      $$\frac{a_1}{a_2}\ne\frac{b_1}{b_2}\ \Rightarrow\ \text{1 solusi};\quad \frac{a_1}{a_2}=\frac{b_1}{b_2}\ne\frac{c_1}{c_2}\ \Rightarrow\ \text{0 solusi};\quad \frac{a_1}{a_2}=\frac{b_1}{b_2}=\frac{c_1}{c_2}\ \Rightarrow\ \text{tak hingga}$$
+      Jika ada koefisien 0, pakai perkalian silang: $a_1b_2=a_2b_1$ → sejajar atau berimpit.</div>
+    <h3>Contoh mencari parameter</h3>
+    <div class="ex"><b>(a) Tak hingga solusi:</b> $x+y=10$ dan $2x+ky=20$.
+      <ol class="steps">
+        <li>Samakan perbandingan:$$\frac12=\frac1k=\frac{10}{20}$$</li>
+        <li>Dari $\dfrac12=\dfrac1k$ diperoleh $k=2$.</li>
+        <li>Cek: $2x+2y=20$ dibagi 2 menjadi $x+y=10$ ✓.</li>
+      </ol></div>
+    <div class="ex"><b>(b) Parameter di ruas kanan:</b> $x+y=10$ dan $2x+2y=k$.
+      <ol class="steps">
+        <li>Perbandingan koefisien: $\dfrac12=\dfrac12$ (sama).</li>
+        <li>Tak hingga solusi jika $\dfrac{10}{k}$ ikut sama, yaitu $k=20$.</li>
+        <li>Tidak ada solusi jika $k\ne20$.</li>
+      </ol></div>
+    <div class="ex"><b>(c) Tidak ada solusi:</b> $2x+3y=6$ dan $4x+ky=10$.
+      <ol class="steps">
+        <li>Samakan perbandingan koefisien:$$\begin{aligned}\frac24&=\frac3k\\2k&=12\\k&=6\end{aligned}$$</li>
+        <li>Cek ruas kanan: $\dfrac24\ne\dfrac6{10}$, jadi garis sejajar → <b>tidak ada solusi</b>.</li>
+      </ol></div>
+    <p><i>SPLTV juga bisa punya satu, nol, atau tak hingga solusi, tetapi di TKA umumnya diminta satu solusi.</i></p>
+  </div>
+</section>
+
+<section id="s17">
+  <h2><i>1.7–1.9</i> Strategi, kesalahan umum, rangkuman</h2>
+  <div class="card">
+    <h3 style="margin-top:0">1.7 Strategi menjawab bentuk soal TKA</h3>
+    <div class="tw"><table>
+      <tr><th>Bentuk</th><th>Cara</th><th>Jebakan</th></tr>
+      <tr><td><b>PG</b></td><td>Selesaikan dulu, atau uji pilihan ke <b>semua</b> persamaan.</td><td>Pilihan yang cocok hanya di satu persamaan.</td></tr>
+      <tr><td><b>PGK</b></td><td>Periksa tiap pernyataan satu per satu.</td><td>Lupa jawaban bisa lebih dari satu.</td></tr>
+      <tr><td><b>Benar/Salah</b></td><td>Cari semua variabel, lalu uji tiap pernyataan.</td><td>Menjawab dari perasaan.</td></tr>
+      <tr><td><b>Waktu</b></td><td>2–3 menit per soal; macet &gt; 3 menit, tandai dan lewati.</td><td>Terlalu lama di satu soal.</td></tr>
+    </table></div>
+    <h3>1.8 Kesalahan umum</h3>
+    <div class="tw"><table>
+      <tr><th>Kesalahan</th><th>Contoh salah</th><th>Yang benar</th></tr>
+      <tr><td>Salah memilih variabel</td><td>$x$ = harga semua barang</td><td>$x$ = harga <b>satu</b> buku</td></tr>
+      <tr><td>Salah menerjemahkan</td><td>“3 lebih banyak dari $x$” → $3x$</td><td>$x+3$</td></tr>
+      <tr><td>Tanda saat mengurangkan</td><td>$(x+y)-(x-y)=2x$</td><td>$2y$</td></tr>
+      <tr><td>Mengalikan sebagian suku</td><td>$2\times(3x+2y=7)\to6x+4y=7$</td><td>$6x+4y=\mathbf{14}$</td></tr>
+      <tr><td>Salah tanda memindah ruas</td><td>$x+3=7\to x=7+3$</td><td>$x=7-3$</td></tr>
+      <tr><td>Tidak mengecek / hanya cari angka</td><td>Berhenti di $x$ dan $y$</td><td>Jawab yang <b>ditanya</b></td></tr>
+    </table></div>
+    <h3>1.9 Kartu rangkuman</h3>
+    <div class="grid">
+      <div class="mini"><b>Solusi</b><br>Benar di <b>semua</b> persamaan.</div>
+      <div class="mini"><b>SPLDV</b><br>Koef. 1 → substitusi; sama/berlawanan → eliminasi; berbeda → kalikan dulu; grafik → titik potong.</div>
+      <div class="mini"><b>SPLTV</b><br>Buang 1 variabel dari 2 pasang → SPLDV → substitusi balik → cek 3 persamaan.</div>
+      <div class="mini"><b>Soal cerita</b><br>Variabel = <b>satu</b> satuan; jawab yang <b>ditanya</b>.</div>
+      <div class="mini"><b>Banyak solusi</b><br>Berpotongan 1; sejajar 0 ($0=-3$); berimpit tak hingga ($0=0$).</div>
+    </div>
+  </div>
+</section>
+
+<section id="latihan">
+  <h2><i>✏️</i> Latihan Bab 1</h2>
+  <p>Kerjakan berurutan. Soal 1–3 = Level 1, 4–10 = Level 2, 11–13 = Level 3. Pilih jawaban, lalu buka <b>Cara Cepat</b> dan <b>Cara Lengkap</b>.</p>
+  <div id="qL"></div>
+</section>
+
+<section id="prediksi">
+  <h2><i>🎯</i> Prediksi Soal TKA</h2>
+  <p>10 soal: Level 1 = 3, Level 2 = 4, Level 3 = 3 (PG, PGK, Benar/Salah). Waktu simulasi: 25 menit.</p>
+  <div id="qP"></div>
+  <div class="card" id="skor" style="text-align:center;font-weight:700"></div>
+</section>
+</main>
+
+<footer><b>VisualMath.Lim</b> - TKA Matematika Wajib SMA<br>© Bimbingan Belajar VisualMath.Lim · <a href="index.html" style="color:var(--yellow)">Home</a> · <a href="linear.html" style="color:var(--yellow)">Dashboard</a></footer>
+<a class="top" href="#" aria-label="Ke atas">↑</a>
+
+<script>
+/* ---------- Grafik SVG ---------- */
+function graph(o){
+  const W=o.w||340,H=o.h||270,L=34,B=26,R=14,T=14,xm=o.xmax,ym=o.ymax;
+  const sx=(W-L-R)/xm, sy=(H-T-B)/ym, X=x=>L+x*sx, Y=y=>H-B-y*sy;
+  const st=o.step||1; let s=`<svg viewBox="0 0 ${W} ${H}" width="${W}" role="img" aria-label="${o.label||'Grafik'}">`;
+  for(let i=0;i<=xm;i+=st){s+=`<line x1="${X(i)}" y1="${T}" x2="${X(i)}" y2="${H-B}" stroke="#e0ebf2"/><text x="${X(i)}" y="${H-B+14}" font-size="10" text-anchor="middle" fill="#4a5f7d">${i}</text>`}
+  for(let j=0;j<=ym;j+=st){s+=`<line x1="${L}" y1="${Y(j)}" x2="${W-R}" y2="${Y(j)}" stroke="#e0ebf2"/><text x="${L-5}" y="${Y(j)+3}" font-size="10" text-anchor="end" fill="#4a5f7d">${j}</text>`}
+  s+=`<line x1="${L}" y1="${H-B}" x2="${W-R}" y2="${H-B}" stroke="#022050" stroke-width="2"/><line x1="${L}" y1="${T}" x2="${L}" y2="${H-B}" stroke="#022050" stroke-width="2"/><text x="${W-R}" y="${H-B-5}" font-size="12" text-anchor="end" font-weight="700" fill="#022050">x</text><text x="${L+6}" y="${T+8}" font-size="12" font-weight="700" fill="#022050">y</text>`;
+  (o.lines||[]).forEach(l=>{s+=`<line x1="${X(l[0])}" y1="${Y(l[1])}" x2="${X(l[2])}" y2="${Y(l[3])}" stroke="${l[4]}" stroke-width="3.5" stroke-linecap="round" ${l[6]?'stroke-dasharray="8 6"':''}/>`;
+    if(l[5])s+=`<text x="${X(l[2])-4}" y="${Y(l[3])-6}" font-size="11" text-anchor="end" font-weight="700" fill="${l[4]}">${l[5]}</text>`});
+  (o.pts||[]).forEach(p=>{s+=`<circle cx="${X(p[0])}" cy="${Y(p[1])}" r="5.5" fill="#ffd300" stroke="#022050" stroke-width="2"/>`+(p[2]?`<text x="${X(p[0])+9}" y="${Y(p[1])-8}" font-size="12" font-weight="800" fill="#022050">${p[2]}</text>`:'')});
+  return s+'</svg>';
+}
+const NV='#1457c4',GR='#14a06b',OR='#e0701a';
+const G={
+ a:graph({xmax:8,ymax:5,lines:[[0,4,6,0,NV,'2x+3y=12']],pts:[[0,4,'(0,4)'],[6,0,'(6,0)']]}),
+ b:graph({xmax:8,ymax:12,step:2,lines:[[0,11,5.5,0,NV,'2x+y=11'],[0,7,7,0,GR,'x+y=7']],pts:[[4,3,'(4,3)']]}),
+ c1:graph({w:230,h:200,xmax:8,ymax:8,step:2,lines:[[0,7,7,0,NV],[1,0,8,7,GR]],pts:[[4,3]]}),
+ c2:graph({w:230,h:200,xmax:8,ymax:8,step:2,lines:[[0,5,5,0,NV],[0,8,8,0,GR]]}),
+ c3:graph({w:230,h:200,xmax:8,ymax:8,step:2,lines:[[0,5,5,0,NV],[0,5,5,0,OR,'',1]]}),
+ p1:graph({xmax:8,ymax:7,lines:[[0,6,6,0,NV,'x+y=6'],[2,0,8,6,GR,'x−y=2']]}),
+ p3:graph({xmax:9,ymax:5,lines:[[0,2,4,0,NV,'p'],[0,4,8,0,GR,'q']],pts:[[0,2,'(0,2)'],[4,0,'(4,0)'],[0,4,'(0,4)'],[8,0,'(8,0)']]})
+};
+g13a.innerHTML=G.a; g13b.innerHTML=G.b;
+g16.innerHTML=`<div class="mini">${G.c1}<br><b>1 solusi</b><br>berpotongan</div><div class="mini">${G.c2}<br><b>Tidak ada solusi</b><br>sejajar</div><div class="mini">${G.c3}<br><b>Tak hingga solusi</b><br>berimpit</div>`;
+let nl='';for(let i=-5;i<=5;i++){const x=290+i*40;nl+=`<line x1="${x}" y1="64" x2="${x}" y2="76" stroke="#022050" stroke-width="2"/><text x="${x}" y="98" text-anchor="middle" font-size="13" fill="#022050">${i}</text>`}
+document.getElementById('nl').innerHTML=nl;
+
+/* ---------- Bank soal ---------- */
+const TB3=`<div class="tw"><table><tr><th>x</th><th>0</th><th>2</th><th>4</th><th>6</th></tr><tr><td>y pada g</td><td>8</td><td>6</td><td>4</td><td>2</td></tr><tr><td>y pada h</td><td>−4</td><td>0</td><td>4</td><td>8</td></tr></table></div>`;
+const TB13=`<div class="tw"><table><tr><th>Langkah</th><th>Pekerjaan Rani</th></tr><tr><td>1</td><td>Dari $x-y=1$ diperoleh $x=y+1$</td></tr><tr><td>2</td><td>Substitusi: $3(y+1)+2y=13$</td></tr><tr><td>3</td><td>$3y+1+2y=13$</td></tr><tr><td>4</td><td>$5y=12$</td></tr></table></div>`;
+const TB7=`<div class="tw"><table><tr><th>Pembeli</th><th>Nasi</th><th>Es teh</th><th>Gorengan</th><th>Total</th></tr><tr><td>Andi</td><td>2</td><td>1</td><td>3</td><td>Rp33.000</td></tr><tr><td>Budi</td><td>1</td><td>2</td><td>1</td><td>Rp21.000</td></tr><tr><td>Cici</td><td>3</td><td>1</td><td>2</td><td>Rp40.000</td></tr></table></div>`;
+
+const r=String.raw;
+const LAT=[
+{lv:1,t:'PG',q:r`Manakah yang merupakan persamaan linear?`,o:[r`$x^2+2y=8$`,r`$xy+3=10$`,r`$3x-2y=7$`,r`$x^3+y=9$`,r`$x^2y=6$`],a:'C',
+ f:[r`Cari yang semua variabelnya berpangkat 1 dan tanpa perkalian variabel.`,r`Hanya $3x-2y=7$ yang memenuhi, jadi <b>C</b>.`],
+ l:[r`Ingat: persamaan linear = variabel berpangkat 1 dan tidak ada perkalian antarvariabel.`,
+    r`Periksa tiap pilihan:<br>A: ada $x^2$ (pangkat 2) ✗<br>B: ada $xy$ (perkalian variabel) ✗<br>C: $x$ dan $y$ berpangkat 1 ✓<br>D: ada $x^3$ ✗<br>E: ada $x^2y$ ✗`,
+    r`Jawaban: <b>C</b>.`]},
+{lv:1,t:'PG',q:r`Pasangan $(x,y)$ yang memenuhi <b>kedua</b> persamaan $2x+3y=13$ dan $x-y=-1$ adalah ....`,o:[r`$(1,2)$`,r`$(2,3)$`,r`$(3,2)$`,r`$(5,1)$`,r`$(4,-1)$`],a:'B',
+ f:[r`Uji pilihan ke persamaan yang paling sederhana dulu, yaitu $x-y=-1$. Hanya $(1,2)$ dan $(2,3)$ yang lolos.`,r`Uji $(2,3)$ di persamaan pertama: $2(2)+3(3)=13$ ✓. Jawaban <b>B</b>.`],
+ l:[r`Ubah persamaan kedua menjadi $y$ dalam $x$:$$\begin{aligned}x-y&=-1\\y&=x+1\end{aligned}$$`,
+    r`Substitusi ke $2x+3y=13$:$$\begin{aligned}2x+3(x+1)&=13\\2x+3x+3&=13\\5x&=10\\x&=2\end{aligned}$$`,
+    r`Cari $y$:$$y=x+1=2+1=3$$`,
+    r`Cek: $2(2)+3(3)=13$ ✓ dan $2-3=-1$ ✓. Pasangan $(5,1)$ hanya cocok di persamaan pertama, sehingga bukan solusi. Jawaban <b>B</b>.`]},
+{lv:1,t:'PG',q:r`Tabel memuat titik-titik pada garis $g: x+y=8$ dan $h: 2x-y=4$. Penyelesaian sistem persamaan $g$ dan $h$ adalah ....[[TB3]]`,o:[r`$(2,6)$`,r`$(4,4)$`,r`$(6,2)$`,r`$(2,0)$`,r`$(0,8)$`],a:'B',
+ f:[r`Cari kolom $x$ yang nilai $y$-nya <b>sama</b> di kedua baris: $x=4$, $y=4$. Jawaban <b>B</b>.`],
+ l:[r`Solusi sistem adalah titik potong, yaitu $x$ yang memberi $y$ sama pada garis $g$ dan $h$.`,
+    r`Bandingkan kolom satu per satu:<br>$x=0$: 8 dan −4 (beda)<br>$x=2$: 6 dan 0 (beda)<br>$x=4$: 4 dan 4 (<b>sama</b>) ✓`,
+    r`Cek: $$\begin{aligned}x+y&=4+4=8\ \checkmark\\2x-y&=8-4=4\ \checkmark\end{aligned}$$`,
+    r`Jawaban: $(4,4)$ → <b>B</b>.`]},
+{lv:2,t:'PG',q:r`Diketahui $x+y=11$ dan $2x+y=17$. Nilai $x+2y$ adalah ....`,o:['12','14','15','16','17'],a:'D',
+ f:[r`Kurangkan langsung: $x=17-11=6$, maka $y=5$.`,r`$x+2y=6+10=16$ → <b>D</b>.`],
+ l:[r`Koefisien $y$ sama, jadi eliminasi langsung (kurangkan):$$\begin{aligned}(2x+y)-(x+y)&=17-11\\x&=6\end{aligned}$$`,
+    r`Cari $y$:$$\begin{aligned}x+y&=11\\6+y&=11\\y&=5\end{aligned}$$`,
+    r`Hitung yang ditanya:$$x+2y=6+2(5)=16$$`,
+    r`Jawaban: <b>D</b>.`]},
+{lv:2,t:'PG',q:r`Diketahui $3x+2y=16$ dan $x+y=6$. Nilai $x$ adalah ....`,o:['2','4','5','6','8'],a:'B',
+ f:[r`Tulis $3x+2y=x+2(x+y)$.`,r`Maka $x+2(6)=16$, sehingga $x=4$ → <b>B</b>.`],
+ l:[r`Kalikan persamaan kedua dengan 2 (semua suku):$$2x+2y=12$$`,
+    r`Kurangkan dari persamaan pertama:$$\begin{aligned}(3x+2y)-(2x+2y)&=16-12\\x&=4\end{aligned}$$`,
+    r`Cek: $y=6-4=2$, lalu $3(4)+2(2)=16$ ✓.`,
+    r`Jawaban: <b>B</b>.`]},
+{lv:2,t:'PG',q:r`Diketahui $x+y+z=12$, $x+y=7$, dan $y+z=8$. Nilai $x$ adalah ....`,o:['3','4','5','6','7'],a:'B',
+ f:[r`$z=12-7=5$, lalu $y=8-5=3$, lalu $x=7-3=4$ → <b>B</b>.`],
+ l:[r`Cari $z$ dari persamaan pertama dan kedua:$$\begin{aligned}(x+y+z)-(x+y)&=12-7\\z&=5\end{aligned}$$`,
+    r`Cari $y$ dari $y+z=8$:$$\begin{aligned}y+5&=8\\y&=3\end{aligned}$$`,
+    r`Cari $x$ dari $x+y=7$:$$\begin{aligned}x+3&=7\\x&=4\end{aligned}$$`,
+    r`Jawaban: <b>B</b>.`]},
+{lv:2,t:'PG',q:r`Tempat parkir berisi 30 kendaraan (mobil dan sepeda motor) dengan jumlah roda 80. Tarif motor Rp2.000 dan mobil Rp5.000. Pendapatan parkir seluruhnya adalah ....`,o:['Rp84.000','Rp88.000','Rp90.000','Rp96.000','Rp100.000'],a:'C',
+ f:[r`Anggap semua motor: $30\times2=60$ roda. Kurang 20 roda, tiap mobil menambah 2 roda.`,r`Mobil $=20\div2=10$, motor $=20$. Pendapatan $=50.000+40.000=$ Rp90.000 → <b>C</b>.`],
+ l:[r`Misalkan mobil $=m$ dan motor $=s$. Model:$$\begin{aligned}m+s&=30\\4m+2s&=80\ \Rightarrow\ 2m+s=40\end{aligned}$$`,
+    r`Kurangkan:$$\begin{aligned}(2m+s)-(m+s)&=40-30\\m&=10\end{aligned}$$`,
+    r`Cari $s$: $s=30-10=20$.`,
+    r`Pendapatan:$$10(5.000)+20(2.000)=50.000+40.000=90.000$$`,
+    r`Jawaban: Rp90.000 → <b>C</b>.`]},
+{lv:2,t:'PG',q:r`Tiket masuk 2 dewasa dan 3 anak Rp170.000, sedangkan 3 dewasa dan 1 anak Rp150.000. Harga tiket 1 dewasa dan 1 anak adalah ....`,o:['Rp55.000','Rp60.000','Rp65.000','Rp70.000','Rp75.000'],a:'D',
+ f:[r`Uji harga bulat (ribuan): $d=40$, $a=30$ → $80+90=170$ ✓ dan $120+30=150$ ✓.`,r`$d+a=70$ → Rp70.000 → <b>D</b>.`],
+ l:[r`Misalkan dewasa $=d$ dan anak $=a$ (dalam ribuan):$$\begin{aligned}2d+3a&=170\\3d+a&=150\end{aligned}$$`,
+    r`Dari persamaan kedua: $a=150-3d$.`,
+    r`Substitusi ke persamaan pertama:$$\begin{aligned}2d+3(150-3d)&=170\\2d+450-9d&=170\\-7d&=-280\\d&=40\end{aligned}$$`,
+    r`Cari $a$: $a=150-3(40)=30$.`,
+    r`Ditanya $d+a=40+30=70$ → Rp70.000 → <b>D</b>.`]},
+{lv:2,t:'PG',q:r`Umur Andi 3 tahun lebih tua daripada Budi. Empat tahun lagi, jumlah umur mereka 41 tahun. Umur Andi sekarang adalah .... tahun.`,o:['15','18','19','22','24'],a:'B',
+ f:[r`Jumlah umur sekarang $=41-8=33$, selisih 3.`,r`Andi $=(33+3)\div2=18$ → <b>B</b>.`],
+ l:[r`Misalkan Andi $=a$ dan Budi $=b$. Model:$$\begin{aligned}a&=b+3\\(a+4)+(b+4)&=41\end{aligned}$$`,
+    r`Sederhanakan persamaan kedua: $a+b=33$.`,
+    r`Substitusi $a=b+3$:$$\begin{aligned}(b+3)+b&=33\\2b&=30\\b&=15\end{aligned}$$`,
+    r`Maka $a=15+3=18$. (Jawaban 22 muncul jika “4 tahun lagi” dilupakan.)`,
+    r`Jawaban: <b>B</b>.`]},
+{lv:2,t:'PG',q:r`Diketahui $2x+y-z=7$, $x-y+2z=7$, dan $x+2y+z=8$. Nilai $x+y+z$ adalah ....`,o:['4','5','6','7','8'],a:'D',
+ f:[r`Buang $y$: (1)+(2) memberi $3x+z=14$.`,r`Tebak bulat $x=4$, $z=2$; dari (3) $y=1$. Jumlah $=7$ → <b>D</b>.`],
+ l:[r`Beri nomor: (1) $2x+y-z=7$, (2) $x-y+2z=7$, (3) $x+2y+z=8$. Buang $y$.`,
+    r`(1)+(2):$$\begin{aligned}(2x+y-z)+(x-y+2z)&=7+7\\3x+z&=14\ \ldots(4)\end{aligned}$$`,
+    r`(2)×2 lalu +(3):$$\begin{aligned}(2x-2y+4z)+(x+2y+z)&=14+8\\3x+5z&=22\ \ldots(5)\end{aligned}$$`,
+    r`(5)−(4):$$\begin{aligned}4z&=8\\z&=2\end{aligned}$$ Dari (4): $3x+2=14\Rightarrow x=4$.`,
+    r`Dari (3):$$\begin{aligned}4+2y+2&=8\\y&=1\end{aligned}$$`,
+    r`$x+y+z=4+1+2=7$. Cek (1): $8+1-2=7$ ✓. Jawaban <b>D</b>.`]},
+{lv:3,t:'PG',q:r`Diketahui $ax+y=6$ dan $2x+2y=12$. Nilai $a$ agar sistem punya tak hingga banyak solusi adalah ....`,o:['0','1','2','3','6'],a:'B',
+ f:[r`Bagi persamaan kedua dengan 2 → $x+y=6$.`,r`Samakan dengan $ax+y=6$ → $a=1$ → <b>B</b>.`],
+ l:[r`Tak hingga solusi berarti kedua garis berimpit: koefisien dan konstanta berbanding sama.`,
+    r`Gunakan perbandingan:$$\frac{a}{2}=\frac{1}{2}=\frac{6}{12}$$`,
+    r`Dari $\dfrac a2=\dfrac12$ diperoleh $a=1$. Cek: $2x+2y=12$ dibagi 2 menjadi $x+y=6$ ✓.`,
+    r`Jawaban: <b>B</b>.`]},
+{lv:3,t:'PG',q:r`Diketahui $2x+3y=6$ dan $4x+ky=10$. Nilai $k$ agar sistem <b>tidak</b> punya solusi adalah ....`,o:['3','4','5','6','9'],a:'D',
+ f:[r`Sejajar: $\dfrac24=\dfrac3k\Rightarrow k=6$.`,r`Ruas kanan: $\dfrac24\ne\dfrac6{10}$ → tidak ada solusi → <b>D</b>.`],
+ l:[r`Syarat tidak ada solusi (sejajar): rasio koefisien sama, rasio konstanta beda.`,
+    r`Samakan rasio koefisien:$$\begin{aligned}\frac{2}{4}&=\frac{3}{k}\\2k&=12\\k&=6\end{aligned}$$`,
+    r`Cek ruas kanan: persamaan pertama ×2 menjadi $4x+6y=12$, sedangkan persamaan kedua $4x+6y=10$. Ruas kiri sama, ruas kanan beda → tidak ada solusi.`,
+    r`Jawaban: <b>D</b>.`]},
+{lv:3,t:'PG',q:r`Rani menyelesaikan $3x+2y=13$ dan $x-y=1$ seperti tabel berikut. Kesalahan pertama terjadi pada ....[[TB13]]`,o:['Langkah 1','Langkah 2','Langkah 3','Langkah 4','Tidak ada kesalahan'],a:'C',
+ f:[r`Periksa dari atas. $3(y+1)=3y+3$, bukan $3y+1$ → salah di langkah 3 → <b>C</b>.`],
+ l:[r`Periksa langkah satu per satu. Langkah 1 benar: $x=y+1$. Langkah 2 benar (substitusi).`,
+    r`Langkah 3: kalikan 3 ke <b>semua</b> suku dalam kurung:$$3(y+1)=3y+3$$ Rani menulis $3y+1$, jadi di sini kesalahan pertama.`,
+    r`Pekerjaan yang benar:$$\begin{aligned}3y+3+2y&=13\\5y&=10\\y&=2\end{aligned}$$ lalu $x=3$. Cek: $3(3)+2(2)=13$ ✓.`,
+    r`Jawaban: <b>C</b>.`]}
+];
+
+const PRE=[
+{lv:1,t:'PG',q:r`Garis biru adalah $x+y=6$ dan garis hijau adalah $x-y=2$. Penyelesaian sistem persamaan tersebut adalah ....[[G:p1]]`,o:[r`$(2,4)$`,r`$(4,2)$`,r`$(6,0)$`,r`$(0,6)$`,r`$(2,0)$`],a:'B',
+ f:[r`Solusi = titik potong. Dari grafik, kedua garis bertemu di $(4,2)$.`,r`Cek kilat: $4+2=6$ dan $4-2=2$ → <b>B</b>.`],
+ l:[r`Penyelesaian sistem adalah titik potong kedua garis. Dari grafik, titik potongnya $(4,2)$.`,
+    r`Cek ke kedua persamaan:$$\begin{aligned}x+y&=4+2=6\ \checkmark\\x-y&=4-2=2\ \checkmark\end{aligned}$$`,
+    r`Jawaban: <b>B</b>.`]},
+{lv:1,t:'PG',q:r`Manakah yang merupakan sistem persamaan linear <b>tiga variabel</b> ($x,y,z$)?`,o:[r`$x+y=3;\ y+z=5;\ x^2+z=4$`,r`$x+y+z=6;\ 2x-y=1;\ xz=3$`,r`$x+\frac1y=3;\ y+z=5;\ x-z=1$`,r`$x+y+z=6;\ x-y+2z=4;\ 2x+y-z=1$`,r`$x+y+z+w=6;\ x-w=1;\ y+z=3$`],a:'D',
+ f:[r`Coret yang memuat pangkat 2 (A), perkalian $xz$ (B), $\frac1y$ (C), dan 4 variabel (E).`,r`Sisa <b>D</b>.`],
+ l:[r`Syarat: tepat tiga variabel, semua berpangkat 1, tanpa perkalian variabel, tanpa variabel di penyebut.`,
+    r`Periksa tiap pilihan:<br>A: ada $x^2$ ✗<br>B: ada $xz$ ✗<br>C: ada $\frac1y$ ✗<br>D: semua linear dengan $x,y,z$ ✓<br>E: ada empat variabel ($w$) ✗`,
+    r`Jawaban: <b>D</b>.`]},
+{lv:1,t:'PG',q:r`Garis $p: x+2y=4$ melalui $(0,2)$ dan $(4,0)$. Garis $q: x+2y=8$ melalui $(0,4)$ dan $(8,0)$. Berdasarkan grafik, pernyataan yang benar tentang sistem $p$ dan $q$ adalah ....[[G:p3]]`,o:['Tepat satu solusi, yaitu $(4,0)$','Tepat satu solusi, yaitu $(0,4)$','Tidak punya solusi, karena kedua garis sejajar','Tak hingga solusi, karena kedua garis memotong sumbu-$x$','Tak hingga solusi, karena kedua garis memotong sumbu-$y$'],a:'C',
+ f:[r`Ruas kiri sama ($x+2y$), ruas kanan beda (4 dan 8).`,r`Garis sejajar → tidak ada solusi → <b>C</b>.`],
+ l:[r`Cari kemiringan kedua garis dengan mengubah ke bentuk $y=mx+c$:$$\begin{aligned}p:\ y&=-\tfrac12x+2\\q:\ y&=-\tfrac12x+4\end{aligned}$$`,
+    r`Kemiringan sama ($-\tfrac12$) tetapi titik potong sumbu-$y$ beda (2 dan 4), sehingga kedua garis sejajar dan tidak pernah bertemu.`,
+    r`Memotong sumbu bukan syarat banyak solusi. Jawaban: <b>C</b> (tidak ada solusi).`]},
+{lv:2,t:'PG',q:r`Harga 3 kg jeruk dan 2 kg apel Rp76.000, sedangkan 2 kg jeruk dan 3 kg apel Rp74.000. Harga 4 kg jeruk dan 5 kg apel adalah ....`,o:['Rp120.000','Rp126.000','Rp130.000','Rp134.000','Rp140.000'],a:'D',
+ f:[r`Jumlahkan: $5j+5a=150\Rightarrow j+a=30$. Kurangkan: $j-a=2$.`,r`$j=16$, $a=14$ → $64+70=134$ → <b>D</b>.`],
+ l:[r`Misalkan jeruk $=j$ dan apel $=a$ (ribuan):$$\begin{aligned}3j+2a&=76\\2j+3a&=74\end{aligned}$$`,
+    r`Jumlahkan:$$\begin{aligned}5j+5a&=150\\j+a&=30\end{aligned}$$`,
+    r`Kurangkan:$$\begin{aligned}(3j+2a)-(2j+3a)&=76-74\\j-a&=2\end{aligned}$$`,
+    r`Dari $j+a=30$ dan $j-a=2$: $j=16$ dan $a=14$.`,
+    r`Ditanya:$$4j+5a=4(16)+5(14)=64+70=134$$ Jawaban Rp134.000 → <b>D</b>.`]},
+{lv:2,t:'PG',q:r`Ani membeli 2 kg beras, 1 kg gula, 1 kg minyak: Rp60.000. Budi: 1 kg beras, 2 kg gula, 1 kg minyak: Rp64.000. Cici: 1 kg beras, 1 kg gula, 2 kg minyak: Rp68.000. Harga 1 kg minyak goreng adalah ....`,o:['Rp16.000','Rp18.000','Rp20.000','Rp22.000','Rp24.000'],a:'C',
+ f:[r`Pola simetris → jumlahkan semua: $4(r+g+m)=192\Rightarrow r+g+m=48$.`,r`Persamaan Cici − 48: $m=68-48=20$ → <b>C</b>.`],
+ l:[r`Misalkan beras $=r$, gula $=g$, minyak $=m$ (ribuan):$$\begin{aligned}2r+g+m&=60\\r+2g+m&=64\\r+g+2m&=68\end{aligned}$$`,
+    r`Koefisien simetris, jumlahkan ketiganya:$$\begin{aligned}4r+4g+4m&=192\\r+g+m&=48\end{aligned}$$`,
+    r`Kurangkan persamaan ketiga dengan hasil tersebut:$$\begin{aligned}(r+g+2m)-(r+g+m)&=68-48\\m&=20\end{aligned}$$`,
+    r`Cek: $r=12$, $g=16$, $m=20$ → $24+16+20=60$ ✓. Jawaban Rp20.000 → <b>C</b>.`]},
+{lv:2,t:'PG',q:r`Pak Budi beternak ayam dan kambing. Jumlah kepala 20 dan jumlah kaki 56. Banyak kambing adalah ....`,o:['6 ekor','8 ekor','10 ekor','12 ekor','14 ekor'],a:'B',
+ f:[r`Semua ayam → 40 kaki, kurang 16 kaki.`,r`Tiap kambing menambah 2 kaki → kambing $=16\div2=8$ → <b>B</b>.`],
+ l:[r`Misalkan ayam $=a$ dan kambing $=k$. Model:$$\begin{aligned}a+k&=20\\2a+4k&=56\ \Rightarrow\ a+2k=28\end{aligned}$$`,
+    r`Kurangkan:$$\begin{aligned}(a+2k)-(a+k)&=28-20\\k&=8\end{aligned}$$`,
+    r`Maka $a=20-8=12$. Yang ditanya banyak <b>kambing</b>, yaitu 8 ekor (12 adalah banyak ayam).`,
+    r`Jawaban: <b>B</b>.`]},
+{lv:2,t:'PG',q:r`Tabel menunjukkan pembelian di kantin. Dewi membeli 2 nasi, 3 es teh, dan 4 gorengan dengan uang Rp50.000. Kembalian Dewi adalah ....[[TB7]]`,o:['Rp4.000','Rp6.000','Rp8.000','Rp10.000','Rp12.000'],a:'B',
+ f:[r`(Cici)−(Andi) memberi $n-g=7$. Coba $g=3\Rightarrow n=10$; dari Budi $t=4$.`,r`Uji Andi: $20+4+9=33$ ✓. Dewi: $20+12+12=44$ → kembalian 6 → <b>B</b>.`],
+ l:[r`Misalkan nasi $=n$, es teh $=t$, gorengan $=g$ (ribuan):$$\begin{aligned}2n+t+3g&=33\ \ldots(1)\\n+2t+g&=21\ \ldots(2)\\3n+t+2g&=40\ \ldots(3)\end{aligned}$$`,
+    r`(3)−(1):$$\begin{aligned}n-g&=7\\n&=g+7\end{aligned}$$`,
+    r`Substitusi $n=g+7$ ke (1):$$\begin{aligned}2(g+7)+t+3g&=33\\5g+t&=19\\t&=19-5g\end{aligned}$$`,
+    r`Substitusi $n$ dan $t$ ke (2):$$\begin{aligned}(g+7)+2(19-5g)+g&=21\\45-8g&=21\\g&=3\end{aligned}$$ Maka $n=10$ dan $t=4$.`,
+    r`Belanja Dewi:$$2(10)+3(4)+4(3)=20+12+12=44$$ Kembalian $=50-44=6$ → Rp6.000 → <b>B</b>.`]},
+{lv:3,t:'PGK',q:r`Diketahui $x+2y=4$ dan $3x+ky=12$ dengan $k$ konstanta. Pilih <b>semua</b> pernyataan yang benar.`,o:[r`Jika $k=6$, sistem punya tak hingga banyak solusi.`,r`Jika $k=6$, sistem tidak punya solusi.`,r`Jika $k=4$, sistem punya tepat satu solusi.`,r`Jika $k=5$, sistem tidak punya solusi.`,r`Untuk setiap $k\ne6$, sistem punya tepat satu solusi.`],a:['A','C','E'],
+ f:[r`Rasio $\dfrac13=\dfrac2k=\dfrac4{12}$. Rasio $x$ dan konstanta sudah sama ($\tfrac13$).`,r`Berimpit hanya jika $k=6$; selain itu berpotongan → <b>A, C, E</b>.`],
+ l:[r`Bandingkan rasio koefisien dan konstanta:$$\frac13\ ;\ \frac2k\ ;\ \frac4{12}=\frac13$$`,
+    r`Jika $k=6$: $3x+6y=12$. Bagi 3:$$x+2y=4$$ sama dengan persamaan pertama → berimpit → tak hingga solusi. <b>A benar, B salah</b>.`,
+    r`Jika $k\ne6$: $\dfrac13\ne\dfrac2k$ → garis berpotongan → tepat satu solusi. <b>C benar (k = 4), E benar</b>, sedangkan <b>D salah</b> (k = 5 berpotongan, bukan tanpa solusi).`,
+    r`Jawaban: <b>A, C, E</b>.`]},
+{lv:3,t:'BS',q:r`Diketahui $x+y+z=12$, $x+y=7$, dan $y+z=9$. Tentukan Benar atau Salah tiap pernyataan.`,
+ s:[[r`Nilai $z=5$.`,1],[r`Nilai $x$ lebih besar daripada nilai $y$.`,0],[r`Pasangan $(x,y,z)=(3,4,5)$ memenuhi ketiga persamaan.`,1],[r`Nilai $x+z=9$.`,0]],
+ f:[r`$z=12-7=5$; $x=12-9=3$; $y=7-3=4$.`,r`Tinggal uji tiap pernyataan: B, S, B, S.`],
+ l:[r`Cari $z$:$$\begin{aligned}(x+y+z)-(x+y)&=12-7\\z&=5\end{aligned}$$`,
+    r`Cari $x$:$$\begin{aligned}(x+y+z)-(y+z)&=12-9\\x&=3\end{aligned}$$`,
+    r`Cari $y$:$$\begin{aligned}x+y&=7\\3+y&=7\\y&=4\end{aligned}$$`,
+    r`Uji pernyataan:<br>(1) $z=5$ → <b>Benar</b><br>(2) $x=3<y=4$ → <b>Salah</b><br>(3) $3+4+5=12$, $3+4=7$, $4+5=9$ → <b>Benar</b><br>(4) $x+z=3+5=8\ne9$ → <b>Salah</b>`]},
+{lv:3,t:'PG',q:r`Kuis 20 soal: benar skor 4, salah −1, tidak dijawab 0. Dino memperoleh skor 57. Banyak soal salah 1 lebih banyak daripada soal tidak dijawab. Banyak soal yang dijawab benar adalah ....`,o:['13','14','15','16','17'],a:'C',
+ f:[r`Uji pilihan: benar 15 → $60-s=57\Rightarrow s=3$.`,r`$k=20-15-3=2$ dan $s=k+1$ ✓ → <b>C</b>.`],
+ l:[r`Misalkan benar $=b$, salah $=s$, tidak dijawab $=k$. Model:$$\begin{aligned}b+s+k&=20\\4b-s&=57\\s&=k+1\end{aligned}$$`,
+    r`Substitusi $s=k+1$ ke persamaan pertama:$$\begin{aligned}b+(k+1)+k&=20\\b&=19-2k\end{aligned}$$`,
+    r`Substitusi $b$ dan $s$ ke persamaan skor:$$\begin{aligned}4(19-2k)-(k+1)&=57\\76-8k-k-1&=57\\75-9k&=57\\k&=2\end{aligned}$$`,
+    r`Maka $s=3$ dan $b=19-4=15$. Cek: $15+3+2=20$ ✓ dan $60-3=57$ ✓.`,
+    r`Jawaban: <b>C</b>.`]}
+];
+
+/* ---------- Render soal ---------- */
+let correctP=0,doneP=0;
+const steps=a=>'<ol class="steps">'+a.map(x=>`<li>${x}</li>`).join('')+'</ol>';
+function build(list,host,prefix){
+  const root=document.getElementById(host);
+  list.forEach((d,i)=>{
+    const L='ABCDE'; let body='';
+    const q=d.q.replace('[[TB3]]',TB3).replace('[[TB13]]',TB13).replace('[[TB7]]',TB7).replace(/\[\[G:(\w+)\]\]/,(m,k)=>`<figure>${G[k]}<figcaption>Grafik untuk soal ${i+1}</figcaption></figure>`);
+    if(d.t==='BS'){
+      body='<div class="tw bs"><table><tr><th>No</th><th>Pernyataan</th><th>Jawaban</th></tr>'+d.s.map((r,j)=>`<tr><td>${j+1}</td><td>${r[0]}</td><td><select><option value="">–</option><option value="1">Benar</option><option value="0">Salah</option></select></td></tr>`).join('')+'</table></div><button class="btn">Periksa</button>';
+    }else{
+      body=d.o.map((t,j)=>`<button class="opt" data-k="${L[j]}"><b>${L[j]}</b><span>${t}</span></button>`).join('')+(d.t==='PGK'?'<button class="btn">Periksa</button><p style="font-size:.85rem;margin:4px 0 0">Pilih semua jawaban yang benar.</p>':'');
+    }
+    const el=document.createElement('div');el.className='q';
+    el.innerHTML=`<div class="hd"><span class="no">${i+1}</span><span class="lv l${d.lv}">Level ${d.lv} · ${d.t==='BS'?'Benar/Salah':d.t}</span></div><div>${q}</div>${body}<div class="res"></div><button class="btn alt show">Lihat Cara Cepat & Cara Lengkap</button><div class="sol"><div class="pane fast"><h4>⚡ Cara Cepat</h4>${steps(d.f)}</div><div class="pane full"><h4>📝 Cara Lengkap</h4>${steps(d.l)}</div></div>`;
+    root.appendChild(el);
+    const res=el.querySelector('.res'),sol=el.querySelector('.sol');let done=false;
+    const finish=ok=>{res.textContent=ok?'✅ Benar! Bagus.':'❌ Belum tepat. Pelajari pembahasan di bawah.';res.style.color=ok?'#1a9d5a':'#e5484d';sol.classList.add('on');if(!done&&prefix==='P'){done=true;doneP++;if(ok)correctP++;document.getElementById('skor').textContent=`Skor Prediksi TKA: ${correctP} benar dari ${doneP} soal dijawab (total 10).`}done=true};
+    el.querySelector('.show').onclick=()=>sol.classList.toggle('on');
+    if(d.t==='PG'){el.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(done)return;done=true;const ok=b.dataset.k===d.a;b.classList.add(ok?'ok':'no2');if(!ok)el.querySelector(`.opt[data-k=${d.a}]`).classList.add('ok');done=false;finish(ok);done=true})}
+    else if(d.t==='PGK'){el.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(!done)b.classList.toggle('sel')});
+      el.querySelector('.btn').onclick=()=>{if(done)return;const sel=[...el.querySelectorAll('.opt.sel')].map(b=>b.dataset.k).sort().join('');el.querySelectorAll('.opt').forEach(b=>{b.classList.remove('sel');if(d.a.includes(b.dataset.k))b.classList.add('ok');else if(sel.includes(b.dataset.k))b.classList.add('no2')});finish(sel===d.a.join(''))}}
+    else{el.querySelector('.btn').onclick=()=>{if(done)return;let ok=true;el.querySelectorAll('select').forEach((s,j)=>{const c=s.value===String(d.s[j][1]);ok=ok&&c;s.parentElement.className=c?'ok':'bad'});finish(ok)}}
+  });
+}
+build(LAT,'qL','L');build(PRE,'qP','P');
+addEventListener('DOMContentLoaded',()=>renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false}));
+</script>
+</body>
+</html>

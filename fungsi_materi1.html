@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fungsi: Konsep, Domain & Range | VisualMath.Lim</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<style>
+:root{--navy:#022050;--cyan:#00d6d8;--yel:#ffd300;--bg:#f2f7fb;--card:#fff;--tx:#14213d;--mut:#5b6b85;--ok:#16a34a;--bad:#dc2626}
+@media(prefers-color-scheme:dark){:root{--bg:#0a1730;--card:#112447;--tx:#e8f0ff;--mut:#9fb2d4}}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:130px}
+body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--tx);line-height:1.7}
+header{background:var(--navy);position:sticky;top:0;z-index:20;border-bottom:4px solid var(--yel)}
+.hd{max-width:1000px;margin:auto;padding:8px 14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.hd img{height:52px;width:52px;border-radius:50%;background:#fff2}
+.hd h1{font-size:1rem;margin:0;color:#fff;flex:1;min-width:200px}.hd h1 span{color:var(--cyan)}
+.hd a.m{color:#fff;text-decoration:none;padding:7px 14px;border-radius:20px;border:1px solid var(--cyan);font-weight:600;font-size:.9rem}
+.hd a.m:hover{background:var(--cyan);color:var(--navy)}
+.sub{background:#03307a;display:flex;gap:6px;overflow-x:auto;padding:6px 14px;justify-content:center}
+.sub a{color:var(--yel);text-decoration:none;font-size:.82rem;white-space:nowrap;padding:3px 10px;border-radius:12px}.sub a:hover{background:var(--yel);color:var(--navy)}
+main{max-width:1000px;margin:auto;padding:18px 14px 50px}
+.hero{background:linear-gradient(135deg,var(--navy),#05449c);color:#fff;border-radius:16px;padding:22px;margin-bottom:18px}
+.hero h2{margin:0 0 6px;color:var(--yel)}.tag{display:inline-block;background:var(--cyan);color:var(--navy);font-weight:700;border-radius:12px;padding:1px 10px;font-size:.78rem;margin-right:5px}
+h2.s{color:var(--navy);border-left:8px solid var(--cyan);padding-left:10px;margin-top:34px}
+@media(prefers-color-scheme:dark){h2.s{color:var(--cyan)}}
+h3{margin:22px 0 6px;color:var(--navy)}@media(prefers-color-scheme:dark){h3{color:var(--yel)}}
+.card{background:var(--card);border-radius:14px;padding:16px;margin:12px 0;box-shadow:0 2px 10px #0001}
+.box{border-left:6px solid var(--yel);background:#fff9d6;color:#3a3000;padding:12px 14px;border-radius:10px;margin:12px 0}
+.box.c{border-color:var(--cyan);background:#d9fbfb;color:#033}.box.r{border-color:var(--bad);background:#fee2e2;color:#500}
+table{border-collapse:collapse;width:100%;font-size:.92rem}th,td{border:1px solid #8aa3;padding:7px 9px;text-align:left;vertical-align:top}th{background:var(--navy);color:#fff}
+.wrap{overflow-x:auto}
+figure{margin:12px auto;text-align:center}figure svg{max-width:100%;height:auto;background:#fff;border-radius:10px;border:1px solid #8aa4}
+figcaption{font-size:.85rem;color:var(--mut);margin-top:4px}
+.two{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}.two figure{flex:1;min-width:260px;margin:6px 0}
+details{border-radius:10px;margin:8px 0;border:1px solid #8aa5}
+details summary{cursor:pointer;font-weight:700;padding:8px 12px}details>div{padding:4px 14px 12px}
+details.f summary{background:var(--yel);color:var(--navy);border-radius:10px}details.l summary{background:var(--cyan);color:var(--navy);border-radius:10px}
+.q{border-top:5px solid var(--cyan)}.q h4{margin:0 0 6px;color:var(--navy)}@media(prefers-color-scheme:dark){.q h4{color:var(--yel)}}
+.lv{font-size:.75rem;font-weight:700;border-radius:10px;padding:1px 9px;color:#fff;margin-left:6px}.l1{background:#16a34a}.l2{background:#d97706}.l3{background:#dc2626}
+.opt{display:block;width:100%;text-align:left;margin:5px 0;padding:8px 12px;border-radius:10px;border:2px solid #8aa6;background:transparent;color:var(--tx);font-size:1rem;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--cyan);background:#00d6d822}.opt.ok{border-color:var(--ok);background:#16a34a33}.opt.no{border-color:var(--bad);background:#dc262633}
+.opt.sel{border-color:var(--cyan);background:#00d6d833}.btn:disabled{opacity:.45;cursor:not-allowed}.ev{margin-top:10px;padding:10px;border-radius:10px;background:#8aa2;}.ev .btn{margin-right:8px}.ex{margin-top:8px}
+.btn{background:var(--cyan);color:var(--navy);border:0;font-weight:700;padding:8px 18px;border-radius:20px;cursor:pointer;margin:6px 0}.btn:hover{background:var(--yel)}
+input[type=text]{padding:8px;border-radius:8px;border:2px solid var(--cyan);font-size:1rem;width:120px}
+.fb{font-weight:700;margin:6px 0}.fb.ok{color:var(--ok)}.fb.no{color:var(--bad)}
+/* langkah penyelesaian */
+.st{margin:8px 0 0;padding-left:24px}.st li{margin:9px 0;padding-left:4px}
+.st li::marker{font-weight:700;color:#036}
+.st li.fin{list-style:none;margin:12px 0 0 -24px;padding:8px 12px;background:#fff;border:2px solid var(--ok);border-radius:10px;font-weight:700;color:#14213d}
+#skor{position:fixed;right:12px;bottom:12px;background:var(--navy);color:var(--yel);border:2px solid var(--cyan);border-radius:20px;padding:6px 16px;font-weight:700;z-index:30}
+footer{background:var(--navy);color:#fff;text-align:center;padding:16px;border-top:4px solid var(--yel)}
+</style>
+</head>
+<body>
+<header>
+ <div class="hd">
+  <img src="logo.png" alt="Logo VisualMath.Lim">
+  <h1>VisualMath<span>.Lim</span> - TKA Matematika Wajib SMA</h1>
+  <a class="m" href="index.html">🏠 Home</a>
+  <a class="m" href="fungsi.html">📊 Dashboard</a>
+ </div>
+ <nav class="sub"><a href="#b0">Bab 0 Pemanasan</a><a href="#b1">Bab 1 Konsep</a><a href="#b2">Bab 2 Domain &amp; Range</a><a href="#ring">Ringkasan</a><a href="#lat">Latihan</a><a href="#soal">Soal TKA</a></nav>
+</header>
+
+<main>
+<section class="hero">
+ <span class="tag">Aljabar</span><span class="tag">Kelas 12</span><span class="tag">TKA</span>
+ <h2>Fungsi: Konsep, Domain, Kodomain &amp; Range</h2>
+ <div>Fungsi linear, kuadrat, dan rasional. Setiap soal punya <b>Cara Cepat ⚡</b> (setelah paham alasannya) dan <b>Cara Lengkap 📘</b> (langkah demi langkah, ke bawah, beserta alasannya).</div>
+ <p style="margin:8px 0 0"><b>Tujuan belajar:</b> (1) menyajikan fungsi dalam 4 bentuk; (2) menentukan domain, kodomain, range secara analitis dan dari grafik; (3) memodelkan masalah sehari-hari.</p>
+</section>
+
+<h2 class="s" id="b0">Bab 0. Pemanasan: Keterampilan Dasar</h2>
+<div class="card wrap"><table>
+<tr><th>Keterampilan</th><th>Contoh</th><th>Coba sendiri</th></tr>
+<tr><td><b>1. Substitusi</b></td><td>$f(x)=2x^2-3x+1 \Rightarrow f(2)=2(4)-3(2)+1=\mathbf{3}$</td><td>Hitung $f(-1)$. <details><summary>Kunci</summary>$f(-1)=2+3+1=6$</details></td></tr>
+<tr><td><b>2. Pertidaksamaan linear</b></td><td>$2x-6\ge 0 \Rightarrow x\ge 3$</td><td>Selesaikan $3x+9\gt 0$. <details><summary>Kunci</summary>$x\gt -3$</details></td></tr>
+<tr><td><b>3. Pemfaktoran</b></td><td>$x^2-7x+12=(x-3)(x-4)$</td><td>Faktorkan $x^2-5x+6$. <details><summary>Kunci</summary>$(x-2)(x-3)$</details></td></tr>
+<tr><td><b>4. Titik puncak</b></td><td>$y=x^2-6x+5$: $x_p=\frac{-b}{2a}=3$, $y_p=9-18+5=-4$</td><td>Puncak $y=x^2-4x+1$? <details><summary>Kunci</summary>$(2,-3)$</details></td></tr>
+</table></div>
+<div class="box">⚠️ Ingat: kalau pertidaksamaan dikali/dibagi bilangan <b>negatif</b>, tanda dibalik.</div>
+
+<h2 class="s" id="b1">Bab 1. Konsep Fungsi dan Representasinya</h2>
+<h3>1.1 Fungsi itu seperti mesin</h3>
+<p>Fungsi adalah aturan yang memasangkan <b>setiap</b> anggota domain dengan <b>tepat satu</b> anggota kodomain.</p>
+<figure data-fig="mesin"><figcaption>Gambar 1. Input 3 diproses $f(x)=2x+1$ menjadi output 7</figcaption></figure>
+<div class="box c"><b>Syarat relasi disebut fungsi</b><br>1. <b>Semua</b> anggota domain punya pasangan.<br>2. Setiap anggota domain punya <b>tepat satu</b> pasangan (tidak boleh bercabang).<br><i>Dua anggota domain boleh punya pasangan yang sama. Yang dilarang: satu anggota domain punya dua pasangan.</i></div>
+
+<h3>1.2 Domain, kodomain, range</h3>
+<figure data-fig="panah"><figcaption>Gambar 2. Diagram panah: $A=\{1,2,3,4\}$, $B=\{a,b,c,d,e\}$</figcaption></figure>
+<div class="card wrap"><table>
+<tr><th>Istilah</th><th>Arti</th><th>Pada Gambar 2</th></tr>
+<tr><td><b>Domain</b> (daerah asal)</td><td>Semua input $x$ yang boleh</td><td>$\{1,2,3,4\}$</td></tr>
+<tr><td><b>Kodomain</b> (daerah kawan)</td><td>Himpunan tujuan</td><td>$\{a,b,c,d,e\}$</td></tr>
+<tr><td><b>Range</b> (daerah hasil)</td><td>Anggota kodomain yang <b>benar-benar</b> kena panah</td><td>$\{a,b,d\}$</td></tr>
+</table></div>
+<p>Ingat: <b>Range ⊆ Kodomain</b>. Pada gambar, $c$ dan $e$ tidak kena panah, jadi bukan range.</p>
+
+<h3>1.3 Empat cara menyajikan fungsi</h3>
+<div class="card wrap"><table>
+<tr><th colspan="2">$f(x)=2x+1$, domain $\{1,2,3\}$</th></tr>
+<tr><td>Rumus</td><td>$f(x)=2x+1$</td></tr><tr><td>Pasangan berurutan</td><td>$\{(1,3),(2,5),(3,7)\}$</td></tr>
+<tr><td>Tabel</td><td>$x$: 1, 2, 3 &nbsp;→&nbsp; $f(x)$: 3, 5, 7</td></tr><tr><td>Diagram panah</td><td>$1\to3,\ 2\to5,\ 3\to7$</td></tr><tr><td>Grafik</td><td>Tiga titik $(1,3),(2,5),(3,7)$</td></tr></table></div>
+
+<h3>1.4 Uji garis vertikal</h3>
+<p>Tarik garis tegak. <b>Jika memotong grafik di satu titik saja</b> → fungsi. Jika ada yang memotong di 2 titik atau lebih → bukan fungsi.</p>
+<div class="two"><figure data-fig="vlt1"><figcaption>Fungsi (1 titik potong)</figcaption></figure><figure data-fig="vlt2"><figcaption>Bukan fungsi (garis $x=1$ memotong 2 titik)</figcaption></figure></div>
+
+<div class="card"><b>Contoh 1.</b> $R=\{(1,2),(2,4),(3,4)\}$. Apakah $R$ fungsi? Tentukan domain dan range-nya.
+<details class="l"><summary>📘 Cara Lengkap</summary><div><ol class="st">
+<li><b>Ingat syarat fungsi.</b> Setiap angka pertama (anggota domain) hanya boleh punya <i>satu</i> pasangan.</li>
+<li><b>Periksa angka pertama.</b> Angka pertamanya 1, 2, 3. Tidak ada yang kembar, jadi $R$ adalah <b>fungsi</b>. (Dua pasangan berbeda boleh sama-sama menghasilkan 4, itu tidak melanggar aturan.)</li>
+<li><b>Domain</b> = kumpulan angka pertama $=\{1,2,3\}$.</li>
+<li><b>Range</b> = kumpulan angka kedua; angka yang sama ditulis satu kali, jadi $\{2,4\}$.</li>
+<li class="fin">Jawaban: $R$ fungsi; domain $\{1,2,3\}$; range $\{2,4\}$</li></ol></div></details>
+<details class="f"><summary>⚡ Cara Cepat</summary><div>Lihat angka <i>pertama</i> tiap pasangan: tidak ada yang kembar → fungsi. Domain = angka pertama, range = angka kedua (tanpa pengulangan).</div></details></div>
+<div class="card"><b>Contoh 2.</b> $S=\{(1,2),(1,3),(2,4)\}$. Apakah $S$ fungsi?
+<details class="l"><summary>📘 Cara Lengkap</summary><div><ol class="st">
+<li><b>Periksa angka pertama.</b> Angka 1 muncul dua kali.</li>
+<li><b>Lihat pasangannya.</b> $1\to2$ dan $1\to3$: satu anggota domain punya dua pasangan.</li>
+<li>Itu melanggar syarat fungsi (tidak boleh bercabang).</li>
+<li class="fin">Jawaban: $S$ bukan fungsi</li></ol></div></details></div>
+
+<h2 class="s" id="b2">Bab 2. Domain &amp; Range: Linear, Kuadrat, Rasional</h2>
+<h3>2.1 Domain alami dan domain dibatasi</h3>
+<ul><li><b>Domain alami:</b> semua $x$ yang membuat rumus bisa dihitung (dipakai jika soal tidak menyebut batas).</li><li><b>Domain dibatasi:</b> misal $0\le x\le 3$; hanya $x$ dalam batas itu yang dipakai.</li></ul>
+
+<h3>2.2 Fungsi linear $f(x)=ax+b$</h3>
+<p>Domain alami $=\mathbb{R}$, range $=\mathbb{R}$. Jika domain dibatasi: <b>substitusi dua titik ujung</b>.</p>
+<figure data-fig="lin"><figcaption>Gambar 4. $f(x)=x+1$, $-1\le x\le 3$ → range $0\le y\le 4$</figcaption></figure>
+<div class="card"><b>Contoh 3.</b> Tentukan range $f(x)=x+1$ untuk $-1\le x\le 3$.
+<details class="l"><summary>📘 Cara Lengkap</summary><div><ol class="st">
+<li><b>Kenali bentuknya.</b> $f(x)=x+1$ adalah garis lurus yang naik (angka di depan $x$ positif). Garis naik: nilai terkecil ada di ujung kiri, nilai terbesar di ujung kanan.</li>
+<li><b>Ujung kiri</b> $x=-1$: $f(-1)=-1+1=0$.</li>
+<li><b>Ujung kanan</b> $x=3$: $f(3)=3+1=4$.</li>
+<li>Semua nilai di antara 0 dan 4 ikut terlewati oleh garis.</li>
+<li class="fin">Jawaban: range $=\{y\mid 0\le y\le 4\}$</li></ol></div></details>
+<details class="f"><summary>⚡ Cara Cepat</summary><div>Masukkan dua ujung domain, hasilnya langsung batas range (kecil → besar).</div></details></div>
+
+<h3>2.3 Fungsi kuadrat $f(x)=ax^2+bx+c$</h3>
+<div class="box c"><b>Langkah baku:</b><br>1. $x_p=\dfrac{-b}{2a}$ &nbsp; 2. $y_p=f(x_p)$ &nbsp; 3. $a\gt0$ → $y\ge y_p$; $a\lt0$ → $y\le y_p$.<br><b>Rumus kilat:</b> $y_p=\dfrac{-D}{4a}=\dfrac{-(b^2-4ac)}{4a}$</div>
+<figure data-fig="kuad"><figcaption>Gambar 5. $f(x)=x^2-4x+3$: puncak $(2,-1)$, range $y\ge -1$</figcaption></figure>
+<div class="card"><b>Contoh 4.</b> Tentukan range $f(x)=x^2-4x+3$.
+<details class="l"><summary>📘 Cara Lengkap</summary><div><ol class="st">
+<li><b>Baca koefisiennya:</b> $a=1$, $b=-4$, $c=3$.</li>
+<li><b>Arah parabola.</b> $a=1>0$ → terbuka ke atas, seperti mangkuk. Mangkuk punya titik <i>terendah</i> (puncak), sehingga range dimulai dari tinggi puncak ke atas.</li>
+<li><b>Cari $x$ puncak:</b> $x_p=\dfrac{-b}{2a}=\dfrac{-(-4)}{2(1)}=\dfrac42=2$.</li>
+<li><b>Cari $y$ puncak</b> (substitusi $x=2$): $y_p=2^2-4(2)+3=4-8+3=-1$.</li>
+<li><b>Tarik kesimpulan:</b> titik terendah di $y=-1$, ke atas tak terbatas.</li>
+<li class="fin">Jawaban: range $=\{y\mid y\ge -1\}$</li></ol></div></details>
+<details class="f"><summary>⚡ Cara Cepat</summary><div>$y_p=\frac{-(16-12)}{4}=-1$. Parabola terbuka ke atas → $y\ge -1$.</div></details></div>
+<p><b>Domain dibatasi (sering keluar!):</b> hitung $f$ di <b>kedua ujung</b> dan di <b>puncak bila puncak ada di dalam interval</b>. Ambil terkecil dan terbesar.</p>
+<figure data-fig="kuad6"><figcaption>Gambar 6. $f(x)=x^2-4x+3$ pada $0\le x\le 3$ → range $-1\le y\le 3$</figcaption></figure>
+<p>$f(0)=3$, $f(3)=0$, puncak $x=2\in[0,3]$ dengan $f(2)=-1$. Range $=\{y\mid -1\le y\le 3\}$. Perhatikan: 0 <b>bukan</b> batas bawah.</p>
+
+<h3>2.4 Fungsi rasional $f(x)=\dfrac{ax+b}{cx+d}$</h3>
+<ul><li><b>Domain:</b> $cx+d\ne0$.</li><li><b>Asimtot tegak:</b> $x=-\dfrac dc$ &nbsp; <b>Asimtot datar:</b> $y=\dfrac ac$.</li><li><b>Range:</b> semua real kecuali $\dfrac ac$.</li></ul>
+<figure data-fig="rasi"><figcaption>Gambar 7. $f(x)=\frac{2x+1}{x-1}$: asimtot tegak $x=1$, asimtot datar $y=2$</figcaption></figure>
+<div class="card"><b>Contoh 5.</b> Tentukan domain dan range $f(x)=\dfrac{2x+1}{x-1}$.
+<details class="l"><summary>📘 Cara Lengkap</summary><div><ol class="st">
+<li><b>Domain.</b> Penyebut tidak boleh nol (pembagian dengan nol tidak ada artinya): $x-1\ne0\Rightarrow x\ne1$.</li>
+<li><b>Range: uji apakah $y=2$ bisa dicapai.</b> Misalkan $f(x)=2$, maka $\dfrac{2x+1}{x-1}=2$.</li>
+<li>Kalikan silang: $2x+1=2(x-1)=2x-2$.</li>
+<li>Kurangi $2x$ di kedua sisi: $1=-2$. Ini mustahil, artinya tidak ada $x$ yang menghasilkan 2.</li>
+<li>Nilai $y$ lainnya bisa dicapai, hanya 2 yang tidak. Jadi range: $y\ne2$.</li>
+<li><b>Titik potong sumbu</b> (pelengkap): sumbu $y$ saat $x=0$: $f(0)=\frac{1}{-1}=-1$ → $(0,-1)$. Sumbu $x$ saat pembilang nol: $2x+1=0\Rightarrow x=-\frac12$ → $(-\frac12,0)$.</li>
+<li class="fin">Jawaban: domain $x\ne1$; range $y\ne2$</li></ol></div></details>
+<details class="f"><summary>⚡ Cara Cepat</summary><div>Domain: $x\ne -d/c = 1$. Range: $y\ne a/c = 2/1=2$.<br><i>Berlaku jika $ad-bc\ne0$ (tidak bisa disederhanakan).</i></div></details></div>
+
+<h3 id="ring">2.5 Ringkasan</h3>
+<div class="card wrap"><table><tr><th>Jenis</th><th>Domain alami</th><th>Range</th><th>Kunci</th></tr>
+<tr><td>Linear $ax+b$</td><td>$\mathbb{R}$</td><td>$\mathbb{R}$</td><td>Domain dibatasi → substitusi ujung</td></tr>
+<tr><td>Kuadrat</td><td>$\mathbb{R}$</td><td>$a\gt0$: $y\ge y_p$; $a\lt0$: $y\le y_p$</td><td>Cari titik puncak</td></tr>
+<tr><td>Rasional</td><td>$x\ne -d/c$</td><td>$y\ne a/c$</td><td>Penyebut ≠ 0; asimtot</td></tr></table></div>
+
+<h3>2.6 Jebakan yang sering membuat salah</h3>
+<div class="card wrap"><table><tr><th>Kesalahan</th><th>Yang benar</th></tr>
+<tr><td>Range rasional ditulis $y\ne$ nilai terlarang $x$ (campur domain-range).</td><td>Domain dari penyebut. Range dari $a/c$.</td></tr>
+<tr><td>Parabola domain dibatasi langsung ditulis $y\ge y_p$.</td><td>Cek puncak ada di dalam interval atau tidak, bandingkan nilai ujung.</td></tr>
+<tr><td>Range dianggap sama dengan kodomain.</td><td>Range hanya yang benar-benar menjadi hasil.</td></tr>
+<tr><td>Domain $\frac{x+2}{x^2-5x+6}$ ditulis $x\ne2$ saja.</td><td>Faktorkan: $(x-2)(x-3)$ → $x\ne2$ <b>dan</b> $x\ne3$.</td></tr>
+<tr><td>Lupa membalik tanda saat dikali negatif.</td><td>Dikali/dibagi negatif → tanda dibalik.</td></tr></table></div>
+
+<h2 class="s" id="lat">Latihan Mandiri</h2>
+<div class="box">Pilih satu jawaban, tekan <b>Cek Jawaban</b>, lalu pilih pembahasan yang Anda butuhkan.</div>
+<div id="lat-list"></div>
+
+<h2 class="s" id="soal">Prediksi Soal TKA (16 Soal)</h2>
+<div class="box">Soal berikut adalah <b>prediksi</b>, bukan soal resmi. Kerjakan dulu: pilih satu jawaban, lalu tekan <b>Cek Jawaban</b>. Setelah itu Anda bisa memilih pembahasan: <b>⚡ Cara Cepat</b> atau <b>📘 Cara Lengkap</b>.</div>
+<div id="soal-list"></div>
+</main>
+<div id="skor">Skor: 0 / 16</div>
+<footer>© VisualMath.Lim - Bimbingan Belajar &nbsp;|&nbsp; <a style="color:var(--yel)" href="index.html">Home</a> &nbsp;|&nbsp; <a style="color:var(--yel)" href="fungsi.html">Dashboard</a></footer>
+
+<script>
+const T=String.raw;
+/* ===== Pembuat grafik SVG ===== */
+function samp(f,a,b,n=160){const r=[];for(let i=0;i<=n;i++){const x=a+(b-a)*i/n;r.push([x,f(x)])}return r}
+function plot(o){
+ const W=340,H=260,m=28,[x0,x1]=o.x,[y0,y1]=o.y;
+ const sx=x=>m+(x-x0)/(x1-x0)*(W-2*m),sy=y=>H-m-(y-y0)/(y1-y0)*(H-2*m);
+ let s=`<svg viewBox="0 0 ${W} ${H}"><defs><clipPath id="c${o.id}"><rect x="${m}" y="${m}" width="${W-2*m}" height="${H-2*m}"/></clipPath><marker id="a${o.id}" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0L6,3L0,6z" fill="#022050"/></marker></defs>`;
+ for(let i=Math.ceil(x0);i<=x1;i++){s+=`<line x1="${sx(i)}" y1="${m}" x2="${sx(i)}" y2="${H-m}" stroke="#dde6f0"/>`;if(i)s+=`<text x="${sx(i)}" y="${sy(0)+11}" font-size="9" text-anchor="middle" fill="#456">${i}</text>`}
+ for(let i=Math.ceil(y0);i<=y1;i++){s+=`<line x1="${m}" y1="${sy(i)}" x2="${W-m}" y2="${sy(i)}" stroke="#dde6f0"/>`;if(i)s+=`<text x="${sx(0)-4}" y="${sy(i)+3}" font-size="9" text-anchor="end" fill="#456">${i}</text>`}
+ s+=`<line x1="${m-6}" y1="${sy(0)}" x2="${W-m+6}" y2="${sy(0)}" stroke="#022050" stroke-width="1.5" marker-end="url(#a${o.id})"/><line x1="${sx(0)}" y1="${H-m+6}" x2="${sx(0)}" y2="${m-8}" stroke="#022050" stroke-width="1.5" marker-end="url(#a${o.id})"/><text x="${W-m+8}" y="${sy(0)+14}" font-size="11" fill="#022050">x</text><text x="${sx(0)+6}" y="${m-8}" font-size="11" fill="#022050">y</text>`;
+ (o.vx||[]).forEach(v=>s+=`<line x1="${sx(v)}" y1="${m}" x2="${sx(v)}" y2="${H-m}" stroke="#dc2626" stroke-dasharray="5 4" stroke-width="1.6"/><text x="${sx(v)+4}" y="${m+10}" font-size="10" fill="#dc2626">x=${v}</text>`);
+ (o.hy||[]).forEach(v=>s+=`<line x1="${m}" y1="${sy(v)}" x2="${W-m}" y2="${sy(v)}" stroke="#16a34a" stroke-dasharray="5 4" stroke-width="1.6"/><text x="${W-m-4}" y="${sy(v)-4}" font-size="10" fill="#16a34a" text-anchor="end">y=${v}</text>`);
+ (o.hl||[]).forEach(v=>s+=`<line x1="${m}" y1="${sy(v)}" x2="${W-m}" y2="${sy(v)}" stroke="#d97706" stroke-dasharray="3 3"/><text x="${m+3}" y="${sy(v)-3}" font-size="10" fill="#d97706">y=${v}</text>`);
+ (o.curves||[]).forEach(c=>{s+=`<path clip-path="url(#c${o.id})" fill="none" stroke="#00a9ab" stroke-width="3" d="${c.map((p,i)=>(i?'L':'M')+sx(p[0]).toFixed(1)+','+sy(p[1]).toFixed(1)).join('')}"/>`});
+ (o.pts||[]).forEach(p=>s+=`<circle cx="${sx(p[0])}" cy="${sy(p[1])}" r="4.5" fill="${p[3]?'#fff':'#ffd300'}" stroke="#022050" stroke-width="2"/><text x="${sx(p[0])+7}" y="${sy(p[1])-7}" font-size="10" font-weight="700" fill="#022050">${p[2]||''}</text>`);
+ return s+'</svg>'}
+const parab=(a,b,c)=>x=>a*x*x+b*x+c;
+const FIG={
+ mesin:()=>`<svg viewBox="0 0 420 110"><g font-size="15" fill="#022050" text-anchor="middle"><text x="40" y="60">x = 3</text><path d="M75 55H130" stroke="#022050" stroke-width="3"/><path d="M130 55l-9-6v12z" fill="#022050"/><rect x="135" y="20" width="150" height="70" rx="12" fill="#00d6d8" stroke="#022050" stroke-width="3"/><text x="210" y="52" font-weight="700">MESIN f</text><text x="210" y="75">f(x) = 2x + 1</text><path d="M290 55H345" stroke="#022050" stroke-width="3"/><path d="M345 55l-9-6v12z" fill="#022050"/><rect x="352" y="35" width="55" height="40" rx="10" fill="#ffd300" stroke="#022050" stroke-width="2"/><text x="380" y="62" font-weight="700">7</text></g></svg>`,
+ panah:()=>{let s=`<svg viewBox="0 0 320 210"><defs><marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0L7,3L0,6z" fill="#022050"/></marker></defs><ellipse cx="75" cy="105" rx="45" ry="92" fill="#d9fbfb" stroke="#022050"/><ellipse cx="245" cy="105" rx="45" ry="92" fill="#fff6bf" stroke="#022050"/><text x="75" y="14" font-size="11" text-anchor="middle" fill="#022050">A (domain)</text><text x="245" y="14" font-size="11" text-anchor="middle" fill="#022050">B (kodomain)</text>`;
+  const ya=[45,85,125,165],yb={a:35,b:70,c:105,d:140,e:175};
+  [[1,'a'],[2,'b'],[3,'b'],[4,'d']].forEach(([x,y])=>s+=`<line x1="88" y1="${ya[x-1]}" x2="228" y2="${yb[y]}" stroke="#022050" stroke-width="1.8" marker-end="url(#ar)"/>`);
+  ya.forEach((y,i)=>s+=`<circle cx="75" cy="${y}" r="4" fill="#022050"/><text x="58" y="${y+4}" font-size="13" text-anchor="end">${i+1}</text>`);
+  Object.entries(yb).forEach(([k,y])=>s+=`<circle cx="245" cy="${y}" r="4" fill="${'abd'.includes(k)?'#16a34a':'#022050'}"/><text x="262" y="${y+4}" font-size="13">${k}</text>`);
+  return s+'</svg>'},
+ vlt1:()=>plot({id:'v1',x:[-3,3],y:[-1,5],curves:[samp(x=>x*x,-3,3)],pts:[[1,1,'']]}).replace('</svg>',`<line x1="${28+4/6*284}" y1="28" x2="${28+4/6*284}" y2="232" stroke="#dc2626" stroke-dasharray="4"/></svg>`),
+ vlt2:()=>plot({id:'v2',x:[-1,5],y:[-3,3],curves:[samp(y=>0,0,0,0)],pts:[[1,1,'(1,1)'],[1,-1,'(1,-1)']]}).replace('<circle',`<path clip-path="url(#cv2)" fill="none" stroke="#00a9ab" stroke-width="3" d="${samp(y=>y,-3,3).map((p,i)=>(i?'L':'M')+(28+(p[1]*p[1]+1)/6*284).toFixed(1)+','+(232-(p[0]+3)/6*204).toFixed(1)).join('')}"/><line x1="${28+2/6*284}" y1="28" x2="${28+2/6*284}" y2="232" stroke="#dc2626" stroke-dasharray="4"/><circle`),
+ lin:()=>plot({id:'l',x:[-3,5],y:[-2,6],curves:[samp(x=>x+1,-1,3)],pts:[[-1,0,'(-1,0)'],[3,4,'(3,4)']],hl:[0,4]}),
+ kuad:()=>plot({id:'k',x:[-1,5],y:[-2,5],curves:[samp(parab(1,-4,3),-1,5)],pts:[[2,-1,'puncak (2,-1)']],hl:[-1]}),
+ kuad6:()=>plot({id:'k6',x:[-1,5],y:[-2,5],curves:[samp(parab(1,-4,3),-1,5).map(p=>[p[0],p[1]]).map((p,i)=>i%1?p:p),samp(parab(1,-4,3),0,3)].slice(1),pts:[[0,3,'(0,3)'],[3,0,'(3,0)'],[2,-1,'(2,-1)']],hl:[-1,3]}),
+ rasi:()=>plot({id:'r',x:[-4,6],y:[-5,7],curves:[samp(x=>(2*x+1)/(x-1),-4,0.8),samp(x=>(2*x+1)/(x-1),1.15,6)],vx:[1],hy:[2],pts:[[0,-1,'(0,-1)'],[-0.5,0,'(-½,0)']]}),
+ s5:()=>plot({id:'s5',x:[-2,4],y:[-3,5],curves:[samp(parab(-1,2,3),-2,4)],pts:[[1,4,'(1,4)'],[-1,0,''],[3,0,'']]}),
+ s11:()=>plot({id:'s11',x:[-1,4],y:[-3,5],curves:[samp(x=>-2*x+4,0,3)],pts:[[0,4,'(0,4)'],[3,-2,'(3,-2)']]})
+};
+/* ===== Latihan mandiri ===== */
+const LATQ=[
+{t:T`Diketahui relasi $R=\{(1,4),(2,4),(3,5)\}$. Pernyataan yang benar tentang $R$ adalah ...`,o:[T`$R$ bukan fungsi`,T`$R$ fungsi; domain $\{1,2,3\}$, range $\{4,5\}$`,T`$R$ fungsi; domain $\{4,5\}$, range $\{1,2,3\}$`,T`$R$ fungsi; domain $\{1,2,3\}$, range $\{4,4,5\}$`,T`$R$ bukan fungsi karena angka 4 muncul dua kali`],k:1,
+ f:T`<ol class="st"><li><b>Ingat syarat fungsi.</b> Setiap angka pertama (anggota domain) hanya boleh punya <i>satu</i> pasangan.</li><li><b>Periksa angka pertama.</b> Angka pertamanya 1, 2, 3, tidak ada yang kembar, jadi $R$ adalah <b>fungsi</b>. Angka 4 muncul dua kali sebagai <i>hasil</i>, dan itu boleh.</li><li><b>Domain</b> = kumpulan angka pertama $=\{1,2,3\}$.</li><li><b>Range</b> = kumpulan angka kedua, angka yang sama ditulis satu kali: $4,4,5\rightarrow\{4,5\}$.</li><li class="fin">Jawaban: $R$ fungsi; domain $\{1,2,3\}$; range $\{4,5\}$</li></ol>`,c:T`Angka pertama tidak kembar → fungsi. Range = angka kedua tanpa pengulangan: $\{4,5\}$.`},
+{t:T`Domain fungsi $f(x)=\dfrac{4}{x+5}$ adalah ...`,o:[T`$x\ne5$`,T`$x\ne-5$`,T`$x\ne4$`,T`$x\ne0$`,T`$x\in\mathbb{R}$`],k:1,
+ f:T`<ol class="st"><li><b>Aturan dasar pecahan.</b> Penyebut tidak boleh nol, karena pembagian dengan nol tidak punya arti.</li><li><b>Tulis syaratnya:</b> $x+5\ne0$.</li><li><b>Selesaikan:</b> pindahkan $5$ ke ruas kanan, tandanya berubah menjadi negatif: $x\ne-5$.</li><li>Artinya semua bilangan real boleh dipakai, kecuali $-5$.</li><li class="fin">Jawaban: $x\ne-5$</li></ol>`,c:T`Penyebut $=0$ → $x=-5$ itulah yang dilarang.`},
+{t:T`Domain fungsi $f(x)=\dfrac{x}{x^2-9}$ adalah ...`,o:[T`$x\ne3$`,T`$x\ne3$ dan $x\ne-3$`,T`$x\ne9$`,T`$x\ne0$`,T`$x\ne-3$`],k:1,
+ f:T`<ol class="st"><li><b>Syarat penyebut:</b> $x^2-9\ne0$.</li><li><b>Faktorkan</b> memakai bentuk selisih dua kuadrat $a^2-b^2=(a-b)(a+b)$. Di sini $9=3^2$, sehingga $x^2-9=(x-3)(x+3)$.</li><li>Hasil kali dua bilangan sama dengan nol jika salah satunya nol. Maka yang dilarang: $x-3=0\Rightarrow x=3$ dan $x+3=0\Rightarrow x=-3$.</li><li>Pembilang $x$ tidak mempengaruhi domain, hanya penyebut yang diperiksa.</li><li class="fin">Jawaban: $x\ne3$ dan $x\ne-3$</li></ol>`,c:T`$x^2=9\Rightarrow x=\pm3$ dilarang.`},
+{t:T`Range fungsi $f(x)=x^2+2x-3$ adalah ...`,o:[T`$y\ge-3$`,T`$y\ge-4$`,T`$y\le-4$`,T`$y\ge-1$`,T`$y\in\mathbb{R}$`],k:1,
+ f:T`<ol class="st"><li><b>Baca koefisien:</b> $a=1$, $b=2$, $c=-3$.</li><li><b>Arah parabola.</b> $a=1>0$ → terbuka ke atas seperti mangkuk, punya titik <i>terendah</i> (puncak). Range dimulai dari tinggi puncak ke atas.</li><li><b>$x$ puncak:</b> $x_p=\dfrac{-b}{2a}=\dfrac{-2}{2(1)}=-1$.</li><li><b>$y$ puncak</b> (substitusi $x=-1$): $y_p=(-1)^2+2(-1)-3=1-2-3=-4$.</li><li>Titik terendah di $y=-4$, lalu naik tanpa batas.</li><li class="fin">Jawaban: $y\ge-4$</li></ol>`,c:T`$y_p=\dfrac{-(4+12)}{4}=-4$; terbuka ke atas → $y\ge-4$.`},
+{t:T`Range fungsi $f(x)=-x^2+4x$ adalah ...`,o:[T`$y\ge4$`,T`$y\le4$`,T`$y\le2$`,T`$y\ge2$`,T`$y\in\mathbb{R}$`],k:1,
+ f:T`<ol class="st"><li><b>Baca koefisien:</b> $a=-1$, $b=4$, $c=0$.</li><li><b>Arah parabola.</b> $a=-1<0$ → terbuka ke bawah seperti bukit, punya titik <i>tertinggi</i>. Range: dari tinggi puncak ke bawah.</li><li><b>$x$ puncak:</b> $x_p=\dfrac{-4}{2(-1)}=\dfrac{-4}{-2}=2$.</li><li><b>$y$ puncak</b> (substitusi $x=2$): $y_p=-(2)^2+4(2)=-4+8=4$.</li><li class="fin">Jawaban: $y\le4$</li></ol>`,c:T`$y_p=\dfrac{-16}{4(-1)}=4$; terbuka ke bawah → $y\le4$.`},
+{t:T`Range fungsi $f(x)=2x-1$ untuk domain $-2\le x\le3$ adalah ...`,o:[T`$-5\le y\le5$`,T`$-3\le y\le5$`,T`$-5\le y\le3$`,T`$y\in\mathbb{R}$`,T`$0\le y\le5$`],k:0,
+ f:T`<ol class="st"><li><b>Kenali bentuknya.</b> $2x-1$ adalah garis lurus yang naik (angka di depan $x$ positif). Nilai terkecil ada di ujung kiri, terbesar di ujung kanan.</li><li><b>Ujung kiri</b> $x=-2$: $f(-2)=2(-2)-1=-4-1=-5$.</li><li><b>Ujung kanan</b> $x=3$: $f(3)=2(3)-1=6-1=5$.</li><li>Garis menyambung tanpa putus, sehingga semua nilai dari $-5$ sampai $5$ dilewati.</li><li class="fin">Jawaban: $-5\le y\le5$</li></ol>`,c:T`Masukkan dua ujung: $-5$ dan $5$.`},
+{t:T`Range fungsi $f(x)=x^2-2x-3$ untuk domain $-2\le x\le2$ adalah ...`,o:[T`$-3\le y\le5$`,T`$-4\le y\le-3$`,T`$-4\le y\le5$`,T`$y\ge-4$`,T`$-3\le y\le0$`],k:2,
+ f:T`<ol class="st"><li><b>Arah parabola.</b> $a=1>0$ → terbuka ke atas, punya titik terendah. Karena domain dibatasi, kita periksa <b>puncak dan dua ujung</b>.</li><li><b>$x$ puncak:</b> $x_p=\dfrac{-(-2)}{2(1)}=1$. Apakah $1$ ada di dalam $[-2,2]$? Ya, jadi puncak ikut dihitung.</li><li><b>Nilai di puncak:</b> $f(1)=1-2-3=-4$.</li><li><b>Ujung kiri:</b> $f(-2)=4+4-3=5$.</li><li><b>Ujung kanan:</b> $f(2)=4-4-3=-3$.</li><li><b>Bandingkan</b> $-4,\ 5,\ -3$: terkecil $-4$, terbesar $5$.</li><li class="fin">Jawaban: $-4\le y\le5$</li></ol>`,c:T`Kandidat: puncak ($-4$) dan ujung (5 dan $-3$). Min $-4$, maks 5.`},
+{t:T`Asimtot tegak, asimtot datar, dan range fungsi $f(x)=\dfrac{x+4}{2x-6}$ berturut-turut adalah ...`,o:[T`$x=3$; $y=2$; $y\ne2$`,T`$x=-3$; $y=\frac12$; $y\ne\frac12$`,T`$x=3$; $y=\frac12$; $y\ne\frac12$`,T`$x=3$; $y=\frac12$; $y\ne3$`,T`$x=6$; $y=1$; $y\ne1$`],k:2,
+ f:T`<ol class="st"><li><b>Baca bentuk</b> $\dfrac{ax+b}{cx+d}$: $a=1$, $b=4$, $c=2$, $d=-6$.</li><li><b>Asimtot tegak</b> (garis tegak yang tidak pernah disentuh grafik) muncul di $x$ yang membuat penyebut nol: $2x-6=0\Rightarrow 2x=6\Rightarrow x=3$.</li><li><b>Asimtot datar:</b> $y=\dfrac ac=\dfrac12$.</li><li><b>Range:</b> semua bilangan real kecuali nilai asimtot datar, yaitu $y\ne\dfrac12$.</li><li class="fin">Jawaban: $x=3$; $y=\frac12$; $y\ne\frac12$</li></ol>`,c:T`$x=-\frac dc=\frac62=3$; $y=\frac ac=\frac12$; range $y\ne\frac12$.`}
+];
+
+/* ===== Soal TKA ===== */
+const Q=[
+{lv:1,t:T`Perhatikan diagram panah dari himpunan $A$ ke himpunan $B$ berikut. Range fungsi tersebut adalah ...`,fig:'panah',o:[T`$\{a,b,c,d,e\}$`,T`$\{a,b,d\}$`,T`$\{1,2,3,4\}$`,T`$\{b,c\}$`,T`$\{a,d\}$`],k:1,
+ f:T`<ol class="st"><li><b>Apa itu range?</b> Anggota himpunan $B$ (sisi kanan) yang <i>benar-benar ditunjuk</i> oleh panah.</li><li><b>Telusuri tiap panah:</b> $1\to a$, $2\to b$, $3\to b$, $4\to d$.</li><li><b>Kumpulkan hasilnya</b> tanpa pengulangan: $a,\ b,\ d$.</li><li><b>Periksa sisanya:</b> $c$ dan $e$ tidak ditunjuk panah, jadi bukan range (walaupun ada di kodomain).</li><li class="fin">Jawaban: $\{a,b,d\}$</li></ol>`,c:T`Lihat <b>ujung panah</b> di sisi kanan saja: yang kena panah hanya $a,b,d$ ($c$ dan $e$ tidak).`},
+{lv:1,t:T`Relasi berikut yang merupakan fungsi adalah ...`,o:[T`$\{(1,2),(1,3),(2,4)\}$`,T`$\{(1,2),(2,2),(3,2)\}$`,T`$\{(1,2),(2,3),(2,4)\}$`,T`$\{(1,2),(2,3),(3,4),(3,5)\}$`,T`$\{(1,1),(1,2),(1,3)\}$`],k:1,
+ f:T`<ol class="st"><li><b>Syarat fungsi:</b> tiap angka pertama hanya punya <i>satu</i> pasangan.</li><li><b>Periksa setiap pilihan</b> lewat angka pertamanya:<br>• $\{(1,2),(1,3),(2,4)\}$: angka 1 punya dua pasangan → bukan fungsi.<br>• $\{(1,2),(2,2),(3,2)\}$: angka 1, 2, 3 masing-masing sekali → <b>fungsi</b>.<br>• $\{(1,2),(2,3),(2,4)\}$: angka 2 punya dua pasangan → bukan.<br>• $\{(1,2),(2,3),(3,4),(3,5)\}$: angka 3 punya dua pasangan → bukan.<br>• $\{(1,1),(1,2),(1,3)\}$: angka 1 punya tiga pasangan → bukan.</li><li>Pada pilihan yang benar, hasilnya sama semua (yaitu 2), dan itu <b>diperbolehkan</b>. Yang dilarang hanya angka pertama yang bercabang.</li><li class="fin">Jawaban: $\{(1,2),(2,2),(3,2)\}$</li></ol>`,c:T`Cek angka <b>pertama</b>: pilih opsi yang angka pertamanya tidak ada yang kembar.`},
+{lv:1,t:T`Domain fungsi $f(x)=\dfrac{5}{x-3}$ adalah ...`,o:[T`$\{x\mid x\ne0\}$`,T`$\{x\mid x\ne3\}$`,T`$\{x\mid x\ne-3\}$`,T`$\{x\mid x\ne5\}$`,T`$\{x\mid x\in\mathbb{R}\}$`],k:1,
+ f:T`<ol class="st"><li><b>Aturan dasar pecahan:</b> penyebut tidak boleh nol.</li><li><b>Tulis syaratnya:</b> $x-3\ne0$.</li><li><b>Selesaikan:</b> pindahkan $-3$ ke ruas kanan menjadi $+3$: $x\ne3$.</li><li>Bilangan $5$ di pembilang tidak ada hubungannya dengan domain.</li><li class="fin">Jawaban: $\{x\mid x\ne3\}$</li></ol>`,c:T`Penyebut $=0$ → $x=3$ itulah yang dilarang.`},
+{lv:1,t:T`Perhatikan lima fungsi berikut:<br>(1) $f(x)=3x-5$ &nbsp; (2) $g(x)=x^2+1$ &nbsp; (3) $h(x)=\dfrac{1}{x^2+1}$ &nbsp; (4) $k(x)=\dfrac{x}{x-2}$ &nbsp; (5) $m(x)=\dfrac{x+1}{x^2-4}$<br>Fungsi yang domain alaminya <b>semua bilangan real</b> adalah ...`,o:[T`(1) dan (4)`,T`(1), (2), dan (3)`,T`(2), (3), dan (5)`,T`(1), (2), dan (4)`,T`(1), (2), (3), (4), dan (5)`],k:1,
+ f:T`<ol class="st"><li><b>Strategi.</b> Bentuk suku banyak (tanpa pecahan) selalu bisa dihitung untuk semua $x$. Masalah hanya muncul pada <b>pecahan</b>, yaitu bila penyebutnya bisa bernilai nol.</li><li><b>(1) $3x-5$:</b> suku banyak → semua real ✔.</li><li><b>(2) $x^2+1$:</b> suku banyak → semua real ✔.</li><li><b>(3) $\dfrac{1}{x^2+1}$:</b> $x^2\ge0$, sehingga $x^2+1\ge1$. Penyebut tidak pernah nol → semua real ✔.</li><li><b>(4) $\dfrac{x}{x-2}$:</b> penyebut nol saat $x=2$ → ada yang dilarang ✘.</li><li><b>(5) $\dfrac{x+1}{x^2-4}$:</b> $x^2-4=(x-2)(x+2)=0$ saat $x=2$ atau $x=-2$ ✘.</li><li class="fin">Jawaban: (1), (2), dan (3)</li></ol>`,c:T`Polinom → semua real. Pecahan → tanya: <i>apakah penyebut bisa nol?</i> $x-2=0$ bisa, $x^2-4=0$ bisa, $x^2+1=0$ tidak bisa.`},
+{lv:1,t:T`Perhatikan grafik fungsi kuadrat $f$ berikut (domainnya semua bilangan real). Range fungsi $f$ adalah ...`,fig:'s5',o:[T`$\{y\mid y\ge4\}$`,T`$\{y\mid y\le4\}$`,T`$\{y\mid y\ge1\}$`,T`$\{y\mid y\le1\}$`,T`$\{y\mid y\in\mathbb{R}\}$`],k:1,
+ f:T`<ol class="st"><li><b>Apa itu range?</b> Semua <i>tinggi</i> (nilai $y$) yang dilewati grafik. Jadi yang kita baca adalah sumbu $y$, bukan sumbu $x$.</li><li><b>Lihat bentuk grafik:</b> terbuka ke bawah seperti bukit. Titik tertingginya (puncak) ada di $(1,4)$.</li><li>Tinggi puncak adalah $y=4$. Grafik tidak pernah naik melewati 4, tetapi bisa turun terus tanpa batas.</li><li>Angka $1$ pada titik $(1,4)$ adalah nilai $x$, jangan dipakai untuk range.</li><li class="fin">Jawaban: $\{y\mid y\le4\}$</li></ol>`,c:T`Baca <b>tinggi puncak</b> pada sumbu $y$ = 4. Terbuka ke bawah → semua $y$ di bawah dan sama dengan 4.`},
+{lv:2,t:T`Sebuah taksi online menetapkan tarif awal Rp8.000 ditambah Rp4.000 untuk setiap kilometer. Misalkan $x$ adalah jarak tempuh (km) dan $f(x)$ adalah ongkos (rupiah). Model fungsi dan ongkos untuk perjalanan 7 km berturut-turut adalah ...`,o:[T`$f(x)=8.000x+4.000$; Rp60.000`,T`$f(x)=4.000x+8.000$; Rp36.000`,T`$f(x)=4.000x+8.000$; Rp32.000`,T`$f(x)=12.000x$; Rp84.000`,T`$f(x)=4.000x-8.000$; Rp20.000`],k:1,
+ f:T`<ol class="st"><li><b>Pisahkan dua jenis biaya.</b> Rp8.000 dibayar <i>sekali</i> di awal (biaya tetap). Rp4.000 dibayar <i>setiap km</i> (ikut berubah dengan jarak).</li><li><b>Susun modelnya:</b> biaya per km dikali jarak, lalu ditambah biaya tetap: $f(x)=4.000x+8.000$.</li><li><b>Substitusi $x=7$:</b> $f(7)=4.000\times7+8.000$.</li><li><b>Hitung:</b> $4.000\times7=28.000$, lalu $28.000+8.000=36.000$.</li><li class="fin">Jawaban: $f(x)=4.000x+8.000$; ongkos Rp36.000</li></ol>`,c:T`Yang <i>ikut jarak</i> dikali $x$, yang <i>tetap</i> ditambah: $8.000+4.000\times7=36.000$.`},
+{lv:2,t:T`Fungsi linear $f(x)=ax+b$ memenuhi $f(1)=5$ dan $f(3)=11$. Nilai $f(5)$ adalah ...`,o:['11','13','15','17','19'],k:3,
+ f:T`<ol class="st"><li><b>Ubah informasi menjadi persamaan.</b> $f(1)=5$ artinya jika $x=1$ hasilnya 5: $a(1)+b=5\Rightarrow a+b=5$ ...(i). $f(3)=11$: $3a+b=11$ ...(ii).</li><li><b>Hilangkan $b$</b> dengan mengurangkan (ii) dengan (i): $(3a+b)-(a+b)=11-5\Rightarrow 2a=6\Rightarrow a=3$.</li><li><b>Cari $b$</b>: masukkan $a=3$ ke (i): $3+b=5\Rightarrow b=2$.</li><li><b>Tulis rumusnya:</b> $f(x)=3x+2$.</li><li><b>Hitung $f(5)$:</b> $3(5)+2=15+2=17$.</li><li class="fin">Jawaban: $f(5)=17$</li></ol>`,c:T`Kemiringan $a=\dfrac{11-5}{3-1}=3$. Dari $x=3$ ke $x=5$ naik 2 langkah: $11+2\times3=17$.`},
+{lv:2,t:T`Laba harian seorang penjual kue (dalam satuan ratus ribu rupiah) dari penjualan $x$ lusin kue dinyatakan dengan $L(x)=-2x^2+16x$, untuk $0\le x\le8$. Laba maksimum yang dapat diperoleh adalah ...`,o:['Rp1.600.000','Rp3.200.000','Rp4.000.000','Rp6.400.000','Rp8.000.000'],k:1,
+ f:T`<ol class="st"><li><b>Kenali jenisnya.</b> $L(x)=-2x^2+16x$ adalah fungsi kuadrat dengan $a=-2<0$ → parabola terbuka ke bawah. Titik tertingginya (puncak) adalah laba maksimum.</li><li><b>Cari $x$ puncak:</b> $x_p=\dfrac{-b}{2a}=\dfrac{-16}{2(-2)}=\dfrac{-16}{-4}=4$ lusin.</li><li><b>Cek domain:</b> $4$ ada di dalam $[0,8]$, jadi puncaknya berlaku.</li><li><b>Hitung laba di puncak:</b> $L(4)=-2(4^2)+16(4)=-32+64=32$.</li><li><b>Ubah satuan.</b> $32$ itu dalam ratus ribu rupiah: $32\times100.000=3.200.000$.</li><li class="fin">Jawaban: Rp3.200.000</li></ol>`,c:T`$L_{maks}=\dfrac{-D}{4a}=\dfrac{-(256)}{4(-2)}=32$ → Rp3.200.000.`},
+{lv:2,t:T`Domain fungsi $f(x)=\dfrac{x+2}{x^2-5x+6}$ adalah ...`,o:[T`$x\in\mathbb{R},\ x\ne-2$`,T`$x\in\mathbb{R},\ x\ne2$`,T`$x\in\mathbb{R},\ x\ne2$ dan $x\ne3$`,T`$x\in\mathbb{R},\ x\ne-2$ dan $x\ne3$`,T`$x\in\mathbb{R},\ x\ne-2$ dan $x\ne-3$`],k:2,
+ f:T`<ol class="st"><li><b>Syarat penyebut:</b> $x^2-5x+6\ne0$.</li><li><b>Faktorkan penyebut.</b> Cari dua bilangan yang jika dikali hasilnya $6$ dan jika dijumlah hasilnya $-5$. Bilangan itu $-2$ dan $-3$. Jadi $x^2-5x+6=(x-2)(x-3)$.</li><li><b>Cari nilai yang dilarang:</b> $(x-2)(x-3)=0$ bila $x=2$ atau $x=3$.</li><li>Pembilang $x+2$ tidak mempengaruhi domain. Angka $-2$ <i>bukan</i> nilai terlarang.</li><li class="fin">Jawaban: $x\in\mathbb{R}$, $x\ne2$ dan $x\ne3$</li></ol>`,c:T`Cari dua bilangan: jumlah $-5$, kali $6$ → $-2$ dan $-3$. Yang dilarang adalah <b>akar penyebut</b>: 2 dan 3.`},
+{lv:2,t:T`Grafik fungsi $f(x)=\dfrac{3x-1}{x+2}$ memiliki persamaan asimtot tegak dan asimtot datar berturut-turut ...`,o:[T`$x=2$ dan $y=3$`,T`$x=-2$ dan $y=3$`,T`$x=-2$ dan $y=-1$`,T`$x=3$ dan $y=-2$`,T`$x=2$ dan $y=-3$`],k:1,
+ f:T`<ol class="st"><li><b>Baca bentuk</b> $\dfrac{ax+b}{cx+d}$: $a=3$, $b=-1$, $c=1$, $d=2$.</li><li><b>Asimtot tegak:</b> $x$ yang membuat penyebut nol: $x+2=0\Rightarrow x=-2$.</li><li><b>Asimtot datar:</b> $y=\dfrac ac=\dfrac31=3$.</li><li><b>Pastikan tidak bisa disederhanakan:</b> $ad-bc=3(2)-(-1)(1)=7\ne0$, jadi rumus asimtot berlaku.</li><li class="fin">Jawaban: $x=-2$ dan $y=3$</li></ol>`,c:T`Tegak $x=-\frac dc=-2$; datar $y=\frac ac=3$.`},
+{lv:2,t:T`Perhatikan grafik fungsi $f$ yang berupa ruas garis dengan domain $\{x\mid0\le x\le3\}$ berikut. Range fungsi $f$ adalah ...`,fig:'s11',o:[T`$0\le y\le3$`,T`$-2\le y\le4$`,T`$y\ge-2$`,T`$y\le4$`,T`$0\le y\le4$`],k:1,
+ f:T`<ol class="st"><li><b>Range = tinggi yang dilewati grafik</b>, jadi baca nilai $y$ pada sumbu tegak.</li><li><b>Ujung kiri</b> ruas garis ada di $(0,4)$ → tinggi $y=4$.</li><li><b>Ujung kanan</b> ruas garis ada di $(3,-2)$ → tinggi $y=-2$.</li><li>Garis turun lurus dari 4 ke $-2$ tanpa putus, sehingga semua tinggi di antaranya terlewati.</li><li><b>Pengecekan</b> dengan rumus $f(x)=-2x+4$: $f(0)=4$ dan $f(3)=-2$ ✔.</li><li class="fin">Jawaban: $-2\le y\le4$</li></ol>`,c:T`Baca nilai $y$ pada <b>dua ujung ruas</b>: 4 dan $-2$. Range ada di antaranya.`},
+{lv:3,t:T`Diketahui fungsi $f(x)=x^2-4x+3$ dengan domain $\{x\mid0\le x\le3\}$. Range fungsi $f$ adalah ...`,fig:'kuad6',o:[T`$0\le y\le3$`,T`$-1\le y\le0$`,T`$-1\le y\le3$`,T`$y\ge-1$`,T`$y\le3$`],k:2,
+ f:T`<ol class="st"><li><b>Arah parabola.</b> $a=1>0$ → terbuka ke atas, punya titik terendah. Domain dibatasi, jadi periksa <b>puncak dan dua ujung</b>.</li><li><b>$x$ puncak:</b> $x_p=\dfrac{-(-4)}{2(1)}=2$. Apakah $2$ ada di dalam $[0,3]$? Ya, puncak ikut dihitung.</li><li><b>Nilai di puncak:</b> $f(2)=4-8+3=-1$.</li><li><b>Ujung kiri:</b> $f(0)=0-0+3=3$.</li><li><b>Ujung kanan:</b> $f(3)=9-12+3=0$.</li><li><b>Bandingkan</b> $-1,\ 3,\ 0$: terkecil $-1$, terbesar $3$.</li><li><b>Hati-hati:</b> $0$ bukan batas atas. Batas atasnya $3$, bukan nilai $f(3)$.</li><li class="fin">Jawaban: $-1\le y\le3$</li></ol>`,c:T`3 kandidat: puncak (kalau di dalam interval) dan 2 ujung → $\{-1,3,0\}$. Min $=-1$, maks $=3$.`},
+{lv:3,t:T`Diketahui $f(x)=\dfrac{2x+1}{x-1}$. Perhatikan pernyataan berikut:<br>(a) Domain $f$ adalah $\{x\mid x\in\mathbb{R},x\ne1\}$.<br>(b) Range $f$ adalah semua bilangan real.<br>(c) Grafik memotong sumbu $y$ di $(0,-1)$.<br>(d) Ada $x$ sehingga $f(x)=2$.<br>(e) Grafik memotong sumbu $x$ di $(-\frac12,0)$.<br>Pernyataan yang <b>benar</b> adalah ...`,o:[T`hanya (a) dan (c)`,T`(a), (c), dan (e)`,T`(a), (b), dan (c)`,T`(b) dan (d)`,T`(a), (b), (c), (d), dan (e)`],k:1,fig:'rasi',
+ f:T`<ol class="st"><li><b>Pernyataan (a), domain.</b> Penyebut tidak boleh nol: $x-1\ne0\Rightarrow x\ne1$. <b>Benar</b>.</li><li><b>Pernyataan (b), range.</b> Range rasional adalah semua real kecuali $y=\dfrac ac=\dfrac21=2$. Jadi range <i>bukan</i> semua bilangan real. <b>Salah</b>.</li><li><b>Pernyataan (c), memotong sumbu $y$.</b> Titik potong sumbu $y$ didapat dengan $x=0$: $f(0)=\dfrac{2(0)+1}{0-1}=\dfrac{1}{-1}=-1$ → titik $(0,-1)$. <b>Benar</b>.</li><li><b>Pernyataan (d), $f(x)=2$.</b> Misalkan $\dfrac{2x+1}{x-1}=2$, kalikan silang: $2x+1=2x-2\Rightarrow1=-2$. Mustahil, jadi tidak ada $x$ yang menghasilkan 2. <b>Salah</b>.</li><li><b>Pernyataan (e), memotong sumbu $x$.</b> Titik potong sumbu $x$ didapat dengan $y=0$, yaitu pembilang nol: $2x+1=0\Rightarrow x=-\frac12$. Penyebut di titik itu $-\frac32\ne0$, jadi aman. <b>Benar</b>.</li><li class="fin">Jawaban: pernyataan (a), (c), dan (e)</li></ol>`,c:T`Domain: $x\ne1$ ✔. Range: $y\ne\frac ac=2$ (b dan d salah). $f(0)=-1$ ✔; pembilang $=0$ di $x=-\frac12$ ✔.`},
+{lv:3,t:T`Fungsi $f(x)=\dfrac{ax+b}{x-c}$ memiliki asimtot tegak $x=3$, asimtot datar $y=2$, dan grafiknya melalui titik $(0,-1)$. Nilai $a+b+c$ adalah ...`,o:['5','6','7','8','9'],k:3,
+ f:T`<ol class="st"><li><b>Asimtot tegak</b> muncul saat penyebut nol: $x-c=0\Rightarrow x=c$. Diketahui $x=3$, maka $c=3$.</li><li><b>Asimtot datar</b> $=\dfrac{\text{angka di depan }x\text{ pembilang}}{\text{angka di depan }x\text{ penyebut}}=\dfrac a1=a$. Diketahui $y=2$, maka $a=2$.</li><li><b>Tulis fungsinya:</b> $f(x)=\dfrac{2x+b}{x-3}$.</li><li><b>Pakai titik $(0,-1)$.</b> Artinya $x=0$ menghasilkan $f=-1$: $\dfrac{2(0)+b}{0-3}=-1\Rightarrow\dfrac{b}{-3}=-1$.</li><li><b>Cari $b$:</b> kalikan kedua sisi dengan $-3$: $b=3$.</li><li><b>Jumlahkan:</b> $a+b+c=2+3+3=8$.</li><li class="fin">Jawaban: $a+b+c=8$</li></ol>`,c:T`$c=3$, $a=2$ langsung dari asimtot. $f(0)=\dfrac{b}{-c}=-1\Rightarrow b=3$. Jumlah $=8$.`},
+{lv:3,t:T`Fungsi kuadrat $f(x)=x^2-6x+k$ memiliki range $\{y\mid y\ge1\}$. Nilai $k$ adalah ...`,o:['8','9','10','11','12'],k:2,
+ f:T`<ol class="st"><li><b>Arah parabola.</b> $a=1>0$ → terbuka ke atas, jadi range-nya $y\ge y_p$ ($y_p$ = tinggi puncak).</li><li><b>$x$ puncak:</b> $x_p=\dfrac{-(-6)}{2(1)}=3$.</li><li><b>$y$ puncak</b> (substitusi $x=3$): $y_p=3^2-6(3)+k=9-18+k=k-9$.</li><li><b>Samakan dengan data soal.</b> Range $y\ge1$ berarti $y_p=1$: $k-9=1$.</li><li><b>Selesaikan:</b> $k=1+9=10$.</li><li><b>Pengecekan:</b> $x^2-6x+10=(x-3)^2+1$, nilai terkecilnya $1$ ✔.</li><li class="fin">Jawaban: $k=10$</li></ol>`,c:T`$y_{min}=k-\left(\frac b2\right)^2=k-9=1\Rightarrow k=10$.`},
+{lv:3,t:T`Andi dan Budi menentukan range fungsi $f(x)=\dfrac{2x-3}{x+1}$.<br>Andi: "Karena $x\ne-1$, range-nya semua bilangan real kecuali $-1$."<br>Budi: "Asimtot datarnya $y=2$, jadi range-nya semua bilangan real kecuali 2."<br>Pernyataan yang paling tepat adalah ...`,o:['Andi benar, Budi salah.','Budi benar; Andi salah karena menyamakan syarat domain dengan range.','Andi dan Budi sama-sama benar.','Andi dan Budi sama-sama salah.','Tidak dapat ditentukan.'],k:1,
+ f:T`<ol class="st"><li><b>Periksa Budi.</b> Asimtot datar $y=\dfrac ac=\dfrac21=2$. Uji: apakah $f(x)=2$ bisa terjadi? $\dfrac{2x-3}{x+1}=2\Rightarrow2x-3=2x+2\Rightarrow-3=2$, mustahil. Jadi nilai $2$ tidak pernah dicapai, range $y\ne2$. Budi <b>benar</b>.</li><li><b>Periksa Andi.</b> Apakah $y=-1$ bisa dicapai? $\dfrac{2x-3}{x+1}=-1\Rightarrow2x-3=-x-1\Rightarrow3x=2\Rightarrow x=\dfrac23$. Karena $x=\frac23$ boleh dipakai, $y=-1$ <i>tercapai</i>, berarti $-1$ ada di dalam range. Andi <b>salah</b>.</li><li><b>Mencari sumber kesalahan Andi.</b> Syarat $x\ne-1$ berasal dari penyebut, itu urusan <b>domain</b> (nilai $x$). Range membahas nilai $y$, dan tidak otomatis memakai angka yang sama.</li><li class="fin">Jawaban: Budi benar; Andi salah karena menyamakan syarat domain dengan range</li></ol>`,c:T`$\frac ac=\frac21=2$ → range $y\ne2$. $x\ne-1$ itu urusan domain.`}
+];
+let skor=0;const L='ABCDE';
+function build(list,box,label,tka,rots){
+ list.forEach((q0,i)=>{
+  /* putar urutan opsi supaya kunci jawaban tersebar (A-E) */
+  const r=(rots&&rots[i])||0,n=q0.o.length;
+  const q=r?{...q0,o:q0.o.map((_,j)=>q0.o[(j-r+n)%n]),k:(q0.k+r)%n}:q0;
+  const c=document.createElement('div');c.className='card q';let sel=-1;
+  c.innerHTML=`<h4>${label} ${i+1}${q.lv?`<span class="lv l${q.lv}">Level ${q.lv}</span>`:''}</h4><div>${q.t}</div>${q.fig?`<figure data-fig="${q.fig}"></figure>`:''}`+
+   q.o.map((o,j)=>`<button class="opt" data-j="${j}">${L[j]}. ${o}</button>`).join('')+
+   `<button class="btn go" disabled>Cek Jawaban</button><div class="res"></div>
+   <div class="ev" hidden><b>Pilih pembahasan:</b><br><button class="btn bf">⚡ Cara Cepat</button><button class="btn bl">📘 Cara Lengkap</button></div>
+   <div class="ex xf box" hidden><b>⚡ Cara Cepat</b><br>${q.c}</div><div class="ex xl box c" hidden><b>📘 Cara Lengkap</b><br>${q.f}</div>`;
+  box.appendChild(c);
+  const opts=c.querySelectorAll('.opt'),go=c.querySelector('.go');
+  opts.forEach(b=>b.onclick=()=>{sel=+b.dataset.j;opts.forEach(x=>x.classList.remove('sel'));b.classList.add('sel');go.disabled=false});
+  go.onclick=()=>{
+   const ok=sel==q.k;opts.forEach((x,n)=>{x.disabled=true;if(n==q.k)x.classList.add('ok')});if(!ok)opts[sel].classList.add('no');
+   go.hidden=true;c.querySelector('.res').innerHTML=`<div class="fb ${ok?'ok':'no'}">${ok?'✔ Benar! Kerja bagus.':'✘ Belum tepat. Jawaban yang benar: '+L[q.k]+'.'}</div>`;
+   if(ok&&tka){skor++;document.getElementById('skor').textContent='Skor: '+skor+' / 16'}
+   c.querySelector('.ev').hidden=false};
+  const tg=(a,b)=>{c.querySelector(a).hidden=false;c.querySelector(b).hidden=true};
+  c.querySelector('.bf').onclick=()=>tg('.xf','.xl');c.querySelector('.bl').onclick=()=>tg('.xl','.xf');
+ })}
+build(LATQ,document.getElementById('lat-list'),'Latihan',false,{1:1,2:2,3:3,4:4,5:3,6:2});
+build(Q,document.getElementById('soal-list'),'Soal',true,{0:1,1:4,2:2,3:3,9:2,10:4,11:2,12:4});
+/* render gambar & rumus */
+document.querySelectorAll('[data-fig]').forEach(f=>f.insertAdjacentHTML('afterbegin',FIG[f.dataset.fig]()));
+window.addEventListener('load',()=>renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false}));
+</script>
+</body>
+</html>

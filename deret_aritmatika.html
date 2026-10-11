@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barisan dan Deret Aritmatika | VisualMath.Lim - TKA Matematika Wajib SMA</title>
+<style>
+:root{--navy:#022050;--navy2:#0a3278;--cyan:#00d6d8;--cyan-d:#007f82;--cyan-l:#e0fbfb;--yellow:#ffd300;--yellow-l:#fff8d1;--ink:#16243d;--mute:#5a6b85;--bg:#f2f7fc;--card:#fff;--line:#d5e1ee;--ok:#12a150;--ok-l:#e6f7ee;--bad:#d93b3b;--bad-l:#fdeaea}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;font-size:17px}
+.top{background:var(--navy);border-bottom:4px solid var(--cyan);position:sticky;top:0;z-index:50}
+.top .in{max-width:1220px;margin:0 auto;padding:8px 18px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;min-width:0}
+.brand img{width:52px;height:52px;border-radius:50%;background:#fff;object-fit:cover;border:2px solid var(--yellow);flex:none}
+.brand .t{font-weight:800;font-size:1.15rem;line-height:1.25}
+.brand .t b{color:var(--cyan)}
+.brand .t small{font-weight:600;font-size:.92em;color:#cfe3ff}
+.nav{margin-left:auto;display:flex;gap:6px;align-items:center}
+.nav a{color:#fff;text-decoration:none;font-weight:700;font-size:.95rem;padding:9px 14px;border-radius:999px;transition:.2s}
+.nav a:hover{background:var(--cyan);color:var(--navy)}
+.nav a.on{background:var(--yellow);color:var(--navy)}
+.burger{display:none;margin-left:auto;background:var(--cyan);color:var(--navy);border:0;border-radius:10px;font-size:1.3rem;padding:6px 12px;cursor:pointer;font-weight:800}
+@media(max-width:860px){.burger{display:block}.nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--navy);flex-direction:column;align-items:stretch;padding:10px 18px 16px;border-bottom:4px solid var(--cyan)}.nav.open{display:flex}.nav a{text-align:center}.brand .t{font-size:.95rem}.brand img{width:42px;height:42px}}
+.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;padding:34px 18px 42px}
+.hero .in{max-width:1220px;margin:0 auto}
+.crumb{font-size:.9rem;color:#bcd4f7}.crumb a{color:var(--cyan);text-decoration:none}
+.hero h2{margin:8px 0 6px;font-size:2.1rem;line-height:1.2}
+.hero p{margin:0 0 16px;color:#d8e8ff;max-width:780px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);padding:5px 12px;border-radius:999px;font-size:.88rem;font-weight:600}
+.chip.y{background:var(--yellow);color:var(--navy);border-color:var(--yellow)}
+.wrap{max-width:1220px;margin:0 auto;padding:22px 18px 60px;display:grid;grid-template-columns:250px minmax(0,1fr);gap:26px}
+@media(max-width:980px){.wrap{grid-template-columns:minmax(0,1fr)}}
+.toc{position:sticky;top:96px;align-self:start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;max-height:calc(100vh - 120px);overflow:auto}
+.toc h4{margin:2px 8px 8px;color:var(--navy);font-size:.9rem;text-transform:uppercase;letter-spacing:.8px}
+.toc a{display:block;padding:6px 10px;border-radius:9px;text-decoration:none;color:var(--ink);font-size:.9rem;font-weight:600;border-left:4px solid transparent}
+.toc a:hover{background:var(--cyan-l)}
+.toc a.act{background:var(--cyan-l);border-left-color:var(--cyan);color:var(--navy)}
+.toc a.sub{padding-left:20px;font-weight:500}
+.tocbtn{display:none;width:100%;margin-bottom:12px;background:var(--navy);color:#fff;border:0;border-radius:12px;padding:11px;font-weight:700;font-size:1rem;cursor:pointer}
+@media(max-width:980px){.toc{position:static;max-height:none;display:none}.toc.open{display:block}.tocbtn{display:block}}
+section.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 28px;margin-bottom:22px;box-shadow:0 4px 14px rgba(2,32,80,.05)}
+@media(max-width:600px){section.card{padding:18px 15px}body{font-size:16px}.hero h2{font-size:1.65rem}}
+h3.sec{margin:0 0 14px;color:var(--navy);font-size:1.55rem;line-height:1.3;padding-bottom:10px;border-bottom:4px solid var(--cyan)}
+h3.sec .tag{display:inline-block;background:var(--yellow);color:var(--navy);font-size:.88rem;padding:2px 11px;border-radius:8px;margin-right:8px;vertical-align:middle}
+h4.sub{margin:26px 0 8px;color:var(--navy);font-size:1.2rem}
+p{margin:0 0 12px}
+.math{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:1.07em}
+.math i{font-style:italic}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .18em;line-height:1.25}
+.frac>span:first-child{border-bottom:1.6px solid currentColor;padding:0 .25em}
+.frac>span:last-child{padding:0 .25em}
+sub,sup{line-height:0;font-size:.72em}
+.eq{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:1.2em;text-align:center;margin:8px 0;padding:6px 8px;overflow-x:auto}
+.formula{background:var(--navy);color:#fff;border-radius:14px;padding:6px 10px;margin:14px 0;border:3px solid var(--yellow)}
+.formula .eq{margin:4px 0;color:#fff}
+.formula .cap{color:#cfe3ff;font-size:.88rem;text-align:center;margin-top:2px}
+.callout{border-radius:14px;padding:14px 18px;margin:16px 0;border-left:6px solid}
+.callout b.h{display:block;margin-bottom:4px}
+.callout.tip{background:var(--cyan-l);border-color:var(--cyan)}
+.callout.warn{background:var(--yellow-l);border-color:var(--yellow)}
+.callout.bad{background:var(--bad-l);border-color:var(--bad)}
+.callout.nv{background:#e8eefa;border-color:var(--navy)}
+.callout ul,.callout ol{margin:6px 0 0;padding-left:22px}
+table.t{border-collapse:collapse;width:100%;margin:12px 0;font-size:.96rem}
+table.t th{background:var(--navy);color:#fff;padding:9px 11px;text-align:left}
+table.t td{padding:8px 11px;border:1px solid var(--line);vertical-align:top}
+table.t tr:nth-child(even) td{background:#f7fafd}
+table.t.c td,table.t.c th{text-align:center}
+.tw{overflow-x:auto}
+.fig{display:block;margin:10px auto;max-width:100%;height:auto}
+.figbox{background:#fbfdff;border:1px solid var(--line);border-radius:16px;padding:10px 12px;margin:14px 0;text-align:center}
+.figbox figcaption{font-size:.88rem;color:var(--mute);margin-top:4px}
+.figrow{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.figrow svg{flex:1 1 270px;max-width:340px}
+.sol{border:2px solid var(--line);border-radius:16px;margin:14px 0;overflow:hidden;background:#fff;text-align:left}
+.sol .tabs{display:flex;background:#eef4fb}
+.sol .tab{flex:1;border:0;background:transparent;padding:11px 8px;font-weight:800;font-size:.97rem;color:var(--mute);cursor:pointer;border-bottom:4px solid transparent;font-family:inherit}
+.sol .tab.active[data-t=cepat]{background:var(--yellow-l);color:var(--navy);border-bottom-color:var(--yellow)}
+.sol .tab.active[data-t=lengkap]{background:var(--cyan-l);color:var(--navy);border-bottom-color:var(--cyan)}
+.sol .pane{padding:16px 18px}
+.sol .pane.cepat{background:var(--yellow-l)}
+.sol .lbl{font-weight:800;color:var(--navy);margin-bottom:8px}
+ol.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+ol.steps li{position:relative;padding:0 0 14px 52px;counter-increment:s}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--navy);color:var(--cyan);font-weight:800;display:flex;align-items:center;justify-content:center;border:3px solid var(--cyan)}
+ol.steps li::after{content:"";position:absolute;left:17px;top:40px;bottom:2px;width:3px;background:#bdeff0}
+ol.steps li:last-child::after{display:none}
+ol.steps li>b{display:block;color:var(--navy);padding-top:5px}
+ol.steps li .b{margin-top:2px}
+.exbox{border:2px solid var(--navy);border-radius:16px;background:#f4f8fd;padding:14px 18px 6px;margin:18px 0}
+.exbox.d{border-color:var(--cyan-d);background:#effdfd}
+.exbox.a{border-color:#c9a800;background:#fffbe6}
+.exbox .eh{font-weight:800;color:var(--navy);margin-bottom:6px;font-size:1.02rem}
+.exbox .qq{margin-bottom:8px}
+.fill{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:flex-end;margin:6px 0 10px}
+.fill label{display:flex;flex-direction:column;font-weight:700;font-size:.92rem;color:var(--navy)}
+.fill input{margin-top:4px;padding:9px 12px;border:2px solid var(--line);border-radius:10px;font:inherit;width:190px;max-width:100%;background:#fff}
+.fill input:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,214,216,.25)}
+.fill input.ok{border-color:var(--ok);background:var(--ok-l)}
+.fill input.no{border-color:var(--bad);background:var(--bad-l)}
+.fbtns{display:flex;gap:8px;flex-wrap:wrap}
+.btn{background:var(--cyan);color:var(--navy);border:0;border-radius:11px;padding:10px 18px;font-weight:800;font-size:.98rem;cursor:pointer;font-family:inherit}
+.btn:hover{background:var(--yellow)}
+.btn.ghost{background:#fff;border:2px solid var(--navy);color:var(--navy)}
+.btn.ghost:hover{background:var(--navy);color:#fff}
+.fbx{margin-bottom:10px}
+.verdict{border-radius:12px;padding:10px 14px;font-weight:700;margin-bottom:6px}
+.verdict.ok{background:var(--ok-l);color:#0b6b36}.verdict.bad{background:var(--bad-l);color:#a02323}.verdict.info{background:var(--yellow-l);color:#6b5600}
+.seatrow{display:flex;align-items:center;gap:12px;margin:5px 0}
+.seatrow .dots{flex:1;min-width:0;display:flex;justify-content:center;gap:2px}
+.seatrow .dots i{flex:0 1 11px;min-width:3px;height:11px;border-radius:3px;background:var(--cyan);display:block}
+.seatrow span{min-width:96px;flex:none;text-align:left;font-size:.88rem;color:var(--navy);font-weight:600}
+.flow{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.flow div{flex:1 1 150px;border-radius:14px;padding:10px 12px;color:#fff;font-size:.9rem}
+.flow div b{display:block;font-size:1.02rem}
+.stat{position:sticky;top:78px;z-index:20;background:var(--navy);color:#fff;border-radius:14px;padding:10px 16px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:12px 0 18px;border:2px solid var(--cyan)}
+.stat b{color:var(--yellow)}
+.stat button{margin-left:auto;background:var(--yellow);border:0;border-radius:9px;padding:7px 14px;font-weight:800;color:var(--navy);cursor:pointer}
+.lvh{margin:30px 0 8px;padding:12px 16px;border-radius:14px;background:var(--navy);color:#fff;font-size:1.2rem;font-weight:800}
+.lvh small{display:block;font-weight:500;color:#cfe3ff;font-size:.9rem}
+article.q{border:2px solid var(--line);border-radius:18px;padding:18px 20px;margin:16px 0;background:#fff}
+article.q.done-ok{border-color:var(--ok)}article.q.done-bad{border-color:var(--bad)}
+.qh{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.qh .num{background:var(--navy);color:#fff;font-weight:800;padding:3px 12px;border-radius:9px}
+.qh .lv{font-weight:800;font-size:.82rem;padding:3px 10px;border-radius:999px}
+.lv1{background:var(--cyan);color:var(--navy)}.lv2{background:var(--yellow);color:var(--navy)}.lv3{background:#ff7a59;color:#fff}
+.qh .pr{font-size:.86rem;color:var(--mute);font-weight:600}
+.qh .fmt{margin-left:auto;font-size:.78rem;border:1px solid var(--line);padding:2px 8px;border-radius:7px;color:var(--mute)}
+.stem p{margin-bottom:8px}
+.pick{font-size:.9rem;color:var(--cyan-d);font-weight:700;margin-top:6px}
+.opts{display:grid;gap:9px;margin-top:10px}
+.opt{display:flex;gap:12px;align-items:center;text-align:left;width:100%;border:2px solid var(--line);background:#fff;border-radius:12px;padding:10px 14px;font:inherit;color:var(--ink);cursor:pointer;transition:.15s}
+.opt:hover{border-color:var(--cyan);background:var(--cyan-l)}
+.opt .l{flex:none;width:32px;height:32px;border-radius:50%;background:#e8eefa;color:var(--navy);font-weight:800;display:flex;align-items:center;justify-content:center}
+.opt input{width:20px;height:20px;accent-color:var(--navy);flex:none}
+.q.locked .opt{cursor:default;pointer-events:none}
+.opt.ok{border-color:var(--ok);background:var(--ok-l)}.opt.ok .l{background:var(--ok);color:#fff}
+.opt.bad{border-color:var(--bad);background:var(--bad-l)}.opt.bad .l{background:var(--bad);color:#fff}
+.opt.miss{border-color:var(--ok);border-style:dashed}
+.q.locked .btn.chk{display:none}
+.btn.chk{margin-top:12px}
+table.bs{width:100%;border-collapse:collapse;margin-top:10px}
+table.bs th{background:var(--navy);color:#fff;padding:8px;font-size:.92rem}
+table.bs td{border:1px solid var(--line);padding:8px 10px}
+table.bs td.r{text-align:center;width:90px}
+table.bs td.r input{width:20px;height:20px;accent-color:var(--navy)}
+table.bs tr.ok td{background:var(--ok-l)}table.bs tr.bad td{background:var(--bad-l)}
+.fb{margin-top:14px}
+.warnmsg{color:#a02323;font-weight:600;margin-top:8px;font-size:.92rem}
+footer{background:var(--navy);color:#cfe3ff;text-align:center;padding:22px 14px;border-top:4px solid var(--cyan);font-size:.92rem}
+footer b{color:var(--yellow)}
+.totop{position:fixed;right:16px;bottom:16px;background:var(--yellow);color:var(--navy);width:46px;height:46px;border-radius:50%;border:0;font-size:1.3rem;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.25);display:none;z-index:40}
+@media print{.top,.toc,.stat,.totop,.tocbtn{display:none}.wrap{display:block}}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="brand" href="index.html" aria-label="VisualMath.Lim">
+    <img src="logo.png" alt="Logo VisualMath.Lim" onerror="this.style.visibility='hidden'">
+    <div class="t"><span>VisualMath.<b>Lim</b></span><small> - TKA Matematika Wajib SMA</small></div>
+  </a>
+  <button class="burger" id="burger" aria-label="Menu">☰</button>
+  <nav class="nav" id="nav">
+    <a href="index.html">🏠 Home</a>
+    <a href="deret.html">📊 Dashboard</a>
+    <a href="deret_aritmatika.html" class="on">➕ Deret Aritmatika</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="in">
+  <div class="crumb"><a href="index.html">Home</a> › <a href="deret.html">Dashboard Deret</a> › Barisan dan Deret Aritmatika</div>
+  <h2>Barisan dan Deret Aritmatika</h2>
+  <p>Belajar dari dasar: <b>baca konsep → isi sendiri dulu → periksa → pelajari Cara Lengkap dan Cara Cepat</b>. Cocok untuk siswa yang ingin menguatkan dasar sebelum TKA.</p>
+  <div class="chips"><span class="chip y">Elemen: Aljabar</span><span class="chip">Sub-materi: Fungsi (Barisan dan Deret)</span><span class="chip">Termasuk Bunga Tunggal</span><span class="chip">Latihan Isian + 17 Soal Prediksi TKA</span></div>
+</div></div>
+
+<div class="wrap">
+  <div>
+    <button class="tocbtn" id="tocbtn">📑 Daftar Isi</button>
+    <aside class="toc" id="toc"><h4>Daftar Isi</h4></aside>
+  </div>
+  <main id="app"></main>
+</div>
+<footer>© <b>VisualMath.Lim</b> · Bimbingan Belajar · Materi TKA Matematika Wajib SMA</footer>
+<button class="totop" id="totop" aria-label="Ke atas">↑</button>
+
+<script>
+/* ===== RENDER MATEMATIKA (tanpa library luar) ===== */
+function mm(m){
+  m=m.replace(/_\{([^}]*)\}/g,'<sub>$1</sub>').replace(/\^\{([^}]*)\}/g,'<sup>$1</sup>');
+  m=m.replace(/⟨([^⟨⟩|]*)\|([^⟨⟩|]*)⟩/g,'<span class="frac"><span>$1</span><span>$2</span></span>');
+  return m.replace(/(<[^>]+>)|(&[a-z]+;)|([A-Za-z]+)/g,(x,tag,ent,w)=>tag||ent||(w.length===1?'<i>'+w+'</i>':w));
+}
+function M(s){
+  return s.replace(/\$\$([\s\S]+?)\$\$/g,(_,m)=>'<div class="eq">'+mm(m)+'</div>')
+          .replace(/\$([^$]+?)\$/g,(_,m)=>'<span class="math">'+mm(m)+'</span>');
+}
+/* ===== GAMBAR (SVG / HTML) ===== */
+const NAVY='#022050',CY='#00d6d8',CYD='#007f82',YL='#ffd300',OR='#ff7a59';
+const defs='<defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="'+OR+'"/></marker><marker id="ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="'+CYD+'"/></marker></defs>';
+function jumpFig(items,jt,cap){
+  const n=items.length,st=n>5?104:112,W=100+(n-1)*st+20,H=128;let s='<svg class="fig" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+cap+'">'+defs;
+  items.forEach((it,i)=>{const cx=60+i*st;
+    s+='<rect x="'+(cx-36)+'" y="64" width="72" height="42" rx="10" fill="'+(it.hl?YL:'#eaf2fb')+'" stroke="'+NAVY+'" stroke-width="2"/><text x="'+cx+'" y="91" text-anchor="middle" font-size="17" font-weight="800" fill="'+NAVY+'">'+it.t+'</text><text x="'+cx+'" y="122" text-anchor="middle" font-size="12" fill="#5a6b85">'+(it.s||'')+'</text>';
+    if(i<n-1&&jt){const nx=cx+st;s+='<path d="M'+(cx+16)+',58 Q'+((cx+nx)/2)+',12 '+(nx-16)+',58" fill="none" stroke="'+OR+'" stroke-width="2.6" marker-end="url(#ar)"/><text x="'+((cx+nx)/2)+'" y="24" text-anchor="middle" font-size="15" font-weight="800" fill="'+OR+'">'+jt+'</text>';}
+  });
+  return '<figure class="figbox">'+s+'</svg><figcaption>'+cap+'</figcaption></figure>';
+}
+function lineChart(ys,col,title){
+  const W=300,H=215,l=44,r=14,t=36,b=40,xs=[1,2,3,4,5,6],mn=Math.min(...ys),mx=Math.max(...ys),lo=Math.floor((mn-1)/5)*5,hi=Math.ceil((mx+1)/5)*5,stp=(hi-lo)>25?10:5;
+  const X=v=>l+(v-1)*(W-l-r)/5,Y=v=>H-b-(v-lo)*(H-b-t)/(hi-lo);let s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+title+'"><rect width="'+W+'" height="'+H+'" fill="#fff"/>';
+  for(let v=lo;v<=hi;v+=stp){s+='<line x1="'+l+'" x2="'+(W-r)+'" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="#e1eaf3"/><text x="'+(l-6)+'" y="'+(Y(v)+4)+'" text-anchor="end" font-size="11" fill="#5a6b85">'+v+'</text>';}
+  xs.forEach(v=>{s+='<text x="'+X(v)+'" y="'+(H-b+16)+'" text-anchor="middle" font-size="11" fill="#5a6b85">'+v+'</text>';});
+  s+='<polyline points="'+xs.map((v,i)=>X(v)+','+Y(ys[i])).join(' ')+'" fill="none" stroke="'+col+'" stroke-width="3"/>';
+  xs.forEach((v,i)=>{s+='<circle cx="'+X(v)+'" cy="'+Y(ys[i])+'" r="5" fill="'+col+'" stroke="#fff" stroke-width="2"/>';});
+  return s+'<text x="'+(W/2)+'" y="20" text-anchor="middle" font-size="13" font-weight="800" fill="'+NAVY+'">'+title+'</text><text x="'+(W/2)+'" y="'+(H-6)+'" text-anchor="middle" font-size="11" fill="#5a6b85">n (urutan suku)</text></svg>';
+}
+function gaussFig(){
+  const v=[2,5,8,11,14],xs=[50,135,220,305,390];let s='<svg class="fig" viewBox="0 0 440 190" role="img" aria-label="Pasangan Gauss">'+defs;
+  s+='<path d="M50,92 Q220,-30 390,92" fill="none" stroke="'+OR+'" stroke-width="2.6"/><text x="220" y="30" text-anchor="middle" font-size="15" font-weight="800" fill="'+OR+'">2 + 14 = 16</text>';
+  s+='<path d="M135,92 Q220,22 305,92" fill="none" stroke="'+CYD+'" stroke-width="2.6"/><text x="220" y="66" text-anchor="middle" font-size="15" font-weight="800" fill="'+CYD+'">5 + 11 = 16</text>';
+  v.forEach((a,i)=>{s+='<rect x="'+(xs[i]-30)+'" y="100" width="60" height="40" rx="10" fill="'+(i===2?YL:'#eaf2fb')+'" stroke="'+NAVY+'" stroke-width="2"/><text x="'+xs[i]+'" y="127" text-anchor="middle" font-size="18" font-weight="800" fill="'+NAVY+'">'+a+'</text>';});
+  return s+'<text x="220" y="170" text-anchor="middle" font-size="13" fill="'+NAVY+'">8 di tengah → 8 + 8 = 16 (setengah pasangan)</text></svg>';
+}
+function seatsFig(){return '<div class="figbox">'+[12,14,16,18,20].map((k,i)=>'<div class="seatrow"><div class="dots">'+'<i></i>'.repeat(k)+'</div><span>Baris '+(i+1)+': '+k+' kursi</span></div>').join('')+'<figcaption>Setiap baris bertambah 2 kursi → beda b = 2</figcaption></div>';}
+function matchFig(){
+  let s='<svg class="fig" viewBox="0 0 440 124" role="img" aria-label="Pola persegi korek api">';
+  const sq=(x0,k)=>{let o='';for(let i=0;i<=k;i++)o+='<line x1="'+(x0+i*44)+'" y1="20" x2="'+(x0+i*44)+'" y2="62" stroke="'+OR+'" stroke-width="6" stroke-linecap="round"/>';for(let i=0;i<k;i++)o+='<line x1="'+(x0+i*44)+'" y1="20" x2="'+(x0+i*44+44)+'" y2="20" stroke="'+OR+'" stroke-width="6" stroke-linecap="round"/><line x1="'+(x0+i*44)+'" y1="62" x2="'+(x0+i*44+44)+'" y2="62" stroke="'+OR+'" stroke-width="6" stroke-linecap="round"/>';return o;};
+  s+=sq(10,1)+sq(110,2)+sq(260,3);
+  const tx=(x,t)=>'<text x="'+x+'" y="98" text-anchor="middle" font-size="13" fill="'+NAVY+'" font-weight="700">'+t+'</text>';
+  return s+tx(32,'Pola 1: 4')+tx(154,'Pola 2: 7')+tx(326,'Pola 3: 10')+'<text x="220" y="118" text-anchor="middle" font-size="11" fill="#5a6b85">(banyak batang korek api)</text></svg>';
+}
+function barFig(){
+  const v=[4,4.24,4.48,4.72,4.96,5.2],W=440,H=230,l=40,b=40,t=30,bw=44,gp=(W-l-10-6*bw)/5;let s='<svg class="fig" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Saldo bunga tunggal">';
+  v.forEach((a,i)=>{const h=(a/5.6)*(H-b-t),x=l+i*(bw+gp);s+='<rect x="'+x+'" y="'+(H-b-h)+'" width="'+bw+'" height="'+h+'" rx="6" fill="'+(i?CY:'#9fb3cc')+'"/><text x="'+(x+bw/2)+'" y="'+(H-b-h-6)+'" text-anchor="middle" font-size="12" font-weight="800" fill="'+NAVY+'">'+a.toFixed(2).replace('.',',')+'</text><text x="'+(x+bw/2)+'" y="'+(H-b+16)+'" text-anchor="middle" font-size="12" fill="#5a6b85">'+i+'</text>';if(i)s+='<text x="'+(x+bw/2)+'" y="'+(H-b-16)+'" text-anchor="middle" font-size="11" font-weight="800" fill="'+NAVY+'">+0,24</text>';});
+  return s+'<line x1="'+l+'" x2="'+(W-6)+'" y1="'+(H-b)+'" y2="'+(H-b)+'" stroke="'+NAVY+'" stroke-width="2"/><text x="'+(W/2)+'" y="'+(H-6)+'" text-anchor="middle" font-size="12" fill="#5a6b85">Tahun ke-</text><text x="'+(l+4)+'" y="16" font-size="12" fill="#5a6b85">Saldo (juta rupiah)</text></svg>';
+}
+function stairFig(){
+  let s='<svg class="fig" viewBox="0 0 440 190" role="img" aria-label="Tumpukan batu bata">';const rows=11;
+  for(let r=0;r<rows;r++){const k=30-2*r,w=k*10,x=(440-w)/2,y=170-r*14;s+='<rect x="'+x+'" y="'+y+'" width="'+w+'" height="12" rx="2" fill="'+(r%2?CY:'#7fe8ea')+'" stroke="'+NAVY+'" stroke-width=".8"/>';if(r===0||r===rows-1||r===5)s+='<text x="'+(x+w+8)+'" y="'+(y+10)+'" font-size="12" font-weight="700" fill="'+NAVY+'">'+k+' buah</text>';}
+  return s+'</svg>';
+}
+function flowFig(){
+  const st=[['1 BACA','nilai awal, perubahan, periode',NAVY],['2 KENALI','yang tetap: selisih atau perbandingan?',CYD],['3 MODELKAN','pilih U<sub>n</sub> atau S<sub>n</sub> dan rumusnya',OR],['4 HITUNG','substitusi, hitung rapi','#6c5b7b'],['5 CEK','masuk akal? naik / turun benar?','#5a6b85']];
+  return '<div class="flow">'+st.map(a=>'<div style="background:'+a[2]+'"><b>'+a[0]+'</b>'+a[1]+'</div>').join('')+'</div>';
+}
+/* ===== PEMBAHASAN: CARA CEPAT + CARA LENGKAP ===== */
+function sol(quick,steps){
+  const L=steps.map(s=>'<li><b>'+s[0]+'</b><div class="b">'+s[1]+'</div></li>').join('');
+  return '<div class="sol"><div class="tabs"><button class="tab" data-t="cepat">⚡ Cara Cepat</button><button class="tab active" data-t="lengkap">📝 Cara Lengkap</button></div>'
+   +'<div class="pane cepat" hidden><div class="lbl">⚡ Jalan pintas (setelah paham caranya):</div>'+quick+'</div>'
+   +'<div class="pane lengkap"><div class="lbl">📝 Ikuti langkahnya satu per satu:</div><ol class="steps">'+L+'</ol></div></div>';
+}
+/* ===== CONTOH & LATIHAN ISIAN (isi dulu, baru dijelaskan) ===== */
+const EX={};
+function E(id,q,f,hint,quick,steps){EX[id]={k:id[0],q:q,f:f,hint:hint,quick:quick,steps:steps};}
+/* -- Cek Dasar -- */
+E('a1','Hitung: $5 + (−3) × 4 = $ ….',[['Hasil =',-7,'−7']],'Kerjakan <b>perkalian</b> lebih dulu, baru penjumlahan.','Kali dulu: $(−3) × 4 = −12$. Lalu $5 − 12 = −7$.',[['Kerjakan perkalian dulu','$(−3) × 4 = −12$ (tanda berbeda → hasil negatif)'],['Lanjutkan penjumlahan','$5 + (−12) = 5 − 12 = −7$']]);
+E('a2','Jika $a = 3$, $b = 4$, dan $n = 10$, hitung $a + (n − 1)b$.',[['Hasil =',39,'39']],'Ganti huruf dengan angkanya dalam kurung, hitung isi kurung dulu.','$3 + 9 × 4 = 3 + 36 = 39$',[['Ganti huruf dengan angka','$a + (n − 1)b = 3 + (10 − 1)(4)$'],['Hitung isi kurung','$10 − 1 = 9$ sehingga $3 + 9 × 4$'],['Kalikan lebih dulu','$9 × 4 = 36$'],['Jumlahkan','$3 + 36 = 39$']]);
+E('a3','Selesaikan persamaan $2x + 6 = 20$.',[['$x$ =',7,'7']],'Pindahkan 6 ke ruas kanan (tandanya berubah), lalu bagi 2.','$2x = 14$ → $x = 7$',[['Pindahkan 6 ke ruas kanan','Tanda berubah: $2x = 20 − 6$'],['Hitung','$2x = 14$'],['Bagi kedua ruas dengan 2','$x = 14 ÷ 2 = 7$'],['Cek','$2(7) + 6 = 20$ ✔']]);
+E('a4','Dari $a + 2b = 10$ dan $a + 7b = 25$, tentukan $b$ lalu $a$.',[['$b$ =',3,'3'],['$a$ =',4,'4']],'Kurangkan persamaan kedua dengan persamaan pertama, huruf $a$ akan hilang.','Selisih: $5b = 15$ → $b = 3$. Lalu $a = 10 − 2(3) = 4$.',[['Kurangkan persamaan (2) − (1)','$$(a + 7b) − (a + 2b) = 25 − 10$$$$5b = 15$$'],['Cari $b$','$b = 15 ÷ 5 = 3$'],['Masukkan $b$ ke persamaan (1)','$a + 2(3) = 10$ → $a + 6 = 10$'],['Cari $a$','$a = 10 − 6 = 4$']]);
+E('a5','Berapa 6% dari Rp5.000.000?',[['Hasil (rupiah) =',300000,'Rp300.000']],'Ubah 6% menjadi desimal: 6% = 0,06.','$1\% = 50.000$ sehingga $6\% = 6 × 50.000 = 300.000$'.replace('\\%','%').replace('\\%','%'),[['Ubah persen ke desimal','$6% = ⟨6|100⟩ = 0,06$'],['Kalikan dengan nilainya','$0,06 × 5.000.000 = 300.000$'],['Jawaban','Rp300.000']]);
+E('a6','Ubah ke satuan tahun: 18 bulan dan 9 bulan.',[['18 bulan = … tahun',1.5,'1,5'],['9 bulan = … tahun',0.75,'0,75']],'Bagi banyak bulan dengan 12.','$⟨18|12⟩ = 1,5$ dan $⟨9|12⟩ = 0,75$',[['Rumus','tahun = bulan ÷ 12'],['18 bulan','$18 ÷ 12 = 1,5$ tahun'],['9 bulan','$9 ÷ 12 = 0,75$ tahun (sama dengan tiga perempat tahun)']]);
+/* -- Barisan aritmatika -- */
+E('d0','Tentukan beda barisan $12, 9, 6, 3, …$',[['$b$ =',-3,'−3']],'Beda = suku kedua dikurangi suku pertama.','$b = 9 − 12 = −3$ (turun 3 setiap suku)',[['Ambil dua suku berurutan','$U_{1} = 12$ dan $U_{2} = 9$'],['Kurangkan: suku kedua − suku pertama','$b = 9 − 12 = −3$'],['Cek dengan pasangan lain','$6 − 9 = −3$ dan $3 − 6 = −3$ ✔ selalu sama']]);
+E('c1','Diketahui barisan $5, 8, 11, 14, …$ Tentukan $U_{20}$.',[['$U_{20}$ =',62,'62']],'Cari $a$ dan $b$ dulu, lalu pakai $U_{n} = a + (n − 1)b$.','Naik 3 setiap suku. Dari suku ke-1 ke suku ke-20 ada <b>19 lompatan</b>:$$U_{20} = 5 + 19 × 3 = 62$$',[['Tulis suku pertama','$a = 5$'],['Cari beda','$b = 8 − 5 = 3$'],['Tulis rumus','$U_{n} = a + (n − 1)b$'],['Masukkan angka ($n = 20$)','$$U_{20} = 5 + (20 − 1)(3)$$'],['Hitung','$$U_{20} = 5 + 19 × 3 = 5 + 57 = 62$$'],['Jawaban','$U_{20} = 62$']]);
+E('c2','Berapa banyak suku pada barisan $4, 9, 14, …, 99$?',[['$n$ =',20,'20']],'Pakai $U_{n} = a + (n − 1)b$ dengan $U_{n} = 99$, lalu cari $n$.','$$n = ⟨99 − 4|5⟩ + 1 = 19 + 1 = 20$$',[['Tulis yang diketahui','$a = 4$, $b = 5$, suku terakhir $U_{n} = 99$'],['Masukkan ke rumus','$$99 = 4 + (n − 1)·5$$'],['Pindahkan 4 ke kiri','$$95 = (n − 1)·5$$'],['Bagi kedua ruas dengan 5','$$19 = n − 1$$'],['Cari $n$','$n = 19 + 1 = 20$ suku']]);
+E('d1','Tentukan suku ke-12 dari barisan $7, 10, 13, 16, …$',[['$U_{12}$ =',40,'40']],'$a = 7$, $b = 3$, banyak lompatan $= 12 − 1 = 11$.','$7 + 11 × 3 = 40$',[['Tentukan $a$ dan $b$','$a = 7$, $b = 10 − 7 = 3$'],['Masukkan ke rumus','$U_{12} = 7 + (12 − 1)(3)$'],['Hitung','$= 7 + 11 × 3 = 7 + 33 = 40$']]);
+E('d2','Tentukan suku ke-10 dari barisan turun $50, 46, 42, 38, …$',[['$U_{10}$ =',14,'14']],'Beda negatif: $b = 46 − 50$. Hati-hati tanda minus.','$50 + 9 × (−4) = 50 − 36 = 14$',[['Tentukan $a$ dan $b$','$a = 50$, $b = 46 − 50 = −4$'],['Masukkan ke rumus','$U_{10} = 50 + (10 − 1)(−4)$'],['Kalikan','$9 × (−4) = −36$'],['Jumlahkan','$50 + (−36) = 14$']]);
+E('c3','Diketahui $U_{3} = 10$ dan $U_{8} = 25$. Tentukan $a$ dan $b$.',[['$a$ =',4,'4'],['$b$ =',3,'3']],'Tulis $U_{3} = a + 2b$ dan $U_{8} = a + 7b$, lalu kurangkan.','$$b = ⟨25 − 10|8 − 3⟩ = ⟨15|5⟩ = 3$$$$a = U_{3} − 2b = 10 − 6 = 4$$',[['Tulis dua persamaan','$U_{3} = a + 2b = 10$ … (1)<br>$U_{8} = a + 7b = 25$ … (2)'],['Kurangkan (2) − (1)','$$(a + 7b) − (a + 2b) = 25 − 10$$$$5b = 15$$'],['Cari $b$','$b = 15 ÷ 5 = 3$'],['Masukkan $b$ ke persamaan (1)','$$a + 2(3) = 10$$$$a + 6 = 10$$'],['Cari $a$','$a = 10 − 6 = 4$']]);
+E('c3b','Diketahui $U_{4} = 11$ dan $U_{9} = −4$. Tentukan $a$ dan $b$ (bedanya negatif).',[['$a$ =',20,'20'],['$b$ =',-3,'−3']],'Selisih nilai: $−4 − 11$. Banyak lompatan: $9 − 4$.','$$b = ⟨−4 − 11|9 − 4⟩ = ⟨−15|5⟩ = −3$$$$a = 11 − 3b = 11 + 9 = 20$$',[['Hitung selisih nilai','$−4 − 11 = −15$'],['Hitung banyak lompatan','$9 − 4 = 5$ lompatan'],['Cari beda','$b = −15 ÷ 5 = −3$ (barisan turun)'],['Cari $a$ dari $U_{4} = a + 3b$','$$11 = a + 3(−3)$$$$11 = a − 9$$$$a = 20$$'],['Cek hasil','20, 17, 14, 11, 8, 5, 2, −1, −4. Suku ke-9 memang −4 ✔']]);
+E('d3','Diketahui $U_{5} = 18$ dan $U_{9} = 30$. Tentukan $a$ dan $b$.',[['$a$ =',6,'6'],['$b$ =',3,'3']],'$b = ⟨30 − 18|9 − 5⟩$. Lalu $a = U_{5} − 4b$.','$b = ⟨12|4⟩ = 3$ ; $a = 18 − 4(3) = 6$',[['Selisih nilai dan lompatan','$30 − 18 = 12$ dan $9 − 5 = 4$'],['Cari beda','$b = 12 ÷ 4 = 3$'],['Cari $a$ dari $U_{5} = a + 4b$','$18 = a + 4(3)$ → $18 = a + 12$'],['Hitung','$a = 6$'],['Cek','6, 9, 12, 15, 18 → suku ke-5 = 18 ✔']]);
+E('c4','Agar $x + 1$, $2x + 3$, $4x − 1$ membentuk barisan aritmatika, tentukan $x$.',[['$x$ =',6,'6']],'Pakai sifat: $2 × $ (suku tengah) $=$ suku kiri $+$ suku kanan.','$$2(2x + 3) = (x + 1) + (4x − 1)$$$$4x + 6 = 5x → x = 6$$',[['Ingat sifatnya','$2U_{2} = U_{1} + U_{3}$'],['Masukkan bentuknya','$$2(2x + 3) = (x + 1) + (4x − 1)$$'],['Kalikan di kiri, jumlahkan di kanan','$$4x + 6 = 5x$$'],['Pindahkan $4x$ ke kanan','$$6 = 5x − 4x$$$$x = 6$$'],['Cek','Ketiga suku: 7, 15, 23 → beda 8 ✔']]);
+E('d4','Agar $3$, $x$, $15$ membentuk barisan aritmatika, tentukan $x$.',[['$x$ =',9,'9']],'Suku tengah adalah rata-rata kedua suku di sampingnya.','$x = ⟨3 + 15|2⟩ = 9$',[['Pakai sifat suku tengah','$2x = 3 + 15$'],['Hitung','$2x = 18$'],['Bagi 2','$x = 9$'],['Cek','3, 9, 15 → beda 6 ✔']]);
+E('c5','Sebuah gedung memiliki 15 baris kursi. Baris pertama 12 kursi, tiap baris berikutnya 2 kursi lebih banyak. Berapa seluruh kursi di gedung itu?',[['Jumlah kursi =',390,'390']],'Soal bertanya "seluruh" → pakai $S_{n}$ dengan $a = 12$, $b = 2$, $n = 15$.','$U_{15} = 12 + 14 × 2 = 40$$$S_{15} = ⟨15|2⟩ × (12 + 40) = 7,5 × 52 = 390$$',[['Tulis yang diketahui','$a = 12$, $b = 2$, $n = 15$'],['Soal bertanya "seluruh" → deret $S_{n}$','$S_{n} = ⟨n|2⟩ (2a + (n − 1)b)$'],['Masukkan angka','$$S_{15} = ⟨15|2⟩ (2·12 + 14·2)$$'],['Hitung isi kurung','$2·12 = 24$, $14·2 = 28$, jumlahnya $52$'],['Kalikan','$$S_{15} = ⟨15|2⟩ × 52 = 15 × 26 = 390$$'],['Jawaban','390 kursi']]);
+E('c5b','Hitung jumlah $1 + 2 + 3 + … + 100$ (cara Gauss).',[['Jumlah =',5050,'5.050']],'$a = 1$, $b = 1$, $n = 100$, suku terakhir $= 100$.','Pasangan $1 + 100 = 101$ ada 50 pasang: $50 × 101 = 5.050$',[['Tulis yang diketahui','$a = 1$, $U_{n} = 100$, $n = 100$'],['Suku terakhir diketahui → pakai','$S_{n} = ⟨n|2⟩ (a + U_{n})$'],['Masukkan angka','$S_{100} = ⟨100|2⟩ (1 + 100) = 50 × 101$'],['Hitung','$50 × 101 = 5.050$']]);
+E('c5c','Hitung $3 + 7 + 11 + 15 + 19$ dengan cara cepat suku tengah.',[['Suku tengah =',11,'11'],['Jumlah =',55,'55']],'Banyak suku 5 (ganjil). Suku tengahnya adalah suku ke-3.','Jumlah $=$ banyak suku $×$ suku tengah $= 5 × 11 = 55$',[['Hitung banyak suku','Ada 5 suku (ganjil), jadi ada satu suku tepat di tengah'],['Tentukan suku tengah','Suku ke-3 $= 11$ (atau rata-rata $⟨3 + 19|2⟩ = 11$)'],['Kalikan','Jumlah $= 5 × 11 = 55$'],['Cek dengan rumus biasa','$S_{5} = ⟨5|2⟩ (3 + 19) = 2,5 × 22 = 55$ ✔']]);
+E('d5','Hitung jumlah 10 suku pertama dari $5 + 8 + 11 + 14 + …$',[['$S_{10}$ =',185,'185']],'$a = 5$, $b = 3$, $n = 10$. Pakai $S_{n} = ⟨n|2⟩ (2a + (n − 1)b)$.','$S_{10} = 5 × (10 + 27) = 5 × 37 = 185$',[['Tulis yang diketahui','$a = 5$, $b = 3$, $n = 10$'],['Masukkan ke rumus','$S_{10} = ⟨10|2⟩ (2·5 + 9·3)$'],['Hitung isi kurung','$10 + 27 = 37$'],['Kalikan','$5 × 37 = 185$']]);
+E('d6','Tentukan banyak dan jumlah semua bilangan kelipatan 3 dari 3 sampai 60.',[['Banyak suku =',20,'20'],['Jumlah =',630,'630']],'$a = 3$, $b = 3$, $U_{n} = 60$. Cari $n$ dulu.','$n = ⟨60 − 3|3⟩ + 1 = 20$ ; $S = 10 × (3 + 60) = 630$',[['Tulis yang diketahui','$a = 3$, $b = 3$, $U_{n} = 60$'],['Cari banyak suku','$n = ⟨60 − 3|3⟩ + 1 = 19 + 1 = 20$'],['Cari jumlah','$S_{20} = ⟨20|2⟩ (3 + 60) = 10 × 63 = 630$']]);
+E('c6','Diketahui $S_{n} = 2n^{2} + n$. Tentukan $U_{5}$.',[['$U_{5}$ =',19,'19']],'$U_{5} = S_{5} − S_{4}$. Hitung kedua jumlah itu lebih dulu.','$U_{5} = S_{5} − S_{4} = 55 − 36 = 19$',[['Ingat hubungannya','$U_{n} = S_{n} − S_{n−1}$, jadi $U_{5} = S_{5} − S_{4}$'],['Hitung $S_{5}$','$S_{5} = 2(5)^{2} + 5 = 50 + 5 = 55$'],['Hitung $S_{4}$','$S_{4} = 2(4)^{2} + 4 = 32 + 4 = 36$'],['Kurangkan','$U_{5} = 55 − 36 = 19$']]);
+E('d7','Diketahui $S_{n} = n^{2} + 2n$. Tentukan $U_{6}$.',[['$U_{6}$ =',13,'13']],'$U_{6} = S_{6} − S_{5}$.','$S_{6} = 48$, $S_{5} = 35$ → $U_{6} = 13$',[['Rumus','$U_{6} = S_{6} − S_{5}$'],['Hitung $S_{6}$','$6^{2} + 2(6) = 36 + 12 = 48$'],['Hitung $S_{5}$','$5^{2} + 2(5) = 25 + 10 = 35$'],['Kurangkan','$48 − 35 = 13$']]);
+E('c7','Di antara 4 dan 24 disisipkan 4 bilangan sehingga terbentuk barisan aritmatika. Berapa beda barisan yang baru?',[['Beda baru =',4,'4']],'Banyak lompatan = banyak bilangan yang disisipkan + 1.','$b = ⟨24 − 4|4 + 1⟩ = ⟨20|5⟩ = 4$',[['Hitung banyak lompatan','4 bilangan disisipkan → ada $4 + 1 = 5$ lompatan dari 4 ke 24'],['Hitung selisih','$24 − 4 = 20$'],['Bagi','$b = 20 ÷ 5 = 4$'],['Tulis barisannya','4, 8, 12, 16, 20, 24 ✔']]);
+E('d8','Di antara 2 dan 22 disisipkan 3 bilangan sehingga terbentuk barisan aritmatika. Berapa beda barisan yang baru?',[['Beda baru =',5,'5']],'Banyak lompatan $= 3 + 1 = 4$.','$b = ⟨22 − 2|4⟩ = 5$',[['Banyak lompatan','$3 + 1 = 4$'],['Selisih','$22 − 2 = 20$'],['Bagi','$20 ÷ 4 = 5$ → barisan 2, 7, 12, 17, 22 ✔']]);
+E('c8','Pola persegi dari korek api: pola ke-1 memerlukan 4 batang, pola ke-2 memerlukan 7 batang, pola ke-3 memerlukan 10 batang. Berapa batang untuk pola ke-10?',[['Banyak batang =',31,'31']],'Cari beda dulu, lalu susun rumus $U_{n}$.','Rumus $U_{n} = 3n + 1$ → $U_{10} = 31$',[['Cari selisih','$7 − 4 = 3$ dan $10 − 7 = 3$ → aritmatika, $a = 4$, $b = 3$'],['Susun rumus umum','$U_{n} = 4 + (n − 1)3 = 3n + 1$'],['Pakai untuk $n = 10$','$U_{10} = 3(10) + 1 = 31$']]);
+E('d9','Pola bilangan $5, 8, 11, 14, …$ Tentukan rumus $U_{n}$ lalu nilai suku ke-20.',[['$U_{20}$ =',62,'62']],'Rumus umum: $U_{n} = 3n + 2$.','$U_{n} = 5 + (n − 1)3 = 3n + 2$ → $U_{20} = 62$',[['Cari $a$ dan $b$','$a = 5$, $b = 3$'],['Susun rumus','$U_{n} = 5 + 3n − 3 = 3n + 2$'],['Hitung $n = 20$','$3(20) + 2 = 62$']]);
+E('c9','Andi menabung Rp4.000.000 dengan bunga tunggal 6% per tahun selama 3 tahun. Berapa jumlah akhirnya?',[['Jumlah akhir (rupiah) =',4720000,'Rp4.720.000']],'Hitung bunga $B = M × r × t$ dulu, lalu tambahkan ke modal.','Bunga setahun $= 240.000$ → 3 tahun $= 720.000$. Jumlah akhir $= 4.720.000$',[['Tulis yang diketahui','$M = 4.000.000$, $r = 6% = 0,06$, $t = 3$ tahun'],['Hitung bunga','$$B = M × r × t$$$$B = 4.000.000 × 0,06 × 3 = 720.000$$'],['Jumlah akhir = modal + bunga','$$A = 4.000.000 + 720.000 = 4.720.000$$'],['Jawaban','Rp4.720.000']]);
+E('c10','Modal Rp2.000.000, bunga tunggal 12% per tahun, selama 9 bulan. Berapa jumlah akhirnya?',[['Jumlah akhir (rupiah) =',2180000,'Rp2.180.000']],'Ubah 9 bulan menjadi tahun dulu.','$t = 0,75$ → bunga $= 2.000.000 × 0,12 × 0,75 = 180.000$ → akhir $2.180.000$',[['Ubah bulan ke tahun','$t = ⟨9|12⟩ = 0,75$ tahun'],['Ubah persen ke desimal','$r = 12% = 0,12$'],['Hitung bunga','$B = 2.000.000 × 0,12 × 0,75 = 180.000$'],['Jumlah akhir','$A = 2.000.000 + 180.000 = 2.180.000$']]);
+E('c11','Modal Rp5.000.000 menjadi Rp5.750.000 dalam 2 tahun dengan bunga tunggal. Berapa persen bunga per tahun?',[['Bunga (% per tahun) =',7.5,'7,5']],'Bunga $=$ jumlah akhir $−$ modal. Lalu $B = M × r × t$.','Bunga $750.000$ dalam 2 tahun → $375.000$ per tahun → $⟨375.000|5.000.000⟩ = 7,5%$',[['Cari bunga','$B = 5.750.000 − 5.000.000 = 750.000$'],['Masukkan ke rumus','$$750.000 = 5.000.000 × r × 2$$$$750.000 = 10.000.000 × r$$'],['Cari $r$','$r = ⟨750.000|10.000.000⟩ = 0,075$'],['Ubah ke persen','$0,075 × 100% = 7,5%$ per tahun']]);
+E('d10','Modal Rp3.000.000 disimpan dengan bunga tunggal 10% per tahun selama 2 tahun. Berapa jumlah akhirnya?',[['Jumlah akhir (rupiah) =',3600000,'Rp3.600.000']],'Bunga $= M × r × t$.','Bunga setahun 300.000 → 2 tahun 600.000 → akhir 3.600.000',[['Hitung bunga','$3.000.000 × 0,10 × 2 = 600.000$'],['Tambahkan ke modal','$3.000.000 + 600.000 = 3.600.000$']]);
+E('d11','Modal Rp1.200.000, bunga tunggal 6% per tahun, selama 8 bulan. Berapa besar bunganya?',[['Bunga (rupiah) =',48000,'Rp48.000']],'$t = ⟨8|12⟩$ tahun. Hitung bunga saja (bukan jumlah akhir).','Bunga setahun $= 72.000$. Untuk 8 bulan: $72.000 × ⟨8|12⟩ = 48.000$',[['Ubah bulan ke tahun','$t = ⟨8|12⟩ = ⟨2|3⟩$ tahun'],['Masukkan ke rumus','$B = 1.200.000 × 0,06 × ⟨2|3⟩$'],['Hitung','$1.200.000 × 0,06 = 72.000$, lalu $72.000 × ⟨2|3⟩ = 48.000$']]);
+E('c12','Tumpukan batu bata: baris paling bawah 30 buah, ke atas tiap baris berkurang 2 buah, dan baris paling atas 10 buah. Tentukan banyak baris dan jumlah seluruh batu bata.',[['Banyak baris =',11,'11'],['Jumlah batu bata =',220,'220']],'$a = 30$, $b = −2$, $U_{n} = 10$. Cari $n$ dulu, lalu $S_{n}$.','$n = ⟨10 − 30|−2⟩ + 1 = 11$ ; $S = ⟨11|2⟩ × (30 + 10) = 220$',[['Tulis yang diketahui','$a = 30$, $b = −2$ (berkurang), $U_{n} = 10$'],['Cari banyak baris','$$n = ⟨U_{n} − a|b⟩ + 1 = ⟨10 − 30|−2⟩ + 1 = 10 + 1 = 11$$'],['Cari jumlah (suku terakhir diketahui)','$$S_{11} = ⟨11|2⟩ (30 + 10) = ⟨11|2⟩ × 40 = 11 × 20 = 220$$'],['Jawaban','11 baris dan 220 batu bata']]);
+E('d12','Seseorang menabung Rp100.000 pada bulan pertama, dan tiap bulan menabung Rp25.000 lebih banyak dari bulan sebelumnya. Berapa total tabungannya selama 12 bulan?',[['Total (rupiah) =',2850000,'Rp2.850.000']],'$a = 100.000$, $b = 25.000$, $n = 12$.','$S_{12} = 6 × (200.000 + 11 × 25.000) = 6 × 475.000 = 2.850.000$',[['Tulis yang diketahui','$a = 100.000$, $b = 25.000$, $n = 12$'],['Soal bertanya total → $S_{n}$','$S_{12} = ⟨12|2⟩ (2·100.000 + 11·25.000)$'],['Hitung isi kurung','$200.000 + 275.000 = 475.000$'],['Kalikan','$6 × 475.000 = 2.850.000$']]);
+const KIND={a:'🧱 Cek Dasar',c:'✏️ Contoh',d:'🎯 Coba Sendiri'},CNT={a:0,c:0,d:0};
+function ex(id){
+  const e=EX[id];CNT[e.k]++;
+  const inputs=e.f.map((f,i)=>'<label><span>'+f[0]+'</span><input type="text" autocomplete="off" inputmode="text" data-f="'+i+'" placeholder="isi jawabanmu"></label>').join('');
+  return '<div class="exbox '+e.k+'" data-ex="'+id+'"><div class="eh">'+KIND[e.k]+' '+CNT[e.k]+' — isi dulu, baru lihat caranya</div><div class="qq">'+e.q+'</div><div class="fill">'+inputs+'<div class="fbtns"><button class="btn chkfill">Periksa jawaban</button><button class="btn ghost skip">Lihat pembahasan</button></div></div><div class="fbx" hidden></div></div>';
+}
+function num(s){s=String(s).toLowerCase().replace(/rp|\s|%|tahun|bulan|unit|orang|kursi|baris|suku|gram|batang|buah/g,'').replace(/−/g,'-');if(!s)return NaN;
+  if(s.indexOf('.')>-1&&s.indexOf(',')>-1)s=s.replace(/\./g,'').replace(',','.');else if(/^-?\d{1,3}(\.\d{3})+$/.test(s))s=s.replace(/\./g,'');else s=s.replace(',','.');return parseFloat(s);}
+/* ===== 17 SOAL PREDIKSI TKA ===== */
+const Q=[
+{n:1,lv:1,pr:'Menghitung',type:'pg',stem:'<p>Diketahui barisan aritmatika $4, 9, 14, 19, …$ Suku ke-25 barisan tersebut adalah ….</p>',opts:['119','124','129','134','139'],ans:1,
+ quick:'Dari suku ke-1 ke suku ke-25 ada <b>24 lompatan</b>, tiap lompatan +5.$$4 + 24 × 5 = 4 + 120 = 124$$',
+ steps:[['Tulis yang diketahui','$a = 4$ dan $n = 25$'],['Cari beda','$b = 9 − 4 = 5$ (cek: $14 − 9 = 5$ juga)'],['Tulis rumus','$U_{n} = a + (n − 1)b$'],['Masukkan angka','$$U_{25} = 4 + (25 − 1)(5)$$'],['Hitung','$$U_{25} = 4 + 24 × 5 = 4 + 120 = 124$$'],['Waspada jebakan','Memakai $n$ (bukan $n − 1$) menghasilkan $4 + 25 × 5 = 129$ → salah.']]},
+{n:2,lv:1,pr:'Memahami informasi',type:'pg',stem:'<p>Tabel berikut menunjukkan banyak buku yang terjual sebuah toko selama lima hari pertama.</p><div class="tw"><table class="t c"><tr><th>Hari ke-</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr><tr><td>Buku terjual</td><td>12</td><td>17</td><td>22</td><td>27</td><td>32</td></tr></table></div><p>Jika pola terus berlanjut, banyak buku yang terjual pada hari ke-8 adalah ….</p>',opts:['40','42','47','52','57'],ans:2,
+ quick:'Naik 5 per hari. Hari ke-5 = 32, tinggal 3 hari lagi:$$32 + 3 × 5 = 47$$',
+ steps:[['Baca tabel, cari selisih','$17 − 12 = 5$, $22 − 17 = 5$ … selalu 5 → aritmatika, $b = 5$'],['Tulis yang diketahui','$a = 12$, $b = 5$, $n = 8$'],['Masukkan ke rumus','$$U_{8} = 12 + (8 − 1)(5)$$'],['Hitung','$$U_{8} = 12 + 7 × 5 = 12 + 35 = 47$$'],['Cek dengan melanjutkan tabel','Hari 6 = 37, hari 7 = 42, hari 8 = 47 ✔']]},
+{n:3,lv:1,pr:'Mengidentifikasi',type:'pg',stem:'<p>Manakah barisan berikut yang merupakan barisan aritmatika?</p>',opts:['$1, 2, 4, 7, 11, …$','$20, 17, 14, 11, 8, …$','$2, 4, 8, 16, 32, …$','$1, 4, 9, 16, 25, …$','$3, 3, 6, 9, 12, …$'],ans:1,
+ quick:'Cari barisan yang <b>selisihnya selalu sama</b>. Pilihan B: selisihnya −3, −3, −3, −3 ✔',
+ steps:[['Ingat ciri aritmatika','Selisih dua suku berurutan <b>selalu sama</b>.'],['Periksa A','Selisih: 1, 2, 3, 4 → berubah ✗'],['Periksa B','Selisih: −3, −3, −3, −3 → tetap ✔'],['Periksa C','Dikali 2 setiap suku → itu barisan geometri ✗'],['Periksa D','Bilangan kuadrat, selisih 3, 5, 7, 9 ✗'],['Periksa E','Selisih: 0, 3, 3, 3 → tidak tetap ✗'],['Kesimpulan','Jawaban <b>B</b> (beda $b = −3$).']]},
+{n:4,lv:1,pr:'Menghitung',type:'pg',stem:'<p>Jumlah 20 suku pertama dari deret $3 + 7 + 11 + 15 + …$ adalah ….</p>',opts:['780','800','820','840','860'],ans:2,
+ quick:'$U_{20} = 3 + 19 × 4 = 79$, lalu$$S_{20} = ⟨20|2⟩ × (3 + 79) = 10 × 82 = 820$$',
+ steps:[['Tulis yang diketahui','$a = 3$, $b = 7 − 3 = 4$, $n = 20$'],['Soal bertanya jumlah → pakai $S_{n}$','$S_{n} = ⟨n|2⟩ (2a + (n − 1)b)$'],['Masukkan angka','$$S_{20} = ⟨20|2⟩ (2·3 + 19·4)$$'],['Hitung isi kurung','$2·3 = 6$, $19·4 = 76$, $6 + 76 = 82$'],['Kalikan','$$S_{20} = 10 × 82 = 820$$']]},
+{n:5,lv:1,pr:'Mengelompokkan (pilih semua yang benar)',type:'multi',stem:'<p>Pilih <b>semua</b> barisan yang merupakan barisan aritmatika.</p>',opts:['$5, 10, 15, 20, …$','$100, 90, 80, 70, …$','$1, 3, 9, 27, …$','$2, 5, 8, 12, …$','$7, 7, 7, 7, …$'],ans:[0,1,4],
+ quick:'Cek selisih tiap barisan. (1) +5, (2) −10, (5) 0 → tetap. (3) dikali 3, (4) selisih 3, 3, 4.',
+ steps:[['Aturan','Barisan aritmatika = selisih berurutan <b>tetap</b>.'],['(1) 5, 10, 15, 20','Selisih 5, 5, 5 ✔'],['(2) 100, 90, 80, 70','Selisih −10, −10, −10 ✔ (beda boleh negatif)'],['(3) 1, 3, 9, 27','Selisih 2, 6, 18 ✗ (ini geometri, rasio 3)'],['(4) 2, 5, 8, 12','Selisih 3, 3, 4 ✗'],['(5) 7, 7, 7, 7','Selisih 0, 0, 0 ✔ (beda = 0 tetap aritmatika)'],['Jawaban','(1), (2), dan (5)']]},
+{n:6,lv:2,pr:'Memodelkan',type:'pg',stem:'<p>Pak Budi menabung setiap bulan. Bulan pertama Rp50.000, dan setiap bulan berikutnya Rp10.000 lebih banyak dari bulan sebelumnya. Model matematika tabungan pada bulan ke-<i>n</i> adalah ….</p>',opts:['$U_{n} = 50.000 + 10.000n$','$U_{n} = 50.000 + (n − 1)·10.000$','$U_{n} = 50.000n + 10.000$','$U_{n} = 50.000 · (10.000)^{n−1}$','$U_{n} = 10.000 + (n + 1)·50.000$'],ans:1,
+ quick:'Awal 50.000 dan <b>ditambah</b> 10.000 tiap bulan → $a + (n − 1)b$. Uji $n = 1$: harus 50.000 (hanya B yang cocok).',
+ steps:[['Tentukan jenis pola','"Lebih banyak Rp10.000" = ditambah tetap → aritmatika.'],['Tentukan $a$ dan $b$','$a = 50.000$, $b = 10.000$'],['Susun rumus','$U_{n} = a + (n − 1)b = 50.000 + (n − 1)·10.000$'],['Uji dengan $n = 1$','Pilihan A memberi 60.000 ✗. Pilihan B memberi 50.000 ✔'],['Jawaban','<b>B</b>']]},
+{n:7,lv:2,pr:'Menerapkan',type:'pg',stem:'<p>Sebuah aula memiliki 20 baris kursi. Baris pertama berisi 15 kursi, dan tiap baris berikutnya 3 kursi lebih banyak dari baris di depannya. Banyak seluruh kursi di aula adalah ….</p>',opts:['780','840','870','900','930'],ans:2,
+ quick:'$U_{20} = 15 + 19 × 3 = 72$$$S_{20} = 10 × (15 + 72) = 870$$',
+ steps:[['Tulis yang diketahui','$a = 15$, $b = 3$, $n = 20$'],['Kata "seluruh" → deret $S_{n}$','$S_{n} = ⟨n|2⟩ (2a + (n − 1)b)$'],['Masukkan angka','$$S_{20} = ⟨20|2⟩ (2·15 + 19·3)$$'],['Hitung','$$S_{20} = 10 × (30 + 57) = 10 × 87 = 870$$'],['Cek dengan cara lain','$U_{20} = 15 + 57 = 72$, lalu $S_{20} = 10 × (15 + 72) = 870$ ✔']]},
+{n:8,lv:2,pr:'Menerapkan',type:'pg',stem:'<p>Produksi sebuah pabrik bertambah dengan jumlah tetap setiap bulan. Produksi bulan ke-3 sebanyak 420 unit dan bulan ke-7 sebanyak 540 unit. Produksi pabrik pada bulan ke-12 adalah …. unit</p>',opts:['630','660','690','720','750'],ans:2,
+ quick:'Bulan 3 → 7 : 4 bulan, naik 120 → tiap bulan naik 30. Bulan 12 = 5 bulan setelah bulan 7:$$540 + 5 × 30 = 690$$',
+ steps:[['Tulis dua persamaan','$U_{3} = a + 2b = 420$<br>$U_{7} = a + 6b = 540$'],['Kurangkan','$$4b = 120$$$$b = 30$$'],['Cari $a$','$$a + 2(30) = 420$$$$a = 420 − 60 = 360$$'],['Hitung $U_{12}$','$$U_{12} = 360 + 11 × 30 = 360 + 330 = 690$$']]},
+{n:9,lv:2,pr:'Menerapkan',type:'pg',stem:'<p>Dina menabung Rp5.000.000 dengan bunga tunggal 8% per tahun. Jumlah tabungan Dina setelah 18 bulan adalah ….</p>',opts:['Rp5.400.000','Rp5.600.000','Rp5.720.000','Rp5.800.000','Rp12.200.000'],ans:1,
+ quick:'Bunga setahun $= 8% × 5.000.000 = 400.000$. Satu setengah tahun: $400.000 × 1,5 = 600.000$. Total $= 5.600.000$.',
+ steps:[['Ubah bulan ke tahun','$t = ⟨18|12⟩ = 1,5$ tahun'],['Ubah persen ke desimal','$r = 8% = 0,08$'],['Hitung bunga','$$B = 5.000.000 × 0,08 × 1,5 = 600.000$$'],['Hitung jumlah akhir (soal bertanya total)','$$A = 5.000.000 + 600.000 = 5.600.000$$'],['Waspada jebakan','Jika memakai $t = 18$ → hasilnya Rp12.200.000 (salah).']]},
+{n:10,lv:2,pr:'Menginterpretasikan',type:'pg',stem:'<p>Jumlah $n$ suku pertama suatu deret aritmatika dinyatakan dengan $S_{n} = n^{2} + 3n$. Nilai suku ke-10 deret tersebut adalah ….</p>',opts:['20','22','24','28','130'],ans:1,
+ quick:'$U_{10} = S_{10} − S_{9} = 130 − 108 = 22$',
+ steps:[['Ingat hubungannya','$U_{n} = S_{n} − S_{n−1}$, jadi $U_{10} = S_{10} − S_{9}$'],['Hitung $S_{10}$','$S_{10} = 10^{2} + 3(10) = 100 + 30 = 130$'],['Hitung $S_{9}$','$S_{9} = 9^{2} + 3(9) = 81 + 27 = 108$'],['Kurangkan','$U_{10} = 130 − 108 = 22$'],['Cek','Dari $S_{n}$ diperoleh $U_{n} = 2n + 2$, sehingga $U_{10} = 22$ ✔ (130 adalah jumlahnya, bukan suku).']]},
+{n:11,lv:2,pr:'Menginterpretasikan',type:'pg',stem:'<p>Rani menabung Rp6.000.000 dengan bunga tunggal. Setelah 2 tahun 6 bulan, tabungannya menjadi Rp7.500.000. Besar suku bunga tunggal per tahun adalah ….</p>',opts:['8%','10%','12%','12,5%','15%'],ans:1,
+ quick:'Bunga $= 1.500.000$ selama 2,5 tahun → $600.000$ per tahun. $⟨600.000|6.000.000⟩ = 10%$.',
+ steps:[['Cari bunga','$B = 7.500.000 − 6.000.000 = 1.500.000$'],['Ubah waktu','2 tahun 6 bulan = $2,5$ tahun'],['Masukkan ke rumus','$$1.500.000 = 6.000.000 × r × 2,5$$$$1.500.000 = 15.000.000 × r$$'],['Cari $r$','$$r = ⟨1.500.000|15.000.000⟩ = 0,10$$'],['Ubah ke persen','$r = 10%$ per tahun']]},
+{n:12,lv:3,pr:'Menyimpulkan (pilih semua yang benar)',type:'multi',stem:'<p>Perusahaan P menawarkan gaji tahun pertama Rp4.000.000 dan naik Rp300.000 setiap tahun. Perusahaan Q menawarkan gaji tahun pertama Rp3.600.000 dan naik Rp400.000 setiap tahun. Pilih <b>semua</b> pernyataan yang benar.</p>',opts:['Pada tahun ke-5, gaji di kedua perusahaan sama besar.','Mulai tahun ke-6, gaji di Q lebih besar daripada di P.','Pada tahun ke-10, selisih gaji kedua perusahaan adalah Rp900.000.','Gaji di Q lebih besar daripada di P sejak tahun pertama.'],ans:[0,1],
+ quick:'Q tertinggal 0,4 juta di awal, tetapi menyusul 0,1 juta tiap tahun → <b>4 tahun</b> kemudian sama (tahun ke-5), mulai tahun ke-6 Q unggul. Tahun ke-10: $7,2 − 6,7 = 0,5$ juta.',
+ steps:[['Tulis rumus kedua gaji (juta rupiah)','$P_{n} = 4,0 + 0,3(n − 1)$<br>$Q_{n} = 3,6 + 0,4(n − 1)$'],['Buat tabel','<div class="tw"><table class="t c"><tr><th>Tahun</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>10</th></tr><tr><td>P</td><td>4,0</td><td>4,3</td><td>4,6</td><td>4,9</td><td>5,2</td><td>5,5</td><td>6,7</td></tr><tr><td>Q</td><td>3,6</td><td>4,0</td><td>4,4</td><td>4,8</td><td>5,2</td><td>5,6</td><td>7,2</td></tr></table></div>'],['Periksa pernyataan (1)','Tahun ke-5 sama-sama 5,2 → <b>benar</b>'],['Periksa pernyataan (2)','Tahun ke-6: Q = 5,6 &gt; P = 5,5 → <b>benar</b>'],['Periksa pernyataan (3)','Tahun ke-10: $7,2 − 6,7 = 0,5$ juta = Rp500.000, bukan Rp900.000 → <b>salah</b>'],['Periksa pernyataan (4)','Tahun ke-1: Q = 3,6 &lt; P = 4,0 → <b>salah</b>'],['Jawaban','(1) dan (2)']]},
+{n:13,lv:3,pr:'Memecahkan masalah',type:'pg',stem:'<p>Jumlah semua bilangan kelipatan 4 yang terletak <b>di antara</b> 10 dan 100 adalah ….</p>',opts:['1.080','1.188','1.200','1.288','1.300'],ans:1,
+ quick:'Kelipatan 4 pertama $= 12$, terakhir $= 96$. Banyaknya $⟨96 − 12|4⟩ + 1 = 22$.$$S = 11 × (12 + 96) = 1.188$$',
+ steps:[['Tentukan suku pertama','Kelipatan 4 setelah 10 adalah 12 → $a = 12$ (10 bukan kelipatan 4).'],['Tentukan suku terakhir','Kata "di antara" → 100 tidak dihitung. Kelipatan 4 terbesar di bawah 100 adalah 96.'],['Cari beda dan banyak suku','$b = 4$$$n = ⟨96 − 12|4⟩ + 1 = 21 + 1 = 22$$'],['Hitung jumlah','$$S_{22} = ⟨22|2⟩ (12 + 96) = 11 × 108 = 1.188$$'],['Waspada jebakan','Jika 100 ikut dihitung, hasilnya 1.288 (salah).']]},
+{n:14,lv:3,pr:'Mengevaluasi',type:'pg',stem:'<p>Tiga siswa menghitung jumlah 50 suku pertama deret $2 + 5 + 8 + …$ dengan cara berbeda.</p><p><b>Andi:</b> $a = 2$, $b = 3$, $S_{50} = ⟨50|2⟩ (2·2 + 49·3) = 25 × 151 = 3.775$.<br><b>Beni:</b> $a = 2$, $b = 3$, $U_{50} = 149$, $S_{50} = 50 × (2 + 149) = 7.550$.<br><b>Cika:</b> $U_{50} = 2 + 49·3 = 149$, $S_{50} = ⟨50|2⟩ × (2 + 149) = 3.775$.</p><p>Evaluasi yang tepat adalah ….</p>',opts:['Hanya Andi yang benar.','Hanya Cika yang benar.','Andi dan Cika benar; Beni salah karena memakai $n$, bukan $⟨n|2⟩$.','Beni benar karena jumlahnya harus lebih besar dari suku terakhir.','Ketiganya salah.'],ans:2,
+ quick:'Rumus yang benar selalu diawali <b>setengah n</b>. Beni memakai $n$ penuh sehingga hasilnya <b>2 kali lipat</b> (7.550 = 2 × 3.775).',
+ steps:[['Ingat rumus yang benar','$S_{n} = ⟨n|2⟩ (a + U_{n})$ atau $S_{n} = ⟨n|2⟩ (2a + (n − 1)b)$'],['Periksa Andi','$⟨50|2⟩ = 25$, $2·2 + 49·3 = 151$, $25 × 151 = 3.775$ ✔'],['Periksa Cika','$U_{50} = 149$ benar, $⟨50|2⟩ × 151 = 3.775$ ✔'],['Periksa Beni','Memakai 50, bukan 25 → hasil dua kali lipat (7.550) ✗'],['Kesimpulan','Jawaban <b>C</b>.']]},
+{n:15,lv:3,pr:'Menjustifikasi (benar/salah)',type:'bs',stem:'<p>Diketahui barisan aritmatika dengan $U_{2} = 8$ dan $U_{5} = 17$. Tentukan apakah setiap pernyataan berikut benar atau salah.</p>',rows:['Beda barisan tersebut adalah 3.','Suku pertama barisan tersebut adalah 4.','Suku ke-10 barisan tersebut adalah 32.','Jumlah 10 suku pertama barisan tersebut adalah 185.','Bilangan 100 merupakan salah satu suku barisan tersebut.'],ans:[true,false,true,true,false],
+ quick:'$b = ⟨17 − 8|5 − 2⟩ = 3$, $a = 8 − 3 = 5$ → $U_{n} = 3n + 2$. Lalu uji tiap pernyataan.',
+ steps:[['Cari beda','$b = ⟨17 − 8|5 − 2⟩ = ⟨9|3⟩ = 3$'],['Cari $a$ dari $U_{2} = a + b = 8$','$a = 8 − 3 = 5$'],['Susun rumus suku ke-n','$U_{n} = 5 + (n − 1)3 = 3n + 2$'],['Pernyataan 1','$b = 3$ → <b>Benar</b>'],['Pernyataan 2','$a = 5$, bukan 4 → <b>Salah</b>'],['Pernyataan 3','$U_{10} = 3(10) + 2 = 32$ → <b>Benar</b>'],['Pernyataan 4','$S_{10} = ⟨10|2⟩ (5 + 32) = 5 × 37 = 185$ → <b>Benar</b>'],['Pernyataan 5','$3n + 2 = 100$ → $n = ⟨98|3⟩ ≈ 32,67$ bukan bilangan bulat → 100 bukan suku → <b>Salah</b>']]},
+{n:16,lv:3,pr:'Melakukan generalisasi',type:'pg',stem:'<p>Sebuah pola disusun dari lingkaran-lingkaran kecil. Pola ke-1 terdiri atas 5 lingkaran, pola ke-2 terdiri atas 9 lingkaran, dan pola ke-3 terdiri atas 13 lingkaran. Pola mengikuti aturan yang sama seterusnya.</p><p>Jika tersedia 100 lingkaran, pola dengan nomor terbesar yang dapat dibuat <b>seluruhnya</b> adalah pola ke-….</p>',opts:['23','24','25','99','100'],ans:1,
+ quick:'Rumus pola: $4n + 1$. Syarat $4n + 1 ≤ 100$ → $n ≤ 24,75$ → <b>dibulatkan ke bawah</b> = 24.',
+ steps:[['Cari polanya','5, 9, 13 → selisih tetap 4 → aritmatika, $a = 5$, $b = 4$'],['Susun rumus umum','$U_{n} = 5 + (n − 1)4 = 4n + 1$'],['Buat pertidaksamaan','Lingkaran yang dibutuhkan tidak boleh lebih dari 100:$$4n + 1 ≤ 100$$'],['Selesaikan','$$4n ≤ 99$$$$n ≤ 24,75$$'],['Tafsirkan','$n$ harus bilangan bulat dan semua lingkaran harus cukup → $n = 24$ (butuh 97 lingkaran). Pola ke-25 butuh 101 → belum cukup.']]},
+{n:17,lv:3,pr:'Menganalisis',type:'pg',stem:'<p>Seseorang menabung dengan bunga tunggal 5% per tahun. Agar jumlah tabungannya menjadi tepat dua kali modal awal, diperlukan waktu ….</p>',opts:['10 tahun','15 tahun','20 tahun','25 tahun','40 tahun'],ans:2,
+ quick:'Bunga tunggal tiap tahun selalu 5% dari modal. Agar bunga = 1 modal (100%) butuh $⟨100%|5%⟩ = 20$ tahun.',
+ steps:[['Pahami syaratnya','Jumlah akhir = 2 × modal → bunga harus sama dengan modal: $B = M$'],['Masukkan ke rumus bunga','$$M × 0,05 × t = M$$'],['Bagi kedua ruas dengan $M$','$$0,05 × t = 1$$'],['Cari $t$','$$t = ⟨1|0,05⟩ = 20$$ tahun'],['Kesimpulan','Hasil tidak bergantung pada besar modal $M$. Pada bunga tunggal, waktu dua kali lipat $= ⟨1|r⟩$.']]}
+];
+const LV={1:['Level 1 · Pengetahuan dan Pemahaman','Menghitung, memahami informasi, mengidentifikasi, mengelompokkan'],2:['Level 2 · Aplikasi','Memodelkan, menerapkan, menginterpretasikan'],3:['Level 3 · Penalaran','Menganalisis, memecahkan masalah, mengevaluasi, menyimpulkan, generalisasi, menjustifikasi']};
+const FMT={pg:'Pilihan ganda',multi:'Pilihan ganda kompleks',bs:'Benar / Salah'};
+function qHTML(q){
+  let body='';
+  if(q.type==='pg')body='<div class="pick">👆 Klik salah satu jawaban:</div><div class="opts">'+q.opts.map((o,i)=>'<button class="opt" data-i="'+i+'"><span class="l">'+'ABCDE'[i]+'</span><span>'+o+'</span></button>').join('')+'</div>';
+  if(q.type==='multi')body='<div class="pick">☑️ Centang semua yang benar, lalu klik Periksa:</div><div class="opts">'+q.opts.map((o,i)=>'<label class="opt"><input type="checkbox" data-i="'+i+'"><span>('+(i+1)+') '+o+'</span></label>').join('')+'</div><button class="btn chk">Periksa jawaban</button><div class="warnmsg" hidden>Pilih minimal satu pernyataan dulu.</div>';
+  if(q.type==='bs')body='<div class="tw"><table class="bs"><tr><th>No</th><th>Pernyataan</th><th>Benar</th><th>Salah</th></tr>'+q.rows.map((r,i)=>'<tr data-r="'+i+'"><td class="r">'+(i+1)+'</td><td>'+r+'</td><td class="r"><input type="radio" name="q'+q.n+'r'+i+'" value="1"></td><td class="r"><input type="radio" name="q'+q.n+'r'+i+'" value="0"></td></tr>').join('')+'</table></div><button class="btn chk">Periksa jawaban</button><div class="warnmsg" hidden>Jawab semua pernyataan dulu.</div>';
+  return '<article class="q" id="q'+q.n+'" data-n="'+q.n+'"><div class="qh"><span class="num">Soal '+q.n+'</span><span class="lv lv'+q.lv+'">Level '+q.lv+'</span><span class="pr">'+q.pr+'</span><span class="fmt">'+FMT[q.type]+'</span></div><div class="stem">'+q.stem+'</div>'+body+'<div class="fb" hidden></div></article>';
+}
+function soalList(){let h='',last=0;Q.forEach(q=>{if(q.lv!==last){last=q.lv;h+='<div class="lvh">'+LV[q.lv][0]+'<small>'+LV[q.lv][1]+'</small></div>';}h+=qHTML(q);});return h;}
+/* ===== ISI HALAMAN ===== */
+const BODY=`
+<section class="card" id="petunjuk" data-toc="Petunjuk Belajar"><h3 class="sec">Petunjuk Belajar</h3>
+<p>Halaman ini dibuat untuk kamu yang ingin belajar <b>dari dasar</b>. Tidak ada langkah yang dilompati: setiap rumus dijelaskan asalnya, setiap contoh dikerjakan pelan-pelan, dan semua latihan bisa dikerjakan <b>tanpa kalkulator</b>.</p>
+<div class="callout tip"><b class="h">Cara belajar yang benar (ikuti urutannya)</b><ol>
+<li><b>Baca</b> penjelasan konsep sampai paham.</li>
+<li><b>Isi dulu</b> kotak jawaban pada <b>✏️ Contoh</b> dan <b>🎯 Coba Sendiri</b>. Boleh dicoret-coret di kertas.</li>
+<li>Klik <b>Periksa jawaban</b>. Kalau salah, baca petunjuk lalu coba lagi. Kalau buntu, klik <b>Lihat pembahasan</b>.</li>
+<li>Pelajari <b>📝 Cara Lengkap</b> (langkah demi langkah) dulu sampai paham. Setelah itu baru latih <b>⚡ Cara Cepat</b>.</li>
+<li>Di bagian <b>Latihan TKA</b>, <b>klik jawaban</b> yang kamu pilih. Pembahasan baru muncul setelah kamu menjawab.</li></ol></div>
+<div class="tw"><table class="t"><tr><th>Tanda</th><th>Artinya</th></tr>
+<tr><td>🧱 Cek Dasar</td><td>Latihan prasyarat (bilangan negatif, substitusi, persamaan, persen)</td></tr>
+<tr><td>✏️ Contoh</td><td>Contoh soal yang kamu isi dulu, lalu dijelaskan</td></tr>
+<tr><td>🎯 Coba Sendiri</td><td>Soal mirip contoh dengan angka berbeda, untuk menguji pemahamanmu</td></tr>
+<tr><td>📝 Cara Lengkap</td><td>Langkah penyelesaian rapi, satu per satu (untuk belajar)</td></tr>
+<tr><td>⚡ Cara Cepat</td><td>Jalan pintas (untuk menghemat waktu saat ujian)</td></tr></table></div>
+<h4 class="sub">Peta kompetensi dan nomor soal Latihan TKA</h4>
+<div class="tw"><table class="t"><tr><th>Level</th><th>Proses berpikir</th><th>Dilatih lewat</th><th>Soal</th></tr>
+<tr><td>1</td><td>Menghitung</td><td>Suku ke-n, jumlah n suku</td><td>1, 4</td></tr>
+<tr><td>1</td><td>Memahami informasi</td><td>Membaca tabel pola</td><td>2</td></tr>
+<tr><td>1</td><td>Mengidentifikasi / Mengelompokkan</td><td>Mengenali barisan aritmatika</td><td>3, 5</td></tr>
+<tr><td>2</td><td>Memodelkan</td><td>Cerita tabungan → rumus $U_{n}$</td><td>6</td></tr>
+<tr><td>2</td><td>Menerapkan</td><td>Kursi aula, produksi pabrik, bunga tunggal</td><td>7, 8, 9</td></tr>
+<tr><td>2</td><td>Menginterpretasikan</td><td>Makna $S_{n}$, bunga tunggal dan persen</td><td>10, 11</td></tr>
+<tr><td>3</td><td>Menyimpulkan</td><td>Membandingkan dua tawaran gaji</td><td>12</td></tr>
+<tr><td>3</td><td>Memecahkan masalah</td><td>Jumlah bilangan kelipatan dalam rentang</td><td>13</td></tr>
+<tr><td>3</td><td>Mengevaluasi</td><td>Menilai cara hitung tiga siswa</td><td>14</td></tr>
+<tr><td>3</td><td>Menjustifikasi</td><td>Benar/Salah dengan alasan</td><td>15</td></tr>
+<tr><td>3</td><td>Melakukan generalisasi</td><td>Menyusun rumus pola</td><td>16</td></tr>
+<tr><td>3</td><td>Menganalisis</td><td>Bunga tunggal dan waktu dua kali lipat</td><td>17</td></tr></table></div>
+<div class="callout warn"><b class="h">Catatan tentang bentuk soal</b>Soal TKA tidak hanya pilihan ganda biasa. Di sini kamu berlatih tiga bentuk: <b>pilihan ganda</b> (satu jawaban), <b>pilihan ganda kompleks</b> (boleh lebih dari satu jawaban benar), dan <b>benar/salah</b> per pernyataan.</div>
+</section>
+
+<section class="card" id="a-dasar" data-toc="A. Persiapan Dasar"><h3 class="sec"><span class="tag">A</span>Persiapan Dasar: Yang Harus Dikuasai Dulu</h3>
+<p>Barisan dan deret hanya memakai lima keterampilan sederhana. Kalau kelimanya sudah kuat, rumus apa pun akan terasa mudah. Baca singkat, lalu isi <b>🧱 Cek Dasar</b>.</p>
+<h4 class="sub">A1. Bilangan bulat dan tanda negatif</h4>
+<div class="tw"><table class="t"><tr><th>Bentuk</th><th>Aturan</th><th>Contoh</th></tr>
+<tr><td>$a + (−b)$</td><td>sama dengan $a − b$</td><td>$5 + (−3) = 5 − 3 = 2$</td></tr>
+<tr><td>$a − (−b)$</td><td>dua minus jadi plus: $a + b$</td><td>$5 − (−3) = 5 + 3 = 8$</td></tr>
+<tr><td>(+) × (+) atau (−) × (−)</td><td>tanda <b>sama</b> → hasil <b>positif</b></td><td>$3 × 4 = 12$ ; $(−3) × (−4) = 12$</td></tr>
+<tr><td>(+) × (−) atau (−) × (+)</td><td>tanda <b>beda</b> → hasil <b>negatif</b></td><td>$3 × (−4) = −12$</td></tr></table></div>
+<div class="callout warn"><b class="h">Urutan mengerjakan</b><ol><li>Kerjakan <b>kurung</b> lebih dulu.</li><li>Lalu <b>pangkat</b>.</li><li>Lalu <b>kali / bagi</b> (dari kiri ke kanan).</li><li>Terakhir <b>tambah / kurang</b> (dari kiri ke kanan).</li></ol>Contoh: $5 + 2 × 3 = 5 + 6 = 11$ (bukan $7 × 3 = 21$).</div>
+${ex('a1')}
+<h4 class="sub">A2. Substitusi: mengganti huruf dengan angka</h4>
+<p>Rumus berisi huruf. "Substitusi" artinya mengganti huruf dengan angka yang diketahui. Tulis angkanya <b>di dalam kurung</b> supaya tanda tidak tertukar.</p>
+<div class="work"><div class="eq">$U_{n} = a + (n − 1)b$ dengan $a = 3$, $b = 4$, $n = 10$</div><div class="eq">$U_{10} = 3 + (10 − 1)(4)$</div></div>
+${ex('a2')}
+<h4 class="sub">A3. Persamaan sederhana: memindahkan ruas</h4>
+<p>Tujuan: membuat huruf $x$ sendirian. Aturan emas: <b>pindah ruas → tanda berlawanan</b> (+ jadi −, − jadi +, × jadi ÷, ÷ jadi ×).</p>
+${ex('a3')}
+<h4 class="sub">A4. Eliminasi: dua persamaan, dua huruf</h4>
+<p>Pada barisan sering ada dua huruf yang belum diketahui ($a$ dan $b$). Kurangkan dua persamaan supaya satu huruf <b>hilang</b>, selesaikan huruf yang tersisa, lalu masukkan kembali.</p>
+${ex('a4')}
+<h4 class="sub">A5. Persen, desimal, dan waktu</h4>
+<div class="tw"><table class="t c"><tr><th>Persen</th><th>1%</th><th>5%</th><th>6%</th><th>8%</th><th>10%</th><th>12%</th><th>25%</th><th>7,5%</th></tr><tr><td>Desimal</td><td>0,01</td><td>0,05</td><td>0,06</td><td>0,08</td><td>0,10</td><td>0,12</td><td>0,25</td><td>0,075</td></tr></table></div>
+<p>Caranya: <b>bagi 100</b> (geser koma 2 tempat ke kiri).</p>
+<div class="tw"><table class="t c"><tr><th>Bulan</th><th>3</th><th>6</th><th>8</th><th>9</th><th>12</th><th>18</th><th>30</th></tr><tr><td>Tahun</td><td>0,25</td><td>0,5</td><td>$⟨2|3⟩$</td><td>0,75</td><td>1</td><td>1,5</td><td>2,5</td></tr></table></div>
+<p>Caranya: <b>bagi 12</b>.</p>
+${ex('a5')}${ex('a6')}
+<div class="callout nv"><b class="h">Trik hitung tanpa kalkulator</b><ul><li><b>Kali 5</b> = kali 10 lalu bagi 2. Contoh: $36 × 5 = 360 ÷ 2 = 180$.</li><li><b>Bagi dulu yang genap</b>: $⟨15|2⟩ × 52 = 15 × 26 = 390$ (lebih mudah daripada $7,5 × 52$).</li><li><b>Persen dari jutaan</b>: 1% dari 4.000.000 adalah 40.000, jadi 6% adalah $6 × 40.000 = 240.000$.</li></ul></div></section>
+
+<section class="card" id="b1" data-sub="1" data-toc="B1. Barisan, Suku, dan Deret"><h3 class="sec"><span class="tag">B1</span>Mengenal Barisan, Suku, dan Deret</h3>
+<p>Dalam hidup sehari-hari ada banyak pola: nomor rumah di satu sisi jalan (1, 3, 5, 7, …), tabungan yang naik tiap bulan, atau kursi bioskop yang makin banyak ke belakang. Matematika memberi nama untuk pola-pola ini.</p>
+<p><b>Barisan</b> adalah urutan bilangan yang mengikuti pola. Setiap bilangan dalam barisan disebut <b>suku</b>. Letak suku diberi nomor urut $n$: suku pertama ditulis $U_{1}$, suku kedua $U_{2}$, dan seterusnya.</p>
+${jumpFig([{t:'5',s:'U₁'},{t:'8',s:'U₂'},{t:'11',s:'U₃'},{t:'14',s:'U₄'},{t:'17',s:'U₅'}],'','Gambar 1. Barisan 5, 8, 11, 14, 17. Angka di dalam kotak adalah nilai suku; tulisan di bawah kotak adalah nomor urutnya.')}
+<div class="callout tip"><b class="h">Bedakan dua hal ini</b>$n$ adalah <b>nomor urut</b> (suku ke berapa). $U_{n}$ adalah <b>nilai</b> suku tersebut. Pada barisan di atas: $U_{3} = 11$ artinya "suku ke-3 bernilai 11".</div>
+<p><b>Deret</b> adalah hasil <b>penjumlahan</b> suku-suku barisan.</p>
+<div class="tw"><table class="t"><tr><th></th><th>Barisan</th><th>Deret</th></tr><tr><td>Contoh</td><td>2, 4, 6, 8, 10</td><td>2 + 4 + 6 + 8 + 10</td></tr><tr><td>Hasil akhirnya</td><td>Daftar bilangan</td><td>Satu bilangan (jumlah) = 30</td></tr><tr><td>Lambang</td><td>$U_{1}, U_{2}, U_{3}, …, U_{n}$</td><td>$S_{n}$ = jumlah $n$ suku pertama</td></tr></table></div>
+<div class="callout warn"><b class="h">⚡ Kunci pengenalan soal</b>Soal bertanya <b>"suku ke-…"</b> atau <b>"banyaknya pada bulan ke-…"</b> → pakai $U_{n}$.<br>Soal bertanya <b>"jumlah"</b>, <b>"total"</b>, <b>"seluruhnya"</b> → pakai $S_{n}$.</div>
+<h4 class="sub">Daftar istilah penting</h4>
+<div class="tw"><table class="t"><tr><th>Lambang</th><th>Nama</th><th>Artinya</th></tr>
+<tr><td>$a$</td><td>Suku pertama</td><td>Nilai paling awal barisan ($a = U_{1}$)</td></tr>
+<tr><td>$b$</td><td>Beda</td><td>Selisih tetap antara dua suku berurutan</td></tr>
+<tr><td>$n$</td><td>Banyak suku / nomor suku</td><td>Suku ke berapa, atau ada berapa suku</td></tr>
+<tr><td>$U_{n}$</td><td>Suku ke-$n$</td><td>Nilai suku nomor $n$</td></tr>
+<tr><td>$S_{n}$</td><td>Jumlah $n$ suku pertama</td><td>Hasil menjumlahkan $U_{1}$ sampai $U_{n}$</td></tr></table></div></section>
+
+<section class="card" id="b2" data-sub="1" data-toc="B2. Barisan Aritmatika"><h3 class="sec"><span class="tag">B2</span>Barisan Aritmatika</h3>
+<p>Barisan aritmatika adalah barisan yang <b>selisih dua suku berurutannya selalu tetap</b>. Selisih itu disebut <b>beda</b> dan ditulis $b$. Artinya, setiap suku didapat dari suku sebelumnya dengan <b>ditambah (atau dikurangi) bilangan yang sama</b>.</p>
+${jumpFig([{t:'3',s:'U₁'},{t:'7',s:'U₂'},{t:'11',s:'U₃'},{t:'15',s:'U₄'},{t:'19',s:'U₅'}],'+4','Gambar 2. Setiap suku diperoleh dengan "melompat" +4 dari suku sebelumnya, sehingga b = 4.')}
+<div class="formula"><div class="cap">Cara mencari beda (kurangkan suku berikutnya dengan suku sebelumnya)</div>$$b = U_{2} − U_{1} = U_{3} − U_{2} = …$$</div>
+<div class="tw"><table class="t"><tr><th>Beda ($b$)</th><th>Arti</th><th>Contoh</th></tr><tr><td>$b &gt; 0$</td><td>Barisan naik</td><td>3, 7, 11, 15, … ($b = 4$)</td></tr><tr><td>$b &lt; 0$</td><td>Barisan turun</td><td>20, 17, 14, 11, … ($b = −3$)</td></tr><tr><td>$b = 0$</td><td>Barisan tetap (semua suku sama)</td><td>7, 7, 7, 7, … ($b = 0$)</td></tr></table></div>
+<figure class="figbox"><div class="figrow">${lineChart([3,7,11,15,19,23],CYD,'b = 4 (positif) → naik')}${lineChart([20,17,14,11,8,5],OR,'b = −3 (negatif) → turun')}</div><figcaption>Gambar 3. Titik-titik barisan aritmatika selalu segaris (lurus). Naik jika $b$ positif, turun jika $b$ negatif.</figcaption></figure>
+<div class="callout warn"><b class="h">⚡ Cara cepat memeriksa barisan aritmatika</b><ol><li>Hitung selisih suku ke-2 dengan ke-1, ke-3 dengan ke-2, dan seterusnya.</li><li>Jika <b>semua selisih sama → aritmatika</b>. Satu saja berbeda → bukan aritmatika.</li></ol>Contoh: 2, 5, 8, 12 → selisih 3, 3, <b>4</b> → bukan aritmatika.</div>
+${ex('d0')}</section>
+
+<section class="card" id="b3" data-sub="1" data-toc="B3. Rumus Suku ke-n"><h3 class="sec"><span class="tag">B3</span>Rumus Suku ke-n</h3>
+<p>Mau tahu suku ke-100 tanpa menulis 100 bilangan? Pakai rumus. Perhatikan dulu dari mana rumusnya datang. Mulai dari suku pertama $a$, lalu tambahkan $b$ berulang-ulang:</p>
+<div class="tw"><table class="t c"><tr><th>Suku</th><th>Ditulis</th><th>Banyak $b$ yang ditambahkan</th></tr>
+<tr><td>$U_{1}$</td><td>$a$</td><td>0</td></tr><tr><td>$U_{2}$</td><td>$a + b$</td><td>1</td></tr><tr><td>$U_{3}$</td><td>$a + 2b$</td><td>2</td></tr><tr><td>$U_{4}$</td><td>$a + 3b$</td><td>3</td></tr><tr><td>$U_{n}$</td><td>$a + (n − 1)b$</td><td>$n − 1$</td></tr></table></div>
+<p>Polanya jelas: banyak $b$ yang ditambahkan selalu <b>satu lebih sedikit dari nomor sukunya</b>. Itulah alasan rumus memakai $(n − 1)$.</p>
+<div class="formula"><div class="cap">Rumus suku ke-n barisan aritmatika</div>$$U_{n} = a + (n − 1)b$$</div>
+<p style="font-size:.92rem;color:#5a6b85">$a$ = suku pertama, $b$ = beda, $n$ = nomor suku.</p>
+<div class="callout tip"><b class="h">Tiga langkah memakai rumus</b><ol><li>Cari $a$ (suku pertama) dan $b$ (selisih).</li><li>Tulis rumus, lalu masukkan angka-angkanya.</li><li>Hitung: kurung dulu, kali, baru tambah.</li></ol></div>
+${ex('c1')}${ex('d1')}${ex('d2')}
+<h4 class="sub">Mencari banyak suku</h4>
+<p>Jika suku terakhir diketahui, rumus bisa dibalik untuk mencari $n$:</p>
+<div class="formula"><div class="cap">Banyak suku</div>$$n = ⟨U_{n} − a|b⟩ + 1$$</div>
+${ex('c2')}</section>
+
+<section class="card" id="b4" data-sub="1" data-toc="B4. Mencari a dan b"><h3 class="sec"><span class="tag">B4</span>Mencari a dan b dari Dua Suku</h3>
+<p>Soal TKA sering tidak memberi $a$ dan $b$, tetapi memberi dua suku. Misalnya $U_{3} = 10$ dan $U_{8} = 25$. Dari suku ke-3 ke suku ke-8 ada <b>5 lompatan</b> dengan total selisih 15, jadi setiap lompatan bernilai $15 ÷ 5 = 3$.</p>
+${jumpFig([{t:'U₃ = 10',s:'suku ke-3',hl:1},{t:'U₄',s:''},{t:'U₅',s:''},{t:'U₆',s:''},{t:'U₇',s:''},{t:'U₈ = 25',s:'suku ke-8',hl:1}],'+b','Gambar 4. Banyak lompatan = 8 − 3 = 5, selisih nilai = 25 − 10 = 15, sehingga 5b = 15 dan b = 3.')}
+<div class="formula"><div class="cap">⚡ Cara cepat mencari beda dari dua suku</div>$$b = ⟨U_{p} − U_{q}|p − q⟩$$</div>
+<p>Setelah $b$ ketemu, cari $a$ dari salah satu suku: $a = U_{q} − (q − 1)b$.</p>
+${ex('c3')}${ex('c3b')}${ex('d3')}</section>
+
+<section class="card" id="b5" data-sub="1" data-toc="B5. Tiga Suku Berurutan"><h3 class="sec"><span class="tag">B5</span>Tiga Suku Berurutan (Suku Tengah)</h3>
+<p>Jika tiga bilangan berurutan membentuk barisan aritmatika, suku tengah adalah <b>rata-rata</b> suku di kiri dan kanannya. Misalnya 7, 15, 23: rata-rata 7 dan 23 adalah $⟨7 + 23|2⟩ = 15$.</p>
+<div class="formula"><div class="cap">Sifat suku tengah</div>$$2U_{2} = U_{1} + U_{3}$$</div>
+${ex('c4')}${ex('d4')}</section>
+
+<section class="card" id="b6" data-sub="1" data-toc="B6. Deret Aritmatika"><h3 class="sec"><span class="tag">B6</span>Deret Aritmatika</h3>
+<p>Deret aritmatika adalah jumlah suku-suku barisan aritmatika. Jumlah $n$ suku pertama ditulis $S_{n}$.</p>
+<h4 class="sub">Dari mana rumusnya? (cara Gauss)</h4>
+<p>Jumlahkan suku pertama dengan terakhir, suku kedua dengan kedua dari belakang, dan seterusnya. <b>Semua pasangan bernilai sama!</b></p>
+<figure class="figbox">${gaussFig()}<figcaption>Gambar 5. $2 + 5 + 8 + 11 + 14$: setiap pasangan berjumlah 16. Ada 5 suku, jadi $2S_{5} = 5 × 16$, sehingga $S_{5} = 40$.</figcaption></figure>
+<div class="formula"><div class="cap">Jika suku terakhir diketahui</div>$$S_{n} = ⟨n|2⟩ (a + U_{n})$$</div>
+<div class="formula"><div class="cap">Jika yang diketahui a, b, dan n</div>$$S_{n} = ⟨n|2⟩ (2a + (n − 1)b)$$</div>
+<div class="callout warn"><b class="h">Pilih rumus yang mana?</b><ul><li>Jika <b>suku terakhir $U_{n}$ diketahui</b> → pakai $S_{n} = ⟨n|2⟩ (a + U_{n})$.</li><li>Jika yang diketahui <b>$a$, $b$, dan $n$</b> → pakai $S_{n} = ⟨n|2⟩ (2a + (n − 1)b)$.</li></ul></div>
+${seatsFig()}
+${ex('c5')}${ex('c5b')}
+<h4 class="sub">⚡ Cara cepat: suku tengah</h4>
+<p>Jika banyak suku <b>ganjil</b>, ada satu suku tepat di tengah. Jumlah seluruh suku sama dengan <b>banyak suku × suku tengah</b>.</p>
+<div class="formula"><div class="cap">Hanya untuk banyak suku ganjil</div>$$S_{n} = n × U_{tengah}$$</div>
+${ex('c5c')}${ex('d5')}${ex('d6')}</section>
+
+<section class="card" id="b7" data-sub="1" data-toc="B7. Suku dari Jumlah"><h3 class="sec"><span class="tag">B7</span>Menentukan Suku dari Rumus Jumlah</h3>
+<p>Kadang soal memberi rumus jumlah $S_{n}$, lalu menanyakan satu suku. Ingat: jumlah $n$ suku dikurangi jumlah $(n − 1)$ suku tinggal suku ke-$n$.</p>
+<div class="formula"><div class="cap">Suku ke-n dari jumlah</div>$$U_{n} = S_{n} − S_{n−1}$$</div>
+${ex('c6')}${ex('d7')}</section>
+
+<section class="card" id="b8" data-sub="1" data-toc="B8. Sisipan (Pengayaan)"><h3 class="sec"><span class="tag">B8</span>Sisipan (Pengayaan)</h3>
+<p>Jika di antara dua bilangan disisipkan $k$ bilangan agar terbentuk barisan aritmatika, banyak lompatan dari bilangan pertama ke terakhir adalah $k + 1$.</p>
+<div class="formula"><div class="cap">Beda baru setelah sisipan</div>$$b' = ⟨selisih kedua bilangan|k + 1⟩$$</div>
+${ex('c7')}${ex('d8')}</section>
+
+<section class="card" id="b9" data-sub="1" data-toc="B9. Pola Bilangan"><h3 class="sec"><span class="tag">B9</span>Pola Bilangan dan Generalisasi</h3>
+<p>Soal Level 3 sering meminta Anda <b>menyusun rumus umum</b> dari sebuah pola gambar atau tabel. Langkahnya: hitung banyak unsur tiap pola, cari selisihnya, susun $U_{n}$.</p>
+<figure class="figbox">${matchFig()}<figcaption>Gambar 6. Persegi berderet dari batang korek api: 4, 7, 10, … batang.</figcaption></figure>
+<div class="callout warn"><b class="h">Hati-hati pada soal "paling banyak"</b>Jika hasil hitung bukan bilangan bulat, <b>jangan dibulatkan ke atas</b>. Pola ke-berapa yang dapat dibuat harus bilangan bulat yang bahannya masih cukup (dibulatkan ke <b>bawah</b>).</div>
+${ex('c8')}${ex('d9')}</section>
+
+<section class="card" id="b10" data-sub="1" data-toc="B10. Bunga Tunggal"><h3 class="sec"><span class="tag">B10</span>Bunga Tunggal (Penerapan Aritmatika)</h3>
+<p>Bunga adalah "jasa" yang diterima penabung dari bank. Pada <b>bunga tunggal</b>, bunga setiap tahun dihitung dari <b>modal awal saja</b>, sehingga bunganya <b>selalu sama besar</b>. Karena bertambah dengan jumlah tetap, saldo membentuk <b>barisan aritmatika</b>.</p>
+<figure class="figbox">${barFig()}<figcaption>Gambar 7. Modal Rp4.000.000, bunga tunggal 6% per tahun: saldo bertambah Rp240.000 setiap tahun (beda tetap).</figcaption></figure>
+<div class="formula"><div class="cap">Bunga</div>$$B = M × r × t$$</div>
+<div class="formula"><div class="cap">Jumlah akhir (modal + bunga)</div>$$A = M + B = M(1 + r·t)$$</div>
+<div class="tw"><table class="t"><tr><th>Lambang</th><th>Arti</th><th>Catatan</th></tr><tr><td>$M$</td><td>Modal awal</td><td>Dalam rupiah</td></tr><tr><td>$r$</td><td>Suku bunga per tahun</td><td>Ubah persen ke desimal: $6% = 0,06$</td></tr><tr><td>$t$</td><td>Lama menabung (tahun)</td><td>Ubah bulan ke tahun: 9 bulan $= ⟨9|12⟩ = 0,75$</td></tr><tr><td>$B$ / $A$</td><td>Bunga / jumlah akhir</td><td>$A$ = modal + bunga</td></tr></table></div>
+<div class="callout bad"><b class="h">Dua hal yang sering membuat salah</b><ul><li>Persen belum diubah ke desimal (8% ditulis 8, seharusnya 0,08).</li><li>Bulan belum diubah ke tahun (18 bulan ditulis 18, seharusnya 1,5).</li></ul></div>
+${ex('c9')}${ex('c10')}${ex('c11')}${ex('d10')}${ex('d11')}</section>
+
+<section class="card" id="b11" data-sub="1" data-toc="B11. Soal Cerita"><h3 class="sec"><span class="tag">B11</span>Cara Membaca Soal Cerita</h3>
+<p>Banyak siswa bisa menghitung, tetapi bingung <b>rumus mana yang dipakai</b>. Gunakan kata kunci berikut.</p>
+<div class="tw"><table class="t"><tr><th>Kata / kalimat di soal</th><th>Artinya</th><th>Yang dipakai</th></tr>
+<tr><td>"bertambah / naik / lebih banyak ... tiap ..." (jumlah tetap)</td><td>Beda positif</td><td>Aritmatika, $b &gt; 0$</td></tr>
+<tr><td>"berkurang / turun / lebih sedikit ... tiap ..."</td><td>Beda negatif</td><td>Aritmatika, $b &lt; 0$</td></tr>
+<tr><td>"pada bulan / hari / baris ke-…"</td><td>Satu suku saja</td><td>$U_{n}$</td></tr>
+<tr><td>"jumlah", "total", "seluruhnya"</td><td>Beberapa suku dijumlahkan</td><td>$S_{n}$</td></tr>
+<tr><td>"bunga tunggal"</td><td>Bunga dari modal awal terus</td><td>$A = M(1 + r·t)$</td></tr>
+<tr><td>"paling banyak yang dapat dibuat"</td><td>Pertidaksamaan; bulatkan ke bawah</td><td>$U_{n} ≤ $ batas</td></tr></table></div>
+<figure class="figbox">${stairFig()}<figcaption>Gambar 8. Tumpukan batu bata: 30, 28, 26, …, 10 buah. Beda $b = −2$ (berkurang).</figcaption></figure>
+${ex('c12')}${ex('d12')}</section>
+
+<section class="card" id="b12" data-sub="1" data-toc="B12. Kesalahan Umum"><h3 class="sec"><span class="tag">B12</span>Kesalahan Umum dan Cara Menghindarinya</h3>
+<div class="tw"><table class="t"><tr><th>Kesalahan</th><th>Contoh</th><th>Cara menghindari</th></tr>
+<tr><td>Memakai $n$, bukan $(n − 1)$</td><td>$U_{25} = 4 + 25·5$ (salah)</td><td>Jumlah lompatan selalu satu lebih sedikit dari nomor suku.</td></tr>
+<tr><td>Lupa tanda beda negatif</td><td>Barisan 20, 17, 14 → $b = 3$</td><td>Hitung selalu suku kedua dikurangi suku pertama.</td></tr>
+<tr><td>Lupa membagi 2 pada $S_{n}$</td><td>$S_{50} = 50 × 151$</td><td>Ingat rumus diawali $⟨n|2⟩$ (setengah banyak suku).</td></tr>
+<tr><td>"Antara" dianggap termasuk ujung</td><td>Kelipatan 4 antara 10 dan 100 memasukkan 100</td><td>Tulis dulu suku pertama dan terakhir yang benar-benar di dalam rentang.</td></tr>
+<tr><td>Persen tidak diubah</td><td>8% ditulis 8</td><td>Selalu ubah: $8% = 0,08$.</td></tr>
+<tr><td>Bulan tidak diubah ke tahun</td><td>18 bulan ditulis $t = 18$</td><td>Bagi 12: 18 bulan = 1,5 tahun.</td></tr>
+<tr><td>Menjawab bunga, padahal ditanya jumlah akhir</td><td>Menjawab 600.000</td><td>Baca kalimat tanya; jumlah akhir = modal + bunga.</td></tr></table></div></section>
+
+<section class="card" id="b13" data-sub="1" data-toc="B13. Strategi dan Ringkasan"><h3 class="sec"><span class="tag">B13</span>Strategi Mengerjakan Soal dan Ringkasan Rumus</h3>
+${flowFig()}
+<div class="tw"><table class="t"><tr><th>Konsep</th><th>Rumus</th></tr>
+<tr><td>Suku ke-n</td><td>$U_{n} = a + (n − 1)b$</td></tr>
+<tr><td>Beda dari dua suku</td><td>$b = ⟨U_{p} − U_{q}|p − q⟩$</td></tr>
+<tr><td>Banyak suku</td><td>$n = ⟨U_{n} − a|b⟩ + 1$</td></tr>
+<tr><td>Tiga suku berurutan</td><td>$2U_{2} = U_{1} + U_{3}$</td></tr>
+<tr><td>Jumlah $n$ suku</td><td>$S_{n} = ⟨n|2⟩ (2a + (n − 1)b) = ⟨n|2⟩ (a + U_{n})$</td></tr>
+<tr><td>Jumlah (suku ganjil)</td><td>$S_{n} = n × U_{tengah}$</td></tr>
+<tr><td>Suku dari jumlah</td><td>$U_{n} = S_{n} − S_{n−1}$</td></tr>
+<tr><td>Sisipan $k$ bilangan</td><td>$b' = ⟨selisih|k + 1⟩$</td></tr>
+<tr><td>Bunga tunggal</td><td>$B = M·r·t$ ; $A = M(1 + r·t)$</td></tr></table></div></section>
+
+<section class="card" id="latihan" data-toc="C. Latihan dan Prediksi TKA"><h3 class="sec"><span class="tag">C</span>Latihan dan Prediksi Soal TKA</h3>
+<p>Kerjakan <b>tanpa kalkulator</b>. <b>Klik jawabanmu</b> dulu; setelah itu baru muncul pembahasan dengan <b>📝 Cara Lengkap</b> dan <b>⚡ Cara Cepat</b>.</p>
+<div class="callout warn"><b class="h">Catatan penyusun</b>Soal ini adalah <b>prediksi</b> berdasarkan matriks asesmen (Aljabar, barisan dan deret aritmatika, termasuk bunga tunggal), bukan soal resmi.</div>
+<div class="stat" id="stat"><span>Dijawab: <b id="sA">0</b>/17</span><span>Benar: <b id="sB">0</b></span><span>Skor: <b id="sC">0</b></span><button id="reset">↺ Ulangi semua</button></div>
+<div id="soal">${soalList()}</div>
+<div class="callout tip" id="penutup" hidden><b class="h">🎉 Semua soal sudah dijawab!</b><span id="pt"></span></div>
+</section>
+`;
+/* ===== MEMBANGUN HALAMAN ===== */
+const app=document.getElementById('app');
+app.innerHTML=M(BODY);
+const toc=document.getElementById('toc');
+app.querySelectorAll('section.card').forEach(s=>{const a=document.createElement('a');a.href='#'+s.id;a.textContent=s.dataset.toc;if(s.dataset.sub)a.className='sub';toc.appendChild(a);});
+const tocLinks=[...toc.querySelectorAll('a')];
+const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){tocLinks.forEach(l=>l.classList.toggle('act',l.getAttribute('href')==='#'+en.target.id));}});},{rootMargin:'-25% 0px -65% 0px'});
+app.querySelectorAll('section.card').forEach(s=>io.observe(s));
+document.getElementById('burger').onclick=()=>document.getElementById('nav').classList.toggle('open');
+document.getElementById('tocbtn').onclick=()=>toc.classList.toggle('open');
+toc.addEventListener('click',e=>{if(e.target.tagName==='A')toc.classList.remove('open');});
+const totop=document.getElementById('totop');
+window.addEventListener('scroll',()=>{totop.style.display=window.scrollY>500?'block':'none';});
+totop.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+/* ===== INTERAKSI ===== */
+const state={};
+function updateStat(){
+  const ans=Object.keys(state).length,ben=Object.values(state).filter(Boolean).length;
+  document.getElementById('sA').textContent=ans;document.getElementById('sB').textContent=ben;document.getElementById('sC').textContent=Math.round(ben/Q.length*100);
+  const pt=document.getElementById('penutup');
+  if(ans===Q.length){pt.hidden=false;document.getElementById('pt').textContent=' Skormu '+Math.round(ben/Q.length*100)+' ('+ben+' dari '+Q.length+' benar). Ulangi soal yang salah dengan membaca Cara Lengkap, lalu coba lagi dengan Cara Cepat.';}else pt.hidden=true;
+}
+function verdict(ok,msg){return '<div class="verdict '+(ok?'ok':'bad')+'">'+(ok?'✅ Benar! ':'❌ Belum tepat. ')+msg+'</div>';}
+function finishQ(art,q,ok,msg){
+  state[q.n]=ok;art.classList.add('locked',ok?'done-ok':'done-bad');
+  const fb=art.querySelector('.fb');fb.innerHTML=M(verdict(ok,msg)+sol(q.quick,q.steps));fb.hidden=false;updateStat();
+  fb.scrollIntoView({block:'nearest',behavior:'smooth'});
+}
+function checkFill(box,skip){
+  const e=EX[box.dataset.ex],ins=[...box.querySelectorAll('input')],fbx=box.querySelector('.fbx');
+  const shown=e.f.map(f=>f[0]+' <b>'+f[2]+'</b>').join(' &nbsp; ');
+  if(skip){ins.forEach(i=>i.disabled=true);fbx.innerHTML=M('<div class="verdict info">📖 Jawaban: '+shown+'</div>'+sol(e.quick,e.steps));fbx.hidden=false;return;}
+  let all=true,any=false;
+  ins.forEach((inp,i)=>{const v=inp.value.trim();if(v)any=true;const ok=Math.abs(num(v)-e.f[i][1])<1e-6;inp.classList.toggle('ok',ok);inp.classList.toggle('no',!ok);if(!ok)all=false;});
+  if(!any){fbx.innerHTML='<div class="verdict info">✍️ Isi jawabanmu dulu ya, baru diperiksa.</div>';fbx.hidden=false;return;}
+  if(all){ins.forEach(i=>i.disabled=true);fbx.innerHTML=M('<div class="verdict ok">✅ Benar! Hebat. Sekarang pelajari caranya supaya makin paham:</div>'+sol(e.quick,e.steps));}
+  else fbx.innerHTML=M('<div class="verdict bad">❌ Belum tepat. 💡 Petunjuk: '+e.hint+'<br>Coba lagi, atau klik <b>Lihat pembahasan</b>.</div>');
+  fbx.hidden=false;
+}
+app.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.matches('.fill input')){e.preventDefault();checkFill(e.target.closest('.exbox'),false);}});
+app.addEventListener('click',e=>{
+  const tab=e.target.closest('.tab');
+  if(tab){const s=tab.closest('.sol');s.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t===tab));s.querySelectorAll('.pane').forEach(p=>{p.hidden=!p.classList.contains(tab.dataset.t);});return;}
+  const cf=e.target.closest('.chkfill');if(cf){checkFill(cf.closest('.exbox'),false);return;}
+  const sk=e.target.closest('.skip');if(sk){checkFill(sk.closest('.exbox'),true);return;}
+  if(e.target.closest('#reset')){document.getElementById('soal').innerHTML=M(soalList());Object.keys(state).forEach(k=>delete state[k]);updateStat();document.getElementById('latihan').scrollIntoView({behavior:'smooth'});return;}
+  const opt=e.target.closest('button.opt');
+  if(opt){const art=opt.closest('article.q'),q=Q[+art.dataset.n-1];if(art.classList.contains('locked'))return;
+    const i=+opt.dataset.i,ok=i===q.ans;art.querySelectorAll('button.opt').forEach((b,j)=>{if(j===q.ans)b.classList.add('ok');else if(j===i)b.classList.add('bad');});
+    finishQ(art,q,ok,ok?'Jawabanmu <b>'+'ABCDE'[q.ans]+'</b> tepat.':'Jawabanmu <b>'+'ABCDE'[i]+'</b>. Jawaban yang benar: <b>'+'ABCDE'[q.ans]+'</b>.');return;}
+  const ck=e.target.closest('.btn.chk');
+  if(ck){const art=ck.closest('article.q'),q=Q[+art.dataset.n-1],warn=art.querySelector('.warnmsg');
+    if(q.type==='multi'){const bx=[...art.querySelectorAll('input[type=checkbox]')],sel=bx.map((b,i)=>b.checked?i:-1).filter(i=>i>=0);
+      if(!sel.length){warn.hidden=false;return;}warn.hidden=true;
+      const ok=sel.length===q.ans.length&&sel.every(i=>q.ans.indexOf(i)>-1);
+      bx.forEach((b,i)=>{const lab=b.closest('label'),c=q.ans.indexOf(i)>-1;if(b.checked&&c)lab.classList.add('ok');else if(b.checked&&!c)lab.classList.add('bad');else if(!b.checked&&c)lab.classList.add('miss');b.disabled=true;});
+      finishQ(art,q,ok,ok?'Semua pilihanmu tepat.':'Jawaban yang benar: '+q.ans.map(i=>'('+(i+1)+')').join(', ')+'.');}
+    else{const rows=[...art.querySelectorAll('tr[data-r]')];let miss=false,ok=true;
+      rows.forEach(r=>{if(!r.querySelector('input:checked'))miss=true;});if(miss){warn.hidden=false;return;}warn.hidden=true;
+      rows.forEach((r,i)=>{const v=r.querySelector('input:checked').value==='1',c=v===q.ans[i];if(!c)ok=false;r.classList.add(c?'ok':'bad');r.querySelectorAll('input').forEach(x=>x.disabled=true);});
+      finishQ(art,q,ok,ok?'Semua pernyataan tepat.':'Ada pernyataan yang keliru (baris merah). Kunci: '+q.ans.map(v=>v?'B':'S').join(', ')+'.');}
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fungsi Komposisi - VisualMath.Lim</title>
+<meta name="description" content="Materi Fungsi Komposisi TKA Matematika Wajib SMA - VisualMath.Lim">
+<link rel="icon" href="logo.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<style>
+:root{
+  --navy:#022050; --navy2:#0a3070; --cyan:#00d6d8; --cyan-d:#007f82; --cyan-l:#e0fbfb;
+  --yellow:#ffd300; --yellow-l:#fff8d1; --ink:#14213d; --muted:#51607a;
+  --bg:#f3f7fb; --card:#fff; --line:#d9e3ef; --ok:#1c8a55; --ok-l:#e4f6ec; --bad:#c0392b; --bad-l:#fdecea;
+  --orange:#e67e22;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;font-family:"Poppins","Segoe UI",system-ui,-apple-system,Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:16px}
+a{color:var(--cyan-d)}
+/* ===== Header ===== */
+.hdr{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff;border-bottom:4px solid var(--yellow);box-shadow:0 2px 12px rgba(2,32,80,.35)}
+.hdr-in{max-width:1280px;margin:auto;padding:8px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;min-width:0}
+.brand img{width:52px;height:52px;border-radius:50%;object-fit:cover;background:var(--navy);flex:none}
+.brand .t{font-weight:700;font-size:1.05rem;line-height:1.25}
+.brand .t b{color:var(--cyan)}
+.brand .t small{display:block;font-weight:500;font-size:.78rem;color:#cfe3ff}
+.nav{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.nav a{color:#fff;text-decoration:none;font-weight:600;font-size:.9rem;padding:8px 16px;border-radius:999px;border:2px solid transparent;transition:.2s}
+.nav a:hover,.nav a:focus-visible{background:var(--cyan);color:var(--navy);outline:none}
+.nav a.on{background:var(--yellow);color:var(--navy)}
+/* ===== Layout ===== */
+.wrap{max-width:1280px;margin:auto;padding:20px 16px 60px;display:grid;grid-template-columns:250px minmax(0,1fr);gap:24px}
+.side{position:sticky;top:96px;align-self:start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;max-height:calc(100vh - 116px);overflow:auto}
+.side h4{margin:0 0 8px;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.side a{display:block;text-decoration:none;color:var(--ink);padding:7px 10px;border-radius:10px;font-size:.88rem;font-weight:500;border-left:4px solid transparent}
+.side a:hover{background:var(--cyan-l)}
+.side a.act{background:var(--navy);color:#fff;border-left-color:var(--yellow)}
+.pbar{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin:8px 0 14px}
+.pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--yellow));transition:width .3s}
+main{min-width:0}
+/* ===== Hero ===== */
+.hero{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;border-radius:20px;padding:28px 26px;position:relative;overflow:hidden;margin-bottom:22px}
+.hero:after{content:"f∘g";position:absolute;right:18px;bottom:-26px;font-size:7rem;font-weight:800;color:rgba(0,214,216,.14);font-family:Georgia,serif}
+.hero .tag{display:inline-block;background:var(--yellow);color:var(--navy);font-weight:700;font-size:.78rem;padding:3px 12px;border-radius:99px}
+.hero h1{margin:10px 0 6px;font-size:1.9rem;line-height:1.25}
+.hero p{margin:0;color:#d6e6ff;max-width:640px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.chips span{background:rgba(0,214,216,.18);border:1px solid rgba(0,214,216,.5);color:#fff;border-radius:99px;padding:3px 12px;font-size:.8rem}
+/* ===== Cards ===== */
+section.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px 24px 18px;margin-bottom:22px;box-shadow:0 2px 10px rgba(2,32,80,.05)}
+section.card>h2{margin:0 0 12px;font-size:1.35rem;color:var(--navy);display:flex;align-items:center;gap:12px;flex-wrap:wrap;line-height:1.3}
+.mno{background:var(--navy);color:var(--yellow);font-size:.78rem;font-weight:700;padding:5px 12px;border-radius:99px;letter-spacing:.04em;white-space:nowrap}
+h3{color:var(--navy);margin:20px 0 8px;font-size:1.05rem}
+.stp{display:inline-block;font-weight:800;font-size:.78rem;letter-spacing:.08em;padding:3px 12px;border-radius:8px;margin:14px 0 6px}
+.see{background:#dff7f8;color:#006a6c}.think{background:var(--yellow-l);color:#7a5d00}.solve{background:var(--navy);color:#fff}
+p{margin:.5em 0}
+ul,ol{padding-left:1.3em;margin:.4em 0}
+li{margin:.25em 0}
+.box{border-radius:14px;padding:12px 16px;margin:12px 0;border-left:6px solid}
+.box.ingat{background:var(--yellow-l);border-color:var(--yellow)}
+.box.info{background:var(--cyan-l);border-color:var(--cyan)}
+.box.warn{background:var(--bad-l);border-color:var(--bad)}
+.box.rumus{background:#eef3ff;border-color:var(--navy);text-align:center;font-size:1.05rem}
+.box b.lbl{display:block;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px}
+/* tables */
+.tw{overflow-x:auto;margin:12px 0;border-radius:12px;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:.93rem}
+th{background:var(--navy);color:#fff;text-align:left;padding:9px 12px;font-weight:600}
+td{padding:9px 12px;border-top:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:#f8fbfe}
+td.good{color:var(--ok);font-weight:600}td.bad{color:var(--bad)}
+/* figures */
+figure{margin:16px 0;text-align:center}
+figure div svg{max-width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:14px}
+figcaption{font-size:.84rem;color:var(--muted);margin-top:6px;font-style:italic}
+/* examples */
+.ex{border:2px solid var(--line);border-radius:16px;margin:18px 0;overflow:hidden;background:#fff}
+.ex-h{background:linear-gradient(90deg,var(--navy),var(--navy2));color:#fff;padding:9px 16px;font-weight:700;font-size:.95rem}
+.ex-h em{color:var(--yellow);font-style:normal}
+.ex-b{padding:12px 18px 8px}
+.cc{background:var(--yellow-l);border:2px dashed #e0b800;border-radius:12px;padding:10px 14px;margin:10px 0}
+.cc>.h{font-weight:800;color:#7a5d00;font-size:.88rem;margin-bottom:2px}
+.cl{background:#f3fbfb;border:2px solid #b8ecee;border-radius:12px;padding:10px 14px 6px;margin:10px 0}
+.cl>.h{font-weight:800;color:var(--cyan-d);font-size:.88rem;margin-bottom:4px}
+ol.steps{list-style:none;counter-reset:s;padding:0;margin:4px 0}
+ol.steps>li{counter-increment:s;position:relative;padding:4px 0 8px 46px;margin:0;border-left:3px solid #b8ecee;margin-left:15px;padding-left:34px}
+ol.steps>li:last-child{border-left-color:transparent}
+ol.steps>li:before{content:counter(s);position:absolute;left:-17px;top:2px;width:30px;height:30px;border-radius:50%;background:var(--navy);color:var(--yellow);font-weight:700;display:grid;place-items:center;font-size:.9rem}
+ol.steps .st{font-weight:600;color:var(--navy)}
+.cek{background:var(--ok-l);border-left:5px solid var(--ok);padding:6px 12px;border-radius:8px;margin:8px 0;font-size:.93rem}
+.katex-display{margin:.5em 0;overflow-x:auto;overflow-y:hidden;padding:2px 0}
+/* widgets */
+.lab{background:linear-gradient(135deg,#eaffff,#fffbe0);border:2px solid var(--cyan);border-radius:16px;padding:14px 16px;margin:16px 0}
+.lab h4{margin:0 0 8px;color:var(--navy)}
+.lab .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.lab input[type=number]{width:90px;padding:6px 10px;border:2px solid var(--navy);border-radius:10px;font:inherit;font-weight:700;color:var(--navy)}
+.lab .out{margin-top:8px;font-size:.98rem}
+.lab select{padding:6px 8px;border:2px solid var(--navy);border-radius:10px;font:inherit}
+/* quiz */
+.q{border:2px solid var(--line);border-radius:16px;margin:18px 0;background:#fff;overflow:hidden}
+.q-h{display:flex;gap:10px;align-items:center;background:var(--bg);padding:8px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.q-n{background:var(--navy);color:var(--yellow);font-weight:700;border-radius:99px;padding:2px 14px}
+.q-t{color:var(--muted);font-size:.82rem}
+.q-b{padding:10px 18px 14px}
+.opts{display:grid;gap:8px;margin:10px 0}
+.opt{display:flex;gap:10px;align-items:flex-start;text-align:left;width:100%;background:#fff;border:2px solid var(--line);border-radius:12px;padding:8px 12px;cursor:pointer;font:inherit;color:inherit;transition:.15s}
+.opt:hover:not(:disabled){border-color:var(--cyan);background:var(--cyan-l)}
+.opt .l{flex:none;width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.85rem}
+.opt.ok{border-color:var(--ok);background:var(--ok-l)}.opt.ok .l{background:var(--ok)}
+.opt.no{border-color:var(--bad);background:var(--bad-l)}.opt.no .l{background:var(--bad)}
+.opt:disabled{cursor:default}
+.opt.pick{border-color:var(--navy);background:#eef3ff}
+.btn{background:var(--cyan);color:var(--navy);border:0;border-radius:999px;padding:8px 20px;font:inherit;font-weight:700;cursor:pointer;transition:.2s}
+.btn:hover{background:var(--yellow)}
+.btn.alt{background:var(--navy);color:#fff}
+.res{font-weight:700;margin:6px 0}
+.res.ok{color:var(--ok)}.res.no{color:var(--bad)}
+details.pb{margin-top:10px;border:2px solid var(--navy);border-radius:12px;overflow:hidden}
+details.pb>summary{cursor:pointer;background:var(--navy);color:#fff;padding:8px 14px;font-weight:600;list-style:none}
+details.pb>summary::-webkit-details-marker{display:none}
+details.pb>summary:before{content:"▶ ";color:var(--yellow);font-size:.8em}
+details.pb[open]>summary:before{content:"▼ "}
+details.pb .in{padding:6px 16px 10px}
+.score{position:sticky;top:78px;z-index:5;background:var(--navy);color:#fff;padding:8px 16px;border-radius:12px;margin:10px 0;display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:.92rem}
+.score b{color:var(--yellow)}
+.lvl{margin:26px 0 6px;padding:10px 16px;border-radius:12px;font-weight:700;color:var(--navy);background:linear-gradient(90deg,var(--cyan),#a8f3f4)}
+.lvl small{font-weight:500;color:#06404a;margin-left:6px}
+/* checklist */
+.chk label{display:flex;gap:10px;align-items:flex-start;padding:7px 4px;border-bottom:1px dashed var(--line);cursor:pointer}
+.chk input{width:20px;height:20px;accent-color:var(--navy);flex:none;margin-top:3px}
+.chk input:checked+span{color:var(--ok);text-decoration:line-through;text-decoration-color:rgba(28,138,85,.4)}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:20px 0 6px}
+.fab{position:fixed;right:18px;bottom:18px;background:var(--yellow);color:var(--navy);width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-weight:800;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.3);z-index:40}
+@media (max-width:900px){
+  .wrap{grid-template-columns:1fr}
+  .side{position:static;max-height:none;display:flex;gap:6px;overflow-x:auto;padding:10px;white-space:nowrap}
+  .side h4,.side .pbar{display:none}
+  .side a{border-left:0;border-bottom:3px solid transparent;flex:none}
+  .side a.act{border-bottom-color:var(--yellow)}
+  .nav{margin-left:0;width:100%}
+  .hero h1{font-size:1.45rem}
+  section.card{padding:16px 14px 10px}
+  .brand .t{font-size:.92rem}
+}
+@media print{.hdr,.side,.fab,.score{display:none}.wrap{display:block}details.pb{display:block}}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="brand" href="index.html" title="Beranda">
+      <img src="logo.png" alt="Logo Bimbingan Belajar VisualMath.Lim" onerror="this.style.display='none'">
+      <span class="t"><b>VisualMath.Lim</b> - TKA Matematika Wajib SMA<small>Aljabar • Fungsi • Fungsi Komposisi</small></span>
+    </a>
+    <nav class="nav" aria-label="Menu utama">
+      <a href="index.html">🏠 Home</a>
+      <a href="fungsi.html">📊 Dashboard</a>
+      <a href="fungsi_materi2.html" class="on">📘 Materi Komposisi</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+<aside class="side" id="side" aria-label="Daftar isi">
+  <h4>Daftar Isi</h4>
+  <div class="pbar" title="Kemajuan Master Check"><i id="pbar"></i></div>
+  <a href="#peta">Peta Belajar</a>
+  <a href="#m1">1. Mesin Fungsi</a>
+  <a href="#m2">2. Substitusi</a>
+  <a href="#m3">3. Domain &amp; Range</a>
+  <a href="#m4">4. Konsep Komposisi</a>
+  <a href="#m5">5. Nilai Komposisi</a>
+  <a href="#m6">6. Rumus &amp; Fungsi Hilang</a>
+  <a href="#m7">7. Domain Komposisi</a>
+  <a href="#m8">8. Grafik &amp; Soal Cerita</a>
+  <a href="#kesalahan">Bank Kesalahan</a>
+  <a href="#check">Master Check</a>
+  <a href="#soal">Bank Soal Prediksi</a>
+  <a href="#kunci">Rekap Kunci</a>
+</aside>
+
+<main>
+<div class="hero">
+  <span class="tag">TKA Matematika • Elemen Aljabar</span>
+  <h1>Fungsi Komposisi dan Representasinya</h1>
+  <p>Belajar langkah demi langkah dari nol: mesin fungsi, substitusi, domain, sampai soal HOTS. Setiap contoh punya <b style="color:var(--yellow)">Cara Cepat</b> dan <b style="color:var(--cyan)">Cara Lengkap</b>.</p>
+  <div class="chips"><span>8 Mission</span><span>20 contoh</span><span>15 soal prediksi</span><span>Level 1-2-3</span></div>
+</div>
+
+<section class="card" id="peta">
+  <h2>🧭 Peta Belajar</h2>
+  <p>Setiap bagian memakai rutinitas <b>SEE • THINK • SOLVE</b>. Tidak perlu konsep Singapore Math karena TKA menguji ketepatan prosedur dan penalaran dalam waktu terbatas. Yang dipertahankan hanya visual yang memang membantu: mesin fungsi, diagram panah, garis bilangan, dan grafik.</p>
+  <div class="tw"><table>
+    <tr><th>Langkah</th><th>Artinya</th></tr>
+    <tr><td><span class="stp see">SEE</span> Lihat</td><td>Perhatikan gambar, diagram, atau tabel. Apa yang diketahui?</td></tr>
+    <tr><td><span class="stp think">THINK</span> Pikir</td><td>Konsep atau rumus apa yang dipakai, dan urutannya bagaimana?</td></tr>
+    <tr><td><span class="stp solve">SOLVE</span> Selesaikan</td><td>Hitung rapi langkah demi langkah, lalu cek ulang.</td></tr>
+  </table></div>
+  <div class="tw"><table>
+    <tr><th>Komponen</th><th>Isi</th></tr>
+    <tr><td>Elemen / Sub materi</td><td>Aljabar / Fungsi</td></tr>
+    <tr><td>Kompetensi</td><td>Memahami, mengaplikasikan, dan bernalar tingkat tinggi untuk menyelesaikan permasalahan terkait fungsi komposisi dan representasinya.</td></tr>
+    <tr><td>Batasan</td><td>Identifikasi fungsi secara <b>analitis</b> (rumus) dan <b>grafis</b> (diagram, tabel, grafik). Fungsi invers tidak termasuk cakupan.</td></tr>
+  </table></div>
+  <div class="box info"><b class="lbl">Cara memakai halaman ini</b>
+    Kerjakan Mission 1 sampai 8 berurutan. Tutup dulu bagian <i>Cara Lengkap</i> di kepala, coba hitung sendiri, lalu cocokkan. Cara Cepat dipakai setelah kamu paham Cara Lengkap, untuk menghemat waktu ujian.</div>
+</section>
+
+<!-- ================= MISSION 1 ================= -->
+<section class="card" id="m1">
+  <h2><span class="mno">MISSION 1</span> Mesin Fungsi dan Lima Representasi</h2>
+  <span class="stp see">SEE</span>
+  <p>Bayangkan fungsi sebagai <b>mesin</b>: masukkan bilangan (input), mesin mengolahnya dengan aturan tertentu, keluar hasil (output).</p>
+  <figure><div id="fig-mesin"></div><figcaption>Mesin fungsi $f(x)=2x+3$: input 4 menghasilkan output 11</figcaption></figure>
+
+  <div class="lab"><h4>🔧 Coba mesinnya: $f(x)=2x+3$</h4>
+    <div class="row">Masukkan <input type="number" id="in-mesin" value="4" aria-label="nilai x"> <button class="btn" id="btn-mesin">Jalankan</button></div>
+    <div class="out" id="out-mesin"></div></div>
+
+  <span class="stp think">THINK</span>
+  <ul>
+    <li><b>Fungsi</b> adalah aturan yang memasangkan <b>setiap</b> anggota domain dengan <b>tepat satu</b> anggota kodomain.</li>
+    <li><b>Domain</b> (daerah asal) = semua input. <b>Kodomain</b> = himpunan tempat output boleh berada. <b>Range</b> (daerah hasil) = output yang benar-benar muncul.</li>
+    <li>$f(4)$ dibaca "nilai $f$ di 4": <b>ganti setiap $x$ dengan 4</b>.</li>
+  </ul>
+  <figure><div id="fig-fungsi"></div><figcaption>Contoh fungsi dan bukan fungsi pada diagram panah</figcaption></figure>
+  <div class="box ingat"><b class="lbl">Ingat</b>Dua anggota domain boleh menuju hasil yang sama (itu tetap fungsi). Yang dilarang: satu anggota domain punya dua hasil, atau ada anggota domain yang tidak punya pasangan.</div>
+
+  <h3>Lima cara menyajikan fungsi yang sama</h3>
+  <p>Fungsi $f(x)=2x+1$ dengan domain $\{0,1,2,3\}$:</p>
+  <div class="tw"><table>
+    <tr><th>Representasi</th><th>Bentuk</th></tr>
+    <tr><td>Rumus</td><td>$f(x)=2x+1$</td></tr>
+    <tr><td>Pasangan berurutan</td><td>$\{(0,1),(1,3),(2,5),(3,7)\}$</td></tr>
+    <tr><td>Tabel</td><td><table style="min-width:260px"><tr><th>$x$</th><td>0</td><td>1</td><td>2</td><td>3</td></tr><tr><th>$f(x)$</th><td>1</td><td>3</td><td>5</td><td>7</td></tr></table></td></tr>
+    <tr><td>Diagram panah</td><td>$0\to1,\ 1\to3,\ 2\to5,\ 3\to7$</td></tr>
+    <tr><td>Grafik</td><td>titik-titik $(0,1),(1,3),(2,5),(3,7)$</td></tr>
+  </table></div>
+
+  <div class="box rumus"><b class="lbl">Uji garis tegak (untuk grafik)</b>Tarik garis vertikal di mana pun. Jika garis itu <b>pernah memotong grafik di lebih dari satu titik</b>, grafik tersebut <b>bukan</b> fungsi.</div>
+  <figure><div id="fig-uji"></div><figcaption>Uji garis tegak</figcaption></figure>
+
+  <span class="stp solve">SOLVE</span>
+  <div class="ex"><div class="ex-h">Contoh 1 • <em>Menghitung nilai fungsi</em></div><div class="ex-b">
+    <p>Jika $f(x)=3x-5$, tentukan $f(4)$ dan $f(-2)$.</p>
+    <div class="cc"><div class="h">⚡ Cara Cepat</div>Ganti $x$ lalu hitung. $f(4)=12-5=7$ dan $f(-2)=-6-5=-11$.</div>
+    <div class="cl"><div class="h">📋 Cara Lengkap</div><ol class="steps">
+      <li><span class="st">Tulis rumus dengan kurung kosong</span>$$f(\ \ )=3(\ \ )-5$$</li>
+      <li><span class="st">Isi kurung dengan 4, lalu hitung</span>$$f(4)=3(4)-5=12-5=7$$</li>
+      <li><span class="st">Isi kurung dengan $-2$, lalu hitung</span>$$f(-2)=3(-2)-5=-6-5=-11$$</li>
+    </ol></div>
+    <div class="box warn"><b class="lbl">Hati-hati</b>$3\times(-2)=-6$, bukan $+6$. Bilangan negatif kalikan positif hasilnya negatif.</div>
+  </div></div>
+  <div class="ex"><div class="ex-h">Contoh 2 • <em>Mengidentifikasi fungsi</em></div><div class="ex-b">
+    <p>Apakah $\{(1,2),(2,4),(3,4),(4,6)\}$ sebuah fungsi?</p>
+    <div class="cc"><div class="h">⚡ Cara Cepat</div>Lihat angka <b>pertama</b> tiap pasangan: 1, 2, 3, 4, semuanya muncul <b>sekali</b>. Jadi <b>fungsi</b>.</div>
+    <div class="cl"><div class="h">📋 Cara Lengkap</div><ol class="steps">
+      <li><span class="st">Daftar anggota domain (angka pertama)</span>1, 2, 3, 4</li>
+      <li><span class="st">Periksa apakah ada yang muncul dua kali</span>Tidak ada. Setiap anggota domain punya tepat satu pasangan.</li>
+      <li><span class="st">Kesimpulan</span>Angka 4 muncul dua kali sebagai <i>hasil</i> (pasangan dari 2 dan 3). Itu diperbolehkan. Jadi relasi tersebut <b>adalah fungsi</b>.</li>
+    </ol></div>
+  </div></div>
+</section>
+
+<!-- ================= MISSION 2 ================= -->
+<section class="card" id="m2">
+  <h2><span class="mno">MISSION 2</span> Mengganti $x$ dengan Ekspresi (Substitusi)</h2>
+  <span class="stp see">SEE</span>
+  <p>Komposisi berarti memasukkan <b>ekspresi</b> ke dalam fungsi, bukan hanya bilangan. Keterampilan ini wajib dikuasai dulu. Sumber salah terbesar pada komposisi ada di sini.</p>
+  <span class="stp think">THINK</span>
+  <div class="box rumus"><b class="lbl">Aturan emas</b>Tulis kurung kosong pada rumus, lalu isi kurung dengan yang baru.
+    $$f(x)=x^{2}-3x+2\quad\Rightarrow\quad f(\ \ )=(\ \ )^{2}-3(\ \ )+2$$</div>
+  <h3>Pemanasan prasyarat (kerjakan sebelum lanjut)</h3>
+  <div class="tw"><table>
+    <tr><th>Bentuk</th><th>Hasil yang benar</th><th>Kesalahan umum</th></tr>
+    <tr><td>$(a+1)^2$</td><td class="good">$a^2+2a+1$</td><td class="bad">$a^2+1$</td></tr>
+    <tr><td>$(2x+1)^2$</td><td class="good">$4x^2+4x+1$</td><td class="bad">$4x^2+1$</td></tr>
+    <tr><td>$-3(a+1)$</td><td class="good">$-3a-3$</td><td class="bad">$-3a+3$</td></tr>
+    <tr><td>$2(x-3)+1$</td><td class="good">$2x-5$</td><td class="bad">$2x-2$</td></tr>
+  </table></div>
+  <div class="box info"><b class="lbl">Rumus kuadrat yang sering dipakai</b>
+    $(a+b)^2=a^2+2ab+b^2$ &nbsp;dan&nbsp; $(a-b)^2=a^2-2ab+b^2$</div>
+  <span class="stp solve">SOLVE</span>
+  <div class="ex"><div class="ex-h">Contoh 3 • <em>Substitusi ekspresi kuadrat</em></div><div class="ex-b">
+    <p>Jika $f(x)=x^2-3x+2$, tentukan $f(a+1)$.</p>
+    <div class="cc"><div class="h">⚡ Cara Cepat</div>Isi kurung dengan $(a+1)$, kuadratkan, lalu sederhanakan: $(a^2+2a+1)-3a-3+2=a^2-a$.</div>
+    <div class="cl"><div class="h">📋 Cara Lengkap</div><ol class="steps">
+      <li><span class="st">Ganti setiap $x$ dengan $(a+1)$</span>$$f(a+1)=(a+1)^2-3(a+1)+2$$</li>
+      <li><span class="st">Jabarkan kuadrat dan kalikan $-3$</span>$$=a^2+2a+1-3a-3+2$$</li>
+      <li><span class="st">Gabungkan suku sejenis</span>$$a^2+(2a-3a)+(1-3+2)=a^2-a$$</li>
+    </ol>
+    <div class="cek"><b>Cek:</b> untuk $a=1$, $f(2)=4-6+2=0$ dan $a^2-a=1-1=0$. Cocok ✔</div></div>
+  </div></div>
+  <div class="ex"><div class="ex-h">Contoh 4 • <em>Substitusi pada fungsi linear</em></div><div class="ex-b">
+    <p>Jika $f(x)=3x-5$, tentukan $f(x+2)$.</p>
+    <div class="cc"><div class="h">⚡ Cara Cepat</div>$3(x+2)-5=3x+6-5=3x+1$.</div>
+    <div class="cl"><div class="h">📋 Cara Lengkap</div><ol class="steps">
+      <li><span class="st">Ganti $x$ dengan $(x+2)$, jangan lupa kurung</span>$$f(x+2)=3(x+2)-5$$</li>
+      <li><span class="st">Kalikan 3 ke semua isi kurung</span>$$=3x+6-5$$</li>
+      <li><span class="st">Sederhanakan</span>$$=3x+1$$</li>
+    </ol></div>
+  </div></div>
+</section>
+
+<!-- ================= MISSION 3 ================= -->
+<section class="card" id="m3">
+  <h2><span class="mno">MISSION 3</span> Domain dan Range Fungsi Dasar</h2>
+  <span class="stp see">SEE</span>
+  <p>Tidak semua bilangan boleh dimasukkan ke mesin. Mesin "rusak" jika kita membagi dengan nol atau menarik akar bilangan negatif.</p>
+  <span class="stp think">THINK</span>
+  <p>Dua aturan domain yang harus hafal:</p>
+  <div class="tw"><table>
+    <tr><th>Bentuk fungsi</th><th>Syarat domain</th></tr>
+    <tr><td>$\dfrac{1}{(\text{sesuatu})}$</td><td>sesuatu $\neq 0$</td></tr>
+    <tr><td>$\sqrt{(\text{sesuatu})}$</td><td>sesuatu $\geq 0$</td></tr>
+  </table></div>
+  <figure><div id="fig-dom1"></div><figcaption>Domain fungsi akar $f(x)=\sqrt{2x-6}$: $x\geq3$</figcaption></figure>
+  <div class="box ingat"><b class="lbl">Cara membaca garis bilangan</b><b>Titik penuh ●</b> berarti angka itu ikut. <b>Titik kosong ○</b> berarti angka itu tidak ikut.</div>
+  <span class="stp solve">SOLVE</span>
+  <div class="ex"><div class="ex-h">Contoh 5 • <em>Domain fungsi pecahan</em></div><div class="ex-b">
+    <p>Tentukan domain $f(x)=\dfrac{1}{x-3}$.</p>
+    <div class="cc"><div class="h">⚡ Cara Cepat</div>Penyebut tidak boleh nol: $x-3\neq0$, jadi $x\neq3$.</div>
+    <div class="cl"><div class="h">📋 Cara Lengkap</div><ol class="steps">
+      <li><span class="st">Tentukan syarat: penyebut tidak boleh nol</span>$$x-3\neq0$$</li>
+      <li><span class="st">Pindahkan $-3$ ke ruas kanan</span>$$x\neq3$$</li>
+      <li><span class="st">Tulis domain</span>$D_f=\{x\mid x\in\mathbb{R},\ x\neq3\}$</li>
+    </ol></div>
+  </div></div>
+  <div class="ex"><div class="ex-h">Contoh 6 • <em>Domain fungsi akar</em></div><div class="ex-b">
+    <p>Tentukan domain $f(x)=\sqrt{2x-6}$.</p>
+    <div class="cc"><div class="h">⚡ Cara Cepat</div>Isi akar harus $\geq0$, jadi $x\geq3$.</div>
+    <div class="cl"><div class="h">📋 Cara Lengkap</div><ol class="steps">
+      <li><span class="st">Syarat: isi akar tidak negatif</span>$$2x-6\geq0$$</li>
+      <li><span class="st">Pindahkan $-6$ ke kanan</span>$$2x\geq6$$</li>
+      <li><span class="st">Bagi kedua ruas dengan 2</span>$$x\geq3$$</li>
+    </ol></div>
+  </div></div>
+  <div class="ex"><div class="ex-h">Contoh 7 • <em>Range</em></div><div class="ex-b">
+    <p>$f(x)=x^2$ dengan $x$ bilangan real. Tentukan range-nya.</p>
+    <div class="cc"><div class="h">⚡ Cara Cepat</div>Kuadrat tidak pernah negatif, jadi range: $y\geq0$.</div>
+    <div class="cl"><div class="h">📋 Cara Lengkap</div><ol class="steps">
+      <li><span class="st">Coba beberapa nilai</span>$f(-2)=4,\ f(0)=0,\ f(3)=9$</li>
+      <li><span class="st">Amati pola</span>Hasil selalu 0 atau positif.</li>
+      <li><span class="st">Kesimpulan</span>$R_f=\{y\mid y\geq0\}$</li>
+    </ol></div>
+  </div></div>
+</section>
+
+<!-- ================= MISSION 4 ================= -->
+<section class="card" id="m4">
+  <h2><span class="mno">MISSION 4</span> Konsep Komposisi Fungsi</h2>
+  <span class="stp see">SEE</span>
+  <p>Komposisi adalah <b>dua mesin yang disambung</b>: hasil mesin pertama menjadi masukan mesin kedua.</p>
+  <figure><div id="fig-komp"></div><figcaption>Mesin gabungan $f\circ g$: $x$ masuk ke $g$ dahulu, hasilnya masuk ke $f$</figcaption></figure>
+  <span class="stp think">THINK</span>
+  <div class="box rumus">$$(f\circ g)(x)=f\big(g(x)\big)$$</div>
+  <ul>
+    <li>Dibaca "$f$ bundaran $g$" atau "$f$ komposisi $g$".</li>
+    <li>Kerjakan <b>fungsi yang di kanan ($g$) lebih dulu</b>, lalu hasilnya dimasukkan ke $f$.</li>
+    <li>Pada umumnya $f\circ g\neq g\circ f$ (urutan tidak boleh ditukar).</li>
+  </ul>
+  <div class="lab"><h4>🔧 Coba dua mesin: $f(x)=2x+1$ dan $g(x)=x^2$</h4>
+    <div class="row">Masukkan $x=$ <input type="number" id="in-komp" value="3" aria-label="nilai x"> <button class="btn" id="btn-komp">Hitung</button></div>
+    <div class="out" id="out-komp"></div></div>
+  <span class="stp solve">SOLVE</span>
+  <div class="ex"><div class="ex-h">Contoh 8 • <em>Dua urutan komposisi</em></div><div class="ex-b">
+    <p>Jika $f(x)=2x+1$ dan $g(x)=x^2$, tentukan $(f\circ g)(x)$ dan $(g\circ f)(x)$.</p>
+    <div class="cc"><div class="h">⚡ Cara Cepat</div>Untuk $f\circ g$: ganti $x$ di $f$ dengan $x^2$. Untuk $g\circ f$: ganti $x$ di $g$ dengan $(2x+1)$.</div>
+    <div class="cl"><div class="h">📋 Cara Lengkap</div><ol class="steps">
+      <li><span class="st">$f\circ g$: kerjakan $g$ dahulu, hasilnya ke $f$</span>$$(f\circ g)(x)=f\big(x^2\big)=2x^2+1$$</li>
+      <li><span class="st">$g\circ f$: kerjakan $f$ dahulu, hasilnya ke $g$</span>$$(g\circ f)(x)=g(2x+1)=(2x+1)^2$$</li>
+      <li><span class="st">Jabarkan kuadrat</span>$$=4x^2+4x+1$$</li>
+      <li><span class="st">Bandingkan</span>$2x^2+1\neq4x^2+4x+1$. Jadi <b>urutan menentukan hasil</b>.</li>
+    </ol></div>
+  </div></div>
+</section>
+
+<!-- ================= MISSION 5 ================= -->
+<section class="card" id="m5">
+  <h2><span class="mno">MISSION 5</span> Menghitung Nilai Komposisi</h2>
+  <span class="stp see">SEE</span>
+  <p>Ada dua jalan: (1) cari rumus komposisinya dulu, atau (2) hitung langsung dari dalam ke luar. Untuk <b>satu nilai $x$</b>, jalan (2) lebih cepat.</p>
+  <span class="stp think">THINK</span>
+  <div class="box rumus">Untuk $(f\circ g)(a)$: hitung $g(a)$ dahulu, lalu masukkan hasilnya ke $f$.</div>
+  <span class="stp solve">SOLVE</span>
+  <div class="ex"><div class="ex-h">Contoh 9 • <em>Dari rumus</em></div><div class="ex-b">
+    <p>$f(x)=2x+1$ dan $g(x)=x-3$. Tentukan $(f\circ g)(5)$ dan $(g\circ f)(5)$.</p>
+    <div class="cc"><div class="h">⚡ Cara Cepat</div>$g(5)=2$, lalu $f(2)=5$. Jadi $(f\circ g)(5)=5$. Sebaliknya: $f(5)=11$, lalu $g(11)=8$.</div>
+    <div class="cl"><div class="h">📋 Cara Lengkap</div><ol class="steps">
+      <li><span class="st">Hitung $g(5)$</span>$$g(5)=5-3=2$$</li>
+      <li><span class="st">Masukkan 2 ke $f$</span>$$(f\circ g)(5)=f(2)=2(2)+1=5$$</li>
+      <li><span class="st">Untuk $g\circ f$, hitung $f(5)$ dahulu</span>$$f(5)=2(5)+1=11$$</li>
+      <li><span class="st">Masukkan 11 ke $g$</span>$$(g\circ f)(5)=g(11)=11-3=8$$</li>
+    </ol></div>
+  </div></div>
+  <div class="ex"><div class="ex-h">Contoh 10 • <em>Dari diagram panah</em></div><div class="ex-b">
+    <p>Perhatikan diagram: $g$ memetakan $A\to B$ dan $f$ memetakan $B\to C$. Tentukan $(f\circ g)(1)$, $(f\circ g)(2)$, dan $(f\circ g)(3)$.</p>
+    <figure><div id="fig-diag"></div><figcaption>Diagram panah komposisi</figcaption></figure>
+    <div class="cc"><div class="h">⚡ Cara Cepat</div>Ikuti panah dua kali. $1\to3\to30$; $2\to1\to10$; $3\to2\to20$.</div>
+    <div class="cl"><div class="h">📋 Cara Lengkap</div><ol class="steps">
+      <li><span class="st">Untuk $x=1$: ikuti panah $g$, lalu panah $f$</span>$$(f\circ g)(1)=f\big(g(1)\big)=f(3)=30$$</li>
+      <li><span class="st">Untuk $x=2$</span>$$(f\circ g)(2)=f\big(g(2)\big)=f(1)=10$$</li>
+      <li><span class="st">Untuk $x=3$</span>$$(f\circ g)(3)=f\big(g(3)\big)=f(2)=20$$</li>
+    </ol></div>
+  </div></div>
+</section>
+
+<!-- ================= MISSION 6 ================= -->
+<section class="card" id="m6">
+  <h2><span class="mno">MISSION 6</span> Menentukan Rumus Komposisi dan Fungsi yang Hilang</h2>
+  <span class="stp see">SEE</span>
+  <p>Kadang rumus komposisi diketahui, tetapi salah satu fungsinya hilang. Kita "membongkar" komposisi.</p>
+  <span class="stp think">THINK</span>
+  <ul>
+    <li>Rumus komposisi: <b>substitusi</b> (Mission 2).</li>
+    <li>Mencari $f$ jika $g$ dan $f\circ g$ diketahui: <b>misalkan</b> $t=g(x)$, nyatakan $x$ dalam $t$, lalu masukkan.</li>
+    <li>Mencari $g$ jika $f$ dan $f\circ g$ diketahui: <b>selesaikan persamaan</b> $f\big(g(x)\big)=\ldots$ untuk $g(x)$.</li>
+  </ul>
+  <span class="stp solve">SOLVE</span>
+  <div class="ex"><div class="ex-h">Contoh 11 • <em>Menyusun rumus komposisi</em></div><div class="ex-b">
+    <p>$f(x)=3x-2$ dan $g(x)=x^2+1$. Tentukan $(f\circ g)(x)$ dan $(g\circ f)(x)$.</p>
+    <div class="cc"><div class="h">⚡ Cara Cepat</div>$(f\circ g)(x)=3(x^2+1)-2=3x^2+1$ dan $(g\circ f)(x)=(3x-2)^2+1=9x^2-12x+5$.</div>
+    <div class="cl"><div class="h">📋 Cara Lengkap</div><ol class="steps">
+      <li><span class="st">$f\circ g$: ganti $x$ pada $f$ dengan $g(x)$</span>$$(f\circ g)(x)=3\big(x^2+1\big)-2$$</li>
+      <li><span class="st">Kalikan 3, lalu sederhanakan</span>$$=3x^2+3-2=3x^2+1$$</li>
+      <li><span class="st">$g\circ f$: ganti $x$ pada $g$ dengan $f(x)$</span>$$(g\circ f)(x)=(3x-2)^2+1$$</li>
+      <li><span class="st">Jabarkan $(3x-2)^2=9x^2-12x+4$</span>$$=9x^2-12x+4+1=9x^2-12x+5$$</li>
+    </ol></div>
+  </div></div>
+  <div class="ex"><div class="ex-h">Contoh 12 • <em>Mencari $f$ yang hilang</em></div><div class="ex-b">
+    <p>$g(x)=x+2$ dan $(f\circ g)(x)=3x+10$. Tentukan $f(x)$.</p>
+    <div class="cc"><div class="h">⚡ Cara Cepat</div>Tulis $3x+10$ memakai $(x+2)$: $3x+10=3(x+2)+4$. Maka $f(x)=3x+4$.</div>
+    <div class="cl"><div class="h">📋 Cara Lengkap</div><ol class="steps">
+      <li><span class="st">Misalkan hasil $g$ sebagai $t$</span>$$t=x+2\quad\Rightarrow\quad x=t-2$$</li>
+      <li><span class="st">Tulis $f(g(x))$ dengan $x=t-2$</span>$$f(t)=3(t-2)+10$$</li>
+      <li><span class="st">Sederhanakan</span>$$f(t)=3t-6+10=3t+4$$</li>
+      <li><span class="st">Ganti $t$ kembali menjadi $x$</span>$$f(x)=3x+4$$</li>
+    </ol>
+    <div class="cek"><b>Cek:</b> $f(g(x))=3(x+2)+4=3x+10$. Cocok ✔</div></div>
+  </div></div>
+  <div class="ex"><div class="ex-h">Contoh 13 • <em>Mencari $g$ yang hilang</em></div><div class="ex-b">
+    <p>$f(x)=2x-1$ dan $(f\circ g)(x)=6x+5$. Tentukan $g(x)$.</p>
+    <div class="cc"><div class="h">⚡ Cara Cepat</div>$2\,g(x)-1=6x+5$, jadi $g(x)=\dfrac{6x+6}{2}=3x+3$.</div>
+    <div class="cl"><div class="h">📋 Cara Lengkap</div><ol class="steps">
+      <li><span class="st">Tulis $f(g(x))$ memakai rumus $f$</span>$$2\,g(x)-1=6x+5$$</li>
+      <li><span class="st">Pindahkan $-1$ ke kanan</span>$$2\,g(x)=6x+6$$</li>
+      <li><span class="st">Bagi kedua ruas dengan 2</span>$$g(x)=3x+3$$</li>
+    </ol>
+    <div class="cek"><b>Cek:</b> $f(3x+3)=2(3x+3)-1=6x+5$. Cocok ✔</div></div>
+  </div></div>
+</section>
+
+<!-- ================= MISSION 7 ================= -->
+<section class="card" id="m7">
+  <h2><span class="mno">MISSION 7</span> Domain dan Range Komposisi <small style="font-weight:500;color:var(--muted)">(Level HOTS)</small></h2>
+  <span class="stp see">SEE</span>
+  <p>Komposisi hanya berlaku jika <b>hasil mesin pertama boleh dimasukkan ke mesin kedua</b>.</p>
+  <span class="stp think">THINK</span>
+  <div class="box rumus"><b class="lbl">Domain $f\circ g$ memenuhi dua syarat sekaligus</b>
+    <ol style="text-align:left;display:inline-block;margin:0"><li>$x$ ada di domain $g$, dan</li><li>$g(x)$ ada di domain $f$.</li></ol></div>
+  <span class="stp solve">SOLVE</span>
+  <div class="ex"><div class="ex-h">Contoh 14 • <em>Contoh dari matriks asesmen</em></div><div class="ex-b">
+    <p>$f(x)=\sqrt{x}$ dan $g(x)=x-4$. Tentukan $(f\circ g)(x)$ dan domainnya.</p>
+    <div class="cc"><div class="h">⚡ Cara Cepat</div>$(f\circ g)(x)=\sqrt{x-4}$. Isi akar harus $\geq0$, jadi $x\geq4$.</div>
+    <div class="cl"><div class="h">📋 Cara Lengkap</div><ol class="steps">
+      <li><span class="st">Susun komposisinya</span>$$(f\circ g)(x)=f(x-4)=\sqrt{x-4}$$</li>
+      <li><span class="st">Syarat 1: $x$ di domain $g$</span>$g(x)=x-4$ terdefinisi untuk semua bilangan real.</li>
+      <li><span class="st">Syarat 2: $g(x)$ di domain $f$</span>$f$ adalah akar, maka $g(x)\geq0$.</li>
+      <li><span class="st">Selesaikan</span>$$x-4\geq0\ \Rightarrow\ x\geq4$$</li>
+    </ol></div>
+  </div></div>
+  <div class="ex"><div class="ex-h">Contoh 15 • <em>Komposisi pecahan</em></div><div class="ex-b">
+    <p>$f(x)=\dfrac{1}{x-1}$ dan $g(x)=x+3$. Tentukan domain $f\circ g$.</p>
+    <div class="cc"><div class="h">⚡ Cara Cepat</div>$(f\circ g)(x)=\dfrac{1}{x+2}$, jadi $x\neq-2$.</div>
+    <div class="cl"><div class="h">📋 Cara Lengkap</div><ol class="steps">
+      <li><span class="st">Susun komposisi</span>$$(f\circ g)(x)=f(x+3)=\frac{1}{(x+3)-1}=\frac{1}{x+2}$$</li>
+      <li><span class="st">Syarat: $g(x)$ tidak boleh membuat penyebut $f$ nol, yaitu $g(x)\neq1$</span>$$x+3\neq1$$</li>
+      <li><span class="st">Selesaikan</span>$$x\neq-2$$</li>
+    </ol></div>
+  </div></div>
+  <div class="ex"><div class="ex-h">Contoh 16 • <em>Jebakan HOTS</em></div><div class="ex-b">
+    <p>$f(x)=x^2$ dan $g(x)=\sqrt{x}$. Tentukan $(f\circ g)(x)$ dan domainnya.</p>
+    <div class="cc"><div class="h">⚡ Cara Cepat</div>Rumusnya $x$, tetapi karena $\sqrt{x}$ ada di dalam, domainnya tetap $x\geq0$.</div>
+    <div class="cl"><div class="h">📋 Cara Lengkap</div><ol class="steps">
+      <li><span class="st">Susun komposisi</span>$$(f\circ g)(x)=\big(\sqrt{x}\big)^2=x$$</li>
+      <li><span class="st">Syarat 1: $x$ di domain $g$</span>$\sqrt{x}$ hanya terdefinisi untuk $x\geq0$.</li>
+      <li><span class="st">Syarat 2: $g(x)$ di domain $f$</span>$f(x)=x^2$ menerima semua bilangan real, selalu terpenuhi.</li>
+      <li><span class="st">Kesimpulan</span>Domain $=\{x\mid x\geq0\}$.</li>
+    </ol></div>
+    <div class="box warn"><b class="lbl">Jebakan</b>Jangan menyimpulkan domainnya semua bilangan real hanya dari bentuk akhir $x$. Misalnya $(f\circ g)(-4)$ tidak terdefinisi, padahal "rumus $x$" memberi $-4$.</div>
+  </div></div>
+  <div class="ex"><div class="ex-h">Contoh 17 • <em>Pertidaksamaan kuadrat</em></div><div class="ex-b">
+    <p>$f(x)=\sqrt{x-1}$ dan $g(x)=x^2-3$. Tentukan domain $f\circ g$.</p>
+    <div class="cc"><div class="h">⚡ Cara Cepat</div>$(f\circ g)(x)=\sqrt{x^2-4}$. Syarat $x^2-4\geq0$, maka $x\leq-2$ atau $x\geq2$ (di <b>luar</b> akar-akar).</div>
+    <div class="cl"><div class="h">📋 Cara Lengkap</div><ol class="steps">
+      <li><span class="st">Susun komposisi</span>$$(f\circ g)(x)=\sqrt{(x^2-3)-1}=\sqrt{x^2-4}$$</li>
+      <li><span class="st">Isi akar harus $\geq0$</span>$$x^2-4\geq0$$</li>
+      <li><span class="st">Faktorkan (selisih dua kuadrat)</span>$$(x-2)(x+2)\geq0$$</li>
+      <li><span class="st">Cari akar-akar: $x=-2$ dan $x=2$. Uji tanda tiap daerah</span>
+        <div class="tw"><table><tr><th>Daerah</th><th>Titik uji</th><th>$(x-2)(x+2)$</th><th>Memenuhi $\geq0$?</th></tr>
+        <tr><td>$x<-2$</td><td>$x=-3$</td><td>$(-5)(-1)=5$</td><td class="good">Ya</td></tr>
+        <tr><td>$-2\lt x\lt2$</td><td>$x=0$</td><td>$(-2)(2)=-4$</td><td class="bad">Tidak</td></tr>
+        <tr><td>$x>2$</td><td>$x=3$</td><td>$(1)(5)=5$</td><td class="good">Ya</td></tr></table></div></li>
+      <li><span class="st">Kesimpulan (titik $-2$ dan $2$ ikut karena tanda $\geq$)</span>$$x\leq-2\ \text{ atau }\ x\geq2$$</li>
+    </ol></div>
+    <figure><div id="fig-dom2"></div><figcaption>Domain $\sqrt{x^2-4}$: $x\leq-2$ atau $x\geq2$</figcaption></figure>
+  </div></div>
+  <div class="ex"><div class="ex-h">Contoh 18 • <em>Range komposisi</em></div><div class="ex-b">
+    <p>$g(x)=x^2$ dan $f(x)=x-1$. Tentukan range $f\circ g$.</p>
+    <div class="cc"><div class="h">⚡ Cara Cepat</div>$(f\circ g)(x)=x^2-1$. Karena $x^2\geq0$, maka $x^2-1\geq-1$. Range: $y\geq-1$.</div>
+    <div class="cl"><div class="h">📋 Cara Lengkap</div><ol class="steps">
+      <li><span class="st">Susun komposisi</span>$$(f\circ g)(x)=x^2-1$$</li>
+      <li><span class="st">Nilai terkecil $x^2$ adalah 0</span>$$x^2\geq0$$</li>
+      <li><span class="st">Kurangi 1 pada kedua ruas</span>$$x^2-1\geq-1$$</li>
+      <li><span class="st">Kesimpulan</span>$R=\{y\mid y\geq-1\}$</li>
+    </ol></div>
+  </div></div>
+</section>
+
+<!-- ================= MISSION 8 ================= -->
+<section class="card" id="m8">
+  <h2><span class="mno">MISSION 8</span> Komposisi dari Grafik dan Soal Cerita</h2>
+  <span class="stp see">SEE</span>
+  <p>Pada grafik, "masukkan ke mesin" artinya <b>baca nilai $y$ dari grafik pertama, lalu pakai sebagai $x$ pada grafik kedua</b>.</p>
+  <figure><div id="fig-grafik"></div><figcaption>Grafik $f$ (biru) dan $g$ (oranye). Titik-titik tebal dapat dibaca langsung.</figcaption></figure>
+  <div class="tw"><table>
+    <tr><th>$x$</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+    <tr><th>$f(x)$</th><td>1</td><td>3</td><td>5</td><td>7</td><td>9</td></tr>
+    <tr><th>$g(x)$</th><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr>
+  </table></div>
+  <p style="font-size:.88rem;color:var(--muted)">Tabel dibaca dari titik pada grafik. Rumusnya $f(x)=2x-1$ dan $g(x)=x+2$.</p>
+  <span class="stp think">THINK</span>
+  <div class="box rumus">Untuk $(f\circ g)(a)$: cari $x=a$ di grafik $g$, baca tingginya ($g(a)$). Kemudian cari $x=g(a)$ di grafik $f$, baca tingginya.</div>
+  <span class="stp solve">SOLVE</span>
+  <div class="ex"><div class="ex-h">Contoh 19 • <em>Komposisi dari grafik</em></div><div class="ex-b">
+    <p>Dari grafik di atas, tentukan $(f\circ g)(1)$.</p>
+    <div class="cc"><div class="h">⚡ Cara Cepat</div>$g(1)=3$, lalu $f(3)=5$. Jadi $(f\circ g)(1)=5$.</div>
+    <div class="cl"><div class="h">📋 Cara Lengkap</div><ol class="steps">
+      <li><span class="st">Pada grafik $g$ (oranye), tarik garis tegak dari $x=1$</span>Tingginya 3, jadi $g(1)=3$.</li>
+      <li><span class="st">Pada grafik $f$ (biru), tarik garis tegak dari $x=3$</span>Tingginya 5, jadi $f(3)=5$.</li>
+      <li><span class="st">Tulis hasilnya</span>$$(f\circ g)(1)=f\big(g(1)\big)=f(3)=5$$</li>
+    </ol></div>
+  </div></div>
+
+  <h3>Soal cerita (pemodelan)</h3>
+  <p>Ubah cerita menjadi dua fungsi, lalu gabungkan sesuai <b>urutan kejadian</b>: kejadian pertama berada <b>di dalam</b>.</p>
+  <figure><div id="fig-diskon"></div><figcaption>Diskon lebih dulu, baru biaya admin</figcaption></figure>
+  <div class="ex"><div class="ex-h">Contoh 20 • <em>Diskon lalu biaya admin</em></div><div class="ex-b">
+    <p>Sebuah toko memberi diskon 20% (fungsi $f$), lalu menambah biaya admin Rp5.000 (fungsi $g$). Harga barang Rp200.000. Berapa yang dibayar?</p>
+    <div class="cc"><div class="h">⚡ Cara Cepat</div>Diskon dulu: $0{,}8\times200.000=160.000$. Lalu tambah admin: $165.000$.</div>
+    <div class="cl"><div class="h">📋 Cara Lengkap</div><ol class="steps">
+      <li><span class="st">Ubah cerita menjadi fungsi</span>Diskon 20% berarti bayar 80%.$$f(x)=0{,}8x\qquad g(x)=x+5.000$$</li>
+      <li><span class="st">Diskon terjadi lebih dulu, jadi $f$ di dalam: $g\circ f$</span>$$(g\circ f)(x)=g\big(f(x)\big)=0{,}8x+5.000$$</li>
+      <li><span class="st">Masukkan harga Rp200.000</span>$$(g\circ f)(200.000)=0{,}8(200.000)+5.000=165.000$$</li>
+    </ol>
+    <div class="box info"><b class="lbl">Bandingkan</b>Jika admin dulu baru diskon: $(f\circ g)(200.000)=0{,}8(205.000)=164.000$. <b>Urutan mengubah harga akhir.</b></div></div>
+  </div></div>
+</section>
+
+<!-- ================= BANK KESALAHAN ================= -->
+<section class="card" id="kesalahan">
+  <h2>⚠️ Bank Kesalahan Umum</h2>
+  <div class="tw"><table>
+    <tr><th>No.</th><th>Kesalahan umum</th><th>Perbaikan</th></tr>
+    <tr><td>1</td><td class="bad">Membaca $(f\circ g)(x)$ sebagai "kerjakan $f$ dulu"</td><td class="good">Yang dikerjakan dulu adalah $g$ (yang di dalam kurung)</td></tr>
+    <tr><td>2</td><td class="bad">$(x+1)^2=x^2+1$</td><td class="good">$(x+1)^2=x^2+2x+1$</td></tr>
+    <tr><td>3</td><td class="bad">Lupa tanda kurung: $f(x+2)=3x+2-5$</td><td class="good">$f(x+2)=3(x+2)-5$</td></tr>
+    <tr><td>4</td><td class="bad">Menganggap $f\circ g=g\circ f$</td><td class="good">Pada umumnya berbeda; hitung keduanya</td></tr>
+    <tr><td>5</td><td class="bad">Domain komposisi hanya dilihat dari rumus akhir</td><td class="good">Periksa domain $g$ <b>dan</b> syarat $g(x)\in$ domain $f$</td></tr>
+    <tr><td>6</td><td class="bad">$\sqrt{x-4}$ dianggap domain $x>4$</td><td class="good">Akar boleh bernilai 0, jadi $x\geq4$</td></tr>
+    <tr><td>7</td><td class="bad">Salah tanda saat mengalikan bilangan negatif</td><td class="good">$-3\times(-2)=+6$ dan $-3\times2=-6$</td></tr>
+    <tr><td>8</td><td class="bad">Pada grafik, membaca $f$ dan $g$ dengan urutan terbalik</td><td class="good">Mulai dari grafik fungsi <b>paling dalam</b></td></tr>
+    <tr><td>9</td><td class="bad">Pada soal cerita, urutan kejadian dibalik</td><td class="good">Fungsi kejadian pertama berada <b>di dalam</b></td></tr>
+  </table></div>
+</section>
+
+<!-- ================= MASTER CHECK ================= -->
+<section class="card" id="check">
+  <h2>✅ Master Check <small style="font-weight:500;color:var(--muted)">(daftar periksa sebelum ujian)</small></h2>
+  <p>Centang jika sudah bisa <b>tanpa melihat catatan</b>. Centangmu tersimpan di browser ini.</p>
+  <div class="chk" id="chk">
+    <label><input type="checkbox"><span>Menghitung $f(a)$ dan $f(a+1)$ dari rumus</span></label>
+    <label><input type="checkbox"><span>Membedakan fungsi dan bukan fungsi dari diagram panah dan grafik</span></label>
+    <label><input type="checkbox"><span>Menentukan domain fungsi akar dan pecahan</span></label>
+    <label><input type="checkbox"><span>Menjelaskan arti $(f\circ g)(x)=f\big(g(x)\big)$ dan urutan kerjanya</span></label>
+    <label><input type="checkbox"><span>Menghitung nilai komposisi dari rumus, tabel, diagram, dan grafik</span></label>
+    <label><input type="checkbox"><span>Menyusun rumus $f\circ g$ dan $g\circ f$</span></label>
+    <label><input type="checkbox"><span>Mencari $f$ atau $g$ yang hilang</span></label>
+    <label><input type="checkbox"><span>Menentukan domain komposisi dengan dua syarat</span></label>
+    <label><input type="checkbox"><span>Menyusun model komposisi dari soal cerita</span></label>
+  </div>
+</section>
+
+<!-- ================= BANK SOAL ================= -->
+<section class="card" id="soal">
+  <h2>📝 Bank Soal Prediksi TKA</h2>
+  <p>Petunjuk: pilih satu jawaban yang paling tepat, kecuali dinyatakan lain. Setelah menjawab, buka <b>Cara Cepat &amp; Cara Lengkap</b> untuk pembahasan.</p>
+  <div class="tw"><table>
+    <tr><th>Level</th><th>Proses berpikir</th><th>Nomor</th></tr>
+    <tr><td>1 Pengetahuan dan Pemahaman</td><td>Menghitung, mengidentifikasi, memahami informasi (tabel)</td><td>1-5</td></tr>
+    <tr><td>2 Aplikasi</td><td>Memodelkan, menerapkan, menginterpretasikan</td><td>6-10</td></tr>
+    <tr><td>3 Penalaran</td><td>Menganalisis, menyimpulkan, mengevaluasi, menjustifikasi, generalisasi</td><td>11-15</td></tr>
+  </table></div>
+  <div class="score" id="score">Terjawab: <b id="sc-a">0</b>/15 &nbsp; Benar: <b id="sc-b">0</b> &nbsp; <button class="btn" id="sc-reset" style="padding:3px 14px;font-size:.82rem">Ulangi semua</button></div>
+  <div id="bank"></div>
+</section>
+
+<section class="card" id="kunci">
+  <h2>🔑 Rekap Kunci Jawaban</h2>
+  <div class="tw"><table id="kt"></table></div>
+</section>
+
+<footer>© VisualMath.Lim • Bimbingan Belajar • Materi Fungsi Komposisi - TKA Matematika Wajib SMA</footer>
+</main>
+</div>
+<a href="#top" class="fab" aria-label="Kembali ke atas" onclick="window.scrollTo({top:0});return false;">↑</a>
+
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+(function(){
+"use strict";
+var NS="http://www.w3.org/2000/svg";
+var C={navy:"#022050",cyan:"#00b8ba",orange:"#e67e22",green:"#1c8a55",red:"#c0392b",fl:"#eaf1f9",ol:"#fdf1e6",gl:"#e8f6ef"};
+function $(id){return document.getElementById(id)}
+function put(id,svg){var e=$(id);if(e)e.innerHTML=svg}
+function arrowDefs(){
+  var o="<defs>";
+  [["a-navy",C.navy],["a-or",C.orange],["a-gr",C.green],["a-rd",C.red]].forEach(function(m){
+    o+='<marker id="'+m[0]+'" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="'+m[1]+'"/></marker>';
+  });
+  return o+"</defs>";
+}
+/* ---------- diagram panah ---------- */
+function diagram(o){
+  var n=o.sets.length,gap=o.gap||220,x0=90,H=o.h||250,W=x0*2+gap*(n-1),ys=[70,125,180];
+  var s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+(o.alt||"diagram panah")+'" width="'+W+'">'+arrowDefs();
+  if(o.title)s+='<text x="'+(W/2)+'" y="22" text-anchor="middle" font-weight="700" font-size="15" fill="'+(o.tc||C.navy)+'">'+o.title+'</text>';
+  o.sets.forEach(function(st,i){
+    var cx=x0+i*gap;
+    s+='<ellipse cx="'+cx+'" cy="125" rx="46" ry="88" fill="'+st.fill+'" stroke="'+st.col+'" stroke-width="3"/>';
+    st.items.forEach(function(t,j){s+='<text x="'+cx+'" y="'+(ys[j]+6)+'" text-anchor="middle" font-size="19" font-weight="700" fill="'+st.col+'">'+t+'</text>'});
+    s+='<text x="'+cx+'" y="'+(H-12)+'" text-anchor="middle" font-size="13" font-weight="600" fill="'+st.col+'">'+st.label+'</text>';
+  });
+  (o.links||[]).forEach(function(l){
+    var a=l[0],i=l[1],j=l[2],col=l[3],mk={"navy":"a-navy","or":"a-or","gr":"a-gr","rd":"a-rd"}[col],hex={"navy":C.navy,"or":C.orange,"gr":C.green,"rd":C.red}[col];
+    s+='<line x1="'+(x0+a*gap+30)+'" y1="'+ys[i]+'" x2="'+(x0+(a+1)*gap-34)+'" y2="'+ys[j]+'" stroke="'+hex+'" stroke-width="2.6" marker-end="url(#'+mk+')"/>';
+  });
+  (o.tags||[]).forEach(function(t){s+='<text x="'+t[0]+'" y="'+t[1]+'" text-anchor="middle" font-size="17" font-weight="700" fill="'+t[3]+'">'+t[2]+'</text>'});
+  return s+"</svg>";
+}
+/* ---------- aliran mesin ---------- */
+function flow(steps,o){
+  o=o||{};var w=o.w||130,gp=o.gap||44,h=o.h||70,n=steps.length,W=n*w+(n-1)*gp+40,Hh=h+50;
+  var s='<svg viewBox="0 0 '+W+' '+Hh+'" role="img" aria-label="'+(o.alt||"mesin fungsi")+'" width="'+W+'">'+arrowDefs();
+  steps.forEach(function(st,i){
+    var x=20+i*(w+gp),y=22,fn=st.fn;
+    if(fn){
+      s+='<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="14" fill="'+st.fill+'" stroke="'+st.col+'" stroke-width="3"/>';
+      s+='<circle cx="'+(x+14)+'" cy="'+(y+14)+'" r="4" fill="'+st.col+'"/><circle cx="'+(x+w-14)+'" cy="'+(y+14)+'" r="4" fill="'+st.col+'"/>';
+    } else {
+      s+='<rect x="'+x+'" y="'+(y+8)+'" width="'+w+'" height="'+(h-16)+'" rx="'+((h-16)/2)+'" fill="#fff" stroke="'+(st.col||C.navy)+'" stroke-width="2.5"/>';
+    }
+    s+='<text x="'+(x+w/2)+'" y="'+(y+h/2+6)+'" text-anchor="middle" font-size="'+(st.fs||17)+'" font-weight="700" fill="'+(st.col||C.navy)+'">'+st.t+'</text>';
+    if(st.cap)s+='<text x="'+(x+w/2)+'" y="'+(y+h+22)+'" text-anchor="middle" font-size="12.5" fill="#51607a">'+st.cap+'</text>';
+    if(i<n-1)s+='<line x1="'+(x+w+4)+'" y1="'+(y+h/2)+'" x2="'+(x+w+gp-4)+'" y2="'+(y+h/2)+'" stroke="'+C.navy+'" stroke-width="3" marker-end="url(#a-navy)"/>';
+  });
+  return s+"</svg>";
+}
+/* ---------- garis bilangan ---------- */
+function numline(o){
+  var W=620,H=96,L=40,R=580,sc=function(v){return L+(v-o.min)/(o.max-o.min)*(R-L)},y=46;
+  var s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+(o.alt||"garis bilangan")+'" width="'+W+'">'+arrowDefs();
+  s+='<line x1="'+(L-14)+'" y1="'+y+'" x2="'+(R+14)+'" y2="'+y+'" stroke="#51607a" stroke-width="2" marker-end="url(#a-navy)"/>';
+  for(var v=o.min;v<=o.max;v+=o.step||1){
+    s+='<line x1="'+sc(v)+'" y1="'+(y-5)+'" x2="'+sc(v)+'" y2="'+(y+5)+'" stroke="#51607a" stroke-width="2"/><text x="'+sc(v)+'" y="'+(y+24)+'" text-anchor="middle" font-size="13" fill="#51607a">'+v+'</text>';
+  }
+  o.seg.forEach(function(g){
+    var a=g.from===null?L-14:sc(g.from),b=g.to===null?R+14:sc(g.to);
+    s+='<line x1="'+a+'" y1="'+y+'" x2="'+b+'" y2="'+y+'" stroke="'+C.cyan+'" stroke-width="9" stroke-linecap="butt" opacity=".85"/>';
+    if(g.from!==null)s+='<circle cx="'+a+'" cy="'+y+'" r="8" fill="'+(g.fo?'#fff':C.navy)+'" stroke="'+C.navy+'" stroke-width="3"/>';
+    if(g.to!==null)s+='<circle cx="'+b+'" cy="'+y+'" r="8" fill="'+(g.to_o?'#fff':C.navy)+'" stroke="'+C.navy+'" stroke-width="3"/>';
+  });
+  if(o.label)s+='<text x="'+(W/2)+'" y="16" text-anchor="middle" font-size="14" font-weight="700" fill="'+C.navy+'">'+o.label+'</text>';
+  return s+"</svg>";
+}
+/* ---------- plot ---------- */
+var pid=0;
+function plot(o){
+  var cp="cp"+(++pid);
+  var W=o.w||420,H=o.h||330,m={l:44,r:14,t:o.title?34:14,b:38};
+  var sx=function(x){return m.l+(x-o.xmin)/(o.xmax-o.xmin)*(W-m.l-m.r)};
+  var sy=function(y){return H-m.b-(y-o.ymin)/(o.ymax-o.ymin)*(H-m.t-m.b)};
+  var s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+(o.alt||"grafik")+'" width="'+W+'">';
+  if(o.title)s+='<text x="'+(W/2)+'" y="20" text-anchor="middle" font-size="13.5" font-weight="700" fill="'+o.tc+'">'+o.title+'</text>';
+  for(var x=Math.ceil(o.xmin);x<=o.xmax;x+=(o.xs||1)){s+='<line x1="'+sx(x)+'" y1="'+sy(o.ymin)+'" x2="'+sx(x)+'" y2="'+sy(o.ymax)+'" stroke="#e3eaf2"/><text x="'+sx(x)+'" y="'+(H-m.b+17)+'" text-anchor="middle" font-size="11.5" fill="#51607a">'+x+'</text>'}
+  for(var y=Math.ceil(o.ymin);y<=o.ymax;y+=(o.ys||1)){s+='<line x1="'+sx(o.xmin)+'" y1="'+sy(y)+'" x2="'+sx(o.xmax)+'" y2="'+sy(y)+'" stroke="#e3eaf2"/><text x="'+(m.l-7)+'" y="'+(sy(y)+4)+'" text-anchor="end" font-size="11.5" fill="#51607a">'+y+'</text>'}
+  if(o.xmin<=0&&o.xmax>=0)s+='<line x1="'+sx(0)+'" y1="'+sy(o.ymin)+'" x2="'+sx(0)+'" y2="'+sy(o.ymax)+'" stroke="#14213d" stroke-width="1.5"/>';
+  if(o.ymin<=0&&o.ymax>=0)s+='<line x1="'+sx(o.xmin)+'" y1="'+sy(0)+'" x2="'+sx(o.xmax)+'" y2="'+sy(0)+'" stroke="#14213d" stroke-width="1.5"/>';
+  s+='<text x="'+(W/2)+'" y="'+(H-5)+'" text-anchor="middle" font-size="12" fill="#14213d">x</text><text x="12" y="'+(H/2)+'" font-size="12" fill="#14213d" transform="rotate(-90 12 '+(H/2)+')" text-anchor="middle">y</text>';
+  (o.vlines||[]).forEach(function(v){s+='<line x1="'+sx(v[0])+'" y1="'+sy(o.ymin)+'" x2="'+sx(v[0])+'" y2="'+sy(o.ymax)+'" stroke="'+v[1]+'" stroke-width="2" stroke-dasharray="5 4"/>'});
+  (o.curves||[]).forEach(function(c){
+    var d="";c.pts.forEach(function(p,i){d+=(i?"L":"M")+sx(p[0]).toFixed(1)+" "+sy(p[1]).toFixed(1)});
+    s+='<path d="'+d+'" fill="none" stroke="'+c.col+'" stroke-width="3.2" stroke-linejoin="round" clip-path="url(#'+cp+')"/>';
+  });
+  s+='<defs><clipPath id="'+cp+'"><rect x="'+m.l+'" y="'+m.t+'" width="'+(W-m.l-m.r)+'" height="'+(H-m.t-m.b)+'"/></clipPath></defs>';
+  (o.points||[]).forEach(function(p){s+='<circle cx="'+sx(p[0])+'" cy="'+sy(p[1])+'" r="5.5" fill="'+p[2]+'" stroke="#fff" stroke-width="1.5"/>'});
+  (o.labels||[]).forEach(function(l){s+='<text x="'+sx(l[0])+'" y="'+sy(l[1])+'" font-size="13" font-weight="700" fill="'+l[3]+'">'+l[2]+'</text>'});
+  return s+"</svg>";
+}
+function gen(f,a,b,n){var r=[];for(var i=0;i<=n;i++){var x=a+(b-a)*i/n;r.push([x,f(x)])}return r}
+
+/* ===== Gambar ===== */
+put("fig-mesin",flow([
+  {t:"x = 4",col:C.navy,cap:"input"},
+  {t:"f(x) = 2x + 3",fn:1,fill:C.fl,col:C.navy,w:170,fs:16,cap:"mesin fungsi (aturan)"},
+  {t:"11",col:C.green,cap:"output  2(4)+3 = 11"}
+],{w:130,alt:"Mesin fungsi f(x)=2x+3"}));
+put("fig-fungsi",
+  '<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px">'+
+  diagram({title:"FUNGSI",tc:C.green,alt:"Diagram panah yang merupakan fungsi",gap:170,sets:[
+    {label:"Domain",col:C.navy,fill:C.fl,items:[1,2,3]},{label:"Kodomain",col:C.orange,fill:C.ol,items:["a","b","c"]}],
+    links:[[0,0,0,"gr"],[0,1,0,"gr"],[0,2,1,"gr"]]})+
+  diagram({title:"BUKAN FUNGSI",tc:C.red,alt:"Diagram panah yang bukan fungsi",gap:170,sets:[
+    {label:"Domain",col:C.navy,fill:C.fl,items:[1,2,3]},{label:"Kodomain",col:C.orange,fill:C.ol,items:["a","b","c"]}],
+    links:[[0,0,0,"rd"],[0,0,1,"rd"],[0,2,2,"rd"]]})+
+  '</div><p style="font-size:.85rem;margin:6px 0 0"><b style="color:#1c8a55">Kiri:</b> tiap anggota domain punya 1 pasangan. <b style="color:#c0392b">Kanan:</b> 1 punya 2 pasangan, 2 tidak berpasangan.</p>');
+var par=gen(function(x){return x*x},-2.5,2.5,60),sid=gen(function(t){return t},-2.5,2.5,60).map(function(p){return[p[1]*p[1]/1,p[0]]});
+sid=gen(function(t){return t},-2.5,2.5,60).map(function(p){return[p[0]*p[0],p[0]]});
+put("fig-uji",'<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px">'+
+  plot({w:360,h:300,xmin:-3,xmax:3,ymin:-0.5,ymax:6.5,title:"FUNGSI: garis tegak memotong 1 titik",tc:C.green,alt:"Parabola terbuka ke atas, fungsi",
+    curves:[{pts:par,col:C.navy}],vlines:[[-1.5,C.green],[0.5,C.green],[1.8,C.green]],points:[[-1.5,2.25,C.green],[0.5,0.25,C.green],[1.8,3.24,C.green]]})+
+  plot({w:360,h:300,xmin:-0.5,xmax:6.5,ymin:-3,ymax:3,title:"BUKAN FUNGSI: ada garis tegak memotong 2 titik",tc:C.red,alt:"Parabola terbuka ke kanan, bukan fungsi",
+    curves:[{pts:sid,col:C.navy}],vlines:[[3,C.red]],points:[[3,1.732,C.red],[3,-1.732,C.red]]})+'</div>');
+put("fig-dom1",numline({min:0,max:6,label:"x ≥ 3",alt:"Garis bilangan x lebih dari atau sama dengan 3",seg:[{from:3,to:null}]}));
+put("fig-dom2",numline({min:-4,max:4,label:"x ≤ −2  atau  x ≥ 2",alt:"Garis bilangan x kurang dari sama dengan -2 atau x lebih dari sama dengan 2",seg:[{from:null,to:-2},{from:2,to:null}]}));
+put("fig-komp",flow([
+  {t:"x",col:C.navy,w:70,cap:"input"},
+  {t:"g",fn:1,fill:C.ol,col:C.orange,w:90,fs:22,cap:"mesin 1 (dulu)"},
+  {t:"g(x)",col:C.orange,w:90,cap:"hasil antara"},
+  {t:"f",fn:1,fill:C.fl,col:C.navy,w:90,fs:22,cap:"mesin 2 (kemudian)"},
+  {t:"f(g(x))",col:C.green,w:110,cap:"output akhir"}
+],{gap:34,alt:"Dua mesin disambung: x masuk g lalu f"}));
+put("fig-diag",diagram({alt:"Diagram panah komposisi f bundaran g",gap:230,h:270,sets:[
+  {label:"A (x)",col:C.navy,fill:C.fl,items:[1,2,3]},
+  {label:"B (g(x))",col:C.orange,fill:C.ol,items:[1,2,3]},
+  {label:"C (f(g(x)))",col:C.green,fill:C.gl,items:[10,20,30]}],
+  links:[[0,0,2,"or"],[0,1,0,"or"],[0,2,1,"or"],[1,0,0,"navy"],[1,1,1,"navy"],[1,2,2,"navy"]],
+  tags:[[205,28,"g",0,C.orange],[435,28,"f",0,C.navy]]}));
+var fl=function(x){return 2*x-1},gl=function(x){return x+2};
+function grafikSVG(){return plot({w:460,h:360,xmin:0,xmax:6,ymin:-1,ymax:9,alt:"Grafik garis f dan g",
+  curves:[{pts:gen(fl,0,6,6),col:C.navy},{pts:gen(gl,0,6,6),col:C.orange}],
+  points:[[1,1,C.navy],[2,3,C.navy],[4,7,C.navy],[1,3,C.orange],[2,4,C.orange],[5,7,C.orange],[3,5,"#7a3e00"]],
+  labels:[[4.3,8.4,"f",0,C.navy],[5.3,7.5,"g",0,C.orange]]})}
+put("fig-grafik",grafikSVG());
+put("fig-diskon",flow([
+  {t:"Rp200.000",col:C.navy,w:140,cap:"harga awal"},
+  {t:"f: diskon 20%",fn:1,fill:C.fl,col:C.navy,w:150,fs:15,cap:"kejadian 1"},
+  {t:"Rp160.000",col:C.orange,w:140,cap:"setelah diskon"},
+  {t:"g: admin +5.000",fn:1,fill:C.ol,col:C.orange,w:160,fs:14.5,cap:"kejadian 2"},
+  {t:"Rp165.000",col:C.green,w:140,cap:"dibayar"}
+],{gap:30,alt:"Alur diskon lalu biaya admin"}));
+
+/* ===== Widget ===== */
+function fmt(v){return String(Math.round(v*1e6)/1e6).replace(".",",")}
+function mach(){
+  var x=parseFloat($("in-mesin").value);var o=$("out-mesin");
+  if(isNaN(x)){o.textContent="Isi angka dulu.";return}
+  o.innerHTML="$f("+fmt(x)+")=2("+fmt(x)+")+3="+fmt(2*x)+"+3=\\mathbf{"+fmt(2*x+3)+"}$";rm(o);
+}
+function kmp(){
+  var x=parseFloat($("in-komp").value);var o=$("out-komp");
+  if(isNaN(x)){o.textContent="Isi angka dulu.";return}
+  var g=x*x,f1=2*g+1,f=2*x+1,g2=f*f;
+  o.innerHTML="$(f\\circ g)("+fmt(x)+")$: $g("+fmt(x)+")="+fmt(g)+"$, lalu $f("+fmt(g)+")=\\mathbf{"+fmt(f1)+"}$<br>"+
+              "$(g\\circ f)("+fmt(x)+")$: $f("+fmt(x)+")="+fmt(f)+"$, lalu $g("+fmt(f)+")=\\mathbf{"+fmt(g2)+"}$<br><small>Hasilnya "+(f1===g2?"kebetulan sama":"berbeda")+": urutan penting.</small>";rm(o);
+}
+function rm(el){if(window.renderMathInElement)window.renderMathInElement(el,MO)}
+var MO={delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],throwOnError:false};
+$("btn-mesin").onclick=mach;$("btn-komp").onclick=kmp;
+
+/* ===== Master Check (tersimpan) ===== */
+var KEY="vmlim-komposisi-check";
+var boxes=[].slice.call(document.querySelectorAll("#chk input"));
+function upd(){var n=boxes.filter(function(b){return b.checked}).length;$("pbar").style.width=(n/boxes.length*100)+"%";}
+try{var sv=JSON.parse(localStorage.getItem(KEY)||"[]");boxes.forEach(function(b,i){b.checked=!!sv[i]})}catch(e){}
+boxes.forEach(function(b){b.onchange=function(){upd();try{localStorage.setItem(KEY,JSON.stringify(boxes.map(function(x){return x.checked})))}catch(e){}}});
+upd();
+
+/* ===== Bank soal ===== */
+var R=String.raw;
+function st(arr){return '<ol class="steps">'+arr.map(function(a){return '<li><span class="st">'+a[0]+'</span>'+(a[1]||"")+'</li>'}).join("")+'</ol>'}
+var Q=[
+{lv:1,tag:"Menghitung",q:R`Diketahui $f(x)=3x-4$. Nilai $f(5)$ adalah ....`,o:["9","11","15","19"],k:1,
+ cc:R`$3\times5=15$, lalu $15-4=11$.`,
+ cl:st([["Tulis rumus dengan kurung kosong",R`$$f(\ \ )=3(\ \ )-4$$`],["Isi kurung dengan 5",R`$$f(5)=3(5)-4$$`],["Hitung",R`$$=15-4=11$$`]]),
+ note:"Jawaban B."},
+{lv:1,tag:"Mengidentifikasi",q:R`Diketahui $P=\{1,2,3\}$ dan $Q=\{a,b,c\}$. Relasi dari $P$ ke $Q$ yang merupakan fungsi adalah ....`,
+ o:[R`$\{(1,a),(2,b)\}$`,R`$\{(1,a),(1,b),(2,c),(3,c)\}$`,R`$\{(1,a),(2,a),(3,b)\}$`,R`$\{(1,a),(2,b),(2,c),(3,c)\}$`],k:2,
+ cc:R`Cek dua hal: semua anggota $P$ (1, 2, 3) harus punya pasangan, dan tidak ada yang punya dua pasangan.`,
+ cl:st([["Ingat syarat fungsi","Setiap anggota $P$ punya <b>tepat satu</b> pasangan di $Q$."],["Periksa opsi A",R`3 tidak punya pasangan. <b>Bukan fungsi.</b>`],["Periksa opsi B",R`1 punya dua pasangan ($a$ dan $b$). <b>Bukan fungsi.</b>`],["Periksa opsi D",R`2 punya dua pasangan ($b$ dan $c$). <b>Bukan fungsi.</b>`],["Periksa opsi C",R`$1\to a,\ 2\to a,\ 3\to b$. Semua punya satu pasangan (hasil boleh sama). <b>Fungsi.</b>`]]),
+ note:"Jawaban C."},
+{lv:1,tag:"Menghitung / mengidentifikasi",q:R`Domain fungsi $f(x)=\sqrt{3x-6}$ adalah ....`,
+ o:[R`$x\geq2$`,R`$x\leq2$`,R`$x\geq3$`,R`$x>2$`],k:0,
+ cc:R`Isi akar $\geq0$: $3x\geq6$, jadi $x\geq2$.`,
+ cl:st([["Syarat akar: isi akar tidak negatif",R`$$3x-6\geq0$$`],["Pindahkan $-6$ ke kanan",R`$$3x\geq6$$`],["Bagi 3",R`$$x\geq2$$`],["Periksa titik batas","$x=2$ ikut karena $\\sqrt{0}=0$ terdefinisi (maka bukan $x>2$)."]]),
+ note:"Jawaban A."},
+{lv:1,tag:"Menghitung",q:R`Diketahui $f(x)=x+3$ dan $g(x)=2x$. Nilai $(f\circ g)(4)$ adalah ....`,o:["7","11","14","15"],k:1,
+ cc:R`$g(4)=8$, lalu $f(8)=11$.`,
+ cl:st([["Kerjakan $g$ dulu",R`$$g(4)=2(4)=8$$`],["Masukkan hasilnya ke $f$",R`$$(f\circ g)(4)=f(8)=8+3=11$$`]]),
+ note:R`Jawaban B. Pengecoh: 14 adalah $(g\circ f)(4)$ dan 15 adalah $f(4)+g(4)$.`},
+{lv:1,tag:"Memahami informasi dari tabel",fig:"tbl5",q:R`Perhatikan tabel fungsi $f$ dan $g$. Nilai $(f\circ g)(2)$ adalah ....`,o:["3","4","5","8"],k:2,
+ cc:R`Baca $g(2)=4$, lalu baca $f(4)=5$.`,
+ cl:st([["Baca $g(2)$ pada baris $g$ di kolom $x=2$",R`$$g(2)=4$$`],["Baca $f(4)$ pada baris $f$ di kolom $x=4$",R`$$f(4)=5$$`],["Tulis hasil",R`$$(f\circ g)(2)=f\big(g(2)\big)=f(4)=5$$`]]),
+ note:"Jawaban C. Pengecoh: 4 adalah $g(2)$ dan 8 adalah $f(2)$."},
+{lv:2,tag:"Menerapkan",q:R`Diketahui $f(x)=2x+1$ dan $g(x)=x^2-3$. Rumus $(f\circ g)(x)$ adalah ....`,
+ o:[R`$2x^2-5$`,R`$4x^2+4x-2$`,R`$2x^2-2$`,R`$2x^2+4$`],k:0,
+ cc:R`$2(x^2-3)+1=2x^2-5$.`,
+ cl:st([["Ganti $x$ pada $f$ dengan $g(x)$",R`$$(f\circ g)(x)=f\big(x^2-3\big)=2\big(x^2-3\big)+1$$`],["Kalikan 2",R`$$=2x^2-6+1$$`],["Sederhanakan",R`$$=2x^2-5$$`]]),
+ note:R`Jawaban A. Pengecoh B adalah $(g\circ f)(x)=(2x+1)^2-3=4x^2+4x-2$. Pengecoh C muncul jika $-6$ lupa dikali 2.`},
+{lv:2,tag:"Memodelkan",q:R`Sebuah toko memberi diskon 30%, kemudian pembeli memakai voucher potongan Rp10.000 pada harga setelah diskon. Harga barang Rp150.000. Harga yang dibayar adalah ....`,
+ o:["Rp95.000","Rp98.000","Rp105.000","Rp110.000"],k:0,
+ cc:R`Diskon 30% berarti bayar 70%: $0{,}7\times150.000=105.000$. Lalu voucher: $105.000-10.000=95.000$.`,
+ cl:st([["Ubah ke fungsi",R`$$f(x)=0{,}7x\ \text{(diskon)}\qquad g(x)=x-10.000\ \text{(voucher)}$$`],["Diskon terjadi dahulu, jadi $f$ di dalam: $g\\circ f$",R`$$(g\circ f)(x)=0{,}7x-10.000$$`],["Masukkan Rp150.000",R`$$(g\circ f)(150.000)=105.000-10.000=95.000$$`]]),
+ note:"Jawaban A. Pengecoh Rp98.000 muncul bila voucher dipakai lebih dulu."},
+{lv:2,tag:"Menerapkan",q:R`Diketahui $g(x)=2x+1$ dan $(f\circ g)(x)=4x^2+4x+3$. Rumus $f(x)$ adalah ....`,
+ o:[R`$x^2+2$`,R`$x^2+3$`,R`$2x^2+1$`,R`$x^2-2$`],k:0,
+ cc:R`$(2x+1)^2=4x^2+4x+1$, sedangkan hasil komposisi lebih besar 2. Jadi $f(t)=t^2+2$.`,
+ cl:st([["Misalkan hasil $g$ sebagai $t$",R`$$t=2x+1\ \Rightarrow\ t^2=4x^2+4x+1$$`],["Tulis $4x^2+4x+3$ memakai $t^2$",R`$$4x^2+4x+3=(4x^2+4x+1)+2=t^2+2$$`],["Jadi",R`$$f(t)=t^2+2\ \Rightarrow\ f(x)=x^2+2$$`]]),
+ cek:R`$f(g(x))=(2x+1)^2+2=4x^2+4x+3$. Cocok ✔`,note:"Jawaban A."},
+{lv:2,tag:"Menginterpretasikan grafik",fig:"gr9",q:R`Perhatikan grafik $f$ dan $g$. Nilai $(g\circ f)(2)$ adalah ....`,o:["3","4","5","7"],k:2,
+ cc:R`Urutan $g\circ f$: mulai dari $f$ <b>dulu</b>. $f(2)=3$, lalu $g(3)=5$.`,
+ cl:st([["Baca $f(2)$ pada grafik biru",R`$$f(2)=3$$`],["Baca $g(3)$ pada grafik oranye",R`$$g(3)=5$$`],["Tulis hasil",R`$$(g\circ f)(2)=g\big(f(2)\big)=g(3)=5$$`]]),
+ note:R`Jawaban C. Pengecoh 7 adalah $(f\circ g)(2)=f(4)=7$.`},
+{lv:2,tag:"Memodelkan",q:R`Sebuah usaha kue memproduksi $x(t)=5t$ kue setelah $t$ jam. Biaya produksi $x$ kue adalah $C(x)=2.000x+10.000$ rupiah. Biaya total setelah 4 jam produksi adalah ....`,
+ o:["Rp18.000","Rp40.000","Rp50.000","Rp90.000"],k:2,
+ cc:R`$x(4)=5\times4=20$ kue. Biaya: $2.000\times20+10.000=50.000$.`,
+ cl:st([["Susun komposisi: $t\\to x\\to C$",R`$$(C\circ x)(t)=C(5t)=2.000(5t)+10.000=10.000t+10.000$$`],["Masukkan $t=4$",R`$$(C\circ x)(4)=10.000(4)+10.000=50.000$$`]]),
+ note:"Jawaban C."},
+{lv:3,tag:"Menganalisis",q:R`Diketahui $f(x)=\sqrt{x-1}$ dan $g(x)=x^2-3$. Domain $f\circ g$ adalah ....`,
+ o:[R`$x\geq2$`,R`$-2\leq x\leq2$`,R`$x\leq-2$ atau $x\geq2$`,R`$x\geq1$`],k:2,
+ cc:R`$(f\circ g)(x)=\sqrt{x^2-4}$. Syarat $x^2-4\geq0$, jadi $x\leq-2$ atau $x\geq2$.`,
+ cl:st([["$g(x)$ terdefinisi untuk semua $x$. Syarat $g(x)\\geq1$ (isi akar $f$ tidak negatif)",R`$$x^2-3\geq1$$`],["Sederhanakan",R`$$x^2\geq4\ \Rightarrow\ (x-2)(x+2)\geq0$$`],["Tanda positif berlaku di <b>luar</b> akar-akar $-2$ dan $2$",R`$$x\leq-2\ \text{ atau }\ x\geq2$$`]]),
+ note:R`Jawaban C. Pengecoh B adalah daerah di antara $-2$ dan $2$, yaitu daerah yang justru <b>tidak</b> memenuhi.`},
+{lv:3,tag:"Menjustifikasi (pilihan ganda kompleks)",multi:1,q:R`Diketahui $f(x)=x+2$ dan $g(x)=x^2$. <b>Pilih semua</b> pernyataan yang benar.`,
+ o:[R`$(f\circ g)(x)=x^2+2$`,R`$(g\circ f)(x)=x^2+2$`,R`$(f\circ g)(3)=11$`,R`$(g\circ f)(3)=25$`],k:[0,2,3],
+ cc:R`$f\circ g=x^2+2$ dan $g\circ f=(x+2)^2$.`,
+ cl:st([["Pernyataan 1",R`$(f\circ g)(x)=f(x^2)=x^2+2$. <b>Benar.</b>`],["Pernyataan 2",R`$(g\circ f)(x)=g(x+2)=(x+2)^2=x^2+4x+4$, bukan $x^2+2$. <b>Salah.</b>`],["Pernyataan 3",R`$(f\circ g)(3)=3^2+2=11$. <b>Benar.</b>`],["Pernyataan 4",R`$(g\circ f)(3)=(3+2)^2=25$. <b>Benar.</b>`]]),
+ note:"Jawaban: pernyataan 1, 3, dan 4 benar."},
+{lv:3,tag:"Menganalisis",q:R`Diketahui $f(x)=x^2$ dan $g(x)=\sqrt{x}$. Pernyataan yang benar tentang $f\circ g$ adalah ....`,
+ o:[R`$(f\circ g)(x)=x$ dengan domain semua bilangan real, karena hasil akhirnya $x$.`,R`$(f\circ g)(x)=x$ dengan domain $x\geq0$, karena $g$ hanya terdefinisi untuk $x\geq0$.`,R`$(f\circ g)(x)=x$ dengan domain $x>0$.`,R`$(f\circ g)(x)=x^2$ dengan domain $x\geq0$.`],k:1,
+ cc:R`Hasil akhir $x$ memang sederhana, tetapi $\sqrt{x}$ ada di dalam, sehingga $x$ harus $\geq0$.`,
+ cl:st([["Susun komposisi",R`$$(f\circ g)(x)=f\big(\sqrt{x}\big)=\big(\sqrt{x}\big)^2=x$$`],["Syarat 1: $x$ di domain $g$",R`$\sqrt{x}$ terdefinisi hanya untuk $x\geq0$.`],["Syarat 2: $g(x)$ di domain $f$","$f$ menerima semua real, selalu terpenuhi."],["Kesimpulan",R`Domain $x\geq0$. Contoh: $(f\circ g)(-4)$ tidak terdefinisi, padahal "rumus $x$" memberi $-4$.`]]),
+ note:"Jawaban B."},
+{lv:3,tag:"Mengevaluasi",q:R`Dua toko menjual barang yang sama seharga Rp150.000. Toko A memberi diskon 20%, lalu memotong Rp20.000. Toko B memotong Rp20.000, lalu memberi diskon 20%. Pernyataan yang benar adalah ....`,
+ o:["Toko A lebih murah Rp4.000","Toko B lebih murah Rp4.000","Harga kedua toko sama","Toko A lebih murah Rp2.000"],k:0,
+ cc:R`Toko A: $0{,}8\times150.000=120.000$, lalu $-20.000=100.000$. Toko B: $150.000-20.000=130.000$, lalu $0{,}8\times130.000=104.000$. Selisih $4.000$.`,
+ cl:st([["Ubah ke fungsi",R`$$f(x)=0{,}8x\ \text{(diskon)}\qquad g(x)=x-20.000\ \text{(potongan)}$$`],["Toko A: diskon dulu, $g\\circ f$",R`$$(g\circ f)(x)=0{,}8x-20.000\ \Rightarrow\ 120.000-20.000=100.000$$`],["Toko B: potongan dulu, $f\\circ g$",R`$$(f\circ g)(x)=0{,}8(x-20.000)=0{,}8x-16.000\ \Rightarrow\ 120.000-16.000=104.000$$`],["Bandingkan","Toko A lebih murah Rp4.000. Alasannya: diskon 20% juga \"mengecilkan\" potongan Rp20.000 menjadi Rp16.000 pada Toko B."]]),
+ note:"Jawaban A."},
+{lv:3,tag:"Melakukan generalisasi",q:R`Diketahui $f(x)=ax+2$ dan $g(x)=x-3$. Agar $(f\circ g)(x)=(g\circ f)(x)$ untuk semua $x$, nilai $a$ adalah ....`,
+ o:[R`$-1$`,R`$0$`,R`$1$`,R`$3$`],k:2,
+ cc:R`$f\circ g=ax-3a+2$ dan $g\circ f=ax-1$. Samakan suku konstan: $-3a+2=-1$, jadi $a=1$.`,
+ cl:st([["Cari $f\\circ g$",R`$$(f\circ g)(x)=f(x-3)=a(x-3)+2=ax-3a+2$$`],["Cari $g\\circ f$",R`$$(g\circ f)(x)=g(ax+2)=ax+2-3=ax-1$$`],["Samakan suku konstan (suku $ax$ sudah sama)",R`$$-3a+2=-1\ \Rightarrow\ -3a=-3\ \Rightarrow\ a=1$$`]]),
+ cek:R`Untuk $a=1$: $f(x)=x+2$ dan $g(x)=x-3$. Kedua komposisi menghasilkan $x-1$ (menambah 2 lalu mengurang 3 sama saja dengan mengurang 3 lalu menambah 2). ✔`,note:"Jawaban C."}
+];
+var L="ABCD",lvTitle={1:["Level 1: Pengetahuan dan Pemahaman","Soal 1-5"],2:["Level 2: Aplikasi","Soal 6-10"],3:["Level 3: Penalaran","Soal 11-15"]};
+var tbl5='<div class="tw"><table style="max-width:420px"><tr><th>$x$</th><th>1</th><th>2</th><th>3</th><th>4</th></tr><tr><td><b>$g(x)$</b></td><td>2</td><td>4</td><td>1</td><td>3</td></tr><tr><td><b>$f(x)$</b></td><td>6</td><td>8</td><td>3</td><td>5</td></tr></table></div>';
+var state={};
+function pbHTML(q){
+  var h='<details class="pb"><summary>Lihat Cara Cepat &amp; Cara Lengkap</summary><div class="in">';
+  h+='<div class="cc"><div class="h">⚡ Cara Cepat</div>'+q.cc+'</div>';
+  h+='<div class="cl"><div class="h">📋 Cara Lengkap</div>'+q.cl+(q.cek?'<div class="cek"><b>Cek:</b> '+q.cek+'</div>':'')+'</div>';
+  if(q.note)h+='<div class="box info" style="margin:8px 0">'+q.note+'</div>';
+  return h+'</div></details>';
+}
+function build(){
+  var h="",last=0;
+  Q.forEach(function(q,i){
+    if(q.lv!==last){last=q.lv;h+='<div class="lvl">'+lvTitle[q.lv][0]+'<small>'+lvTitle[q.lv][1]+'</small></div>'}
+    h+='<div class="q" id="q'+i+'"><div class="q-h"><span class="q-n">Soal '+(i+1)+'</span><span class="q-t">('+q.tag+')</span></div><div class="q-b">';
+    h+='<div>'+q.q+'</div>';
+    if(q.fig==="tbl5")h+=tbl5;
+    if(q.fig==="gr9")h+='<figure><div>'+grafikSVG()+'</div><figcaption>Grafik $f$ (biru) dan $g$ (oranye)</figcaption></figure>';
+    h+='<div class="opts">';
+    q.o.forEach(function(t,j){h+='<button class="opt" data-q="'+i+'" data-o="'+j+'"><span class="l">'+(q.multi?(j+1):L[j])+'</span><span>'+t+'</span></button>'});
+    h+='</div>';
+    if(q.multi)h+='<button class="btn alt" data-chk="'+i+'">Periksa jawaban</button> <small style="color:var(--muted)">Klik untuk memilih/membatalkan, lalu periksa.</small>';
+    h+='<div class="res" id="res'+i+'" aria-live="polite"></div>'+pbHTML(q)+'</div></div>';
+  });
+  $("bank").innerHTML=h;
+  var kt='<tr><th>No.</th>'+Q.map(function(_,i){return '<th>'+(i+1)+'</th>'}).join("")+'</tr><tr><th>Kunci</th>'+Q.map(function(q){return '<td><b>'+(q.multi?q.k.map(function(x){return x+1}).join(", "):L[q.k])+'</b></td>'}).join("")+'</tr>';
+  $("kt").innerHTML=kt;
+}
+function score(){
+  var a=0,b=0;Object.keys(state).forEach(function(k){if(state[k].done){a++;if(state[k].ok)b++}});
+  $("sc-a").textContent=a;$("sc-b").textContent=b;
+}
+function finish(i,ok){
+  state[i]={done:true,ok:ok};var r=$("res"+i);
+  r.className="res "+(ok?"ok":"no");
+  var q=Q[i],key=q.multi?"pernyataan "+q.k.map(function(x){return x+1}).join(", ")+" benar":"jawaban "+L[q.k];
+  r.textContent=ok?"✔ Benar! Hebat.":"✘ Belum tepat. Kunci: "+key+". Buka pembahasan di bawah.";
+  document.querySelectorAll('#q'+i+' .opt').forEach(function(b){b.disabled=true});
+  var d=document.querySelector('#q'+i+' details.pb');if(d)d.open=true;
+  score();
+}
+document.addEventListener("click",function(e){
+  var t=e.target.closest?e.target.closest("button"):null;if(!t)return;
+  if(t.dataset.q!==undefined){
+    var i=+t.dataset.q,j=+t.dataset.o,q=Q[i];
+    if(state[i]&&state[i].done)return;
+    if(q.multi){t.classList.toggle("pick");return}
+    var ok=(j===q.k);
+    document.querySelectorAll('#q'+i+' .opt').forEach(function(b){var n=+b.dataset.o;if(n===q.k)b.classList.add("ok");else if(n===j)b.classList.add("no")});
+    finish(i,ok);
+  } else if(t.dataset.chk!==undefined){
+    var i2=+t.dataset.chk,q2=Q[i2];if(state[i2]&&state[i2].done)return;
+    var sel=[];document.querySelectorAll('#q'+i2+' .opt').forEach(function(b){var n=+b.dataset.o,on=b.classList.contains("pick"),right=q2.k.indexOf(n)>-1;if(on)sel.push(n);b.classList.remove("pick");if(right)b.classList.add("ok");else if(on)b.classList.add("no")});
+    finish(i2,sel.length===q2.k.length&&sel.every(function(x){return q2.k.indexOf(x)>-1}));
+    t.disabled=true;
+  }
+});
+$("sc-reset").onclick=function(){state={};build();score();rm($("bank"));rm($("kt"))};
+build();score();
+
+/* ===== Render rumus ===== */
+function renderAll(){if(window.renderMathInElement){window.renderMathInElement(document.body,MO);mach();kmp()}else setTimeout(renderAll,150)}
+window.addEventListener("load",renderAll);
+
+/* ===== Scroll spy ===== */
+var links=[].slice.call(document.querySelectorAll("#side a")),secs=links.map(function(a){return document.querySelector(a.getAttribute("href"))});
+function spy(){var y=window.scrollY+130,c=0;secs.forEach(function(s,i){if(s&&s.offsetTop<=y)c=i});links.forEach(function(a,i){a.classList.toggle("act",i===c)})}
+window.addEventListener("scroll",spy,{passive:true});spy();
+})();
+</script>
+</body>
+</html>

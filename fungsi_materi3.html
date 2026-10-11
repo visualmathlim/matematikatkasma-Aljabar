@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Invers Fungsi - VisualMath.Lim</title>
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};</script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script>
+<style>
+:root{--navy:#022050;--cyan:#00d6d8;--yellow:#ffd300;--bg:#f2f7fb;--card:#fff;--text:#1b2a41;--soft:#e6fbfb}
+@media(prefers-color-scheme:dark){:root{--bg:#0a1429;--card:#101d3a;--text:#e8eefb;--soft:#0c2c40}}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Segoe UI',Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+header{background:var(--navy);color:#fff;border-bottom:4px solid var(--yellow);position:sticky;top:0;z-index:10}
+.bar{max-width:980px;margin:auto;padding:8px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.bar img{height:48px;width:48px;border-radius:50%;background:#fff;object-fit:contain}
+.brand{font-weight:700;font-size:1.05rem;flex:1;min-width:200px}
+.brand b{color:var(--cyan)}
+nav a{color:#fff;text-decoration:none;padding:7px 14px;border-radius:20px;font-weight:600;margin-left:4px;border:1px solid var(--cyan)}
+nav a:hover{background:var(--cyan);color:var(--navy)}
+nav a.act{background:var(--yellow);color:var(--navy);border-color:var(--yellow)}
+main{max-width:980px;margin:auto;padding:20px 16px 60px}
+.hero{background:linear-gradient(135deg,var(--navy),#0a3a86);color:#fff;border-radius:16px;padding:24px;margin-bottom:20px}
+.hero h1{margin:0 0 6px;font-size:1.7rem}.hero h1 span{color:var(--yellow)}
+.chip{display:inline-block;background:var(--cyan);color:var(--navy);font-weight:700;border-radius:12px;padding:2px 10px;font-size:.8rem;margin:2px 4px 2px 0}
+section{background:var(--card);border-radius:14px;padding:20px;margin-bottom:18px;box-shadow:0 2px 8px rgba(2,32,80,.1);overflow-x:auto}
+h2{margin:0 0 12px;color:var(--navy);border-left:6px solid var(--yellow);padding-left:10px;font-size:1.3rem}
+@media(prefers-color-scheme:dark){h2{color:var(--cyan)}}
+h3{margin:14px 0 6px}
+.box{border-radius:10px;padding:12px 16px;margin:12px 0}
+.def{background:var(--soft);border-left:5px solid var(--cyan)}
+.warn{background:#fff6cc;color:#4a3b00;border-left:5px solid var(--yellow)}
+.fast{background:#fff6cc;color:#3a2f00;border-left:5px solid var(--yellow)}
+.full{background:var(--soft);border-left:5px solid var(--cyan)}
+.fast b.t{color:#9a6b00}.full b.t{color:#007f82}
+table{border-collapse:collapse;width:100%;margin:8px 0}
+th,td{border:1px solid #9bb;padding:8px;text-align:center}
+th{background:var(--navy);color:#fff}
+ol.st{list-style:none;counter-reset:s;padding:0;margin:8px 0}
+ol.st li{counter-increment:s;position:relative;padding:6px 0 6px 40px;margin-bottom:4px}
+ol.st li::before{content:counter(s);position:absolute;left:0;top:6px;width:28px;height:28px;border-radius:50%;background:var(--navy);color:var(--yellow);font-weight:700;display:flex;align-items:center;justify-content:center}
+details.q{border:2px solid var(--cyan);border-radius:12px;margin:14px 0;padding:12px 16px;background:var(--card)}
+details.q summary{cursor:pointer;font-weight:600}
+.lv{font-size:.75rem;background:var(--navy);color:var(--yellow);padding:2px 8px;border-radius:10px;margin-right:6px}
+.opt{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:4px 12px;margin:6px 0}
+svg.fig{max-width:100%;height:auto;display:block;margin:auto;background:#fff;border-radius:10px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;align-items:center}
+footer{text-align:center;padding:16px;background:var(--navy);color:#fff;border-top:4px solid var(--yellow)}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<img src="logo.png" alt="Logo Bimbel" onerror="this.style.visibility='hidden'">
+<div class="brand">VisualMath.<b>Lim</b> - TKA Matematika Wajib SMA</div>
+<nav><a href="index.html">🏠 Home</a><a href="fungsi.html">📊 Dashboard</a></nav>
+</div></header>
+
+<main>
+<div class="hero">
+<h1>Invers Fungsi <span>&amp; Representasinya</span></h1>
+<div>Elemen: Aljabar &nbsp;|&nbsp; Sub-materi: Fungsi &nbsp;|&nbsp; Kelas 12</div>
+<p style="margin:10px 0 4px"><b>Tujuan belajar:</b> menentukan invers fungsi (rumus, tabel, grafik), memakai sifatnya, dan menyelesaikan soal TKA level 1-3.</p>
+<span class="chip">Level 1: Memahami</span><span class="chip">Level 2: Menerapkan</span><span class="chip">Level 3: Bernalar</span>
+</div>
+
+<section>
+<h2>1. Bekal Dasar (Wajib Dipahami Dulu)</h2>
+<p>Invers terasa sulit kalau bekal dasarnya belum kuat. Pelajari 6 bekal ini pelan-pelan, satu per satu. Tiap bekal ada contoh langkah demi langkah dan di akhir ada <b>Cek Pemahaman</b>.</p>
+
+<h3>Bekal 1: Fungsi dan notasi \(f(x)\)</h3>
+<div class="two"><div>
+<p>Fungsi adalah aturan yang memasangkan <b>setiap</b> anggota <b>domain</b> (daerah asal, nilai \(x\)) dengan <b>tepat satu</b> anggota <b>range</b> (daerah hasil).</p>
+<p>Notasi \(f(x)\) dibaca "f dari x" dan berarti <i>hasil</i> aturan \(f\) untuk input \(x\). Ini <b>bukan</b> \(f\) dikali \(x\).</p>
+</div>
+<svg class="fig" viewBox="0 0 300 175" role="img" aria-label="Diagram panah fungsi f(x)=2x+1">
+<defs><marker id="ar2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#ff9d00"/></marker></defs>
+<ellipse cx="60" cy="80" rx="42" ry="68" fill="none" stroke="#022050" stroke-width="2"/><ellipse cx="240" cy="80" rx="42" ry="68" fill="none" stroke="#00b9bb" stroke-width="2"/>
+<g font-family="Arial" font-size="17" fill="#022050" text-anchor="middle"><text x="60" y="46">1</text><text x="60" y="86">2</text><text x="60" y="126">3</text><text x="240" y="46">3</text><text x="240" y="86">5</text><text x="240" y="126">7</text>
+<text x="60" y="168" font-size="12">Domain (x)</text><text x="240" y="168" font-size="12">Range f(x)</text><text x="150" y="30" font-size="12" fill="#9a6b00">f(x) = 2x + 1</text></g>
+<g stroke="#022050" stroke-width="2" marker-end="url(#ar2)"><path d="M85 42H205M85 82H205M85 122H205"/></g>
+</svg></div>
+<div class="box def"><b>Mengganti \(x\) (substitusi).</b> Contoh \(f(x)=2x+1\):
+<ol class="st"><li>\(f(3)\): ganti \(x\) dengan 3, jadi \(2(3)+1=6+1=7\).</li><li>\(f(0)=2(0)+1=0+1=1\).</li><li>\(f(-2)=2(-2)+1=-4+1=-3\).</li></ol></div>
+<div class="box warn">⚠️ Saat mengganti \(x\) dengan bilangan negatif, <b>wajib pakai kurung</b>: tulis \(2(-2)\), bukan \(2-2\).</div>
+
+<h3>Bekal 2: Memindahkan ruas</h3>
+<p>Aturan emas: <b>apa yang dilakukan di ruas kiri harus dilakukan juga di ruas kanan</b>. Praktisnya, pindah ruas berarti operasinya dilawankan:</p>
+<table><tr><th>Sebelum pindah</th><th>Setelah pindah</th></tr>
+<tr><td>\(+5\)</td><td>\(-5\)</td></tr><tr><td>\(-5\)</td><td>\(+5\)</td></tr>
+<tr><td>\(\times 3\) (dikali 3)</td><td>\(\div 3\) (dibagi 3)</td></tr><tr><td>\(\div 3\)</td><td>\(\times 3\)</td></tr></table>
+<div class="box def"><b>Contoh 1:</b> selesaikan \(3x+2=14\).
+<ol class="st"><li>Pindahkan \(+2\) lebih dulu: \(3x=14-2=12\).</li><li>Pindahkan \(\times3\): \(x=\dfrac{12}{3}=4\).</li></ol>
+<b>Contoh 2 (mirip invers):</b> ungkapkan \(x\) dari \(y=3x-6\).
+<ol class="st"><li>Pindahkan \(-6\): \(y+6=3x\).</li><li>Pindahkan \(\times3\): \(x=\dfrac{y+6}{3}\).</li></ol>
+Perhatikan: yang <b>dikerjakan terakhir</b> pada \(x\) (di sini \(-6\)) <b>dibuka lebih dulu</b>.</div>
+
+<h3>Bekal 3: Pecahan, kali silang, dan faktorisasi</h3>
+<ul>
+<li><b>Kali silang:</b> \(\dfrac{a}{b}=\dfrac{c}{d}\Rightarrow a\cdot d=b\cdot c\). Contoh: \(\dfrac{x+1}{2}=3\Rightarrow x+1=6\Rightarrow x=5\).</li>
+<li><b>Bentuk \(y\) sama dengan pecahan:</b> anggap \(y=\dfrac{y}{1}\). Maka \(\dfrac{2x+1}{x-3}=y\) menjadi \(2x+1=y(x-3)\).</li>
+<li><b>Buka kurung:</b> \(y(x-3)=xy-3y\).</li>
+<li><b>Faktorisasi (keluarkan faktor sama):</b> \(xy-2x=x(y-2)\).</li>
+</ul>
+<div class="box def"><b>Contoh:</b> ungkapkan \(x\) dari \(xy-2x=5\).
+<ol class="st"><li>Keluarkan \(x\): \(x(y-2)=5\).</li><li>Bagi dengan \((y-2)\): \(x=\dfrac{5}{y-2}\).</li></ol></div>
+
+<h3>Bekal 4: Pangkat dan logaritma</h3>
+<p>Pangkat: \(2^3=2\times2\times2=8\). Logaritma adalah pertanyaan <b>"pangkat berapa?"</b>:</p>
+\[{}^{a}\log b=c \iff a^{c}=b\]
+<table><tr><th>Bentuk pangkat</th><th>Bentuk logaritma</th><th>Dibaca</th></tr>
+<tr><td>\(2^3=8\)</td><td>\({}^{2}\log 8=3\)</td><td>2 dipangkatkan berapa agar 8? Jawab 3</td></tr>
+<tr><td>\(3^4=81\)</td><td>\({}^{3}\log 81=4\)</td><td>3 dipangkatkan 4 menjadi 81</td></tr>
+<tr><td>\(10^2=100\)</td><td>\({}^{10}\log 100=2\)</td><td>10 dipangkatkan 2 menjadi 100</td></tr></table>
+<p>Dua nilai khusus: \({}^{a}\log a=1\) dan \({}^{a}\log 1=0\).</p>
+
+<h3>Bekal 5: Fungsi satu-satu</h3>
+<p>Fungsi <b>satu-satu</b>: dua input yang berbeda <b>tidak boleh</b> menghasilkan output yang sama.</p>
+<ul><li>\(f(x)=2x+1\): \(f(1)=3,\ f(2)=5\). Semua hasil berbeda, jadi satu-satu ✅.</li>
+<li>\(f(x)=x^2\): \(f(2)=4\) dan \(f(-2)=4\). Hasil sama dari input berbeda, jadi <b>bukan</b> satu-satu ❌.</li></ul>
+<p>Hanya fungsi satu-satu (dan terpakai semua hasilnya, disebut <b>bijektif</b>) yang punya invers. Cara cek lewat grafik dibahas di bagian 2.</p>
+
+<h3>Bekal 6: Komposisi fungsi</h3>
+<p>\((f\circ g)(x)=f(g(x))\): hasil \(g\) dimasukkan ke dalam \(f\). Kerjakan dari <b>dalam ke luar</b>.</p>
+<div class="box def"><b>Contoh:</b> \(f(x)=2x+1\) dan \(g(x)=x-3\).
+<ol class="st"><li>\((f\circ g)(x)=f(x-3)=2(x-3)+1=2x-6+1=2x-5\).</li><li>\((g\circ f)(x)=g(2x+1)=(2x+1)-3=2x-2\).</li><li>Hasilnya <b>berbeda</b>: urutan komposisi tidak boleh ditukar.</li><li>Nilai: \((f\circ g)(5)=f(g(5))=f(2)=5\).</li></ol></div>
+
+<h3>✅ Cek Pemahaman (kerjakan di buku dulu)</h3>
+<details class="q"><summary>a) \(f(x)=3x-4\). Hitung \(f(5)\) dan \(f(-1)\).</summary><div class="box full">\(f(5)=3(5)-4=11\). \(f(-1)=3(-1)-4=-3-4=-7\).</div></details>
+<details class="q"><summary>b) Selesaikan \(2x+7=15\).</summary><div class="box full">\(2x=15-7=8\), maka \(x=4\).</div></details>
+<details class="q"><summary>c) Hitung \({}^{2}\log 32\) dan \({}^{3}\log 9\).</summary><div class="box full">\(2^5=32\) jadi \({}^{2}\log32=5\). \(3^2=9\) jadi \({}^{3}\log9=2\).</div></details>
+<details class="q"><summary>d) \(f(x)=x+1\) dan \(g(x)=2x\). Hitung \((f\circ g)(2)\).</summary><div class="box full">\(g(2)=4\), lalu \(f(4)=5\). Jadi \((f\circ g)(2)=5\).</div></details>
+</section>
+
+<section>
+<h2>2. Konsep Invers Fungsi</h2>
+<div class="two">
+<div>
+<div class="box def"><b>Definisi.</b> Jika \(f\) memasangkan \(a\) ke \(b\), maka invers \(f^{-1}\) memasangkan \(b\) kembali ke \(a\):
+\[f(a)=b \iff f^{-1}(b)=a\]</div>
+<p>Contoh: \(f(3)=7\) maka \(f^{-1}(7)=3\).</p>
+<p>⚠️ \(f^{-1}(x)\) <b>bukan</b> \(\dfrac{1}{f(x)}\). Tanda \(-1\) di sini hanya lambang "invers".</p>
+</div>
+<svg class="fig" viewBox="0 0 320 190" role="img" aria-label="Diagram mesin fungsi dan invers">
+<rect x="110" y="30" width="100" height="44" rx="10" fill="#022050"/><text x="160" y="58" fill="#ffd300" font-size="18" text-anchor="middle" font-family="Arial">f(x)</text>
+<rect x="110" y="116" width="100" height="44" rx="10" fill="#00d6d8"/><text x="160" y="144" fill="#022050" font-size="18" text-anchor="middle" font-family="Arial">f⁻¹(x)</text>
+<text x="20" y="48" font-size="15" fill="#022050" font-family="Arial">a = 3</text><text x="20" y="150" font-size="15" fill="#022050" font-family="Arial">a = 3</text>
+<text x="250" y="48" font-size="15" fill="#022050" font-family="Arial">b = 7</text><text x="250" y="150" font-size="15" fill="#022050" font-family="Arial">b = 7</text>
+<path d="M75 52H105M210 52H245" stroke="#022050" stroke-width="2.5" marker-end="url(#ar)"/>
+<path d="M245 138H215M105 138H75" stroke="#009a9c" stroke-width="2.5" marker-end="url(#ar)"/>
+<defs><marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#ff9d00"/></marker></defs>
+<text x="160" y="100" font-size="12" fill="#555" text-anchor="middle" font-family="Arial">maju ↑ &nbsp; mundur ↓</text>
+</svg>
+</div>
+
+<h3>Syarat fungsi punya invers</h3>
+<p>Fungsi harus <b>bijektif</b> (satu-satu <i>dan</i> pada): setiap hasil berasal dari <b>tepat satu</b> \(x\). Cek grafik dengan <b>uji garis horizontal</b>: garis datar tidak boleh memotong grafik lebih dari satu titik.</p>
+<table><tr><th>Grafik</th><th>Uji garis horizontal</th><th>Punya invers?</th></tr>
+<tr><td>\(y=2x+1\) (garis miring)</td><td>memotong 1 titik</td><td>✅ Ya</td></tr>
+<tr><td>\(y=x^2\) (parabola)</td><td>memotong 2 titik</td><td>❌ Tidak (kecuali domain dibatasi, misal \(x\ge 0\))</td></tr></table>
+
+<h3>Sifat penting</h3>
+<ul>
+<li>\((f\circ f^{-1})(x)=(f^{-1}\circ f)(x)=x\)</li>
+<li>\((f^{-1})^{-1}=f\)</li>
+<li>\((f\circ g)^{-1}(x)=(g^{-1}\circ f^{-1})(x)\) &nbsp; <i>(urutan dibalik, seperti melepas sepatu dulu baru kaus kaki)</i></li>
+</ul>
+</section>
+
+<section>
+<h2>3. Cara Menentukan Rumus Invers</h2>
+<div class="box full"><b class="t">🧩 CARA LENGKAP (4 langkah, cocok untuk pemula)</b>
+<ol class="st">
+<li>Tulis \(y=f(x)\).</li>
+<li>Pindahkan ruas sampai \(x\) sendirian di kiri (ungkapkan \(x\) dalam \(y\)).</li>
+<li>Hasilnya adalah \(x=f^{-1}(y)\).</li>
+<li>Ganti huruf \(y\) menjadi \(x\) agar bentuk akhirnya \(f^{-1}(x)\).</li>
+</ol>
+<b>Contoh:</b> \(f(x)=3x-6\)
+<ol class="st">
+<li>\(y=3x-6\)</li>
+<li>\(y+6=3x \;\Rightarrow\; x=\dfrac{y+6}{3}\)</li>
+<li>\(f^{-1}(y)=\dfrac{y+6}{3}\)</li>
+<li>Jadi \(f^{-1}(x)=\dfrac{x+6}{3}\)</li>
+</ol></div>
+
+<div class="box fast"><b class="t">⚡ CARA CEPAT (hafalkan tabel ini)</b>
+<table>
+<tr><th>Bentuk \(f(x)\)</th><th>Invers \(f^{-1}(x)\)</th></tr>
+<tr><td>\(ax+b\)</td><td>\(\dfrac{x-b}{a}\)</td></tr>
+<tr><td>\(\dfrac{ax+b}{cx+d}\)</td><td>\(\dfrac{-dx+b}{cx-a}\)</td></tr>
+<tr><td>\(a^{x}\)</td><td>\({}^{a}\log x\)</td></tr>
+<tr><td>\({}^{a}\log x\)</td><td>\(a^{x}\)</td></tr>
+<tr><td>\(\sqrt{x}\) &nbsp;(\(x\ge0\))</td><td>\(x^2\)</td></tr>
+</table>
+<i>Trik pecahan:</i> pada \(\frac{ax+b}{cx+d}\), <b>tukar</b> \(a\) dan \(d\), lalu <b>ubah tanda</b> keduanya.<br>
+<i>Trik "kebalikan operasi":</i> kalau \(f\) = "kali 2 lalu tambah 1", maka \(f^{-1}\) = "kurang 1 lalu bagi 2" (urutan dibalik, operasi dilawankan).</div>
+<h3>Contoh Lengkap Per Jenis Fungsi</h3>
+<div class="box full"><b class="t">A. Linear dengan koefisien negatif:</b> \(f(x)=-2x+4\)
+<ol class="st"><li>\(y=-2x+4\)</li><li>Pindah \(+4\): \(y-4=-2x\)</li><li>Bagi \(-2\): \(x=\dfrac{y-4}{-2}=\dfrac{4-y}{2}\)</li><li>\(f^{-1}(x)=\dfrac{4-x}{2}\)</li></ol><i>Cek cepat:</i> rumus \(\frac{x-b}{a}=\frac{x-4}{-2}=\frac{4-x}{2}\). Sama ✅</div>
+<div class="box full"><b class="t">B. Pecahan:</b> \(f(x)=\dfrac{2x+1}{x+4}\)
+<ol class="st"><li>\(y=\dfrac{2x+1}{x+4}\)</li><li>Kali silang: \(y(x+4)=2x+1\)</li><li>Buka kurung: \(xy+4y=2x+1\)</li><li>Kumpulkan suku \(x\) di kiri: \(xy-2x=1-4y\)</li><li>Faktorkan: \(x(y-2)=1-4y\Rightarrow x=\dfrac{1-4y}{y-2}\)</li><li>\(f^{-1}(x)=\dfrac{-4x+1}{x-2}\)</li></ol><i>Cek cepat:</i> \(a=2,b=1,c=1,d=4\) memberi \(\frac{-4x+1}{x-2}\). Sama ✅</div>
+<div class="box full"><b class="t">C. Eksponen:</b> \(f(x)=2^{x}+3\)
+<ol class="st"><li>\(y=2^{x}+3\)</li><li>Pindah \(+3\): \(y-3=2^{x}\)</li><li>Ubah ke logaritma: \(x={}^{2}\log(y-3)\)</li><li>\(f^{-1}(x)={}^{2}\log(x-3)\), dengan \(x>3\)</li></ol></div>
+<div class="box full"><b class="t">D. Logaritma:</b> \(f(x)={}^{3}\log(x-1)\)
+<ol class="st"><li>\(y={}^{3}\log(x-1)\)</li><li>Ubah ke pangkat: \(3^{y}=x-1\)</li><li>Pindah \(-1\): \(x=3^{y}+1\)</li><li>\(f^{-1}(x)=3^{x}+1\)</li></ol></div>
+<div class="box full"><b class="t">E. Kuadrat dengan domain dibatasi:</b> \(f(x)=x^2+2\), \(x\ge0\)
+<ol class="st"><li>\(y=x^2+2\Rightarrow y-2=x^2\)</li><li>Akar: \(x=\pm\sqrt{y-2}\). Karena domain \(x\ge0\), ambil tanda \(+\).</li><li>\(f^{-1}(x)=\sqrt{x-2}\), dengan \(x\ge2\)</li></ol></div>
+<div class="box def"><b>Mencari \(f\) kalau yang diketahui \(f^{-1}\):</b> invers dari invers adalah fungsi aslinya. Jika \(f^{-1}(x)=\dfrac{x-1}{2}\): \(y=\dfrac{x-1}{2}\Rightarrow x=2y+1\), jadi \(f(x)=2x+1\).</div>
+</section>
+
+<section>
+<h2>4. Representasi Invers: Rumus, Tabel, Grafik</h2>
+<h3>a. Tabel</h3>
+<p>Tukar kolom \(x\) dan \(f(x)\).</p>
+<table><tr><th>\(x\)</th><td>1</td><td>2</td><td>3</td></tr><tr><th>\(f(x)\)</th><td>3</td><td>5</td><td>7</td></tr></table>
+<table><tr><th>\(x\)</th><td>3</td><td>5</td><td>7</td></tr><tr><th>\(f^{-1}(x)\)</th><td>1</td><td>2</td><td>3</td></tr></table>
+
+<h3>b. Grafik</h3>
+<p>Grafik \(f^{-1}\) adalah <b>cermin</b> grafik \(f\) terhadap garis \(y=x\). Titik \((a,b)\) pada \(f\) menjadi \((b,a)\) pada \(f^{-1}\).</p>
+<svg class="fig" viewBox="0 0 300 300" width="420" role="img" aria-label="Grafik f(x)=2x+1, inversnya, dan garis y=x">
+<defs><clipPath id="cp"><rect x="0" y="0" width="300" height="300"/></clipPath></defs>
+<g stroke="#dde" stroke-width="1"><path d="M30 0V300M60 0V300M90 0V300M120 0V300M180 0V300M210 0V300M240 0V300M270 0V300M0 30H300M0 60H300M0 90H300M0 120H300M0 180H300M0 210H300M0 240H300M0 270H300"/></g>
+<path d="M0 150H300M150 0V300" stroke="#022050" stroke-width="1.5"/>
+<g clip-path="url(#cp)" fill="none" stroke-width="3">
+<path d="M15 390L285 -150" stroke="#022050"/>
+<path d="M15 232.5L285 97.5" stroke="#00b9bb"/>
+<path d="M15 285L285 15" stroke="#e6a800" stroke-dasharray="7 5"/></g>
+<g font-family="Arial" font-size="12"><circle cx="150" cy="120" r="4.5" fill="#022050"/><text x="104" y="114" fill="#022050">(0,1)</text>
+<circle cx="180" cy="150" r="4.5" fill="#00b9bb"/><text x="184" y="165" fill="#007f82">(1,0)</text>
+<circle cx="180" cy="60" r="4.5" fill="#022050"/><text x="184" y="56" fill="#022050">(1,3)</text>
+<circle cx="240" cy="120" r="4.5" fill="#00b9bb"/><text x="244" y="116" fill="#007f82">(3,1)</text>
+<text x="165" y="22" fill="#022050" font-weight="bold">f(x)=2x+1</text>
+<text x="232" y="92" fill="#007f82" font-weight="bold" transform="translate(-30 20)">f⁻¹(x)</text>
+<text x="40" y="262" fill="#9a6b00" font-weight="bold">y = x</text>
+<text x="288" y="144" fill="#022050">x</text><text x="154" y="12" fill="#022050">y</text></g>
+</svg>
+<p style="text-align:center;font-size:.9rem">Biru tua: \(f\) &nbsp;|&nbsp; Cyan: \(f^{-1}\) &nbsp;|&nbsp; Kuning putus-putus: \(y=x\) (cermin). Setiap satuan kotak = 1.</p>
+<div class="box def"><b>Cara membaca invers dari grafik:</b> untuk mencari \(f^{-1}(5)\), cari <b>5 di sumbu-\(y\)</b> pada grafik \(f\), tarik garis datar ke grafik, lalu turun ke sumbu-\(x\). Angka di sumbu-\(x\) itulah jawabannya.</div>
+</section>
+
+<section>
+<h2>5. Kesalahan yang Sering Terjadi</h2>
+<ul>
+<li>Mengira \(f^{-1}(x)=\frac{1}{f(x)}\). ❌ Itu kebalikan (<i>reciprocal</i>), bukan invers.</li>
+<li>Lupa membalik urutan pada \((f\circ g)^{-1}\). Yang benar \(g^{-1}\circ f^{-1}\).</li>
+<li>Salah tanda saat memindahkan ruas. Pindah ruas = ganti operasi lawannya (+ jadi −, × jadi ÷).</li>
+<li>Lupa memeriksa: \(f^{-1}(b)=a\) harus cocok dengan \(f(a)=b\). <b>Selalu cek balik!</b></li>
+</ul>
+</section>
+
+<section>
+<h2>5b. Rangkuman: Soal Apa, Jurus Apa?</h2>
+<table><tr><th>Yang ditanya</th><th>Jurus</th></tr>
+<tr><td>\(f^{-1}(\text{angka})\)</td><td>Misal hasilnya \(a\). Ubah menjadi \(f(a)=\text{angka}\), lalu cari \(a\)</td></tr>
+<tr><td>Rumus \(f^{-1}(x)\)</td><td>Cara lengkap 4 langkah, atau tabel rumus cepat</td></tr>
+<tr><td>Invers dari tabel</td><td>Tukar baris \(x\) dan \(f(x)\)</td></tr>
+<tr><td>Invers dari grafik</td><td>Titik \((a,b)\) menjadi \((b,a)\); atau baca nilai \(y\) di grafik \(f\), turun ke sumbu-\(x\)</td></tr>
+<tr><td>\((f\circ g)^{-1}\)</td><td>Balik urutan: \(g^{-1}\circ f^{-1}\), atau cari \((f\circ g)(x)\) lalu inversnya</td></tr>
+<tr><td>Mencari parameter (\(a,b\))</td><td>Ubah info invers menjadi \(f(\cdot)=\cdot\), lalu substitusi</td></tr>
+<tr><td>Soal cerita</td><td>Tentukan variabel yang dicari. Jika dicari input dari hasil, pakai invers</td></tr></table>
+<div class="box warn"><b>Checklist akhir:</b> (1) Cek balik: \(f(f^{-1}(x))=x\). (2) Perhatikan syarat domain. (3) Apakah tanda negatif sudah benar?</div>
+</section>
+
+<section>
+<h2>6. Contoh Soal Berpembahasan</h2>
+<p>Klik soal untuk membuka pembahasan. Pelajari dulu pola pengerjaannya, lalu kerjakan latihan di bagian 7.</p>
+
+<details class="q"><summary><span class="lv">Level 1 · Menghitung</span> Diketahui \(f(x)=3x-6\). Nilai \(f^{-1}(9)\) adalah ...</summary>
+<div class="opt"><span>A. 1</span><span>B. 3</span><span>C. 5</span><span>D. 7</span><span>E. 21</span></div>
+<div class="box fast"><b class="t">⚡ Cara Cepat</b><br>\(f^{-1}(9)=a\) artinya \(f(a)=9\). Maka \(3a-6=9\Rightarrow a=5\). <b>Jawaban: C</b></div>
+<div class="box full"><b class="t">🧩 Cara Lengkap</b>
+<ol class="st"><li>\(y=3x-6\)</li><li>\(x=\dfrac{y+6}{3}\)</li><li>\(f^{-1}(x)=\dfrac{x+6}{3}\)</li><li>\(f^{-1}(9)=\dfrac{9+6}{3}=\dfrac{15}{3}=5\)</li></ol>Jawaban: <b>C</b></div></details>
+
+<details class="q"><summary><span class="lv">Level 1 · Memahami informasi</span> Perhatikan tabel fungsi \(f\) berikut. Nilai \(f^{-1}(10)+f^{-1}(4)\) adalah ...
+<table><tr><th>\(x\)</th><td>1</td><td>2</td><td>3</td><td>4</td></tr><tr><th>\(f(x)\)</th><td>4</td><td>7</td><td>10</td><td>13</td></tr></table></summary>
+<div class="opt"><span>A. 2</span><span>B. 3</span><span>C. 4</span><span>D. 5</span><span>E. 14</span></div>
+<div class="box fast"><b class="t">⚡ Cara Cepat</b><br>Cari hasil di baris \(f(x)\), lihat \(x\)-nya. \(f^{-1}(10)=3\) dan \(f^{-1}(4)=1\). Jumlah \(=4\). <b>Jawaban: C</b></div>
+<div class="box full"><b class="t">🧩 Cara Lengkap</b>
+<ol class="st"><li>\(f^{-1}(10)=a\) berarti \(f(a)=10\). Di tabel, \(f(3)=10\), jadi \(a=3\).</li><li>\(f^{-1}(4)=b\) berarti \(f(b)=4\). Di tabel, \(f(1)=4\), jadi \(b=1\).</li><li>\(3+1=4\)</li></ol>Jawaban: <b>C</b></div></details>
+
+<details class="q"><summary><span class="lv">Level 2 · Menerapkan</span> Diketahui \(f(x)=\dfrac{2x+1}{x-3}\), \(x\neq3\). Nilai \(f^{-1}(5)\) adalah ...</summary>
+<div class="opt"><span>A. 3</span><span>B. 4</span><span>C. \(\frac{16}{3}\)</span><span>D. 6</span><span>E. 8</span></div>
+<div class="box fast"><b class="t">⚡ Cara Cepat</b><br>Rumus pecahan: \(a=2,b=1,c=1,d=-3\). \(f^{-1}(x)=\dfrac{-dx+b}{cx-a}=\dfrac{3x+1}{x-2}\).<br>\(f^{-1}(5)=\dfrac{16}{3}\). <b>Jawaban: C</b></div>
+<div class="box full"><b class="t">🧩 Cara Lengkap</b>
+<ol class="st"><li>\(y=\dfrac{2x+1}{x-3}\)</li><li>Kali silang: \(y(x-3)=2x+1\)</li><li>Buka kurung: \(xy-3y=2x+1\)</li><li>Kumpulkan \(x\) di kiri: \(xy-2x=3y+1\)</li><li>Faktorkan: \(x(y-2)=3y+1\Rightarrow x=\dfrac{3y+1}{y-2}\)</li><li>Jadi \(f^{-1}(x)=\dfrac{3x+1}{x-2}\), maka \(f^{-1}(5)=\dfrac{15+1}{5-2}=\dfrac{16}{3}\)</li></ol>Jawaban: <b>C</b></div></details>
+
+<details class="q"><summary><span class="lv">Level 2 · Memodelkan</span> Hubungan suhu Fahrenheit (F) dan Celsius (C) adalah \(F=\frac{9}{5}C+32\). Jika suatu hari suhu \(95^\circ F\), suhu dalam Celsius adalah ...</summary>
+<div class="opt"><span>A. 25°C</span><span>B. 30°C</span><span>C. 35°C</span><span>D. 40°C</span><span>E. 45°C</span></div>
+<div class="box fast"><b class="t">⚡ Cara Cepat</b><br>Dari rumus invers: \(C=\frac{5}{9}(F-32)=\frac{5}{9}(63)=35\). <b>Jawaban: C</b></div>
+<div class="box full"><b class="t">🧩 Cara Lengkap</b>
+<ol class="st"><li>Fungsinya \(F(C)=\frac{9}{5}C+32\). Kita ingin \(C\) dari \(F\), jadi cari invers.</li><li>\(F-32=\frac{9}{5}C\)</li><li>Kalikan \(\frac{5}{9}\): \(C=\frac{5}{9}(F-32)\)</li><li>Masukkan \(F=95\): \(C=\frac{5}{9}\times63=35\)</li></ol>Jawaban: <b>C</b></div></details>
+
+<details class="q"><summary><span class="lv">Level 3 · Menganalisis</span> Diketahui \(f(x)=2x-1\) dan \(g(x)=x+3\). Nilai \((g\circ f)^{-1}(8)\) adalah ...</summary>
+<div class="opt"><span>A. 2</span><span>B. 3</span><span>C. 4</span><span>D. 5</span><span>E. 6</span></div>
+<div class="box fast"><b class="t">⚡ Cara Cepat</b><br>\((g\circ f)^{-1}=f^{-1}\circ g^{-1}\). Kerjakan dari dalam: \(g^{-1}(8)=8-3=5\), lalu \(f^{-1}(5)=\frac{5+1}{2}=3\). <b>Jawaban: B</b></div>
+<div class="box full"><b class="t">🧩 Cara Lengkap</b>
+<ol class="st"><li>Cari \((g\circ f)(x)=g(f(x))=(2x-1)+3=2x+2\).</li><li>\(y=2x+2\Rightarrow x=\dfrac{y-2}{2}\)</li><li>\((g\circ f)^{-1}(x)=\dfrac{x-2}{2}\)</li><li>\((g\circ f)^{-1}(8)=\dfrac{8-2}{2}=3\)</li></ol>Jawaban: <b>B</b></div></details>
+
+<details class="q"><summary><span class="lv">Level 3 · Memecahkan masalah</span> Diketahui \(f(x)=2x+a\) dan \(f^{-1}(5)=1\). Nilai \(f^{-1}(9)\) adalah ...</summary>
+<div class="opt"><span>A. 1</span><span>B. 2</span><span>C. 3</span><span>D. 4</span><span>E. 6</span></div>
+<div class="box fast"><b class="t">⚡ Cara Cepat</b><br>\(f^{-1}(5)=1\) artinya \(f(1)=5\Rightarrow 2+a=5\Rightarrow a=3\). Maka \(f(x)=2x+3\). \(f^{-1}(9)=b\Rightarrow 2b+3=9\Rightarrow b=3\). <b>Jawaban: C</b></div>
+<div class="box full"><b class="t">🧩 Cara Lengkap</b>
+<ol class="st"><li>Ubah informasi invers menjadi fungsi: \(f(1)=5\).</li><li>Substitusi: \(2(1)+a=5\Rightarrow a=3\).</li><li>Rumus: \(f(x)=2x+3\Rightarrow f^{-1}(x)=\dfrac{x-3}{2}\).</li><li>\(f^{-1}(9)=\dfrac{9-3}{2}=3\)</li></ol>Jawaban: <b>C</b></div></details>
+
+<details class="q"><summary><span class="lv">Level 3 · Menyimpulkan</span> Diketahui \(f(x)=2^{x+1}\). Nilai \(f^{-1}(16)\) adalah ...</summary>
+<div class="opt"><span>A. 2</span><span>B. 3</span><span>C. 4</span><span>D. 7</span><span>E. 15</span></div>
+<div class="box fast"><b class="t">⚡ Cara Cepat</b><br>\(f^{-1}(16)=a\Rightarrow 2^{a+1}=16=2^4\Rightarrow a+1=4\Rightarrow a=3\). <b>Jawaban: B</b></div>
+<div class="box full"><b class="t">🧩 Cara Lengkap</b>
+<ol class="st"><li>\(y=2^{x+1}\)</li><li>Ambil log basis 2: \({}^{2}\log y=x+1\)</li><li>\(x={}^{2}\log y-1\), jadi \(f^{-1}(x)={}^{2}\log x-1\)</li><li>\(f^{-1}(16)={}^{2}\log16-1=4-1=3\)</li></ol>Jawaban: <b>B</b></div></details>
+
+<details class="q"><summary><span class="lv">Level 3 · Mengevaluasi</span> Seorang siswa menulis: "Jika \(f(x)=x^2\) untuk semua bilangan real, maka \(f^{-1}(x)=\sqrt{x}\)". Pernyataan ini ...</summary>
+<div class="opt"><span>A. Benar</span><span>B. Salah, karena \(f\) tidak satu-satu pada \(\mathbb{R}\)</span><span>C. Salah, karena hasilnya \(x^2\)</span></div>
+<div class="box fast"><b class="t">⚡ Cara Cepat</b><br>Uji garis horizontal: \(y=4\) memotong parabola di dua titik. Jadi \(f\) tidak punya invers pada \(\mathbb{R}\). <b>Jawaban: B</b></div>
+<div class="box full"><b class="t">🧩 Cara Lengkap</b>
+<ol class="st"><li>Cek: \(f(2)=4\) dan \(f(-2)=4\). Dua nilai \(x\) berbeda menghasilkan hasil yang sama.</li><li>Berarti \(f\) bukan satu-satu, maka tidak bijektif.</li><li>Agar punya invers, domain harus dibatasi, misalnya \(x\ge0\). Barulah \(f^{-1}(x)=\sqrt{x}\).</li></ol>Jawaban: <b>B</b></div></details>
+</section>
+<section id="latihan">
+<h2>7. Latihan Mandiri: 20 Soal TKA</h2>
+<p>Tersedia tombol <b>💡 Petunjuk</b> jika bingung. Urutan pilihan jawaban diacak setiap kali latihan dimulai. Jawab dulu, tombol <b>Cek Jawaban</b> baru aktif setelah soal terisi. Setelah dicek, pembahasan cara cepat dan cara lengkap muncul.</p>
+<div id="lat"></div>
+<div style="text-align:center;margin-top:16px">
+<button class="btn" id="skorBtn">📈 Lihat Skor</button> <button class="btn alt" id="resetBtn">🔄 Ulangi Latihan</button>
+<div id="skor" class="box def" style="display:none;font-weight:600"></div></div>
+</section>
+<style>
+.card{border:2px solid var(--cyan);border-radius:12px;padding:14px 16px;margin:14px 0}
+.card .qt{margin:8px 0}
+.o{display:block;padding:6px 10px;margin:4px 0;border-radius:8px;border:1px solid #9bb;cursor:pointer}
+.o:hover{background:var(--soft)}.o input{margin-right:8px}
+.o.ok{background:#c9f5d4;color:#064d1c;border-color:#2a9d4a}.o.bad{background:#ffd2d2;color:#6b0000;border-color:#d33}
+.btn{background:var(--navy);color:var(--yellow);border:0;border-radius:20px;padding:9px 20px;font-weight:700;cursor:pointer;font-size:.95rem}
+.btn:disabled{opacity:.4;cursor:not-allowed}.btn.alt{background:var(--cyan);color:var(--navy)}
+.res{margin-top:10px;font-weight:700}.pemb{display:none;margin-top:8px}
+.card input[type=text]{padding:8px;border:2px solid var(--cyan);border-radius:8px;width:140px;font-size:1rem}
+.bsr td:first-child{text-align:left}.bsr tr.ok td{background:#c9f5d4;color:#064d1c}.bsr tr.bad td{background:#ffd2d2;color:#6b0000}
+</style>
+<script>
+const RAW=String.raw`pg§1§Diketahui $f(x)=2x+5$. Rumus $f^{-1}(x)$ adalah ...§$\dfrac{x-5}{2}$;;$\dfrac{x+5}{2}$;;$2x-5$;;$\dfrac{1}{2x+5}$;;$\dfrac{2}{x-5}$§0§Balik operasi: dikurang 5 dulu, lalu dibagi 2.§$y=2x+5$;;$y-5=2x$;;$x=\dfrac{y-5}{2}$;;Ganti $y$ dengan $x$: $f^{-1}(x)=\dfrac{x-5}{2}$
+pg§1§$f(x)=5x+3$. Nilai $f^{-1}(18)$ adalah ...§1;;2;;3;;4;;5§2§$f^{-1}(18)=a$ artinya $f(a)=18$, jadi $5a+3=18$ dan $a=3$.§$f^{-1}(18)=a$ berarti $f(a)=18$;;$5a+3=18$;;$5a=15$;;$a=3$
+pg§1§Perhatikan tabel fungsi $f$.<table><tr><th>$x$</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr><tr><th>$f(x)$</th><td>2</td><td>5</td><td>8</td><td>11</td><td>14</td></tr></table>Nilai $f^{-1}(8)+f^{-1}(14)$ adalah ...§6;;7;;8;;9;;10§2§Cari 8 dan 14 di baris $f(x)$, lihat $x$-nya: 3 dan 5. Jumlah $=8$.§$f^{-1}(8)=a$ berarti $f(a)=8$. Di tabel, $a=3$;;$f^{-1}(14)=b$ berarti $f(b)=14$. Di tabel, $b=5$;;$3+5=8$
+pg§1§$f(x)=\dfrac{x+4}{3}$. Maka $f^{-1}(x)=$ ...§$3x-4$;;$3x+4$;;$\dfrac{x-4}{3}$;;$\dfrac{3}{x+4}$;;$\dfrac{x}{3}-4$§0§$f$: tambah 4 lalu bagi 3. Balik: kali 3 lalu kurang 4.§$y=\dfrac{x+4}{3}$;;Kali 3: $3y=x+4$;;$x=3y-4$;;$f^{-1}(x)=3x-4$
+pg§1§Titik $(2,5)$ terletak pada grafik fungsi $f$. Titik yang pasti terletak pada grafik $f^{-1}$ adalah ...§$(2,5)$;;$(-2,-5)$;;$(5,2)$;;$(-5,-2)$;;$(\frac{1}{2},\frac{1}{5})$§2§Grafik invers adalah cermin terhadap $y=x$, koordinat ditukar: $(a,b)\to(b,a)$.§$(2,5)$ pada $f$ berarti $f(2)=5$;;Maka $f^{-1}(5)=2$;;Titik pada grafik $f^{-1}$ adalah $(5,2)$
+pg§2§Diketahui $f(x)=\dfrac{3x-1}{x+2}$, $x\ne-2$. Rumus $f^{-1}(x)$ adalah ...§$\dfrac{-2x-1}{x-3}$;;$\dfrac{2x-1}{x+3}$;;$\dfrac{2x+1}{x-3}$;;$\dfrac{x+2}{3x-1}$;;$\dfrac{-2x+1}{x+3}$§0§Rumus: $a=3,b=-1,c=1,d=2$, maka $\dfrac{-dx+b}{cx-a}=\dfrac{-2x-1}{x-3}$.§$y(x+2)=3x-1$;;$xy+2y=3x-1$;;$xy-3x=-2y-1$;;$x(y-3)=-2y-1$;;$x=\dfrac{-2y-1}{y-3}$, jadi $f^{-1}(x)=\dfrac{-2x-1}{x-3}$
+pg§2§$f(x)=\dfrac{2x+3}{x-1}$, $x\ne1$. Nilai $f^{-1}(3)$ adalah ...§3;;4;;5;;6;;7§3§$f^{-1}(3)=a$ berarti $f(a)=3$. Selesaikan $\dfrac{2a+3}{a-1}=3$ dan diperoleh $a=6$.§$f^{-1}(3)=a$ berarti $f(a)=3$;;$\dfrac{2a+3}{a-1}=3$;;$2a+3=3(a-1)=3a-3$;;$6=a$
+pg§2§Biaya produksi $B(x)=15.000x+50.000$ rupiah dengan $x$ banyak unit. Jika biaya yang dikeluarkan Rp290.000, banyak unit yang diproduksi adalah ...§12;;14;;16;;18;;20§2§Kurangi biaya tetap lalu bagi: $\dfrac{290.000-50.000}{15.000}=16$.§Yang dicari $x$ dari $B$, jadi pakai invers;;$B=15.000x+50.000\Rightarrow x=\dfrac{B-50.000}{15.000}$;;Masukkan $B=290.000$: $x=\dfrac{240.000}{15.000}$;;$x=16$ unit
+pg§2§$f(x)=3x+1$ dan $g(x)=x-2$. Nilai $(f\circ g)^{-1}(10)$ adalah ...§3;;4;;5;;6;;7§2§$(f\circ g)^{-1}=g^{-1}\circ f^{-1}$. $f^{-1}(10)=\dfrac{10-1}{3}=3$, lalu $g^{-1}(3)=3+2=5$.§$(f\circ g)(x)=3(x-2)+1=3x-5$;;$y=3x-5\Rightarrow x=\dfrac{y+5}{3}$;;$(f\circ g)^{-1}(x)=\dfrac{x+5}{3}$;;$(f\circ g)^{-1}(10)=\dfrac{15}{3}=5$
+pg§2§$f(x)=3^{x-1}$. Nilai $f^{-1}(81)$ adalah ...§3;;4;;5;;6;;7§2§$3^{a-1}=81=3^4$, maka $a-1=4$ dan $a=5$.§$y=3^{x-1}$;;Log basis 3: $@^{3}\log y=x-1$;;$f^{-1}(x)={}^{3}\log x+1$;;$f^{-1}(81)=4+1=5$
+pg§3§$f(x)=ax+b$ dengan $f(1)=5$ dan $f^{-1}(11)=3$. Nilai $f^{-1}(8)$ adalah ...§1;;2;;3;;4;;5§1§Garis lurus melalui $(1,5)$ dan $(3,11)$: naik 3 tiap 1, jadi $f(x)=3x+2$. Lalu $3x+2=8$ memberi $x=2$.§$f(1)=5\Rightarrow a+b=5$;;$f^{-1}(11)=3\Rightarrow f(3)=11\Rightarrow 3a+b=11$;;Kurangkan: $2a=6$, $a=3$, $b=2$;;$f(x)=3x+2$. Misal $f^{-1}(8)=t$ maka $3t+2=8$, $t=2$
+pg§3§$f(x)=x+2$ dan $(f\circ g)(x)=3x+8$. Nilai $g^{-1}(12)$ adalah ...§1;;2;;3;;4;;6§1§$g(x)=3x+8-2=3x+6$. Lalu $3a+6=12$ memberi $a=2$.§$(f\circ g)(x)=g(x)+2$;;$g(x)+2=3x+8\Rightarrow g(x)=3x+6$;;$y=3x+6\Rightarrow x=\dfrac{y-6}{3}$, jadi $g^{-1}(x)=\dfrac{x-6}{3}$;;$g^{-1}(12)=\dfrac{6}{3}=2$
+pg§3§Untuk $f(x)=\dfrac{x+1}{x-1}$, $x\ne1$, pernyataan yang benar adalah ...§$f^{-1}(x)=f(x)$;;$f^{-1}(x)=\dfrac{x-1}{x+1}$;;$f^{-1}(x)=-f(x)$;;$f^{-1}(x)=\dfrac{-x+1}{x+1}$;;$f$ tidak mempunyai invers§0§Rumus: $a=1,b=1,c=1,d=-1$ memberi $\dfrac{x+1}{x-1}$, sama dengan $f(x)$.§$y(x-1)=x+1$;;$xy-y=x+1$;;$xy-x=y+1$;;$x(y-1)=y+1\Rightarrow x=\dfrac{y+1}{y-1}$;;Hasilnya sama dengan $f(x)$, jadi $f^{-1}(x)=f(x)$
+pk§2§Diketahui $f(x)=4x-8$. Pilih <b>semua</b> pernyataan yang benar.§$f^{-1}(x)=\dfrac{x+8}{4}$;;$f^{-1}(0)=2$;;$f^{-1}(x)=\dfrac{x}{4}-8$;;$(f\circ f^{-1})(5)=5$;;$f^{-1}(4)=1$§0,1,3§Cari invers: $\dfrac{x+8}{4}$. Lalu uji tiap pernyataan.§$y=4x-8\Rightarrow x=\dfrac{y+8}{4}$ (A benar, C salah);;$f^{-1}(0)=\dfrac{8}{4}=2$ (B benar);;$f(f^{-1}(x))=x$ selalu, jadi D benar;;$f^{-1}(4)=\dfrac{12}{4}=3$, bukan 1 (E salah)
+pk§1§Fungsi berikut (domain dan kodomain bilangan real) yang mempunyai invers adalah ... (pilih semua yang benar)§$f(x)=3x-1$;;$f(x)=x^2$;;$f(x)=x^3$;;$f(x)=|x|$;;$f(x)=5-x$§0,2,4§Uji garis horizontal: yang hanya dipotong 1 titik punya invers.§$3x-1$ garis miring, dipotong 1 titik (benar);;$x^2$ dan $|x|$ berbentuk U/V, garis datar memotong 2 titik (salah);;$x^3$ naik terus (benar);;$5-x$ garis turun (benar)
+pk§3§Diketahui $f(x)=2x+1$ dan $g(x)=x-3$. Pilih <b>semua</b> pernyataan yang benar.§$(f\circ g)(x)=2x-5$;;$(g\circ f)(x)=2x-2$;;$(f\circ g)^{-1}(x)=\dfrac{x+5}{2}$;;$(f\circ g)^{-1}=f^{-1}\circ g^{-1}$;;$(g\circ f)^{-1}(4)=3$§0,1,2,4§Ingat $(f\circ g)^{-1}=g^{-1}\circ f^{-1}$ (urutan dibalik), jadi D salah.§$(f\circ g)(x)=2(x-3)+1=2x-5$ (A benar);;$(g\circ f)(x)=(2x+1)-3=2x-2$ (B benar);;$y=2x-5\Rightarrow x=\dfrac{y+5}{2}$ (C benar);;Aturan yang benar $g^{-1}\circ f^{-1}$, D salah;;$(g\circ f)^{-1}(x)=\dfrac{x+2}{2}$, di $x=4$ hasilnya 3 (E benar)
+bs§2§Diketahui $f(x)=3x+6$. Tentukan benar atau salah setiap pernyataan.§$f^{-1}(x)=\dfrac{x-6}{3}$;;$f^{-1}(12)=2$;;Grafik $f^{-1}$ adalah cerminan grafik $f$ terhadap sumbu-$y$;;$f(f^{-1}(7))=7$§BBSB§Cari invers: $\dfrac{x-6}{3}$. Cermin invers adalah garis $y=x$.§$y=3x+6\Rightarrow x=\dfrac{y-6}{3}$ (1 Benar);;$f^{-1}(12)=\dfrac{6}{3}=2$ (2 Benar);;Cermin grafik invers adalah garis $y=x$, bukan sumbu-$y$ (3 Salah);;$f(f^{-1}(x))=x$ (4 Benar)
+bs§3§Diketahui $f(x)=x^2-4x+4$ dengan domain $x\ge2$. Tentukan benar atau salah setiap pernyataan.§$f^{-1}(x)=\sqrt{x}+2$;;$f^{-1}(9)=5$;;$f$ mempunyai invers jika domainnya semua bilangan real;;$f^{-1}(x)=2-\sqrt{x}$§BBSS§$f(x)=(x-2)^2$. Karena $x\ge2$, $x-2$ tak negatif sehingga $x=\sqrt{y}+2$.§$y=(x-2)^2\Rightarrow x-2=\pm\sqrt{y}$. Domain $x\ge2$ memilih tanda $+$ : $f^{-1}(x)=\sqrt{x}+2$ (1 Benar);;$f^{-1}(9)=3+2=5$ (2 Benar);;Pada semua real tidak satu-satu, sebab $f(1)=f(3)=1$ (3 Salah);;Tanda minus berlaku untuk $x\le2$, bukan domain ini (4 Salah)
+is§1§$f(x)=4x-9$. Nilai $f^{-1}(15)=$ ...§§6§$4a-9=15\Rightarrow a=6$.§$f^{-1}(15)=a$ berarti $f(a)=15$;;$4a-9=15$;;$4a=24$;;$a=6$
+is§3§$f(x)=\dfrac{x+1}{x-2}$, $x\ne2$. Nilai $f^{-1}(2)=$ ...§§5§Rumus: $a=1,b=1,c=1,d=-2$ memberi $f^{-1}(x)=\dfrac{2x+1}{x-1}$. Maka $f^{-1}(2)=5$.§$f^{-1}(2)=a$ berarti $f(a)=2$;;$\dfrac{a+1}{a-2}=2$;;$a+1=2a-4$;;$a=5$ (cek: $f(5)=\dfrac{6}{3}=2$)`;
+const LB={pg:'Pilihan Ganda',pk:'Pilihan Ganda Kompleks (pilih semua yang benar)',bs:'Benar / Salah',is:'Isian Singkat'};
+const M=s=>s.replace(/@\^/g,'{}^').replace(/\$(.+?)\$/g,(m,a)=>'\\('+a+'\\)');
+const Q0=RAW.trim().split('\n').map(l=>{const[t,lv,q,o,a,c,s]=l.split('§');return{t,lv,q,o:o?o.split(';;'):[],a,c,s:s.split(';;')}});
+let Q=[];
+const HINT=['Lawan dari "kali 2 lalu tambah 5" adalah "kurang 5 lalu bagi 2".','Ubah menjadi f(a)=18, lalu cari a.','Cari angka 8 dan 14 di baris f(x), baca x di atasnya.','f: tambah 4 lalu bagi 3. Balik urutan dan lawankan operasinya.','Pada grafik invers, koordinat x dan y ditukar.','Kali silang: y(x+2)=3x-1, lalu kumpulkan x di satu sisi.','Ubah menjadi f(a)=3, lalu kali silang.','Biaya sudah diketahui, yang dicari x. Kurangi biaya tetap lalu bagi.','Cari (f∘g)(x) dulu, atau pakai g⁻¹∘f⁻¹ dari dalam ke luar.','Ubah menjadi 3^(a-1)=81, lalu samakan basis.','Ada dua info: f(1)=5 dan f(3)=11. Cari a dan b.','(f∘g)(x)=f(g(x)). Cari g(x) dulu.','Cari f⁻¹ dengan rumus pecahan atau kali silang.','Cari f⁻¹ dulu, lalu uji tiap pernyataan satu per satu.','Garis datar memotong grafik berapa titik?','Cari (f∘g)(x) dan (g∘f)(x). Ingat urutan invers dibalik.','Cari f⁻¹ dulu. Cermin grafik invers adalah garis apa?','Tulis f(x)=(x-2)^2. Domain x≥2 memilih tanda + atau -?','f⁻¹(15)=a berarti f(a)=15.','f⁻¹(2)=a berarti f(a)=2, lalu kali silang.'];
+function arr(q0){const q=JSON.parse(JSON.stringify(q0));if(q.t!='pg')return q;const a=+q.a,n=q.o.map(Number);
+ if(n.every(x=>!isNaN(x))){const st=n[1]-n[0],c=[0,1,2,3,4].filter(p=>n[a]-p*st>=1),p=c[Math.floor(Math.random()*c.length)],b=n[a]-p*st;q.o=[0,1,2,3,4].map(k=>String(b+k*st));q.a=String(p);return q}
+ const idx=[0,1,2,3,4];for(let i=4;i>0;i--){const j=Math.floor(Math.random()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]]}
+ q.o=idx.map(k=>q0.o[k]);q.a=String(idx.indexOf(a));return q}
+const L=i=>String.fromCharCode(65+i);
+let done=[];
+function build(){
+ Q=Q0.map(arr);const box=document.getElementById('lat');box.innerHTML='';done=Q.map(()=>null);
+ Q.forEach((q,i)=>{
+  let b='';
+  if(q.t=='pg')b=q.o.map((o,k)=>`<label class="o"><input type="radio" name="q${i}" value="${k}">${L(k)}. ${M(o)}</label>`).join('');
+  if(q.t=='pk')b=q.o.map((o,k)=>`<label class="o"><input type="checkbox" name="q${i}" value="${k}">${L(k)}. ${M(o)}</label>`).join('');
+  if(q.t=='bs')b='<table class="bsr"><tr><th>Pernyataan</th><th>Benar</th><th>Salah</th></tr>'+q.o.map((o,k)=>`<tr><td>${k+1}. ${M(o)}</td><td><input type="radio" name="q${i}_${k}" value="B"></td><td><input type="radio" name="q${i}_${k}" value="S"></td></tr>`).join('')+'</table>';
+  if(q.t=='is')b=`<input type="text" id="q${i}t" inputmode="decimal" placeholder="Jawaban"> `;
+  const d=document.createElement('div');d.className='card';d.id='c'+i;
+  d.innerHTML=`<b>Soal ${i+1}</b> <span class="lv">Level ${q.lv} · ${LB[q.t]}</span><div class="qt">${M(q.q)}</div>${b}<button class="btn" disabled>✔ Cek Jawaban</button> <button class="btn alt hb" type="button">💡 Petunjuk</button><div class="hint box warn" style="display:none"></div><div class="res"></div><div class="pemb"><div class="box fast"><b class="t">⚡ Cara Cepat</b><br>${M(q.c)}</div><div class="box full"><b class="t">🧩 Cara Lengkap</b><ol class="st">${q.s.map(x=>'<li>'+M(x)+'</li>').join('')}</ol></div></div>`;
+  box.appendChild(d);
+  const btn=d.querySelector('.btn');
+  d.addEventListener('input',()=>{btn.disabled=!full(i)});d.addEventListener('change',()=>{btn.disabled=!full(i)});
+  btn.onclick=()=>check(i);
+  const hb=d.querySelector('.hb'),hd=d.querySelector('.hint');hd.textContent=HINT[i];hb.onclick=()=>{hd.style.display=hd.style.display=='none'?'block':'none'};
+ });
+ document.getElementById('skor').style.display='none';
+ if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise([box]);
+}
+function ans(i){const q=Q[i],c=document.getElementById('c'+i);
+ if(q.t=='pg'){const e=c.querySelector('input:checked');return e?e.value:null}
+ if(q.t=='pk')return[...c.querySelectorAll('input:checked')].map(e=>e.value).join(',');
+ if(q.t=='bs')return q.o.map((o,k)=>{const e=c.querySelector(`input[name=q${i}_${k}]:checked`);return e?e.value:'?'}).join('');
+ return c.querySelector('input[type=text]').value.trim()}
+function full(i){const a=ans(i);if(Q[i].t=='bs')return a.indexOf('?')<0;return a!==null&&a!==''}
+function check(i){
+ const q=Q[i],c=document.getElementById('c'+i),a=ans(i);let ok;
+ if(q.t=='is')ok=Math.abs(parseFloat(a.replace(',','.'))-parseFloat(q.a))<1e-6;else ok=(a===q.a);
+ c.querySelectorAll('input').forEach(e=>e.disabled=true);c.querySelector('.btn').disabled=true;
+ const key=q.t=='pg'?[q.a]:q.a.split(','),mine=a.split(',');
+ if(q.t=='pg'||q.t=='pk')c.querySelectorAll('.o').forEach(l=>{const v=l.querySelector('input').value;if(key.includes(v))l.classList.add('ok');else if(mine.includes(v))l.classList.add('bad')});
+ if(q.t=='bs')c.querySelectorAll('.bsr tr').forEach((r,k)=>{if(k>0)r.classList.add(a[k-1]==q.a[k-1]?'ok':'bad')});
+ let kunci=q.t=='pg'?L(+q.a):q.t=='pk'?q.a.split(',').map(x=>L(+x)).join(', '):q.t=='bs'?q.a.split('').map((x,k)=>(k+1)+x).join(', '):q.a;
+ c.querySelector('.res').innerHTML=ok?'✅ Benar! Hebat.':'❌ Belum tepat. Jawaban yang benar: '+kunci+'. Pelajari pembahasan di bawah.';
+ c.querySelector('.pemb').style.display='block';done[i]=ok;
+ if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise([c]);
+}
+document.getElementById('skorBtn').onclick=()=>{
+ const n=done.filter(x=>x!==null).length,b=done.filter(x=>x===true).length,s=document.getElementById('skor');
+ s.style.display='block';s.innerHTML=`Soal sudah dicek: ${n}/20 · Benar: ${b} · Nilai: ${Math.round(b/20*100)}`+(n<20?'<br>Selesaikan semua soal untuk nilai akhir.':'');};
+document.getElementById('resetBtn').onclick=build;
+build();
+</script>
+</main>
+<footer>© VisualMath.Lim · Bimbingan Belajar · TKA Matematika Wajib SMA</footer>
+</body>
+</html>

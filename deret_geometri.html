@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barisan dan Deret Geometri | VisualMath.Lim - TKA Matematika Wajib SMA</title>
+<style>
+:root{--navy:#022050;--navy2:#0a3278;--cyan:#00d6d8;--cyan-d:#007f82;--cyan-l:#e0fbfb;--yellow:#ffd300;--yellow-l:#fff8d1;--ink:#16243d;--mute:#5a6b85;--bg:#f2f7fc;--card:#fff;--line:#d5e1ee;--ok:#12a150;--ok-l:#e6f7ee;--bad:#d93b3b;--bad-l:#fdeaea}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;font-size:17px}
+.top{background:var(--navy);border-bottom:4px solid var(--cyan);position:sticky;top:0;z-index:50}
+.top .in{max-width:1220px;margin:0 auto;padding:8px 18px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;min-width:0}
+.brand img{width:52px;height:52px;border-radius:50%;background:#fff;object-fit:cover;border:2px solid var(--yellow);flex:none}
+.brand .t{font-weight:800;font-size:1.15rem;line-height:1.25}
+.brand .t b{color:var(--cyan)}
+.brand .t small{font-weight:600;font-size:.92em;color:#cfe3ff}
+.nav{margin-left:auto;display:flex;gap:6px;align-items:center}
+.nav a{color:#fff;text-decoration:none;font-weight:700;font-size:.95rem;padding:9px 14px;border-radius:999px;transition:.2s}
+.nav a:hover{background:var(--cyan);color:var(--navy)}
+.nav a.on{background:var(--yellow);color:var(--navy)}
+.burger{display:none;margin-left:auto;background:var(--cyan);color:var(--navy);border:0;border-radius:10px;font-size:1.3rem;padding:6px 12px;cursor:pointer;font-weight:800}
+@media(max-width:860px){.burger{display:block}.nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--navy);flex-direction:column;align-items:stretch;padding:10px 18px 16px;border-bottom:4px solid var(--cyan)}.nav.open{display:flex}.nav a{text-align:center}.brand .t{font-size:.95rem}.brand img{width:42px;height:42px}}
+.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);color:#fff;padding:34px 18px 42px}
+.hero .in{max-width:1220px;margin:0 auto}
+.crumb{font-size:.9rem;color:#bcd4f7}.crumb a{color:var(--cyan);text-decoration:none}
+.hero h2{margin:8px 0 6px;font-size:2.1rem;line-height:1.2}
+.hero p{margin:0 0 16px;color:#d8e8ff;max-width:780px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);padding:5px 12px;border-radius:999px;font-size:.88rem;font-weight:600}
+.chip.y{background:var(--yellow);color:var(--navy);border-color:var(--yellow)}
+.wrap{max-width:1220px;margin:0 auto;padding:22px 18px 60px;display:grid;grid-template-columns:250px minmax(0,1fr);gap:26px}
+@media(max-width:980px){.wrap{grid-template-columns:minmax(0,1fr)}}
+.toc{position:sticky;top:96px;align-self:start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;max-height:calc(100vh - 120px);overflow:auto}
+.toc h4{margin:2px 8px 8px;color:var(--navy);font-size:.9rem;text-transform:uppercase;letter-spacing:.8px}
+.toc a{display:block;padding:6px 10px;border-radius:9px;text-decoration:none;color:var(--ink);font-size:.9rem;font-weight:600;border-left:4px solid transparent}
+.toc a:hover{background:var(--cyan-l)}
+.toc a.act{background:var(--cyan-l);border-left-color:var(--cyan);color:var(--navy)}
+.toc a.sub{padding-left:20px;font-weight:500}
+.tocbtn{display:none;width:100%;margin-bottom:12px;background:var(--navy);color:#fff;border:0;border-radius:12px;padding:11px;font-weight:700;font-size:1rem;cursor:pointer}
+@media(max-width:980px){.toc{position:static;max-height:none;display:none}.toc.open{display:block}.tocbtn{display:block}}
+section.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 28px;margin-bottom:22px;box-shadow:0 4px 14px rgba(2,32,80,.05)}
+@media(max-width:600px){section.card{padding:18px 15px}body{font-size:16px}.hero h2{font-size:1.65rem}}
+h3.sec{margin:0 0 14px;color:var(--navy);font-size:1.55rem;line-height:1.3;padding-bottom:10px;border-bottom:4px solid var(--cyan)}
+h3.sec .tag{display:inline-block;background:var(--yellow);color:var(--navy);font-size:.88rem;padding:2px 11px;border-radius:8px;margin-right:8px;vertical-align:middle}
+h4.sub{margin:26px 0 8px;color:var(--navy);font-size:1.2rem}
+p{margin:0 0 12px}
+.math{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:1.07em}
+.math i{font-style:italic}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .18em;line-height:1.25}
+.frac>span:first-child{border-bottom:1.6px solid currentColor;padding:0 .25em}
+.frac>span:last-child{padding:0 .25em}
+sub,sup{line-height:0;font-size:.72em}
+.eq{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;font-size:1.2em;text-align:center;margin:8px 0;padding:6px 8px;overflow-x:auto}
+.formula{background:var(--navy);color:#fff;border-radius:14px;padding:6px 10px;margin:14px 0;border:3px solid var(--yellow)}
+.formula .eq{margin:4px 0;color:#fff}
+.formula .cap{color:#cfe3ff;font-size:.88rem;text-align:center;margin-top:2px}
+.callout{border-radius:14px;padding:14px 18px;margin:16px 0;border-left:6px solid}
+.callout b.h{display:block;margin-bottom:4px}
+.callout.tip{background:var(--cyan-l);border-color:var(--cyan)}
+.callout.warn{background:var(--yellow-l);border-color:var(--yellow)}
+.callout.bad{background:var(--bad-l);border-color:var(--bad)}
+.callout.nv{background:#e8eefa;border-color:var(--navy)}
+.callout ul,.callout ol{margin:6px 0 0;padding-left:22px}
+table.t{border-collapse:collapse;width:100%;margin:12px 0;font-size:.96rem}
+table.t th{background:var(--navy);color:#fff;padding:9px 11px;text-align:left}
+table.t td{padding:8px 11px;border:1px solid var(--line);vertical-align:top}
+table.t tr:nth-child(even) td{background:#f7fafd}
+table.t.c td,table.t.c th{text-align:center}
+.tw{overflow-x:auto}
+.fig{display:block;margin:10px auto;max-width:100%;height:auto}
+.figbox{background:#fbfdff;border:1px solid var(--line);border-radius:16px;padding:10px 12px;margin:14px 0;text-align:center}
+.figbox figcaption{font-size:.88rem;color:var(--mute);margin-top:4px}
+.figrow{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.figrow svg{flex:1 1 270px;max-width:340px}
+.sol{border:2px solid var(--line);border-radius:16px;margin:14px 0;overflow:hidden;background:#fff;text-align:left}
+.sol .tabs{display:flex;background:#eef4fb}
+.sol .tab{flex:1;border:0;background:transparent;padding:11px 8px;font-weight:800;font-size:.97rem;color:var(--mute);cursor:pointer;border-bottom:4px solid transparent;font-family:inherit}
+.sol .tab.active[data-t=cepat]{background:var(--yellow-l);color:var(--navy);border-bottom-color:var(--yellow)}
+.sol .tab.active[data-t=lengkap]{background:var(--cyan-l);color:var(--navy);border-bottom-color:var(--cyan)}
+.sol .pane{padding:16px 18px}
+.sol .pane.cepat{background:var(--yellow-l)}
+.sol .lbl{font-weight:800;color:var(--navy);margin-bottom:8px}
+ol.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+ol.steps li{position:relative;padding:0 0 14px 52px;counter-increment:s}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--navy);color:var(--cyan);font-weight:800;display:flex;align-items:center;justify-content:center;border:3px solid var(--cyan)}
+ol.steps li::after{content:"";position:absolute;left:17px;top:40px;bottom:2px;width:3px;background:#bdeff0}
+ol.steps li:last-child::after{display:none}
+ol.steps li>b{display:block;color:var(--navy);padding-top:5px}
+ol.steps li .b{margin-top:2px}
+.exbox{border:2px solid var(--navy);border-radius:16px;background:#f4f8fd;padding:14px 18px 6px;margin:18px 0}
+.exbox.d{border-color:var(--cyan-d);background:#effdfd}
+.exbox.a{border-color:#c9a800;background:#fffbe6}
+.exbox .eh{font-weight:800;color:var(--navy);margin-bottom:6px;font-size:1.02rem}
+.exbox .qq{margin-bottom:8px}
+.fill{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:flex-end;margin:6px 0 10px}
+.fill label{display:flex;flex-direction:column;font-weight:700;font-size:.92rem;color:var(--navy)}
+.fill input{margin-top:4px;padding:9px 12px;border:2px solid var(--line);border-radius:10px;font:inherit;width:190px;max-width:100%;background:#fff}
+.fill input:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,214,216,.25)}
+.fill input.ok{border-color:var(--ok);background:var(--ok-l)}
+.fill input.no{border-color:var(--bad);background:var(--bad-l)}
+.fbtns{display:flex;gap:8px;flex-wrap:wrap}
+.btn{background:var(--cyan);color:var(--navy);border:0;border-radius:11px;padding:10px 18px;font-weight:800;font-size:.98rem;cursor:pointer;font-family:inherit}
+.btn:hover{background:var(--yellow)}
+.btn.ghost{background:#fff;border:2px solid var(--navy);color:var(--navy)}
+.btn.ghost:hover{background:var(--navy);color:#fff}
+.fbx{margin-bottom:10px}
+.verdict{border-radius:12px;padding:10px 14px;font-weight:700;margin-bottom:6px}
+.verdict.ok{background:var(--ok-l);color:#0b6b36}.verdict.bad{background:var(--bad-l);color:#a02323}.verdict.info{background:var(--yellow-l);color:#6b5600}
+.seatrow{display:flex;align-items:center;gap:12px;margin:5px 0}
+.seatrow .dots{flex:1;min-width:0;display:flex;justify-content:center;gap:2px}
+.seatrow .dots i{flex:0 1 11px;min-width:3px;height:11px;border-radius:3px;background:var(--cyan);display:block}
+.seatrow span{min-width:96px;flex:none;text-align:left;font-size:.88rem;color:var(--navy);font-weight:600}
+.flow{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.flow div{flex:1 1 150px;border-radius:14px;padding:10px 12px;color:#fff;font-size:.9rem}
+.flow div b{display:block;font-size:1.02rem}
+.stat{position:sticky;top:78px;z-index:20;background:var(--navy);color:#fff;border-radius:14px;padding:10px 16px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:12px 0 18px;border:2px solid var(--cyan)}
+.stat b{color:var(--yellow)}
+.stat button{margin-left:auto;background:var(--yellow);border:0;border-radius:9px;padding:7px 14px;font-weight:800;color:var(--navy);cursor:pointer}
+.lvh{margin:30px 0 8px;padding:12px 16px;border-radius:14px;background:var(--navy);color:#fff;font-size:1.2rem;font-weight:800}
+.lvh small{display:block;font-weight:500;color:#cfe3ff;font-size:.9rem}
+article.q{border:2px solid var(--line);border-radius:18px;padding:18px 20px;margin:16px 0;background:#fff}
+article.q.done-ok{border-color:var(--ok)}article.q.done-bad{border-color:var(--bad)}
+.qh{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.qh .num{background:var(--navy);color:#fff;font-weight:800;padding:3px 12px;border-radius:9px}
+.qh .lv{font-weight:800;font-size:.82rem;padding:3px 10px;border-radius:999px}
+.lv1{background:var(--cyan);color:var(--navy)}.lv2{background:var(--yellow);color:var(--navy)}.lv3{background:#ff7a59;color:#fff}
+.qh .pr{font-size:.86rem;color:var(--mute);font-weight:600}
+.qh .fmt{margin-left:auto;font-size:.78rem;border:1px solid var(--line);padding:2px 8px;border-radius:7px;color:var(--mute)}
+.stem p{margin-bottom:8px}
+.pick{font-size:.9rem;color:var(--cyan-d);font-weight:700;margin-top:6px}
+.opts{display:grid;gap:9px;margin-top:10px}
+.opt{display:flex;gap:12px;align-items:center;text-align:left;width:100%;border:2px solid var(--line);background:#fff;border-radius:12px;padding:10px 14px;font:inherit;color:var(--ink);cursor:pointer;transition:.15s}
+.opt:hover{border-color:var(--cyan);background:var(--cyan-l)}
+.opt .l{flex:none;width:32px;height:32px;border-radius:50%;background:#e8eefa;color:var(--navy);font-weight:800;display:flex;align-items:center;justify-content:center}
+.opt input{width:20px;height:20px;accent-color:var(--navy);flex:none}
+.q.locked .opt{cursor:default;pointer-events:none}
+.opt.ok{border-color:var(--ok);background:var(--ok-l)}.opt.ok .l{background:var(--ok);color:#fff}
+.opt.bad{border-color:var(--bad);background:var(--bad-l)}.opt.bad .l{background:var(--bad);color:#fff}
+.opt.miss{border-color:var(--ok);border-style:dashed}
+.q.locked .btn.chk{display:none}
+.btn.chk{margin-top:12px}
+table.bs{width:100%;border-collapse:collapse;margin-top:10px}
+table.bs th{background:var(--navy);color:#fff;padding:8px;font-size:.92rem}
+table.bs td{border:1px solid var(--line);padding:8px 10px}
+table.bs td.r{text-align:center;width:90px}
+table.bs td.r input{width:20px;height:20px;accent-color:var(--navy)}
+table.bs tr.ok td{background:var(--ok-l)}table.bs tr.bad td{background:var(--bad-l)}
+.fb{margin-top:14px}
+.warnmsg{color:#a02323;font-weight:600;margin-top:8px;font-size:.92rem}
+footer{background:var(--navy);color:#cfe3ff;text-align:center;padding:22px 14px;border-top:4px solid var(--cyan);font-size:.92rem}
+footer b{color:var(--yellow)}
+.totop{position:fixed;right:16px;bottom:16px;background:var(--yellow);color:var(--navy);width:46px;height:46px;border-radius:50%;border:0;font-size:1.3rem;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.25);display:none;z-index:40}
+@media print{.top,.toc,.stat,.totop,.tocbtn{display:none}.wrap{display:block}}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <a class="brand" href="index.html" aria-label="VisualMath.Lim">
+    <img src="logo.png" alt="Logo VisualMath.Lim" onerror="this.style.visibility='hidden'">
+    <div class="t"><span>VisualMath.<b>Lim</b></span><small> - TKA Matematika Wajib SMA</small></div>
+  </a>
+  <button class="burger" id="burger" aria-label="Menu">☰</button>
+  <nav class="nav" id="nav">
+    <a href="index.html">🏠 Home</a>
+    <a href="deret.html">📊 Dashboard</a>
+    <a href="deret_aritmatika.html">➕ Deret Aritmatika</a>
+    <a href="deret_geometri.html" class="on">✖️ Deret Geometri</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="in">
+  <div class="crumb"><a href="index.html">Home</a> › <a href="deret.html">Dashboard Deret</a> › Barisan dan Deret Geometri</div>
+  <h2>Barisan dan Deret Geometri</h2>
+  <p>Belajar dari dasar: <b>baca konsep → isi sendiri dulu → periksa → pelajari Cara Lengkap dan Cara Cepat</b>. Mencakup pertumbuhan, peluruhan, dan bunga majemuk. Cocok untuk siswa yang ingin menguatkan dasar sebelum TKA.</p>
+  <div class="chips"><span class="chip y">Elemen: Aljabar</span><span class="chip">Sub-materi: Fungsi (Barisan dan Deret)</span><span class="chip">Pertumbuhan · Peluruhan · Bunga Majemuk</span><span class="chip">Latihan Isian + 18 Soal Prediksi TKA</span></div>
+</div></div>
+
+<div class="wrap">
+  <div>
+    <button class="tocbtn" id="tocbtn">📑 Daftar Isi</button>
+    <aside class="toc" id="toc"><h4>Daftar Isi</h4></aside>
+  </div>
+  <main id="app"></main>
+</div>
+<footer>© <b>VisualMath.Lim</b> · Bimbingan Belajar · Materi TKA Matematika Wajib SMA</footer>
+<button class="totop" id="totop" aria-label="Ke atas">↑</button>
+
+<script>
+/* ===== RENDER MATEMATIKA (tanpa library luar) ===== */
+function mm(m){
+  m=m.replace(/_\{([^}]*)\}/g,'<sub>$1</sub>').replace(/\^\{([^}]*)\}/g,'<sup>$1</sup>');
+  m=m.replace(/⟨([^⟨⟩|]*)\|([^⟨⟩|]*)⟩/g,'<span class="frac"><span>$1</span><span>$2</span></span>');
+  return m.replace(/(<[^>]+>)|(&[a-z]+;)|([A-Za-z]+)/g,(x,tag,ent,w)=>tag||ent||(w.length===1?'<i>'+w+'</i>':w));
+}
+function M(s){
+  return s.replace(/\$\$([\s\S]+?)\$\$/g,(_,m)=>'<div class="eq">'+mm(m)+'</div>')
+          .replace(/\$([^$]+?)\$/g,(_,m)=>'<span class="math">'+mm(m)+'</span>');
+}
+/* ===== GAMBAR (SVG / HTML) ===== */
+const NAVY='#022050',CY='#00d6d8',CYD='#007f82',YL='#ffd300',OR='#ff7a59';
+const defs='<defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="'+OR+'"/></marker><marker id="ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="'+CYD+'"/></marker></defs>';
+function jumpFig(items,jt,cap){
+  const n=items.length,st=n>5?104:112,W=100+(n-1)*st+20,H=128;let s='<svg class="fig" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+cap+'">'+defs;
+  items.forEach((it,i)=>{const cx=60+i*st;
+    s+='<rect x="'+(cx-36)+'" y="64" width="72" height="42" rx="10" fill="'+(it.hl?YL:'#eaf2fb')+'" stroke="'+NAVY+'" stroke-width="2"/><text x="'+cx+'" y="91" text-anchor="middle" font-size="17" font-weight="800" fill="'+NAVY+'">'+it.t+'</text><text x="'+cx+'" y="122" text-anchor="middle" font-size="12" fill="#5a6b85">'+(it.s||'')+'</text>';
+    if(i<n-1&&jt){const nx=cx+st;s+='<path d="M'+(cx+16)+',58 Q'+((cx+nx)/2)+',12 '+(nx-16)+',58" fill="none" stroke="'+OR+'" stroke-width="2.6" marker-end="url(#ar)"/><text x="'+((cx+nx)/2)+'" y="24" text-anchor="middle" font-size="15" font-weight="800" fill="'+OR+'">'+jt+'</text>';}
+  });
+  return '<figure class="figbox">'+s+'</svg><figcaption>'+cap+'</figcaption></figure>';
+}
+function lineChart(ys,col,title){
+  const W=300,H=215,l=44,r=14,t=36,b=40,xs=[1,2,3,4,5,6],mn=Math.min(...ys),mx=Math.max(...ys),lo=Math.floor((mn-1)/5)*5,hi=Math.ceil((mx+1)/5)*5,stp=(hi-lo)>25?10:5;
+  const X=v=>l+(v-1)*(W-l-r)/5,Y=v=>H-b-(v-lo)*(H-b-t)/(hi-lo);let s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+title+'"><rect width="'+W+'" height="'+H+'" fill="#fff"/>';
+  for(let v=lo;v<=hi;v+=stp){s+='<line x1="'+l+'" x2="'+(W-r)+'" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="#e1eaf3"/><text x="'+(l-6)+'" y="'+(Y(v)+4)+'" text-anchor="end" font-size="11" fill="#5a6b85">'+v+'</text>';}
+  xs.forEach(v=>{s+='<text x="'+X(v)+'" y="'+(H-b+16)+'" text-anchor="middle" font-size="11" fill="#5a6b85">'+v+'</text>';});
+  s+='<polyline points="'+xs.map((v,i)=>X(v)+','+Y(ys[i])).join(' ')+'" fill="none" stroke="'+col+'" stroke-width="3"/>';
+  xs.forEach((v,i)=>{s+='<circle cx="'+X(v)+'" cy="'+Y(ys[i])+'" r="5" fill="'+col+'" stroke="#fff" stroke-width="2"/>';});
+  return s+'<text x="'+(W/2)+'" y="20" text-anchor="middle" font-size="13" font-weight="800" fill="'+NAVY+'">'+title+'</text><text x="'+(W/2)+'" y="'+(H-6)+'" text-anchor="middle" font-size="11" fill="#5a6b85">n (urutan suku)</text></svg>';
+}
+function gaussFig(){
+  const v=[2,5,8,11,14],xs=[50,135,220,305,390];let s='<svg class="fig" viewBox="0 0 440 190" role="img" aria-label="Pasangan Gauss">'+defs;
+  s+='<path d="M50,92 Q220,-30 390,92" fill="none" stroke="'+OR+'" stroke-width="2.6"/><text x="220" y="30" text-anchor="middle" font-size="15" font-weight="800" fill="'+OR+'">2 + 14 = 16</text>';
+  s+='<path d="M135,92 Q220,22 305,92" fill="none" stroke="'+CYD+'" stroke-width="2.6"/><text x="220" y="66" text-anchor="middle" font-size="15" font-weight="800" fill="'+CYD+'">5 + 11 = 16</text>';
+  v.forEach((a,i)=>{s+='<rect x="'+(xs[i]-30)+'" y="100" width="60" height="40" rx="10" fill="'+(i===2?YL:'#eaf2fb')+'" stroke="'+NAVY+'" stroke-width="2"/><text x="'+xs[i]+'" y="127" text-anchor="middle" font-size="18" font-weight="800" fill="'+NAVY+'">'+a+'</text>';});
+  return s+'<text x="220" y="170" text-anchor="middle" font-size="13" fill="'+NAVY+'">8 di tengah → 8 + 8 = 16 (setengah pasangan)</text></svg>';
+}
+function seatsFig(){return '<div class="figbox">'+[12,14,16,18,20].map((k,i)=>'<div class="seatrow"><div class="dots">'+'<i></i>'.repeat(k)+'</div><span>Baris '+(i+1)+': '+k+' kursi</span></div>').join('')+'<figcaption>Setiap baris bertambah 2 kursi → beda b = 2</figcaption></div>';}
+function matchFig(){
+  let s='<svg class="fig" viewBox="0 0 440 124" role="img" aria-label="Pola persegi korek api">';
+  const sq=(x0,k)=>{let o='';for(let i=0;i<=k;i++)o+='<line x1="'+(x0+i*44)+'" y1="20" x2="'+(x0+i*44)+'" y2="62" stroke="'+OR+'" stroke-width="6" stroke-linecap="round"/>';for(let i=0;i<k;i++)o+='<line x1="'+(x0+i*44)+'" y1="20" x2="'+(x0+i*44+44)+'" y2="20" stroke="'+OR+'" stroke-width="6" stroke-linecap="round"/><line x1="'+(x0+i*44)+'" y1="62" x2="'+(x0+i*44+44)+'" y2="62" stroke="'+OR+'" stroke-width="6" stroke-linecap="round"/>';return o;};
+  s+=sq(10,1)+sq(110,2)+sq(260,3);
+  const tx=(x,t)=>'<text x="'+x+'" y="98" text-anchor="middle" font-size="13" fill="'+NAVY+'" font-weight="700">'+t+'</text>';
+  return s+tx(32,'Pola 1: 4')+tx(154,'Pola 2: 7')+tx(326,'Pola 3: 10')+'<text x="220" y="118" text-anchor="middle" font-size="11" fill="#5a6b85">(banyak batang korek api)</text></svg>';
+}
+function barFig(){
+  const v=[4,4.24,4.48,4.72,4.96,5.2],W=440,H=230,l=40,b=40,t=30,bw=44,gp=(W-l-10-6*bw)/5;let s='<svg class="fig" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Saldo bunga tunggal">';
+  v.forEach((a,i)=>{const h=(a/5.6)*(H-b-t),x=l+i*(bw+gp);s+='<rect x="'+x+'" y="'+(H-b-h)+'" width="'+bw+'" height="'+h+'" rx="6" fill="'+(i?CY:'#9fb3cc')+'"/><text x="'+(x+bw/2)+'" y="'+(H-b-h-6)+'" text-anchor="middle" font-size="12" font-weight="800" fill="'+NAVY+'">'+a.toFixed(2).replace('.',',')+'</text><text x="'+(x+bw/2)+'" y="'+(H-b+16)+'" text-anchor="middle" font-size="12" fill="#5a6b85">'+i+'</text>';if(i)s+='<text x="'+(x+bw/2)+'" y="'+(H-b-16)+'" text-anchor="middle" font-size="11" font-weight="800" fill="'+NAVY+'">+0,24</text>';});
+  return s+'<line x1="'+l+'" x2="'+(W-6)+'" y1="'+(H-b)+'" y2="'+(H-b)+'" stroke="'+NAVY+'" stroke-width="2"/><text x="'+(W/2)+'" y="'+(H-6)+'" text-anchor="middle" font-size="12" fill="#5a6b85">Tahun ke-</text><text x="'+(l+4)+'" y="16" font-size="12" fill="#5a6b85">Saldo (juta rupiah)</text></svg>';
+}
+function stairFig(){
+  let s='<svg class="fig" viewBox="0 0 440 190" role="img" aria-label="Tumpukan batu bata">';const rows=11;
+  for(let r=0;r<rows;r++){const k=30-2*r,w=k*10,x=(440-w)/2,y=170-r*14;s+='<rect x="'+x+'" y="'+y+'" width="'+w+'" height="12" rx="2" fill="'+(r%2?CY:'#7fe8ea')+'" stroke="'+NAVY+'" stroke-width=".8"/>';if(r===0||r===rows-1||r===5)s+='<text x="'+(x+w+8)+'" y="'+(y+10)+'" font-size="12" font-weight="700" fill="'+NAVY+'">'+k+' buah</text>';}
+  return s+'</svg>';
+}
+function flowFig(){
+  const st=[['1 BACA','nilai awal, perubahan, periode',NAVY],['2 KENALI','yang tetap: selisih atau perbandingan?',CYD],['3 MODELKAN','pilih U<sub>n</sub> atau S<sub>n</sub> dan rumusnya',OR],['4 HITUNG','substitusi, hitung rapi','#6c5b7b'],['5 CEK','masuk akal? naik / turun benar?','#5a6b85']];
+  return '<div class="flow">'+st.map(a=>'<div style="background:'+a[2]+'"><b>'+a[0]+'</b>'+a[1]+'</div>').join('')+'</div>';
+}
+/* ===== PEMBAHASAN: CARA CEPAT + CARA LENGKAP ===== */
+function sol(quick,steps){
+  const L=steps.map(s=>'<li><b>'+s[0]+'</b><div class="b">'+s[1]+'</div></li>').join('');
+  return '<div class="sol"><div class="tabs"><button class="tab" data-t="cepat">⚡ Cara Cepat</button><button class="tab active" data-t="lengkap">📝 Cara Lengkap</button></div>'
+   +'<div class="pane cepat" hidden><div class="lbl">⚡ Jalan pintas (setelah paham caranya):</div>'+quick+'</div>'
+   +'<div class="pane lengkap"><div class="lbl">📝 Ikuti langkahnya satu per satu:</div><ol class="steps">'+L+'</ol></div></div>';
+}
+/* ===== GAMBAR KHUSUS GEOMETRI ===== */
+function niceStep(raw){const p=Math.pow(10,Math.floor(Math.log10(raw))),f=raw/p;return (f<=1?1:f<=2?2:f<=5?5:10)*p;}
+function multiChart(series,xs,o){
+  o=o||{};const W=440,H=260,l=58,r=16,t=46,b=42,lo=o.min||0,mx=Math.max.apply(null,series.reduce((a,s)=>a.concat(s.ys),[])),stp=niceStep((mx-lo)/5),hi=Math.ceil(mx/stp)*stp,fmt=o.fmt||(v=>String(v).replace('.',','));
+  const X=i=>l+i*(W-l-r)/(xs.length-1),Y=v=>H-b-(v-lo)*(H-b-t)/(hi-lo);
+  let s='<svg class="fig" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+(o.label||'Grafik')+'"><rect width="'+W+'" height="'+H+'" fill="#fff"/>';
+  for(let v=lo;v<=hi+1e-9;v+=stp){s+='<line x1="'+l+'" x2="'+(W-r)+'" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="#e1eaf3"/><text x="'+(l-6)+'" y="'+(Y(v)+4)+'" text-anchor="end" font-size="11" fill="#5a6b85">'+fmt(Math.round(v*100)/100)+'</text>';}
+  xs.forEach((x,i)=>{s+='<text x="'+X(i)+'" y="'+(H-b+16)+'" text-anchor="middle" font-size="11" fill="#5a6b85">'+x+'</text>';});
+  series.forEach(se=>{s+='<polyline points="'+se.ys.map((v,i)=>X(i)+','+Y(v)).join(' ')+'" fill="none" stroke="'+se.c+'" stroke-width="3"/>';se.ys.forEach((v,i)=>{s+='<circle cx="'+X(i)+'" cy="'+Y(v)+'" r="3.8" fill="'+se.c+'" stroke="#fff" stroke-width="1.5"/>';});});
+  let lx=l;series.forEach(se=>{s+='<rect x="'+lx+'" y="12" width="16" height="5" rx="2" fill="'+se.c+'"/><text x="'+(lx+22)+'" y="19" font-size="11.5" font-weight="700" fill="'+NAVY+'">'+se.l+'</text>';lx+=se.l.length*6.4+48;});
+  return '<figure class="figbox">'+s+'<text x="'+(W/2)+'" y="'+(H-6)+'" text-anchor="middle" font-size="11" fill="#5a6b85">'+(o.xl||'')+'</text></svg><figcaption>'+(o.cap||'')+'</figcaption></figure>';
+}
+function treeFig(){
+  const lv=[1,2,4,8];let s='<svg class="fig" viewBox="0 0 460 230" role="img" aria-label="Pembelahan sel">';
+  const pos=k=>k===1?[0]:Array.from({length:k},(_,j)=>-170+(j+.5)*340/k);
+  lv.forEach((k,l)=>{const y=28+l*54,ps=pos(k);
+    if(l>0)ps.forEach((x,j)=>{s+='<line x1="'+(260+pos(lv[l-1])[j>>1])+'" y1="'+(y-54+14)+'" x2="'+(260+x)+'" y2="'+(y-14)+'" stroke="#9fb3cc" stroke-width="1.5"/>';});
+    ps.forEach(x=>{s+='<circle cx="'+(260+x)+'" cy="'+y+'" r="14" fill="'+CY+'" stroke="'+NAVY+'" stroke-width="2" opacity="'+(0.45+l*0.18)+'"/>';});
+    s+='<text x="8" y="'+(y+5)+'" font-size="13" font-weight="800" fill="'+NAVY+'">Jam '+l+': '+k+' sel</text>';});
+  return '<figure class="figbox">'+s+'</svg><figcaption>Gambar 1. Sel membelah: 1, 2, 4, 8, … Setiap jam jumlahnya dikali 2, sehingga rasio r = 2.</figcaption></figure>';
+}
+function bounceFig(){
+  const g=170,sc=8;let s='<svg class="fig" viewBox="0 0 460 190" role="img" aria-label="Bola memantul">';
+  s+='<line x1="30" y1="'+(g-16*sc)+'" x2="30" y2="'+g+'" stroke="'+CYD+'" stroke-width="3"/><text x="20" y="'+(g-8*sc)+'" text-anchor="end" font-size="12" font-weight="700" fill="'+NAVY+'">16 m</text>';
+  let x=30;[8,4,2].forEach((h,i)=>{const w=70-i*14;s+='<path d="M'+x+','+g+' Q'+(x+w/2)+','+(g-2*h*sc)+' '+(x+w)+','+g+'" fill="none" stroke="'+CYD+'" stroke-width="3"/><text x="'+(x+w/2)+'" y="'+(g-h*sc-6)+'" text-anchor="middle" font-size="12" font-weight="700" fill="'+NAVY+'">'+h+' m</text><circle cx="'+x+'" cy="'+g+'" r="5" fill="'+OR+'"/>';x+=w;});
+  s+='<circle cx="'+x+'" cy="'+g+'" r="5" fill="'+OR+'"/><line x1="20" y1="'+g+'" x2="440" y2="'+g+'" stroke="'+NAVY+'" stroke-width="2"/><text x="240" y="186" text-anchor="middle" font-size="11" fill="'+OR+'">● titik menyentuh lantai · tinggi pantulan = ½ tinggi sebelumnya</text></svg>';
+  return '<figure class="figbox">'+s+'<figcaption>Gambar 7. Lintasan bola yang dijatuhkan dari 16 m.</figcaption></figure>';
+}
+function halfFig(){
+  const d=[0,3,6,9,12],m=[80,40,20,10,5];let s='<svg class="fig" viewBox="0 0 440 220" role="img" aria-label="Waktu paruh">';
+  d.forEach((dd,i)=>{const x=50+i*76,h=m[i]*1.9;s+='<rect x="'+x+'" y="'+(180-h)+'" width="46" height="'+h+'" rx="6" fill="'+CY+'"/><text x="'+(x+23)+'" y="'+(172-h)+'" text-anchor="middle" font-size="13" font-weight="800" fill="'+NAVY+'">'+m[i]+' g</text><text x="'+(x+23)+'" y="198" text-anchor="middle" font-size="12" fill="#5a6b85">hari '+dd+'</text>';if(i<4)s+='<text x="'+(x+61)+'" y="'+(172-m[i+1]*1.9-26)+'" text-anchor="middle" font-size="14" font-weight="800" fill="'+OR+'">×½</text>';});
+  return '<figure class="figbox">'+s+'<line x1="30" y1="180" x2="430" y2="180" stroke="'+NAVY+'" stroke-width="2"/></svg><figcaption>Gambar 5. Waktu paruh 3 hari: massa dibagi 2 setiap 3 hari (80 → 40 → 20 → 10 → 5 gram).</figcaption></figure>';
+}
+/* ===== CONTOH & LATIHAN ISIAN (isi dulu, baru dijelaskan) ===== */
+const EX={};
+function E(id,q,f,hint,quick,steps){EX[id]={k:id[0],q:q,f:f,hint:hint,quick:quick,steps:steps};}
+/* -- Cek Dasar -- */
+E('a1','$2^{5} = $ ….',[['Hasil =',32,'32']],'Kalikan 2 sebanyak 5 kali.','Hafalkan: $2, 4, 8, 16, 32$ → $2^{5} = 32$',[['Arti pangkat','$2^{5}$ artinya 2 dikalikan 5 kali: $2 × 2 × 2 × 2 × 2$'],['Kalikan bertahap','$2 × 2 = 4$, lalu $4 × 2 = 8$, lalu $8 × 2 = 16$, lalu $16 × 2 = 32$']]);
+E('a2','Hitung $3 × 2^{4}$.',[['Hasil =',48,'48']],'Pangkat dikerjakan <b>lebih dulu</b> daripada perkalian.','$2^{4} = 16$, lalu $3 × 16 = 48$',[['Kerjakan pangkat dulu','$2^{4} = 2 × 2 × 2 × 2 = 16$'],['Baru kalikan','$3 × 16 = 48$'],['Waspada','Bukan $(3 × 2)^{4}$. Yang dipangkatkan hanya angka 2.']]);
+E('a3','Hitung $(0,5)^{3}$.',[['Hasil =',0.125,'0,125']],'$0,5 × 0,5 = 0,25$. Lalu kalikan 0,5 lagi.','$0,5 × 0,5 × 0,5 = 0,125$',[['Tulis perkalian','$(0,5)^{3} = 0,5 × 0,5 × 0,5$'],['Dua yang pertama','$0,5 × 0,5 = 0,25$'],['Kalikan lagi','$0,25 × 0,5 = 0,125$']]);
+E('a4','Tentukan faktor pengali untuk "naik 5% per periode" dan "turun 30% per periode".',[['Naik 5% →',1.05,'1,05'],['Turun 30% →',0.7,'0,7']],'Naik: $1 + p$. Turun: $1 − p$. Ubah persen ke desimal dulu.','Naik 5%: $1 + 0,05 = 1,05$. Turun 30%: $1 − 0,30 = 0,70$.',[['Ubah persen ke desimal','$5% = 0,05$ dan $30% = 0,30$'],['Naik 5%','Faktor $= 1 + 0,05 = 1,05$'],['Turun 30%','Faktor $= 1 − 0,30 = 0,70$ (tersisa 70%)']]);
+E('a5','Hitung $1,1 × 1,1 × 1,1$.',[['Hasil =',1.331,'1,331']],'Kalikan seperti bilangan bulat ($11 × 11$), lalu hitung angka di belakang koma.','$1,1^{2} = 1,21$ lalu $1,21 × 1,1 = 1,331$',[['Dua yang pertama','$11 × 11 = 121$. Ada 2 angka di belakang koma → $1,21$'],['Kalikan 1,1 lagi','$121 × 11 = 1.331$. Ada 3 angka di belakang koma → $1,331$']]);
+E('a6','Jika $r^{3} = 27$ dan $r$ positif, tentukan $r$.',[['$r$ =',3,'3']],'Cari bilangan yang dipangkatkan 3 hasilnya 27.','$3 × 3 × 3 = 27$ → $r = 3$',[['Coba bilangan kecil','$2^{3} = 8$ (kurang), $3^{3} = 27$ (pas!)'],['Jawaban','$r = 3$']]);
+/* -- Barisan geometri -- */
+E('c0','Tentukan rasio barisan $2, 6, 18, 54, …$',[['$r$ =',3,'3']],'Rasio = suku kedua dibagi suku pertama.','$r = ⟨6|2⟩ = 3$',[['Ambil dua suku berurutan','$U_{1} = 2$ dan $U_{2} = 6$'],['Bagi: suku kedua ÷ suku pertama','$r = 6 ÷ 2 = 3$'],['Cek pasangan lain','$18 ÷ 6 = 3$ dan $54 ÷ 18 = 3$ ✔ selalu sama']]);
+E('d0','Tentukan rasio barisan $80, 40, 20, 10, …$',[['$r$ =',0.5,'0,5 (atau ½)']],'$r = 40 ÷ 80$. Hasilnya pecahan kurang dari 1.','$r = ⟨40|80⟩ = ⟨1|2⟩ = 0,5$ (barisan turun)',[['Bagi suku kedua dengan suku pertama','$r = 40 ÷ 80 = 0,5$'],['Cek','$20 ÷ 40 = 0,5$ ✔'],['Arti','$0 &lt; r &lt; 1$ → barisan makin kecil']]);
+E('d0b','Tentukan rasio barisan $5, −10, 20, −40, …$',[['$r$ =',-2,'−2']],'Tanda suku bergantian + dan −, jadi rasionya negatif.','$r = ⟨−10|5⟩ = −2$',[['Bagi suku kedua dengan suku pertama','$r = −10 ÷ 5 = −2$'],['Cek','$20 ÷ (−10) = −2$ dan $−40 ÷ 20 = −2$ ✔']]);
+E('c1','Diketahui barisan $3, 6, 12, 24, …$ Tentukan $U_{8}$.',[['$U_{8}$ =',384,'384']],'Cari $a$ dan $r$, lalu pakai $U_{n} = a·r^{n−1}$.','$U_{8} = 3 × 2^{7} = 3 × 128 = 384$',[['Tulis suku pertama','$a = 3$'],['Cari rasio','$r = 6 ÷ 3 = 2$'],['Tulis rumus','$U_{n} = a·r^{n−1}$'],['Masukkan angka ($n = 8$)','$U_{8} = 3 · 2^{8−1} = 3 · 2^{7}$'],['Hitung pangkat','$2^{7} = 128$'],['Kalikan','$U_{8} = 3 × 128 = 384$']]);
+E('d1','Diketahui barisan $4, 12, 36, 108, …$ Tentukan $U_{5}$.',[['$U_{5}$ =',324,'324']],'$r = 12 ÷ 4$. Pangkatnya $5 − 1 = 4$.','Dari 108 tinggal dikali 3 sekali lagi: $108 × 3 = 324$',[['Tentukan $a$ dan $r$','$a = 4$, $r = 12 ÷ 4 = 3$'],['Masukkan ke rumus','$U_{5} = 4 · 3^{5−1} = 4 · 3^{4}$'],['Hitung','$3^{4} = 81$, lalu $4 × 81 = 324$']]);
+E('d2','Diketahui barisan $5, −10, 20, −40, …$ Tentukan $U_{5}$.',[['$U_{5}$ =',80,'80']],'$r = −2$. Ingat $(−2)^{4} = +16$ (pangkat genap → positif).','Tanda bergantian: suku ke-5 positif. $U_{5} = −40 × (−2) = 80$',[['Tentukan $a$ dan $r$','$a = 5$, $r = −10 ÷ 5 = −2$'],['Masukkan ke rumus','$U_{5} = 5 · (−2)^{5−1} = 5 · (−2)^{4}$'],['Hitung pangkat','$(−2)^{4} = (−2)(−2)(−2)(−2) = 16$'],['Kalikan','$5 × 16 = 80$']]);
+E('d2b','Diketahui barisan $64, 32, 16, 8, …$ Tentukan $U_{7}$.',[['$U_{7}$ =',1,'1']],'Dibagi 2 setiap suku, jadi $r = ⟨1|2⟩$.','Bagi 2 enam kali: 64 → 32 → 16 → 8 → 4 → 2 → 1',[['Tentukan $a$ dan $r$','$a = 64$, $r = ⟨1|2⟩$'],['Masukkan ke rumus','$U_{7} = 64 · (⟨1|2⟩)^{6}$'],['Hitung pangkat','$(⟨1|2⟩)^{6} = ⟨1|64⟩$'],['Kalikan','$64 × ⟨1|64⟩ = 1$']]);
+E('c1b','Berapa banyak suku pada barisan geometri $3, 6, 12, …, 768$?',[['$n$ =',9,'9']],'Bagi 768 dengan 3, lalu tulis hasilnya sebagai $2^{…}$.','$768 ÷ 3 = 256 = 2^{8}$ → $n − 1 = 8$ → $n = 9$',[['Tulis yang diketahui','$a = 3$, $r = 2$, $U_{n} = 768$'],['Masukkan ke rumus','$3 · 2^{n−1} = 768$'],['Bagi kedua ruas dengan 3','$2^{n−1} = 256$'],['Tulis 256 sebagai pangkat 2','$256 = 2^{8}$ (2, 4, 8, 16, 32, 64, 128, 256)'],['Samakan pangkat','$n − 1 = 8$ → $n = 9$']]);
+E('c3','Diketahui $U_{2} = 10$ dan $U_{5} = 80$. Tentukan $a$ dan $r$ (rasio positif).',[['$a$ =',5,'5'],['$r$ =',2,'2']],'Bagi $U_{5}$ dengan $U_{2}$. Jarak suku: $5 − 2 = 3$ langkah.','$r^{3} = ⟨80|10⟩ = 8$ → $r = 2$. Lalu $a = ⟨10|2⟩ = 5$.',[['Hitung banyak langkah','Dari suku ke-2 ke suku ke-5: $5 − 2 = 3$ langkah (dikali $r$ tiga kali)'],['Bagi kedua suku','$$r^{3} = ⟨U_{5}|U_{2}⟩ = ⟨80|10⟩ = 8$$'],['Cari $r$','$2^{3} = 8$ sehingga $r = 2$'],['Cari $a$ dari $U_{2} = a·r$','$10 = a · 2$ → $a = 5$'],['Cek','5, 10, 20, 40, 80 → suku ke-5 = 80 ✔']]);
+E('d3','Diketahui $U_{3} = 18$ dan $U_{5} = 162$. Tentukan $a$ dan $r$ (rasio positif).',[['$a$ =',2,'2'],['$r$ =',3,'3']],'Jarak $5 − 3 = 2$ langkah, jadi $r^{2} = 162 ÷ 18$.','$r^{2} = 9$ → $r = 3$. $U_{3} = a·r^{2}$ → $18 = 9a$ → $a = 2$.',[['Bagi kedua suku','$r^{2} = ⟨162|18⟩ = 9$'],['Cari $r$','$r = 3$ (positif)'],['Cari $a$ dari $U_{3} = a·r^{2}$','$18 = a · 9$ → $a = 2$'],['Cek','2, 6, 18, 54, 162 ✔']]);
+E('d3b','Diketahui $U_{2} = 12$ dan $U_{4} = 48$. Tentukan $a$ dan $r$ (rasio positif).',[['$a$ =',6,'6'],['$r$ =',2,'2']],'Jarak $4 − 2 = 2$ langkah.','$r^{2} = 4$ → $r = 2$ ; $a = ⟨12|2⟩ = 6$',[['Bagi kedua suku','$r^{2} = ⟨48|12⟩ = 4$'],['Cari $r$','$r = 2$'],['Cari $a$ dari $U_{2} = a·r$','$12 = a · 2$ → $a = 6$'],['Cek','6, 12, 24, 48 ✔']]);
+E('c4','Agar $2$, $x$, $18$ membentuk barisan geometri (suku positif), tentukan $x$.',[['$x$ =',6,'6']],'Pakai sifat: (suku tengah)$^{2}$ = suku kiri × suku kanan.','$x^{2} = 2 × 18 = 36$ → $x = 6$',[['Ingat sifatnya','$(U_{2})^{2} = U_{1} · U_{3}$'],['Masukkan angka','$x^{2} = 2 × 18 = 36$'],['Cari $x$','$x = 6$ (karena $6 × 6 = 36$)'],['Cek','2, 6, 18 → rasio 3 ✔']]);
+E('d4','Agar $5$, $x$, $20$ membentuk barisan geometri (suku positif), tentukan $x$.',[['$x$ =',10,'10']],'$x^{2} = 5 × 20$.','$x^{2} = 100$ → $x = 10$',[['Pakai sifat suku tengah','$x^{2} = 5 × 20 = 100$'],['Cari $x$','$x = 10$'],['Cek','5, 10, 20 → rasio 2 ✔']]);
+E('c5','Tentukan jumlah 5 suku pertama dari $2 + 6 + 18 + 54 + 162$.',[['$S_{5}$ =',242,'242']],'$a = 2$, $r = 3$, $n = 5$. Karena $r &gt; 1$ pakai $⟨a(r^{n} − 1)|r − 1⟩$.','$S_{5} = ⟨2(243 − 1)|2⟩ = 242$',[['Tulis yang diketahui','$a = 2$, $r = 3$, $n = 5$'],['Pilih rumus ($r &gt; 1$)','$S_{n} = ⟨a(r^{n} − 1)|r − 1⟩$'],['Masukkan angka','$$S_{5} = ⟨2(3^{5} − 1)|3 − 1⟩$$'],['Hitung pangkat','$3^{5} = 243$'],['Hitung','$$S_{5} = ⟨2(243 − 1)|2⟩ = ⟨2 × 242|2⟩ = 242$$'],['Cek dengan menjumlahkan langsung','$2 + 6 + 18 + 54 + 162 = 242$ ✔']]);
+E('c5b','Hari pertama seseorang memberi tahu 2 orang. Hari berikutnya, setiap orang yang baru tahu memberi tahu 2 orang lain. Berapa orang yang sudah tahu setelah 4 hari (tidak termasuk penyebar awal)?',[['Banyak orang =',30,'30']],'Orang baru tiap hari: 2, 4, 8, 16. Jumlahkan 4 suku.','$2 + 4 + 8 + 16 = 30$',[['Tulis orang baru tiap hari','2, 4, 8, 16 → rasio 2 → geometri, $a = 2$, $r = 2$, $n = 4$'],['Soal bertanya total → $S_{n}$','$S_{4} = ⟨2(2^{4} − 1)|2 − 1⟩$'],['Hitung','$2^{4} = 16$ → $S_{4} = 2 × 15 = 30$'],['Cek','$2 + 4 + 8 + 16 = 30$ ✔']]);
+E('d5','Tentukan jumlah 5 suku pertama dari $3 + 6 + 12 + 24 + 48$.',[['$S_{5}$ =',93,'93']],'$a = 3$, $r = 2$, $n = 5$.','$S_{5} = 3 × (32 − 1) = 93$',[['Tulis yang diketahui','$a = 3$, $r = 2$, $n = 5$'],['Masukkan ke rumus','$S_{5} = ⟨3(2^{5} − 1)|2 − 1⟩$'],['Hitung','$2^{5} = 32$ → $S_{5} = 3 × 31 = 93$']]);
+E('d5b','Tentukan jumlah 4 suku pertama dari $81 + 27 + 9 + 3$ (rasio ⅓).',[['$S_{4}$ =',120,'120']],'Karena $0 &lt; r &lt; 1$, pakai $⟨a(1 − r^{n})|1 − r⟩$. Atau jumlahkan langsung.','Suku sedikit → jumlahkan langsung: $81 + 27 + 9 + 3 = 120$',[['Tulis yang diketahui','$a = 81$, $r = ⟨1|3⟩$, $n = 4$'],['Pilih rumus ($0 &lt; r &lt; 1$)','$S_{n} = ⟨a(1 − r^{n})|1 − r⟩$'],['Hitung $r^{n}$','$(⟨1|3⟩)^{4} = ⟨1|81⟩$ sehingga $1 − ⟨1|81⟩ = ⟨80|81⟩$'],['Hitung pembilang dan penyebut','$a(1 − r^{n}) = 81 × ⟨80|81⟩ = 80$ dan $1 − r = ⟨2|3⟩$'],['Bagi','$S_{4} = 80 ÷ ⟨2|3⟩ = 80 × ⟨3|2⟩ = 120$']]);
+E('c6','Harga sebuah rumah Rp300 juta dan naik 10% setiap tahun. Berapa harganya setelah 2 tahun (dalam juta rupiah)?',[['Harga (juta) =',363,'363']],'Faktor pengali $= 1 + 0,10 = 1,10$. Dikali 2 kali.','$300 × 1,1 × 1,1 = 300 × 1,21 = 363$',[['Tulis yang diketahui','$N_{0} = 300$, $p = 10% = 0,10$, $t = 2$'],['Tulis rumus pertumbuhan','$N_{t} = N_{0}(1 + p)^{t}$'],['Masukkan angka','$N_{2} = 300 (1,1)^{2}$'],['Hitung pangkat','$(1,1)^{2} = 1,21$'],['Kalikan','$300 × 1,21 = 363$ juta']]);
+E('c6b','Jamur sebanyak 50 gram menjadi dua kali lipat setiap hari. Berapa gram jamur setelah 5 hari?',[['Massa (gram) =',1600,'1.600']],'Dua kali lipat berarti faktor pengali 2. Dikali 5 kali.','$50 × 2^{5} = 50 × 32 = 1.600$',[['Tulis yang diketahui','$N_{0} = 50$, faktor $= 2$, $t = 5$'],['Masukkan ke rumus','$N_{5} = 50 × 2^{5}$'],['Hitung','$2^{5} = 32$ → $50 × 32 = 1.600$ gram']]);
+E('d6','Penduduk sebuah desa 20.000 jiwa dan bertambah 10% per tahun. Berapa jumlah penduduk setelah 2 tahun?',[['Penduduk =',24200,'24.200']],'Faktor $1,10$; $(1,1)^{2} = 1,21$.','$20.000 × 1,21 = 24.200$',[['Tulis yang diketahui','$N_{0} = 20.000$, faktor $= 1,1$, $t = 2$'],['Masukkan ke rumus','$N_{2} = 20.000 (1,1)^{2}$'],['Hitung','$20.000 × 1,21 = 24.200$']]);
+E('d6b','Pelanggan sebuah toko 500 orang dan naik 20% setiap bulan. Berapa pelanggan setelah 3 bulan?',[['Pelanggan =',864,'864']],'Faktor $1,2$; $(1,2)^{3} = 1,728$.','$500 × 1,728 = 864$',[['Tulis yang diketahui','$N_{0} = 500$, faktor $= 1,2$, $t = 3$'],['Hitung pangkat','$1,2 × 1,2 = 1,44$ lalu $1,44 × 1,2 = 1,728$'],['Kalikan','$500 × 1,728 = 864$ orang']]);
+E('c7','Sebuah mesin bernilai Rp20.000.000 dan menyusut 10% per tahun. Berapa nilainya setelah 2 tahun?',[['Nilai (rupiah) =',16200000,'Rp16.200.000']],'Faktor $1 − 0,10 = 0,9$. Dikali 2 kali.','$20.000.000 × 0,9 × 0,9 = 20.000.000 × 0,81 = 16.200.000$',[['Tulis yang diketahui','$N_{0} = 20.000.000$, $p = 0,10$, $t = 2$'],['Tulis rumus peluruhan','$N_{t} = N_{0}(1 − p)^{t}$'],['Masukkan angka','$N_{2} = 20.000.000 (0,9)^{2}$'],['Hitung pangkat','$(0,9)^{2} = 0,81$'],['Kalikan','$20.000.000 × 0,81 = 16.200.000$']]);
+E('d7','Sebuah mobil bernilai Rp50.000.000 dan menyusut 20% per tahun. Berapa nilainya setelah 2 tahun?',[['Nilai (rupiah) =',32000000,'Rp32.000.000']],'Faktor $1 − 0,20 = 0,8$. $(0,8)^{2} = 0,64$.','$50.000.000 × 0,64 = 32.000.000$',[['Tentukan faktor','$1 − 0,20 = 0,8$'],['Masukkan ke rumus','$N_{2} = 50.000.000 (0,8)^{2}$'],['Hitung','$(0,8)^{2} = 0,64$ → $50.000.000 × 0,64 = 32.000.000$']]);
+E('c7b','Zat radioaktif 64 gram memiliki waktu paruh 5 hari. Berapa gram sisa zat setelah 20 hari?',[['Sisa (gram) =',4,'4']],'Hitung dulu ada berapa kali waktu paruh: $20 ÷ 5$.','20 hari = 4 waktu paruh: $64 → 32 → 16 → 8 → 4$',[['Hitung banyak waktu paruh','$20 ÷ 5 = 4$ kali'],['Bagi 2 sebanyak 4 kali','$64 → 32 → 16 → 8 → 4$'],['Atau pakai rumus','$64 × (⟨1|2⟩)^{4} = 64 × ⟨1|16⟩ = 4$ gram']]);
+E('d7b','Zat radioaktif 160 gram memiliki waktu paruh 2 hari. Berapa gram sisa zat setelah 6 hari?',[['Sisa (gram) =',20,'20']],'$6 ÷ 2 = 3$ kali waktu paruh.','$160 → 80 → 40 → 20$',[['Banyak waktu paruh','$6 ÷ 2 = 3$ kali'],['Bagi 2 sebanyak 3 kali','$160 → 80 → 40 → 20$']]);
+E('c8','Modal Rp4.000.000 disimpan dengan bunga majemuk 6% per tahun selama 3 tahun. Berapa jumlah akhirnya?',[['Jumlah akhir (rupiah) =',4764064,'Rp4.764.064']],'Pakai $A = M(1 + i)^{t}$. Faktor $1,06$ dipangkatkan 3.','$(1,06)^{3} = 1,191016$ → $4.000.000 × 1,191016 = 4.764.064$',[['Tulis yang diketahui','$M = 4.000.000$, $i = 0,06$, $t = 3$'],['Tulis rumus','$A = M(1 + i)^{t}$'],['Masukkan angka','$A = 4.000.000 (1,06)^{3}$'],['Hitung pangkat','$1,06 × 1,06 = 1,1236$ lalu $1,1236 × 1,06 = 1,191016$'],['Kalikan','$A = 4.000.000 × 1,191016 = 4.764.064$']]);
+E('c8b','Modal Rp6.000.000 berbunga 8% per tahun yang dimajemukkan setiap semester (6 bulan). Berapa jumlah akhir setelah 1 tahun?',[['Jumlah akhir (rupiah) =',6489600,'Rp6.489.600']],'Bunga per semester $= 8% ÷ 2 = 4%$. Dalam 1 tahun ada 2 semester.','$i = 4%$, $t = 2$ → $6.000.000 × (1,04)^{2} = 6.000.000 × 1,0816 = 6.489.600$',[['Sesuaikan bunga dan periode','$i = 8% ÷ 2 = 4% = 0,04$ dan $t = 1 × 2 = 2$ periode'],['Masukkan ke rumus','$A = 6.000.000 (1,04)^{2}$'],['Hitung pangkat','$1,04 × 1,04 = 1,0816$'],['Kalikan','$6.000.000 × 1,0816 = 6.489.600$']]);
+E('d8','Modal Rp2.000.000 berbunga majemuk 20% per tahun selama 2 tahun. Berapa jumlah akhirnya?',[['Jumlah akhir (rupiah) =',2880000,'Rp2.880.000']],'$(1,2)^{2} = 1,44$.','$2.000.000 × 1,44 = 2.880.000$',[['Masukkan ke rumus','$A = 2.000.000 (1,2)^{2}$'],['Hitung pangkat','$1,2 × 1,2 = 1,44$'],['Kalikan','$2.000.000 × 1,44 = 2.880.000$']]);
+E('d8b','Modal Rp1.000.000 berbunga 10% per tahun yang dimajemukkan setiap semester. Berapa jumlah akhir setelah 1 tahun?',[['Jumlah akhir (rupiah) =',1102500,'Rp1.102.500']],'$i = 10% ÷ 2 = 5%$ dan $t = 2$.','$1.000.000 × (1,05)^{2} = 1.000.000 × 1,1025 = 1.102.500$',[['Sesuaikan','$i = 5% = 0,05$, $t = 2$ periode'],['Hitung pangkat','$(1,05)^{2} = 1,1025$'],['Kalikan','$1.000.000 × 1,1025 = 1.102.500$']]);
+E('c9','Bonus A: tahun ke-1 Rp1.000.000 dan naik Rp200.000 tiap tahun. Bonus B: tahun ke-1 Rp800.000 dan naik 25% tiap tahun. Mulai tahun ke berapa bonus B lebih besar dari bonus A?',[['Tahun ke- =',5,'5']],'Buat tabel tahun demi tahun sampai urutannya berbalik.','Tabel: tahun ke-4 B = 1,5625 jt masih di bawah A = 1,6 jt. Tahun ke-5 B = 1,953 jt &gt; A = 1,8 jt.',[['Tulis rumus kedua bonus (juta rupiah)','A: $1,0 + 0,2(n − 1)$ (aritmatika)<br>B: $0,8 × (1,25)^{n−1}$ (geometri)'],['Buat tabel','<div class="tw"><table class="t c"><tr><th>Tahun</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr><tr><td>A</td><td>1,0</td><td>1,2</td><td>1,4</td><td>1,6</td><td>1,8</td></tr><tr><td>B</td><td>0,8</td><td>1,0</td><td>1,25</td><td>1,5625</td><td>1,953125</td></tr></table></div>'],['Bandingkan','Tahun ke-4: B (1,5625) masih lebih kecil dari A (1,6). Tahun ke-5: B (1,953) &gt; A (1,8).'],['Jawaban','Tahun ke-5']]);
+E('d9','Tabungan A: tahun ke-1 Rp1.000.000 dan naik Rp200.000 tiap tahun. Tabungan B: tahun ke-1 Rp1.000.000 dan naik 20% tiap tahun. Mulai tahun ke berapa B lebih besar dari A?',[['Tahun ke- =',3,'3']],'Hitung tahun ke-1, 2, 3 untuk keduanya.','A: 1,0 ; 1,2 ; 1,4. B: 1,0 ; 1,2 ; 1,44. Tahun ke-3 B lebih besar.',[['Hitung tahun demi tahun (juta rupiah)','A: 1,0 → 1,2 → 1,4<br>B: 1,0 → $1,0 × 1,2 = 1,2$ → $1,2 × 1,2 = 1,44$'],['Bandingkan','Tahun ke-1 dan ke-2 sama. Tahun ke-3: B = 1,44 &gt; A = 1,4'],['Jawaban','Tahun ke-3']]);
+E('c10','Bola dijatuhkan dari ketinggian 20 m. Setiap memantul, tingginya setengah dari tinggi sebelumnya. Berapa panjang lintasan bola sampai menyentuh lantai untuk ketiga kalinya?',[['Panjang (meter) =',50,'50']],'Lintasan: jatuh 20 m, lalu (naik + turun) setinggi 10 m, lalu (naik + turun) setinggi 5 m.','$20 + 2(10 + 5) = 20 + 30 = 50$',[['Gambarkan lintasan','Jatuh 20 m (sentuh lantai ke-1).<br>Naik 10 m, turun 10 m (sentuh ke-2).<br>Naik 5 m, turun 5 m (sentuh ke-3).'],['Tulis jumlahnya','$20 + 2(10) + 2(5)$'],['Hitung','$20 + 20 + 10 = 50$ meter']]);
+E('d10','Bola dijatuhkan dari ketinggian 8 m. Setiap memantul, tingginya setengah dari tinggi sebelumnya. Berapa panjang lintasan sampai menyentuh lantai untuk kedua kalinya?',[['Panjang (meter) =',16,'16']],'Jatuh 8 m, lalu naik 4 m dan turun 4 m.','$8 + 2(4) = 16$',[['Gambarkan lintasan','Jatuh 8 m (sentuh ke-1), naik 4 m, turun 4 m (sentuh ke-2)'],['Jumlahkan','$8 + 4 + 4 = 16$ meter']]);
+const KIND={a:'🧱 Cek Dasar',c:'✏️ Contoh',d:'🎯 Coba Sendiri'},CNT={a:0,c:0,d:0};
+function ex(id){
+  const e=EX[id];CNT[e.k]++;
+  const inputs=e.f.map((f,i)=>'<label><span>'+f[0]+'</span><input type="text" autocomplete="off" inputmode="text" data-f="'+i+'" placeholder="isi jawabanmu"></label>').join('');
+  return '<div class="exbox '+e.k+'" data-ex="'+id+'"><div class="eh">'+KIND[e.k]+' '+CNT[e.k]+' — isi dulu, baru lihat caranya</div><div class="qq">'+e.q+'</div><div class="fill">'+inputs+'<div class="fbtns"><button class="btn chkfill">Periksa jawaban</button><button class="btn ghost skip">Lihat pembahasan</button></div></div><div class="fbx" hidden></div></div>';
+}
+function num(s){s=String(s).toLowerCase().replace(/rp|\s|%|tahun|bulan|unit|orang|kursi|baris|suku|gram|batang|buah/g,'').replace(/−/g,'-');if(!s)return NaN;
+  if(s.indexOf('.')>-1&&s.indexOf(',')>-1)s=s.replace(/\./g,'').replace(',','.');else if(/^-?\d{1,3}(\.\d{3})+$/.test(s))s=s.replace(/\./g,'');else s=s.replace(',','.');return parseFloat(s);}
+/* ===== 18 SOAL PREDIKSI TKA ===== */
+const Q=[
+{n:1,lv:1,pr:'Menghitung',type:'pg',stem:'<p>Diketahui barisan geometri $2, 6, 18, 54, …$ Suku ke-6 barisan tersebut adalah ….</p>',opts:['162','324','486','972','1.458'],ans:2,
+ quick:'$U_{6} = 2 × 3^{5} = 2 × 243 = 486$ (dari 54: ×3 = 162, ×3 = 486)',
+ steps:[['Tulis yang diketahui','$a = 2$, $r = 6 ÷ 2 = 3$, $n = 6$'],['Tulis rumus','$U_{n} = a·r^{n−1}$'],['Masukkan angka','$U_{6} = 2 · 3^{6−1} = 2 · 3^{5}$'],['Hitung pangkat','$3^{5} = 243$'],['Kalikan','$U_{6} = 2 × 243 = 486$'],['Waspada jebakan','162 adalah $U_{5}$; 1.458 berasal dari pangkat 6 (salah).']]},
+{n:2,lv:1,pr:'Memahami informasi',type:'pg',stem:'<p>Tabel berikut menunjukkan jumlah bakteri dalam sebuah percobaan.</p><div class="tw"><table class="t c"><tr><th>Jam ke-</th><th>0</th><th>1</th><th>2</th><th>3</th></tr><tr><td>Jumlah bakteri</td><td>100</td><td>200</td><td>400</td><td>800</td></tr></table></div><p>Jika pola terus berlanjut, jumlah bakteri pada jam ke-6 adalah ….</p>',opts:['1.200','3.200','6.400','12.800','25.600'],ans:2,
+ quick:'Dua kali lipat tiap jam, 6 jam → $100 × 2^{6} = 100 × 64 = 6.400$',
+ steps:[['Baca tabel, cari perbandingan','$200 ÷ 100 = 2$, $400 ÷ 200 = 2$ → geometri, $r = 2$'],['Perhatikan jam ke-0','Jam ke-0 adalah nilai awal: $N_{0} = 100$'],['Dikali 2 sebanyak 6 kali','$N_{6} = 100 × 2^{6}$'],['Hitung','$2^{6} = 64$ → $100 × 64 = 6.400$']]},
+{n:3,lv:1,pr:'Mengidentifikasi',type:'pg',stem:'<p>Harga sebuah mobil turun 8% setiap tahun. Faktor pengali yang tepat untuk menghitung nilai mobil setelah satu tahun adalah ….</p>',opts:['0,08','0,92','1,08','1,92','8'],ans:1,
+ quick:'Turun 8% → tersisa 92% → faktor $0,92$.',
+ steps:[['Ingat aturan','Turun $p$ → faktor $1 − p$'],['Ubah persen','$8% = 0,08$'],['Hitung','$1 − 0,08 = 0,92$'],['Arti','Setelah 1 tahun, nilai mobil tersisa 92% dari sebelumnya.']]},
+{n:4,lv:1,pr:'Mengelompokkan (pilih semua yang benar)',type:'multi',stem:'<p>Pilih <b>semua</b> barisan yang merupakan barisan geometri.</p>',opts:['$3, 6, 12, 24, …$','$64, 32, 16, 8, …$','$1, 4, 9, 16, …$','$5, −10, 20, −40, …$','$2, 4, 6, 8, …$'],ans:[0,1,3],
+ quick:'Cek hasil bagi suku berurutan. (1) ×2, (2) ×½, (4) ×(−2) → tetap. (3) bilangan kuadrat, (5) selisih tetap (aritmatika).',
+ steps:[['Aturan','Barisan geometri = <b>hasil bagi</b> suku berurutan selalu sama.'],['(1) 3, 6, 12, 24','$6 ÷ 3 = 2$, $12 ÷ 6 = 2$ ✔'],['(2) 64, 32, 16, 8','Rasio $⟨1|2⟩$ ✔'],['(3) 1, 4, 9, 16','$4 ÷ 1 = 4$, $9 ÷ 4 = 2,25$ → tidak tetap ✗'],['(4) 5, −10, 20, −40','Rasio $−2$ tetap ✔'],['(5) 2, 4, 6, 8','Selisih tetap 2 → aritmatika ✗'],['Jawaban','(1), (2), dan (4)']]},
+{n:5,lv:1,pr:'Menghitung',type:'pg',stem:'<p>Jumlah 6 suku pertama deret $1 + 2 + 4 + 8 + …$ adalah ….</p>',opts:['32','63','64','126','127'],ans:1,
+ quick:'Jumlahkan langsung: $1 + 2 + 4 + 8 + 16 + 32 = 63$.',
+ steps:[['Tulis yang diketahui','$a = 1$, $r = 2$, $n = 6$'],['Pilih rumus ($r &gt; 1$)','$S_{n} = ⟨a(r^{n} − 1)|r − 1⟩$'],['Masukkan angka','$S_{6} = ⟨1(2^{6} − 1)|2 − 1⟩$'],['Hitung','$2^{6} = 64$ → $S_{6} = ⟨63|1⟩ = 63$'],['Cek','$1 + 2 + 4 + 8 + 16 + 32 = 63$ ✔']]},
+{n:6,lv:2,pr:'Memodelkan',type:'pg',stem:'<p>Harga sebidang tanah saat ini Rp200 juta dan naik 5% setiap tahun. Model matematika harga tanah (dalam juta rupiah) setelah $t$ tahun adalah ….</p>',opts:['$200 + 0,05t$','$200 · (0,05)^{t}$','$200 · (1,05)^{t}$','$200 · (1,05t)$','$200 · (1 − 0,05)^{t}$'],ans:2,
+ quick:'Naik 5% per tahun → dikali 1,05 tiap tahun → $200 · (1,05)^{t}$.',
+ steps:[['Kenali jenis pola','Kenaikan berupa <b>persen</b> → geometri (dikali tetap).'],['Tentukan faktor pengali','$1 + 0,05 = 1,05$'],['Susun model','$N_{t} = N_{0}(1 + p)^{t} = 200 · (1,05)^{t}$'],['Periksa pilihan lain','A dan D menambah tetap (aritmatika). B memakai 0,05 sebagai faktor. E memakai $1 − 0,05$ (itu untuk turun).']]},
+{n:7,lv:2,pr:'Menerapkan',type:'pg',stem:'<p>Sebuah mesin bernilai Rp80.000.000 dan menyusut 10% per tahun dari nilai tahun sebelumnya. Nilai mesin setelah 3 tahun adalah ….</p>',opts:['Rp54.000.000','Rp56.000.000','Rp58.320.000','Rp64.800.000','Rp72.000.000'],ans:2,
+ quick:'$80 × 0,9 × 0,9 × 0,9 = 80 × 0,729 = 58,32$ juta.',
+ steps:[['Tentukan faktor','$1 − 0,10 = 0,9$, $t = 3$'],['Masukkan ke rumus','$N_{3} = 80.000.000 · (0,9)^{3}$'],['Hitung pangkat','$0,9 × 0,9 = 0,81$, lalu $0,81 × 0,9 = 0,729$'],['Kalikan','$80.000.000 × 0,729 = 58.320.000$'],['Waspada jebakan','56.000.000 memakai potongan tetap 8 juta per tahun; 64.800.000 adalah nilai setelah 2 tahun.']]},
+{n:8,lv:2,pr:'Menerapkan',type:'pg',stem:'<p>Modal Rp10.000.000 disimpan selama 2 tahun dengan bunga 10% per tahun. Selisih jumlah akhir jika memakai bunga majemuk dan bunga tunggal adalah ….</p>',opts:['Rp50.000','Rp100.000','Rp200.000','Rp1.000.000','Rp2.100.000'],ans:1,
+ quick:'Tahun ke-2, bunga majemuk lebih besar karena ada "bunga atas bunga": $10% × 1.000.000 = 100.000$.',
+ steps:[['Hitung dengan bunga majemuk','$A = 10.000.000 (1,1)^{2} = 10.000.000 × 1,21 = 12.100.000$'],['Hitung dengan bunga tunggal','$A = 10.000.000(1 + 0,1 × 2) = 12.000.000$'],['Cari selisih','$12.100.000 − 12.000.000 = 100.000$']]},
+{n:9,lv:2,pr:'Menginterpretasikan',type:'pg',stem:'<p>Jumlah pengikut sebuah akun dimodelkan dengan $N(t) = 1.000 · (1,25)^{t}$, dengan $t$ dalam bulan. Pernyataan yang tepat tentang model tersebut adalah ….</p>',opts:['Pengikut awal 1.000 dan bertambah 1,25 orang setiap bulan.','Pengikut awal 1.000 dan bertambah 25% setiap bulan.','Pengikut awal 1.250 dan bertambah 1.000 orang setiap bulan.','Pengikut awal 1.000 dan bertambah 125% setiap bulan.','Pengikut awal 1.000 dan berkurang 25% setiap bulan.'],ans:1,
+ quick:'Bentuk $N_{0}(1 + p)^{t}$: $N_{0} = 1.000$ dan $1 + p = 1,25$ → $p = 25%$ naik.',
+ steps:[['Cocokkan dengan bentuk umum','$N_{t} = N_{0}(1 + p)^{t}$'],['Nilai awal','$N_{0} = 1.000$ (nilai saat $t = 0$)'],['Faktor pengali','$1 + p = 1,25$ → $p = 0,25 = 25%$'],['Arti','Pengikut <b>bertambah 25%</b> setiap bulan (bukan bertambah 1,25 orang).']]},
+{n:10,lv:2,pr:'Menerapkan',type:'pg',stem:'<p>Rp8.000.000 disimpan dengan bunga majemuk 12% per tahun yang dihitung setiap semester. Jumlah tabungan setelah 1 tahun adalah ….</p>',opts:['Rp8.960.000','Rp8.988.800','Rp9.000.000','Rp9.600.000','Rp10.035.200'],ans:1,
+ quick:'Per semester 6%, ada 2 semester: $8.000.000 × (1,06)^{2} = 8.000.000 × 1,1236 = 8.988.800$.',
+ steps:[['Sesuaikan bunga dan periode','$i = 12% ÷ 2 = 6%$ per semester; $t = 1 × 2 = 2$ periode'],['Masukkan ke rumus','$A = 8.000.000 (1,06)^{2}$'],['Hitung pangkat','$1,06 × 1,06 = 1,1236$'],['Kalikan','$8.000.000 × 1,1236 = 8.988.800$'],['Waspada jebakan','8.960.000 memakai majemuk tahunan (1,12); 10.035.200 memakai 12% dua kali.']]},
+{n:11,lv:2,pr:'Menerapkan',type:'pg',stem:'<p>Seseorang menyebarkan kabar. Pada hari pertama ia memberi tahu 3 orang. Setiap hari berikutnya, setiap orang yang baru tahu memberi tahu 3 orang lain yang belum tahu. Banyak orang yang telah menerima kabar setelah 5 hari (tidak termasuk penyebar awal) adalah ….</p>',opts:['243','363','364','486','729'],ans:1,
+ quick:'Orang baru: 3, 9, 27, 81, 243 → jumlahkan: $3 + 9 + 27 + 81 + 243 = 363$.',
+ steps:[['Tulis orang baru tiap hari','3, 9, 27, 81, 243 → rasio 3 → geometri, $a = 3$, $r = 3$, $n = 5$'],['Soal bertanya total → $S_{n}$','$S_{5} = ⟨3(3^{5} − 1)|3 − 1⟩$'],['Hitung','$3^{5} = 243$ → $S_{5} = ⟨3 × 242|2⟩ = 363$'],['Waspada jebakan','364 menghitung penyebar awal; 243 hanya orang baru di hari ke-5.']]},
+{n:12,lv:2,pr:'Menerapkan',type:'pg',stem:'<p>Pada barisan geometri diketahui suku kedua 6 dan suku kelima 48. Suku kedelapan barisan tersebut adalah ….</p>',opts:['192','256','384','768','1.536'],ans:2,
+ quick:'$U_{2} → U_{5}$ dikali $r^{3} = 8$. $U_{5} → U_{8}$ juga dikali 8: $48 × 8 = 384$.',
+ steps:[['Cari $r$','Dari suku ke-2 ke ke-5: 3 langkah → $r^{3} = 48 ÷ 6 = 8$ → $r = 2$'],['Dari suku ke-5 ke suku ke-8','Juga 3 langkah, jadi dikali $r^{3} = 8$'],['Hitung','$U_{8} = 48 × 8 = 384$'],['Cek','$a = 3$: 3, 6, 12, 24, 48, 96, 192, 384 ✔']]},
+{n:13,lv:3,pr:'Menyimpulkan (pilih semua yang benar)',type:'multi',stem:'<p>Dua bank menawarkan bunga 10% per tahun untuk modal Rp5.000.000. Bank A memakai bunga tunggal, Bank B memakai bunga majemuk. Pilih <b>semua</b> pernyataan yang benar.</p>',opts:['Setelah 1 tahun, saldo kedua bank sama besar.','Setelah 2 tahun, saldo Bank B lebih besar Rp100.000 daripada Bank A.','Selisih saldo Bank B dan Bank A bertambah setiap tahun.','Saldo Bank A setiap tahun membentuk barisan geometri.'],ans:[0,2],
+ quick:'Tunggal: +500.000 per tahun (aritmatika). Majemuk: ×1,1 per tahun (geometri). Tahun 1 sama; setelah itu majemuk menjauh.',
+ steps:[['Hitung saldo (juta rupiah)','<div class="tw"><table class="t c"><tr><th>Tahun</th><th>1</th><th>2</th><th>3</th></tr><tr><td>A (tunggal)</td><td>5,5</td><td>6,0</td><td>6,5</td></tr><tr><td>B (majemuk)</td><td>5,5</td><td>6,05</td><td>6,655</td></tr><tr><td>Selisih B − A</td><td>0</td><td>0,05</td><td>0,155</td></tr></table></div>'],['Pernyataan (1)','Tahun ke-1 sama-sama 5,5 juta → <b>benar</b>'],['Pernyataan (2)','Selisih tahun ke-2 adalah 0,05 juta = Rp50.000, bukan Rp100.000 → <b>salah</b>'],['Pernyataan (3)','Selisih 0 → 0,05 → 0,155 juta terus membesar → <b>benar</b>'],['Pernyataan (4)','Saldo A bertambah tetap 500.000 → aritmatika, bukan geometri → <b>salah</b>'],['Jawaban','(1) dan (3)']]},
+{n:14,lv:3,pr:'Memecahkan masalah',type:'pg',stem:'<p>Seorang karyawan ditawari dua pilihan bonus tahunan.</p><p><b>Pilihan A:</b> bonus tahun pertama Rp1.000.000 dan naik Rp200.000 setiap tahun.<br><b>Pilihan B:</b> bonus tahun pertama Rp800.000 dan naik 25% setiap tahun.</p><p>Mulai tahun ke berapa bonus Pilihan B <b>lebih besar</b> daripada Pilihan A?</p>',opts:['Tahun ke-3','Tahun ke-4','Tahun ke-5','Tahun ke-6','Tidak pernah'],ans:2,
+ quick:'Buat tabel: tahun ke-4 B = 1,5625 masih di bawah A = 1,6; tahun ke-5 B = 1,953 &gt; A = 1,8.',
+ steps:[['Tulis rumus (juta rupiah)','A: $1,0 + 0,2(n − 1)$ (aritmatika)<br>B: $0,8 × (1,25)^{n−1}$ (geometri)'],['Buat tabel','<div class="tw"><table class="t c"><tr><th>Tahun</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr><tr><td>A</td><td>1,0</td><td>1,2</td><td>1,4</td><td>1,6</td><td>1,8</td></tr><tr><td>B</td><td>0,8</td><td>1,0</td><td>1,25</td><td>1,5625</td><td>1,953125</td></tr></table></div>'],['Bandingkan','Tahun ke-4: B (1.562.500) &lt; A (1.600.000). Tahun ke-5: B (1.953.125) &gt; A (1.800.000).'],['Kesimpulan','Aritmatika bertambah dengan jumlah tetap, geometri bertambah sebanding nilai sebelumnya. Pada jangka panjang geometri melampaui aritmatika. Jawaban: <b>tahun ke-5</b>.']]},
+{n:15,lv:3,pr:'Mengevaluasi',type:'pg',stem:'<p>Nilai sebuah mobil Rp120.000.000 menyusut 20% setiap tahun dari nilai tahun sebelumnya. Tiga siswa menghitung nilai mobil setelah 2 tahun.</p><p><b>Xena:</b> $120 − (2 × 20% × 120) = 72$ juta.<br><b>Yoga:</b> $120 × (0,8)^{2} = 76,8$ juta.<br><b>Zahra:</b> $120 × (0,2)^{2} = 4,8$ juta.</p><p>Evaluasi yang tepat adalah ….</p>',opts:['Xena benar karena penyusutan tiap tahun sama besar.','Yoga benar; Xena salah karena memakai penyusutan tetap dari nilai awal.','Yoga benar; Zahra salah karena 20% bukan faktor penyusutan dari nilai awal.','Yoga benar; Xena salah karena penyusutan tetap, dan Zahra salah karena memakai 0,2 sebagai faktor pengali.','Ketiganya benar dengan cara yang berbeda.'],ans:3,
+ quick:'Turun 20% → faktor <b>0,8</b> (bukan 0,2), dan dikali tiap tahun (bukan dikurangi tetap).',
+ steps:[['Hitung dengan benar','Faktor $= 1 − 0,2 = 0,8$. $N_{2} = 120 × (0,8)^{2} = 120 × 0,64 = 76,8$ juta (Yoga benar).'],['Periksa Xena','Memotong tetap 20% dari 120 juta (pola aritmatika). Padahal tahun kedua penyusutan dihitung dari nilai yang sudah turun → salah.'],['Periksa Zahra','Memakai 0,2 sebagai faktor pengali. Faktor yang tersisa adalah $1 − 0,2 = 0,8$ → salah.'],['Kesimpulan','Pilihan <b>D</b> memuat kedua alasan yang benar.']]},
+{n:16,lv:3,pr:'Memecahkan masalah',type:'pg',stem:'<p>Sebuah zat radioaktif bermassa 80 gram memiliki waktu paruh 3 hari. Zat tersebut tinggal 10 gram setelah ….</p>',opts:['6 hari','9 hari','12 hari','15 hari','24 hari'],ans:1,
+ quick:'80 → 40 → 20 → 10 : dibagi 2 sebanyak 3 kali → $3 × 3 = 9$ hari.',
+ steps:[['Pahami waktu paruh','Setiap 3 hari massa dibagi 2.'],['Telusuri','80 → (3 hari) 40 → (6 hari) 20 → (9 hari) 10'],['Jawaban','Tinggal 10 gram setelah <b>9 hari</b>.']]},
+{n:17,lv:3,pr:'Menjustifikasi (benar/salah)',type:'bs',stem:'<p>Tentukan apakah setiap pernyataan tentang barisan geometri dengan suku pertama $a$ dan rasio $r$ berikut benar atau salah.</p>',rows:['Jika $a &gt; 0$ dan $r &gt; 1$, barisan tersebut naik.','Jika $a &gt; 0$ dan $0 &lt; r &lt; 1$, barisan tersebut turun.','Jika $r &lt; 0$, tanda suku-suku barisan bergantian.','Jika $a &lt; 0$ dan $r &gt; 1$, barisan tersebut naik.','Barisan $5, 5, 5, 5, …$ bukan barisan geometri.'],ans:[true,true,true,false,false],
+ quick:'Uji dengan contoh angka: (4) $a = −2$, $r = 2$ → $−2, −4, −8$ (turun). (5) $5, 5, 5$ memiliki $r = 1$ (tetap geometri).',
+ steps:[['Pernyataan 1','Contoh $a = 1$, $r = 2$: 1, 2, 4, … naik → <b>Benar</b>'],['Pernyataan 2','Contoh $a = 8$, $r = ⟨1|2⟩$: 8, 4, 2, … turun → <b>Benar</b>'],['Pernyataan 3','Contoh $r = −2$: 5, −10, 20, … tanda berganti → <b>Benar</b>'],['Pernyataan 4','Contoh $a = −2$, $r = 2$: −2, −4, −8, … makin kecil (turun) → <b>Salah</b>'],['Pernyataan 5','$5 ÷ 5 = 1$ tetap, jadi geometri dengan $r = 1$ → pernyataan "bukan geometri" <b>Salah</b>']]},
+{n:18,lv:3,pr:'Memecahkan masalah',type:'pg',stem:'<p>Sebuah bola dijatuhkan dari ketinggian 16 m. Setiap kali memantul, bola mencapai ketinggian setengah dari ketinggian sebelumnya. Panjang lintasan bola sejak dijatuhkan sampai menyentuh lantai untuk <b>ketiga kalinya</b> adalah …. m</p>'+'<figure class="figbox">'+bounceFig().replace(/^<figure class="figbox">/,'').replace(/<\/figure>$/,'').replace('Gambar 7. ','')+'</figure>',opts:['28','32','40','44','56'],ans:2,
+ quick:'$16 + 2(8 + 4) = 16 + 24 = 40$ m',
+ steps:[['Gambarkan lintasan','Jatuh 16 m (sentuh lantai ke-1).<br>Naik 8 m dan turun 8 m (sentuh ke-2).<br>Naik 4 m dan turun 4 m (sentuh ke-3).'],['Tulis jumlahnya','$16 + 2(8) + 2(4)$'],['Hitung','$16 + 16 + 8 = 40$ m'],['Waspada jebakan','44 m ikut menghitung naik 2 m setelah sentuhan ketiga (belum terjadi).']]}
+];
+const LV={1:['Level 1 · Pengetahuan dan Pemahaman','Menghitung, memahami informasi, mengidentifikasi, mengelompokkan'],2:['Level 2 · Aplikasi','Memodelkan, menerapkan, menginterpretasikan'],3:['Level 3 · Penalaran','Menganalisis, memecahkan masalah, mengevaluasi, menyimpulkan, generalisasi, menjustifikasi']};
+const FMT={pg:'Pilihan ganda',multi:'Pilihan ganda kompleks',bs:'Benar / Salah'};
+function qHTML(q){
+  let body='';
+  if(q.type==='pg')body='<div class="pick">👆 Klik salah satu jawaban:</div><div class="opts">'+q.opts.map((o,i)=>'<button class="opt" data-i="'+i+'"><span class="l">'+'ABCDE'[i]+'</span><span>'+o+'</span></button>').join('')+'</div>';
+  if(q.type==='multi')body='<div class="pick">☑️ Centang semua yang benar, lalu klik Periksa:</div><div class="opts">'+q.opts.map((o,i)=>'<label class="opt"><input type="checkbox" data-i="'+i+'"><span>('+(i+1)+') '+o+'</span></label>').join('')+'</div><button class="btn chk">Periksa jawaban</button><div class="warnmsg" hidden>Pilih minimal satu pernyataan dulu.</div>';
+  if(q.type==='bs')body='<div class="tw"><table class="bs"><tr><th>No</th><th>Pernyataan</th><th>Benar</th><th>Salah</th></tr>'+q.rows.map((r,i)=>'<tr data-r="'+i+'"><td class="r">'+(i+1)+'</td><td>'+r+'</td><td class="r"><input type="radio" name="q'+q.n+'r'+i+'" value="1"></td><td class="r"><input type="radio" name="q'+q.n+'r'+i+'" value="0"></td></tr>').join('')+'</table></div><button class="btn chk">Periksa jawaban</button><div class="warnmsg" hidden>Jawab semua pernyataan dulu.</div>';
+  return '<article class="q" id="q'+q.n+'" data-n="'+q.n+'"><div class="qh"><span class="num">Soal '+q.n+'</span><span class="lv lv'+q.lv+'">Level '+q.lv+'</span><span class="pr">'+q.pr+'</span><span class="fmt">'+FMT[q.type]+'</span></div><div class="stem">'+q.stem+'</div>'+body+'<div class="fb" hidden></div></article>';
+}
+function soalList(){let h='',last=0;Q.forEach(q=>{if(q.lv!==last){last=q.lv;h+='<div class="lvh">'+LV[q.lv][0]+'<small>'+LV[q.lv][1]+'</small></div>';}h+=qHTML(q);});return h;}
+/* ===== ISI HALAMAN ===== */
+const BODY=`
+<section class="card" id="petunjuk" data-toc="Petunjuk Belajar"><h3 class="sec">Petunjuk Belajar</h3>
+<p>Halaman ini dibuat untuk kamu yang ingin belajar <b>dari dasar</b>. Barisan geometri memakai <b>perkalian berulang</b>, jadi bagian pangkat dan persen sengaja dibahas pelan-pelan. Semua latihan bisa dikerjakan <b>tanpa kalkulator</b>.</p>
+<div class="callout tip"><b class="h">Cara belajar yang benar (ikuti urutannya)</b><ol>
+<li><b>Baca</b> penjelasan konsep sampai paham.</li>
+<li><b>Isi dulu</b> kotak jawaban pada <b>✏️ Contoh</b> dan <b>🎯 Coba Sendiri</b>. Boleh dicoret-coret di kertas.</li>
+<li>Klik <b>Periksa jawaban</b>. Kalau salah, baca petunjuk lalu coba lagi. Kalau buntu, klik <b>Lihat pembahasan</b>.</li>
+<li>Pelajari <b>📝 Cara Lengkap</b> (langkah demi langkah) dulu sampai paham. Setelah itu baru latih <b>⚡ Cara Cepat</b>.</li>
+<li>Di bagian <b>Latihan TKA</b>, <b>klik jawaban</b> yang kamu pilih. Pembahasan baru muncul setelah kamu menjawab.</li></ol></div>
+<div class="tw"><table class="t"><tr><th>Tanda</th><th>Artinya</th></tr>
+<tr><td>🧱 Cek Dasar</td><td>Latihan prasyarat (pangkat, desimal, persen, mencari rasio)</td></tr>
+<tr><td>✏️ Contoh</td><td>Contoh soal yang kamu isi dulu, lalu dijelaskan</td></tr>
+<tr><td>🎯 Coba Sendiri</td><td>Soal mirip contoh dengan angka berbeda, untuk menguji pemahamanmu</td></tr>
+<tr><td>📝 Cara Lengkap</td><td>Langkah penyelesaian rapi, satu per satu (untuk belajar)</td></tr>
+<tr><td>⚡ Cara Cepat</td><td>Jalan pintas (untuk menghemat waktu saat ujian)</td></tr></table></div>
+<h4 class="sub">Peta kompetensi dan nomor soal Latihan TKA</h4>
+<div class="tw"><table class="t"><tr><th>Level</th><th>Proses berpikir</th><th>Dilatih lewat</th><th>Soal</th></tr>
+<tr><td>1</td><td>Menghitung</td><td>Suku ke-n, jumlah n suku</td><td>1, 5</td></tr>
+<tr><td>1</td><td>Memahami informasi</td><td>Membaca tabel pertumbuhan</td><td>2</td></tr>
+<tr><td>1</td><td>Mengidentifikasi / Mengelompokkan</td><td>Faktor pengali, mengenali barisan geometri</td><td>3, 4</td></tr>
+<tr><td>2</td><td>Memodelkan</td><td>Cerita harga tanah → rumus</td><td>6</td></tr>
+<tr><td>2</td><td>Menerapkan</td><td>Penyusutan, bunga majemuk, deret, dua suku</td><td>7, 8, 10, 11, 12</td></tr>
+<tr><td>2</td><td>Menginterpretasikan</td><td>Makna angka pada model</td><td>9</td></tr>
+<tr><td>3</td><td>Menyimpulkan</td><td>Bunga tunggal lawan majemuk</td><td>13</td></tr>
+<tr><td>3</td><td>Memecahkan masalah</td><td>Dua bonus berbeda model; waktu paruh; bola memantul</td><td>14, 16, 18</td></tr>
+<tr><td>3</td><td>Mengevaluasi</td><td>Menilai cara hitung penyusutan</td><td>15</td></tr>
+<tr><td>3</td><td>Menjustifikasi / Generalisasi</td><td>Benar/Salah sifat barisan geometri</td><td>17</td></tr></table></div>
+<div class="callout warn"><b class="h">Catatan tentang bentuk soal</b>Soal TKA tidak hanya pilihan ganda biasa. Di sini kamu berlatih tiga bentuk: <b>pilihan ganda</b> (satu jawaban), <b>pilihan ganda kompleks</b> (boleh lebih dari satu jawaban benar), dan <b>benar/salah</b> per pernyataan.</div>
+</section>
+
+<section class="card" id="a-dasar" data-toc="A. Persiapan Dasar"><h3 class="sec"><span class="tag">A</span>Persiapan Dasar: Pangkat dan Persen</h3>
+<p>Kunci barisan geometri ada pada <b>pangkat</b>, <b>perkalian desimal</b>, dan <b>persen</b>. Baca singkat, lalu isi <b>🧱 Cek Dasar</b>.</p>
+<h4 class="sub">A1. Pangkat = perkalian berulang</h4>
+<p>$2^{5}$ dibaca "2 pangkat 5". Artinya <b>2 dikalikan dirinya sendiri sebanyak 5 kali</b>: $2 × 2 × 2 × 2 × 2 = 32$. Angka kecil di atas disebut <b>pangkat</b> (eksponen).</p>
+<div class="callout warn"><b class="h">Urutan mengerjakan</b><ol><li>Kerjakan <b>kurung</b> lebih dulu.</li><li>Lalu <b>pangkat</b>.</li><li>Lalu <b>kali / bagi</b>.</li><li>Terakhir <b>tambah / kurang</b>.</li></ol>Contoh: $3 × 2^{4} = 3 × 16 = 48$ (bukan $6^{4}$).</div>
+<div class="tw"><table class="t c"><tr><th>Pangkat</th><th>Nilai</th><th>Pangkat</th><th>Nilai</th></tr>
+<tr><td>$2^{2}, 2^{3}, 2^{4}, 2^{5}, 2^{6}$</td><td>4, 8, 16, 32, 64</td><td>$1,1^{2}, 1,1^{3}$</td><td>1,21 ; 1,331</td></tr>
+<tr><td>$2^{7}, 2^{8}, 2^{10}$</td><td>128, 256, 1.024</td><td>$1,2^{2}, 1,2^{3}$</td><td>1,44 ; 1,728</td></tr>
+<tr><td>$3^{2}, 3^{3}, 3^{4}, 3^{5}$</td><td>9, 27, 81, 243</td><td>$1,05^{2}, 1,06^{3}$</td><td>1,1025 ; 1,191016</td></tr>
+<tr><td>$(⟨1|2⟩)^{2}, (⟨1|2⟩)^{3}, (⟨1|2⟩)^{4}$</td><td>$⟨1|4⟩, ⟨1|8⟩, ⟨1|16⟩$</td><td>$0,9^{2}, 0,9^{3}, 0,8^{2}$</td><td>0,81 ; 0,729 ; 0,64</td></tr></table></div>
+<div class="callout nv"><b class="h">Pangkat dengan bilangan negatif</b>$(−2)^{2} = (−2)(−2) = 4$ (pangkat <b>genap</b> → positif). $(−2)^{3} = −8$ (pangkat <b>ganjil</b> → negatif). Ini penting untuk barisan yang tandanya bergantian.</div>
+${ex('a1')}${ex('a2')}
+<h4 class="sub">A2. Perkalian desimal</h4>
+<p>Kalikan seperti bilangan bulat, lalu hitung banyak angka di belakang koma pada kedua bilangan, dan letakkan koma sejumlah itu. Contoh: $1,1 × 1,1$ → $11 × 11 = 121$ → dua angka di belakang koma → $1,21$.</p>
+${ex('a3')}${ex('a5')}
+<h4 class="sub">A3. Persen menjadi faktor pengali</h4>
+<p>Persen diubah ke desimal dengan <b>dibagi 100</b>: $5% = 0,05$ ; $25% = 0,25$. Lalu:</p>
+<div class="tw"><table class="t"><tr><th>Situasi</th><th>Persen</th><th>Faktor pengali</th><th>Aturan</th></tr>
+<tr><td>Naik 10% per periode</td><td>0,10</td><td><b>1,10</b></td><td>Naik: $1 + p$</td></tr>
+<tr><td>Naik 25% per periode</td><td>0,25</td><td><b>1,25</b></td><td>Naik: $1 + p$</td></tr>
+<tr><td>Turun 8% per periode</td><td>0,08</td><td><b>0,92</b></td><td>Turun: $1 − p$</td></tr>
+<tr><td>Turun 20% per periode</td><td>0,20</td><td><b>0,80</b></td><td>Turun: $1 − p$</td></tr></table></div>
+${ex('a4')}
+<h4 class="sub">A4. Mencari bilangan dari pangkatnya</h4>
+<p>Jika $r^{3} = 27$, cari bilangan yang dipangkatkan 3 hasilnya 27. Cara termudah: <b>coba-coba</b> memakai tabel pangkat di atas ($3 × 3 × 3 = 27$ sehingga $r = 3$).</p>
+${ex('a6')}</section>
+
+<section class="card" id="b1" data-sub="1" data-toc="B1. Barisan Geometri"><h3 class="sec"><span class="tag">B1</span>Barisan Geometri dan Rasio</h3>
+<p>Barisan geometri adalah barisan yang <b>perbandingan (hasil bagi) dua suku berurutannya selalu tetap</b>. Perbandingan itu disebut <b>rasio</b> dan ditulis $r$. Artinya, setiap suku didapat dari suku sebelumnya dengan <b>dikalikan bilangan yang sama</b>.</p>
+${treeFig()}
+${jumpFig([{t:'2',s:'U₁'},{t:'6',s:'U₂'},{t:'18',s:'U₃'},{t:'54',s:'U₄'},{t:'162',s:'U₅'}],'×3','Gambar 2. Setiap suku diperoleh dengan dikali 3 dari suku sebelumnya, sehingga r = 3.')}
+<div class="formula"><div class="cap">Cara mencari rasio (bagi suku berikutnya dengan suku sebelumnya)</div>$$r = ⟨U_{2}|U_{1}⟩ = ⟨U_{3}|U_{2}⟩ = …$$</div>
+<div class="tw"><table class="t"><tr><th>Rasio ($r$)</th><th>Arti</th><th>Contoh</th></tr><tr><td>$r &gt; 1$</td><td>Naik makin cepat</td><td>2, 6, 18, 54, … ($r = 3$)</td></tr><tr><td>$0 &lt; r &lt; 1$</td><td>Turun, tetapi tidak pernah negatif</td><td>80, 40, 20, 10, … ($r = ⟨1|2⟩$)</td></tr><tr><td>$r &lt; 0$</td><td>Tanda suku bergantian + dan −</td><td>5, −10, 20, −40, … ($r = −2$)</td></tr><tr><td>$r = 1$</td><td>Semua suku sama</td><td>5, 5, 5, 5, … ($r = 1$)</td></tr></table></div>
+<figure class="figbox"><div class="figrow">${lineChart([1,2,4,8,16,32],CYD,'a = 1, r = 2 → naik cepat')}${lineChart([64,32,16,8,4,2],OR,'a = 64, r = ½ → turun')}</div><figcaption>Gambar 3. Titik barisan geometri tidak segaris, tetapi melengkung. Naik jika $r &gt; 1$, turun jika $0 &lt; r &lt; 1$.</figcaption></figure>
+<div class="callout warn"><b class="h">⚡ Aritmatika atau geometri? Satu pertanyaan penentu</b>Hitung <b>selisih</b> dan <b>perbandingan</b> suku berurutan. Selisih tetap → <b>aritmatika</b> (tambah/kurang tetap). Perbandingan tetap → <b>geometri</b> (kali/bagi tetap).<br>Contoh: 5, 8, 11, 14 → selisih 3, 3, 3 (aritmatika). 5, 10, 20, 40 → rasio 2, 2, 2 (geometri).</div>
+${ex('c0')}${ex('d0')}${ex('d0b')}</section>
+
+<section class="card" id="b2" data-sub="1" data-toc="B2. Rumus Suku ke-n"><h3 class="sec"><span class="tag">B2</span>Rumus Suku ke-n</h3>
+<p>Perhatikan dari mana rumusnya datang. Mulai dari suku pertama $a$, lalu kalikan dengan $r$ berulang-ulang:</p>
+<div class="tw"><table class="t c"><tr><th>Suku</th><th>Ditulis</th><th>Banyak $r$ yang dikalikan</th></tr>
+<tr><td>$U_{1}$</td><td>$a$</td><td>0</td></tr><tr><td>$U_{2}$</td><td>$a·r$</td><td>1</td></tr><tr><td>$U_{3}$</td><td>$a·r^{2}$</td><td>2</td></tr><tr><td>$U_{4}$</td><td>$a·r^{3}$</td><td>3</td></tr><tr><td>$U_{n}$</td><td>$a·r^{n−1}$</td><td>$n − 1$</td></tr></table></div>
+<p>Polanya: banyak $r$ yang dikalikan selalu <b>satu lebih sedikit dari nomor sukunya</b>. Itu sebabnya pangkatnya $n − 1$.</p>
+<div class="formula"><div class="cap">Rumus suku ke-n barisan geometri</div>$$U_{n} = a · r^{n−1}$$</div>
+<p style="font-size:.92rem;color:#5a6b85">$a$ = suku pertama, $r$ = rasio, $n$ = nomor suku.</p>
+<div class="callout tip"><b class="h">Tiga langkah memakai rumus</b><ol><li>Cari $a$ (suku pertama) dan $r$ (hasil bagi).</li><li>Tulis rumus, masukkan angkanya.</li><li>Hitung pangkat dulu, baru kalikan dengan $a$.</li></ol></div>
+${ex('c1')}${ex('d1')}${ex('d2')}${ex('d2b')}
+<h4 class="sub">Mencari banyak suku</h4>
+<p>Jika suku terakhir diketahui, bagi dulu dengan $a$, lalu tulis hasilnya sebagai pangkat dari $r$.</p>
+${ex('c1b')}</section>
+
+<section class="card" id="b3" data-sub="1" data-toc="B3. Mencari a dan r"><h3 class="sec"><span class="tag">B3</span>Mencari a dan r dari Dua Suku</h3>
+<p>Soal TKA sering memberi dua suku. Misalnya $U_{2} = 6$ dan $U_{5} = 48$. Dari suku ke-2 ke suku ke-5 ada <b>3 langkah</b>, dan setiap langkah dikali $r$. Jadi $6 × r × r × r = 48$, atau $r^{3} = 48 ÷ 6 = 8$.</p>
+${jumpFig([{t:'U₂ = 6',s:'suku ke-2',hl:1},{t:'U₃',s:''},{t:'U₄',s:''},{t:'U₅ = 48',s:'suku ke-5',hl:1}],'×r','Gambar 4. Tiga langkah dikali r: 6 · r³ = 48, sehingga r³ = 8 dan r = 2.')}
+<div class="formula"><div class="cap">⚡ Cara cepat mencari rasio dari dua suku</div>$$r^{(p − q)} = ⟨U_{p}|U_{q}⟩$$</div>
+<p>Setelah $r$ ketemu, cari $a$ dari salah satu suku: $a = ⟨U_{q}|r^{q−1}⟩$.</p>
+${ex('c3')}${ex('d3')}${ex('d3b')}</section>
+
+<section class="card" id="b4" data-sub="1" data-toc="B4. Tiga Suku Berurutan"><h3 class="sec"><span class="tag">B4</span>Tiga Suku Berurutan (Suku Tengah)</h3>
+<p>Jika tiga bilangan berurutan membentuk barisan geometri, <b>suku tengah dikuadratkan sama dengan perkalian suku di kiri dan kanannya</b>. Misalnya 2, 6, 18: $6^{2} = 36$ dan $2 × 18 = 36$ ✔.</p>
+<div class="formula"><div class="cap">Sifat suku tengah</div>$$(U_{2})^{2} = U_{1} · U_{3}$$</div>
+${ex('c4')}${ex('d4')}</section>
+
+<section class="card" id="b5" data-sub="1" data-toc="B5. Deret Geometri"><h3 class="sec"><span class="tag">B5</span>Deret Geometri</h3>
+<p>Deret geometri adalah jumlah suku-suku barisan geometri. Jumlah $n$ suku pertama ditulis $S_{n}$.</p>
+<h4 class="sub">Dari mana rumusnya?</h4>
+<p>Ambil 4 suku sebagai contoh. Tulis $S$, lalu tulis $r × S$ (setiap suku digeser satu tempat), kemudian kurangkan:</p>
+<div class="work"><div class="eq">$S = a + ar + ar^{2} + ar^{3}$</div><div class="eq">$rS = ar + ar^{2} + ar^{3} + ar^{4}$</div><div class="eq">$S − rS = a − ar^{4}$</div><div class="eq">$S(1 − r) = a(1 − r^{4})$</div></div>
+<p>Hampir semua suku saling menghapus. Hasil akhirnya adalah rumus berikut (ganti 4 dengan $n$):</p>
+<div class="formula"><div class="cap">Jika r &gt; 1</div>$$S_{n} = ⟨a(r^{n} − 1)|r − 1⟩$$</div>
+<div class="formula"><div class="cap">Jika 0 &lt; r &lt; 1</div>$$S_{n} = ⟨a(1 − r^{n})|1 − r⟩$$</div>
+<p style="font-size:.92rem;color:#5a6b85">Kedua rumus nilainya sama. Pilih yang penyebutnya <b>positif</b> agar lebih mudah. Rumus tidak berlaku untuk $r = 1$ (jumlahnya cukup $n × a$).</p>
+<div class="callout warn"><b class="h">⚡ Kapan tidak perlu rumus?</b>Jika sukunya hanya 3–5 dan angkanya kecil, <b>jumlahkan langsung</b>. Rumus lebih hemat saat suku banyak.</div>
+${ex('c5')}${ex('c5b')}${ex('d5')}${ex('d5b')}
+<div class="callout nv"><b class="h">Pengayaan (bukan prioritas)</b>Untuk $−1 &lt; r &lt; 1$, jumlah deret yang berlanjut tanpa akhir mendekati $⟨a|1 − r⟩$. Topik ini tidak disebut pada batasan asesmen, jadi cukup dikenali saja.</div></section>
+
+<section class="card" id="b6" data-sub="1" data-toc="B6. Pertumbuhan"><h3 class="sec"><span class="tag">B6</span>Pertumbuhan</h3>
+<p>Jika sesuatu bertambah dengan <b>persentase tetap</b> setiap periode (harga naik 5% per tahun, penduduk naik 10% per tahun), nilainya membentuk <b>barisan geometri</b>. Gunakan $p$ untuk persentase (dalam desimal) dan <b>faktor pengali</b> $(1 + p)$ sebagai rasio.</p>
+<div class="formula"><div class="cap">Rumus pertumbuhan</div>$$N_{t} = N_{0}(1 + p)^{t}$$</div>
+<div class="tw"><table class="t"><tr><th>Lambang</th><th>Arti</th></tr><tr><td>$N_{0}$</td><td>Nilai awal (periode ke-0)</td></tr><tr><td>$p$</td><td>Persentase per periode, dalam desimal</td></tr><tr><td>$t$</td><td>Banyak periode yang sudah berlalu</td></tr><tr><td>$N_{t}$</td><td>Nilai setelah $t$ periode</td></tr></table></div>
+${multiChart([{ys:[100,110,121,133.1,146.41,161.05,177.16,194.87,214.36,235.79,259.37],c:CYD,l:'Tumbuh 10%'},{ys:[100,90,81,72.9,65.61,59.05,53.14,47.83,43.05,38.74,34.87],c:OR,l:'Luruh 10%'}],[0,1,2,3,4,5,6,7,8,9,10],{xl:'t (banyak periode)',cap:'Gambar 5. Nilai awal 100. Pertumbuhan 10% makin curam, peluruhan 10% makin landai.',label:'Pertumbuhan dan peluruhan',fmt:v=>String(v)})}
+<div class="callout bad"><b class="h">Jebakan: pangkatnya $t$ atau $n − 1$?</b><ul><li>Pada $N_{t}$, awal adalah periode ke-<b>0</b>, jadi setelah $t$ periode pangkatnya $t$.</li><li>Pada $U_{n}$, nilai awal adalah suku ke-<b>1</b>, jadi pangkatnya $n − 1$.</li><li><b>Cara aman:</b> hitung berapa kali nilai itu dikalikan. "Setelah 3 tahun" berarti dikali 3 kali.</li></ul></div>
+${ex('c6')}${ex('c6b')}${ex('d6')}${ex('d6b')}</section>
+
+<section class="card" id="b7" data-sub="1" data-toc="B7. Peluruhan dan Waktu Paruh"><h3 class="sec"><span class="tag">B7</span>Peluruhan dan Waktu Paruh</h3>
+<p>Jika nilai <b>berkurang</b> dengan persentase tetap (mesin menyusut 10% per tahun), faktor pengalinya adalah $(1 − p)$. Nilainya tetap barisan geometri, hanya rasionya <b>kurang dari 1</b>.</p>
+<div class="formula"><div class="cap">Rumus peluruhan</div>$$N_{t} = N_{0}(1 − p)^{t}$$</div>
+<div class="callout warn"><b class="h">Penyusutan dihitung dari nilai tahun sebelumnya</b>Penyusutan 20% tiap tahun <b>bukan</b> dikurangi 20% dari nilai awal terus-menerus, melainkan dikali 0,8 setiap tahun. Jadi tahun kedua penyusutannya lebih kecil daripada tahun pertama.</div>
+${ex('c7')}${ex('d7')}
+<h4 class="sub">Waktu paruh</h4>
+<p><b>Waktu paruh</b> adalah waktu yang dibutuhkan agar suatu zat tinggal separuh. Cukup bagi dua setiap satu waktu paruh.</p>
+${halfFig()}
+<div class="formula"><div class="cap">Rumus waktu paruh</div>$$N = N_{0} · (⟨1|2⟩)^{⟨waktu|waktu paruh⟩}$$</div>
+${ex('c7b')}${ex('d7b')}</section>
+
+<section class="card" id="b8" data-sub="1" data-toc="B8. Bunga Majemuk"><h3 class="sec"><span class="tag">B8</span>Bunga Majemuk</h3>
+<p>Pada <b>bunga majemuk</b>, bunga setiap periode <b>ditambahkan ke modal</b>, sehingga bunga periode berikutnya dihitung dari modal yang sudah bertambah ("bunga berbunga"). Karena saldo dikali tetap tiap periode, saldo membentuk <b>barisan geometri</b>.</p>
+<div class="formula"><div class="cap">Rumus bunga majemuk</div>$$A = M(1 + i)^{t}$$</div>
+<p style="font-size:.92rem;color:#5a6b85">$M$ = modal, $i$ = suku bunga <b>per periode</b> (desimal), $t$ = banyak periode, $A$ = jumlah akhir.</p>
+<h4 class="sub">Bunga tunggal dibandingkan bunga majemuk</h4>
+${multiChart([{ys:[4,4.24,4.48,4.72,4.96,5.2,5.44,5.68,5.92,6.16,6.4],c:'#6b7f99',l:'Bunga tunggal 6%'},{ys:[4,4.24,4.494,4.764,5.05,5.353,5.674,6.015,6.376,6.759,7.164],c:CYD,l:'Bunga majemuk 6%'}],[0,1,2,3,4,5,6,7,8,9,10],{min:3,xl:'Tahun ke-',cap:'Gambar 6. Modal Rp4.000.000 (dalam juta rupiah): bunga majemuk makin menjauh di atas bunga tunggal.',label:'Tunggal lawan majemuk',fmt:v=>String(v).replace('.',',')})}
+<div class="tw"><table class="t c"><tr><th>Tahun ke-</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr><tr><td>Tunggal (Rp)</td><td>4.240.000</td><td>4.480.000</td><td>4.720.000</td><td>4.960.000</td><td>5.200.000</td></tr><tr><td>Majemuk (Rp)</td><td>4.240.000</td><td>4.494.400</td><td>4.764.064</td><td>5.049.908</td><td>5.352.902</td></tr></table></div>
+<div class="tw"><table class="t"><tr><th></th><th>Bunga tunggal</th><th>Bunga majemuk</th></tr><tr><td>Bunga dihitung dari</td><td>Modal awal saja</td><td>Modal + bunga sebelumnya</td></tr><tr><td>Pola saldo</td><td>Aritmatika (tambah tetap)</td><td>Geometri (kali tetap)</td></tr><tr><td>Rumus</td><td>$A = M(1 + r·t)$</td><td>$A = M(1 + i)^{t}$</td></tr><tr><td>Tahun pertama</td><td colspan="2">Sama besar</td></tr></table></div>
+<h4 class="sub">Bunga dihitung per semester, triwulan, atau bulan</h4>
+<div class="callout tip"><b class="h">Aturan penyesuaian (bunga 12% per tahun)</b><ul><li>Per <b>semester</b> → $i = 12% ÷ 2 = 6%$ dan $t = 2 ×$ (jumlah tahun).</li><li>Per <b>triwulan</b> → $i = 12% ÷ 4 = 3%$ dan $t = 4 ×$ (jumlah tahun).</li><li>Per <b>bulan</b> → $i = 12% ÷ 12 = 1%$ dan $t = 12 ×$ (jumlah tahun).</li></ul></div>
+${ex('c8')}${ex('c8b')}${ex('d8')}${ex('d8b')}</section>
+
+<section class="card" id="b9" data-sub="1" data-toc="B9. Aritmatika Lawan Geometri"><h3 class="sec"><span class="tag">B9</span>Aritmatika Lawan Geometri: Siapa Menang?</h3>
+<p>Soal Level 3 sering meminta kamu membandingkan dua pilihan. Pola geometri mulai lebih lambat, tetapi akhirnya <b>melampaui</b> pola aritmatika.</p>
+${multiChart([{ys:[1,1.2,1.4,1.6,1.8,2.0,2.2,2.4],c:'#6b7f99',l:'A: +Rp200.000'},{ys:[0.8,1,1.25,1.5625,1.953,2.441,3.052,3.815],c:OR,l:'B: ×1,25'}],[1,2,3,4,5,6,7,8],{xl:'Tahun ke-',cap:'Gambar 8. Bonus A (aritmatika) dan bonus B (geometri), dalam juta rupiah. B menyalip A pada tahun ke-5.',label:'Bonus A dan B',fmt:v=>String(v).replace('.',',')})}
+<div class="callout tip"><b class="h">Cara mengerjakan soal perbandingan</b><ul><li>Buat <b>tabel</b> tahun demi tahun sampai dua nilai berbalik urutan.</li><li>Jangan menyimpulkan "selalu lebih besar" sebelum memeriksa beberapa periode.</li><li>Tulis alasan: <b>aritmatika bertambah tetap, geometri bertambah sebanding nilai sebelumnya</b>.</li></ul></div>
+${ex('c9')}${ex('d9')}</section>
+
+<section class="card" id="b10" data-sub="1" data-toc="B10. Soal Cerita"><h3 class="sec"><span class="tag">B10</span>Cara Membaca Soal Cerita</h3>
+<div class="tw"><table class="t"><tr><th>Kata / kalimat di soal</th><th>Artinya</th><th>Yang dipakai</th></tr>
+<tr><td>"naik / bertambah <b>p%</b> tiap …"</td><td>Dikali $(1 + p)$ tiap periode</td><td>Pertumbuhan geometri</td></tr>
+<tr><td>"turun / menyusut <b>p%</b> tiap …"</td><td>Dikali $(1 − p)$ tiap periode</td><td>Peluruhan geometri</td></tr>
+<tr><td>"dua kali lipat / tiga kali lipat tiap …"</td><td>Faktor pengali 2 atau 3</td><td>Geometri, $r = 2$ atau 3</td></tr>
+<tr><td>"waktu paruh"</td><td>Dibagi 2 tiap waktu paruh</td><td>Geometri, $r = ⟨1|2⟩$</td></tr>
+<tr><td>"bunga majemuk"</td><td>Bunga berbunga</td><td>$A = M(1 + i)^{t}$</td></tr>
+<tr><td>"jumlah / total / seluruhnya"</td><td>Beberapa suku dijumlahkan</td><td>$S_{n}$</td></tr></table></div>
+<p><b>Lintasan bola memantul</b> juga memakai deret geometri. Hitung dulu lintasan jatuh pertama, lalu tiap pantulan dihitung <b>naik + turun</b> (dua kali tinggi pantulan).</p>
+${bounceFig()}
+${ex('c10')}${ex('d10')}</section>
+
+<section class="card" id="b11" data-sub="1" data-toc="B11. Kesalahan Umum"><h3 class="sec"><span class="tag">B11</span>Kesalahan Umum dan Cara Menghindarinya</h3>
+<div class="tw"><table class="t"><tr><th>Kesalahan</th><th>Contoh</th><th>Cara menghindari</th></tr>
+<tr><td>Memakai pangkat $n$, bukan $n − 1$</td><td>$U_{6} = 2·3^{6}$ (salah)</td><td>Kalikan sebanyak $(n − 1)$ kali dari suku pertama.</td></tr>
+<tr><td>Menganggap penyusutan 20% sebagai faktor 0,2</td><td>$120 · (0,2)^{2}$</td><td>Turun $p$ → faktor $1 − p$, jadi 0,8.</td></tr>
+<tr><td>Mencampur tunggal dan majemuk</td><td>$A = M(1 + r·t)$ untuk majemuk</td><td>Majemuk selalu berpangkat $t$.</td></tr>
+<tr><td>Menganggap penyusutan tetap tiap tahun</td><td>80 jt − 3 × 8 jt</td><td>Persen berlaku pada nilai tahun sebelumnya.</td></tr>
+<tr><td>Lupa menyesuaikan $i$ dan $t$</td><td>12% per tahun dipakai langsung untuk semester</td><td>Bagi $i$, kalikan $t$ sesuai periode.</td></tr>
+<tr><td>Salah tanda pada pangkat negatif</td><td>$(−2)^{4} = −16$ (salah)</td><td>Pangkat genap → positif; ganjil → negatif.</td></tr>
+<tr><td>Menjawab bunga, padahal ditanya jumlah akhir</td><td>Menjawab 764.064</td><td>Baca kalimat tanya; jumlah akhir = modal + bunga.</td></tr></table></div></section>
+
+<section class="card" id="b12" data-sub="1" data-toc="B12. Strategi dan Ringkasan"><h3 class="sec"><span class="tag">B12</span>Strategi Mengerjakan Soal dan Ringkasan Rumus</h3>
+${flowFig()}
+<div class="tw"><table class="t"><tr><th>Konsep</th><th>Rumus</th></tr>
+<tr><td>Suku ke-n</td><td>$U_{n} = a · r^{n−1}$</td></tr>
+<tr><td>Rasio dari dua suku</td><td>$r^{(p − q)} = ⟨U_{p}|U_{q}⟩$</td></tr>
+<tr><td>Tiga suku berurutan</td><td>$(U_{2})^{2} = U_{1} · U_{3}$</td></tr>
+<tr><td>Jumlah $n$ suku ($r &gt; 1$)</td><td>$S_{n} = ⟨a(r^{n} − 1)|r − 1⟩$</td></tr>
+<tr><td>Jumlah $n$ suku ($0 &lt; r &lt; 1$)</td><td>$S_{n} = ⟨a(1 − r^{n})|1 − r⟩$</td></tr>
+<tr><td>Pertumbuhan</td><td>$N_{t} = N_{0}(1 + p)^{t}$</td></tr>
+<tr><td>Peluruhan</td><td>$N_{t} = N_{0}(1 − p)^{t}$</td></tr>
+<tr><td>Waktu paruh</td><td>$N = N_{0} · (⟨1|2⟩)^{⟨waktu|waktu paruh⟩}$</td></tr>
+<tr><td>Bunga majemuk</td><td>$A = M(1 + i)^{t}$</td></tr></table></div></section>
+
+<section class="card" id="latihan" data-toc="C. Latihan dan Prediksi TKA"><h3 class="sec"><span class="tag">C</span>Latihan dan Prediksi Soal TKA</h3>
+<p>Kerjakan <b>tanpa kalkulator</b>. <b>Klik jawabanmu</b> dulu; setelah itu baru muncul pembahasan dengan <b>📝 Cara Lengkap</b> dan <b>⚡ Cara Cepat</b>.</p>
+<div class="callout warn"><b class="h">Catatan penyusun</b>Soal ini adalah <b>prediksi</b> berdasarkan matriks asesmen (Aljabar, barisan dan deret geometri, termasuk pertumbuhan, peluruhan, dan bunga majemuk), bukan soal resmi.</div>
+<div class="stat" id="stat"><span>Dijawab: <b id="sA">0</b>/18</span><span>Benar: <b id="sB">0</b></span><span>Skor: <b id="sC">0</b></span><button id="reset">↺ Ulangi semua</button></div>
+<div id="soal">${soalList()}</div>
+<div class="callout tip" id="penutup" hidden><b class="h">🎉 Semua soal sudah dijawab!</b><span id="pt"></span></div>
+</section>
+`;
+/* ===== MEMBANGUN HALAMAN ===== */
+const app=document.getElementById('app');
+app.innerHTML=M(BODY);
+const toc=document.getElementById('toc');
+app.querySelectorAll('section.card').forEach(s=>{const a=document.createElement('a');a.href='#'+s.id;a.textContent=s.dataset.toc;if(s.dataset.sub)a.className='sub';toc.appendChild(a);});
+const tocLinks=[...toc.querySelectorAll('a')];
+const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){tocLinks.forEach(l=>l.classList.toggle('act',l.getAttribute('href')==='#'+en.target.id));}});},{rootMargin:'-25% 0px -65% 0px'});
+app.querySelectorAll('section.card').forEach(s=>io.observe(s));
+document.getElementById('burger').onclick=()=>document.getElementById('nav').classList.toggle('open');
+document.getElementById('tocbtn').onclick=()=>toc.classList.toggle('open');
+toc.addEventListener('click',e=>{if(e.target.tagName==='A')toc.classList.remove('open');});
+const totop=document.getElementById('totop');
+window.addEventListener('scroll',()=>{totop.style.display=window.scrollY>500?'block':'none';});
+totop.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+/* ===== INTERAKSI ===== */
+const state={};
+function updateStat(){
+  const ans=Object.keys(state).length,ben=Object.values(state).filter(Boolean).length;
+  document.getElementById('sA').textContent=ans;document.getElementById('sB').textContent=ben;document.getElementById('sC').textContent=Math.round(ben/Q.length*100);
+  const pt=document.getElementById('penutup');
+  if(ans===Q.length){pt.hidden=false;document.getElementById('pt').textContent=' Skormu '+Math.round(ben/Q.length*100)+' ('+ben+' dari '+Q.length+' benar). Ulangi soal yang salah dengan membaca Cara Lengkap, lalu coba lagi dengan Cara Cepat.';}else pt.hidden=true;
+}
+function verdict(ok,msg){return '<div class="verdict '+(ok?'ok':'bad')+'">'+(ok?'✅ Benar! ':'❌ Belum tepat. ')+msg+'</div>';}
+function finishQ(art,q,ok,msg){
+  state[q.n]=ok;art.classList.add('locked',ok?'done-ok':'done-bad');
+  const fb=art.querySelector('.fb');fb.innerHTML=M(verdict(ok,msg)+sol(q.quick,q.steps));fb.hidden=false;updateStat();
+  fb.scrollIntoView({block:'nearest',behavior:'smooth'});
+}
+function checkFill(box,skip){
+  const e=EX[box.dataset.ex],ins=[...box.querySelectorAll('input')],fbx=box.querySelector('.fbx');
+  const shown=e.f.map(f=>f[0]+' <b>'+f[2]+'</b>').join(' &nbsp; ');
+  if(skip){ins.forEach(i=>i.disabled=true);fbx.innerHTML=M('<div class="verdict info">📖 Jawaban: '+shown+'</div>'+sol(e.quick,e.steps));fbx.hidden=false;return;}
+  let all=true,any=false;
+  ins.forEach((inp,i)=>{const v=inp.value.trim();if(v)any=true;const ok=Math.abs(num(v)-e.f[i][1])<1e-6;inp.classList.toggle('ok',ok);inp.classList.toggle('no',!ok);if(!ok)all=false;});
+  if(!any){fbx.innerHTML='<div class="verdict info">✍️ Isi jawabanmu dulu ya, baru diperiksa.</div>';fbx.hidden=false;return;}
+  if(all){ins.forEach(i=>i.disabled=true);fbx.innerHTML=M('<div class="verdict ok">✅ Benar! Hebat. Sekarang pelajari caranya supaya makin paham:</div>'+sol(e.quick,e.steps));}
+  else fbx.innerHTML=M('<div class="verdict bad">❌ Belum tepat. 💡 Petunjuk: '+e.hint+'<br>Coba lagi, atau klik <b>Lihat pembahasan</b>.</div>');
+  fbx.hidden=false;
+}
+app.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.matches('.fill input')){e.preventDefault();checkFill(e.target.closest('.exbox'),false);}});
+app.addEventListener('click',e=>{
+  const tab=e.target.closest('.tab');
+  if(tab){const s=tab.closest('.sol');s.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t===tab));s.querySelectorAll('.pane').forEach(p=>{p.hidden=!p.classList.contains(tab.dataset.t);});return;}
+  const cf=e.target.closest('.chkfill');if(cf){checkFill(cf.closest('.exbox'),false);return;}
+  const sk=e.target.closest('.skip');if(sk){checkFill(sk.closest('.exbox'),true);return;}
+  if(e.target.closest('#reset')){document.getElementById('soal').innerHTML=M(soalList());Object.keys(state).forEach(k=>delete state[k]);updateStat();document.getElementById('latihan').scrollIntoView({behavior:'smooth'});return;}
+  const opt=e.target.closest('button.opt');
+  if(opt){const art=opt.closest('article.q'),q=Q[+art.dataset.n-1];if(art.classList.contains('locked'))return;
+    const i=+opt.dataset.i,ok=i===q.ans;art.querySelectorAll('button.opt').forEach((b,j)=>{if(j===q.ans)b.classList.add('ok');else if(j===i)b.classList.add('bad');});
+    finishQ(art,q,ok,ok?'Jawabanmu <b>'+'ABCDE'[q.ans]+'</b> tepat.':'Jawabanmu <b>'+'ABCDE'[i]+'</b>. Jawaban yang benar: <b>'+'ABCDE'[q.ans]+'</b>.');return;}
+  const ck=e.target.closest('.btn.chk');
+  if(ck){const art=ck.closest('article.q'),q=Q[+art.dataset.n-1],warn=art.querySelector('.warnmsg');
+    if(q.type==='multi'){const bx=[...art.querySelectorAll('input[type=checkbox]')],sel=bx.map((b,i)=>b.checked?i:-1).filter(i=>i>=0);
+      if(!sel.length){warn.hidden=false;return;}warn.hidden=true;
+      const ok=sel.length===q.ans.length&&sel.every(i=>q.ans.indexOf(i)>-1);
+      bx.forEach((b,i)=>{const lab=b.closest('label'),c=q.ans.indexOf(i)>-1;if(b.checked&&c)lab.classList.add('ok');else if(b.checked&&!c)lab.classList.add('bad');else if(!b.checked&&c)lab.classList.add('miss');b.disabled=true;});
+      finishQ(art,q,ok,ok?'Semua pilihanmu tepat.':'Jawaban yang benar: '+q.ans.map(i=>'('+(i+1)+')').join(', ')+'.');}
+    else{const rows=[...art.querySelectorAll('tr[data-r]')];let miss=false,ok=true;
+      rows.forEach(r=>{if(!r.querySelector('input:checked'))miss=true;});if(miss){warn.hidden=false;return;}warn.hidden=true;
+      rows.forEach((r,i)=>{const v=r.querySelector('input:checked').value==='1',c=v===q.ans[i];if(!c)ok=false;r.classList.add(c?'ok':'bad');r.querySelectorAll('input').forEach(x=>x.disabled=true);});
+      finishQ(art,q,ok,ok?'Semua pernyataan tepat.':'Ada pernyataan yang keliru (baris merah). Kunci: '+q.ans.map(v=>v?'B':'S').join(', ')+'.');}
+  }
+});
+</script>
+</body>
+</html>
